@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfP-Ew-fVZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -9,23 +9,97 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--음식찾기-->
+        <scene sceneID="NcV-Ma-rdY">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="UFK-hJ-mRZ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ik8-d2-R3x">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="iOu-O8-ANY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="음식찾기" image="searchFoods" selectedImage="searchFoodsSelected" id="72A-VY-e16">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VcI-WX-paf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1059" y="538"/>
+            <point key="canvasLocation" x="-1523" y="1383"/>
+        </scene>
+        <!--설정-->
+        <scene sceneID="642-8n-Jjx">
+            <objects>
+                <viewController id="VOg-eE-GiR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fdz-Dy-ZrB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="zKV-QI-FRM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="설정" image="gearshape" catalog="system" selectedImage="gearshape.fill" id="idr-nM-KB2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gBI-yw-ueN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-674" y="1383"/>
+        </scene>
+        <!--추천-->
+        <scene sceneID="cM7-XW-8U8">
+            <objects>
+                <viewController id="hsd-dy-z1l" customClass="RecommendViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="11O-1K-F8G">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHh-x0-n6K">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yHb-Ul-wZf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="trailing" secondItem="EHh-x0-n6K" secondAttribute="trailing" id="Tfr-3U-3gJ"/>
+                            <constraint firstItem="EHh-x0-n6K" firstAttribute="leading" secondItem="yHb-Ul-wZf" secondAttribute="leading" id="Tja-dq-3IJ"/>
+                            <constraint firstItem="EHh-x0-n6K" firstAttribute="top" secondItem="yHb-Ul-wZf" secondAttribute="top" id="mrN-0S-Bs1"/>
+                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="bottom" secondItem="EHh-x0-n6K" secondAttribute="bottom" id="sQQ-ak-8dn"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="추천" image="person.fill.questionmark" catalog="system" selectedImage="person.fill.checkmark" id="uF0-XY-KmD"/>
+                    <connections>
+                        <outlet property="foodTableImageView" destination="EHh-x0-n6K" id="skU-bD-I4D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AtY-Dy-2PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2390" y="1383"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="yH1-2Z-KYR">
+            <objects>
+                <tabBarController id="tfP-Ew-fVZ" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UzK-Dy-Vvu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="hsd-dy-z1l" kind="relationship" relationship="viewControllers" id="Bcv-vu-Xgt"/>
+                        <segue destination="UFK-hJ-mRZ" kind="relationship" relationship="viewControllers" id="GCY-Me-hfh"/>
+                        <segue destination="VOg-eE-GiR" kind="relationship" relationship="viewControllers" id="mT7-S5-jAy"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PbL-hD-ukB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1523" y="539"/>
         </scene>
     </scenes>
     <resources>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
+        <image name="person.fill.questionmark" catalog="system" width="128" height="104"/>
+        <image name="searchFoods" width="25" height="25"/>
+        <image name="searchFoodsSelected" width="25" height="25"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
