@@ -51,27 +51,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EHh-x0-n6K">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="it3-Jb-WhF">
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syD-AX-Ph0">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="769"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="width" secondItem="dUY-Vr-qRL" secondAttribute="width" id="5CB-ox-kc1"/>
+                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="leading" secondItem="fDq-vm-WrF" secondAttribute="leading" id="M9I-H8-7IE"/>
+                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="bottom" secondItem="fDq-vm-WrF" secondAttribute="bottom" id="R1r-Di-yz6"/>
+                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="height" secondItem="dUY-Vr-qRL" secondAttribute="height" id="cCQ-Kh-T9Q"/>
+                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="trailing" secondItem="fDq-vm-WrF" secondAttribute="trailing" id="dOt-7e-TUD"/>
+                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="top" secondItem="fDq-vm-WrF" secondAttribute="top" id="p5a-A7-2Rc"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="fDq-vm-WrF"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="dUY-Vr-qRL"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yHb-Ul-wZf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="trailing" secondItem="EHh-x0-n6K" secondAttribute="trailing" id="Tfr-3U-3gJ"/>
-                            <constraint firstItem="EHh-x0-n6K" firstAttribute="leading" secondItem="yHb-Ul-wZf" secondAttribute="leading" id="Tja-dq-3IJ"/>
-                            <constraint firstItem="EHh-x0-n6K" firstAttribute="top" secondItem="yHb-Ul-wZf" secondAttribute="top" id="mrN-0S-Bs1"/>
-                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="bottom" secondItem="EHh-x0-n6K" secondAttribute="bottom" id="sQQ-ak-8dn"/>
+                            <constraint firstItem="it3-Jb-WhF" firstAttribute="leading" secondItem="yHb-Ul-wZf" secondAttribute="leading" id="0xH-wD-cR5"/>
+                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="bottom" secondItem="it3-Jb-WhF" secondAttribute="bottom" id="S7M-CA-I0R"/>
+                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="trailing" secondItem="it3-Jb-WhF" secondAttribute="trailing" id="Vjo-5D-YBy"/>
+                            <constraint firstItem="it3-Jb-WhF" firstAttribute="top" secondItem="yHb-Ul-wZf" secondAttribute="top" id="tuc-NQ-1dh"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="추천" image="person.fill.questionmark" catalog="system" selectedImage="person.fill.checkmark" id="uF0-XY-KmD"/>
                     <connections>
-                        <outlet property="foodTableImageView" destination="EHh-x0-n6K" id="skU-bD-I4D"/>
+                        <outlet property="foodTableImageView" destination="syD-AX-Ph0" id="N89-qz-oi2"/>
+                        <outlet property="scrollView" destination="it3-Jb-WhF" id="oLh-V8-wZ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AtY-Dy-2PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2390" y="1383"/>
+            <point key="canvasLocation" x="-2391.304347826087" y="1382.8125"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yH1-2Z-KYR">
