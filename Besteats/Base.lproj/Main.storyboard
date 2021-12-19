@@ -92,7 +92,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yH1-2Z-KYR">
             <objects>
-                <tabBarController id="tfP-Ew-fVZ" sceneMemberID="viewController">
+                <tabBarController id="tfP-Ew-fVZ" customClass="TabBarController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="UzK-Dy-Vvu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
