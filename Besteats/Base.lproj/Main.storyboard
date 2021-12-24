@@ -12,16 +12,26 @@
         <!--음식찾기-->
         <scene sceneID="NcV-Ma-rdY">
             <objects>
-                <viewController id="UFK-hJ-mRZ" sceneMemberID="viewController">
+                <viewController id="UFK-hJ-mRZ" customClass="MainViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ik8-d2-R3x">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ehr-GE-L8z">
+                                <rect key="frame" x="32" y="84" width="350" height="51"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" returnKeyType="search"/>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="iOu-O8-ANY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="음식찾기" image="searchFoods" selectedImage="searchFoodsSelected" id="72A-VY-e16">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="foodSearchBar" destination="Ehr-GE-L8z" id="Tva-jn-H17"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VcI-WX-paf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
