@@ -11,6 +11,8 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodLabel: UILabel!
+    @IBOutlet weak var foodImageView: UIImageView!
+    
     var foodList: [String] = ["치킨", "카레", "피자", "대게", "떡볶이", "타코"]
     
     override func viewDidLoad() {
