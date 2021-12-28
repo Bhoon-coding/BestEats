@@ -46,7 +46,6 @@
 		E11E3C8E2764CF6300B70E3A = {
 			isa = PBXGroup;
 			children = (
-				E19A03982779E32F000B1246 /* FoodCollectionViewCell.swift */,
 				E11E3C992764CF6300B70E3A /* Besteats */,
 				E11E3C982764CF6300B70E3A /* Products */,
 			);
@@ -64,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
+				E19A03982779E32F000B1246 /* FoodCollectionViewCell.swift */,
 				E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */,
 				E11E3C9E2764CF6300B70E3A /* MainViewController.swift */,
 				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
