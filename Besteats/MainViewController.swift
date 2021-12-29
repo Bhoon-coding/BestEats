@@ -59,7 +59,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     // Cell 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let size = CGSize(width: 300, height: 100)
+        let size = CGSize(width: 320, height: 128)
         return size
     }
 }
@@ -89,3 +89,37 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
+#if DEBUG
+
+import SwiftUI
+@available(iOS 13.0, *)
+
+// UIViewControllerRepresentable을 채택
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    // update
+    // _ uiViewController: UIViewController로 지정
+    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
+        
+    }
+    // makeui
+    func makeUIViewController(context: Context) -> UIViewController {
+    // Preview를 보고자 하는 Viewcontroller 이름
+    // e.g.)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        
+    }
+}
+
+struct ViewController_Previews: PreviewProvider {
+    
+    @available(iOS 13.0, *)
+    static var previews: some View {
+        // UIViewControllerRepresentable에 지정된 이름.
+        ViewControllerRepresentable()
+
+// 테스트 해보고자 하는 기기
+            .previewDevice("iPhone 12")
+    }
+}
+#endif
