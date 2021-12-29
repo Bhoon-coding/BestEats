@@ -12,6 +12,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
+    
+    
 //    @IBOutlet weak var foodImageView: UIImageView!
     
     var foodList: [String] = ["치킨", "카레", "피자", "대게", "떡볶이", "타코"]
@@ -57,7 +59,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     // Cell 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let size = CGSize(width: 250, height: 100)
+        let size = CGSize(width: 300, height: 100)
         return size
     }
 }
@@ -67,7 +69,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
-        cell.foodButtonLayer.setTitle("\(foodList[indexPath.row])", for: .selected)
+//        cell.foodButtonLayer.setTitle("\(foodList[indexPath.row])", for: .selected)
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
         cell.layer.borderWidth = 1
@@ -80,4 +82,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return foodList.count
     }
     
+    // 해당
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("\(indexPath.item + 1) 번째 셀이 눌림")
+    }
+    
 }
+

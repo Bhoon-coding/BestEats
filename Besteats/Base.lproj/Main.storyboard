@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -39,23 +40,30 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2G-Xz-vYY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                                    <connections>
-                                                        <action selector="foodButtonAction:" destination="F4F-Ir-yU2" eventType="touchUpInside" id="PmN-2m-VSK"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vbr-ZC-ZG9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="128"/>
+                                                    <color key="backgroundColor" name="AccentColor"/>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8oM-eO-aBH">
+                                                    <rect key="frame" x="30" y="0.0" width="290" height="128"/>
+                                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Y2G-Xz-vYY" firstAttribute="centerY" secondItem="kow-Ql-Jru" secondAttribute="centerY" id="e4F-ls-KIo"/>
-                                                <constraint firstItem="Y2G-Xz-vYY" firstAttribute="centerX" secondItem="kow-Ql-Jru" secondAttribute="centerX" id="wZX-Tm-Etg"/>
+                                                <constraint firstItem="8oM-eO-aBH" firstAttribute="top" secondItem="kow-Ql-Jru" secondAttribute="top" id="28m-WC-1NU"/>
+                                                <constraint firstAttribute="trailing" secondItem="8oM-eO-aBH" secondAttribute="trailing" id="4na-YV-see"/>
+                                                <constraint firstItem="vbr-ZC-ZG9" firstAttribute="leading" secondItem="kow-Ql-Jru" secondAttribute="leading" id="Pe8-Zp-meh"/>
+                                                <constraint firstAttribute="bottom" secondItem="8oM-eO-aBH" secondAttribute="bottom" id="QV6-MP-QsH"/>
+                                                <constraint firstAttribute="trailing" secondItem="vbr-ZC-ZG9" secondAttribute="trailing" constant="290" id="cfU-HA-21J"/>
+                                                <constraint firstItem="8oM-eO-aBH" firstAttribute="leading" secondItem="vbr-ZC-ZG9" secondAttribute="trailing" id="kJW-6f-04B"/>
+                                                <constraint firstAttribute="bottom" secondItem="vbr-ZC-ZG9" secondAttribute="bottom" id="kee-Ny-9fC"/>
+                                                <constraint firstItem="vbr-ZC-ZG9" firstAttribute="top" secondItem="kow-Ql-Jru" secondAttribute="top" id="raS-kY-29v"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="320" height="128"/>
                                         <connections>
-                                            <outlet property="foodButtonLayer" destination="Y2G-Xz-vYY" id="dhX-vE-ePv"/>
+                                            <outlet property="foodContentsStackView" destination="8oM-eO-aBH" id="wQn-mR-n98"/>
+                                            <outlet property="remindIconsStackView" destination="vbr-ZC-ZG9" id="WKK-A9-b35"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -174,6 +182,9 @@
         <image name="person.fill.questionmark" catalog="system" width="128" height="104"/>
         <image name="searchFoods" width="25" height="25"/>
         <image name="searchFoodsSelected" width="25" height="25"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
