@@ -24,15 +24,15 @@ class MainViewController: UIViewController {
 //        foodList.map{ foodLabel.text = $0 }
         
     }
-    
-    class FoodCollectionViewCell: UICollectionViewCell {
-        
-        @IBOutlet weak var title: UILabel!
-        
-    }
-
 }
 
+class FoodCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var restaurantName: UILabel!
+    @IBOutlet weak var oneLineTip: UILabel!
+    @IBOutlet weak var cautionTip: UILabel!
+    
+}
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -60,7 +60,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     // Cell 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let size = CGSize(width: 320, height: 128)
+        let size = CGSize(width: 320, height: 150)
         return size
     }
 }
@@ -68,7 +68,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 // Cell에 대한 delegate
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as? FoodCollectionViewCell else { return UICollectionViewCell() }
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
@@ -84,6 +84,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // 해당
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
+        navigationController?.pushViewController(foodModiVC, animated: true)
+        
         print("\(indexPath.item + 1) 번째 셀이 눌림")
     }
     
