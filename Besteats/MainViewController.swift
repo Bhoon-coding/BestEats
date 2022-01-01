@@ -13,7 +13,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var foodCollectionView: UICollectionView!
 //    @IBOutlet weak var foodImageView: UIImageView!
     
-    var foodList: [String] = ["치킨", "카레", "피자", "대게", "떡볶이", "타코"]
+    
+    var restaurantNames: [String] = ["BHC", "카레", "엘루이피자", "대게", "중평떡볶이", "낙원타코"]
+    var oneLineTips: [String] = ["뿌링클", "김치랑 먹자", "파마산치즈 듬뿍", "게껍딱 👍", "떡순오가 최고", "대창파히타 > 낙원파히타"]
+    var cautionTips: [String?] = ["배달이 1시간 걸림", nil, "화장실 밖", "손조심", nil, "물셀프"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +31,9 @@ class MainViewController: UIViewController {
 
 class FoodCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var restaurantName: UILabel!
-    @IBOutlet weak var oneLineTip: UILabel!
-    @IBOutlet weak var cautionTip: UILabel!
+    @IBOutlet weak var restaurantNamesLabel: UILabel!
+    @IBOutlet weak var oneLineTipsLabel: UILabel!
+    @IBOutlet weak var cautionTipsLabel: UILabel!
     
 }
 extension MainViewController: UISearchBarDelegate {
@@ -38,7 +41,7 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText.count > 1 {
-           let filteredFoodArr = foodList.filter { $0 == searchText }
+           let filteredFoodArr = restaurantNames.filter { $0 == searchText }
             let filterdFood =  filteredFoodArr.joined(separator: "")
             
         }
@@ -70,16 +73,21 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
+        cell.restaurantNamesLabel.text = restaurantNames[indexPath.row]
+        cell.oneLineTipsLabel.text = oneLineTips[indexPath.row]
+        cell.cautionTipsLabel.text = cautionTips[indexPath.row]
+        
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
         cell.layer.borderWidth = 1
+        
 
         return cell
     }
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return foodList.count
+        return restaurantNames.count
     }
     
     // 해당
