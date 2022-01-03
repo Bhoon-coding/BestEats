@@ -27,6 +27,9 @@ class MainViewController: UIViewController {
 //        foodList.map{ foodLabel.text = $0 }
         
     }
+    @IBAction func tapMore(_ sender: Any) {
+        print("더보기 터치")
+    }
 }
 
 class FoodCollectionViewCell: UICollectionViewCell {
