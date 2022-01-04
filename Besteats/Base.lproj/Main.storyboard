@@ -44,14 +44,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="330" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="restaurantName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa8-Ig-1E0">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="restaurantName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oa8-Ig-1E0">
                                                     <rect key="frame" x="16" y="16" width="158" height="22"/>
                                                     <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="cautionTip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92Q-W0-fyL">
-                                                    <rect key="frame" x="16" y="119.5" width="66" height="14.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cautionTip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92Q-W0-fyL">
+                                                    <rect key="frame" x="16" y="119.5" width="65" height="14.5"/>
                                                     <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="14"/>
                                                     <color key="textColor" systemColor="systemRedColor"/>
                                                     <nil key="highlightedColor"/>
@@ -67,8 +67,8 @@
                                                         <action selector="tapMore:" destination="UFK-hJ-mRZ" eventType="touchUpInside" id="xSa-4n-Qu5"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="oneLineTip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
-                                                    <rect key="frame" x="16" y="67" width="79" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oneLineTip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
+                                                    <rect key="frame" x="16" y="67" width="75" height="16"/>
                                                     <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -201,6 +201,46 @@
             </objects>
             <point key="canvasLocation" x="-3486" y="521"/>
         </scene>
+        <!--More Bottom Sheet View Controller-->
+        <scene sceneID="0Ux-dI-wZC">
+            <objects>
+                <viewController storyboardIdentifier="MoreBottomSheetViewController" id="NsW-u9-zfx" customClass="MoreBottomSheetViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qHG-Kk-Mtc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psn-JP-ShY">
+                                <rect key="frame" x="0.0" y="644" width="414" height="252"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BDd-Gq-3Bn"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Psn-JP-ShY" secondAttribute="bottom" id="Hv6-b7-1B3"/>
+                            <constraint firstItem="Psn-JP-ShY" firstAttribute="top" secondItem="BDd-Gq-3Bn" secondAttribute="top" constant="600" id="bPg-3y-GzD"/>
+                            <constraint firstItem="BDd-Gq-3Bn" firstAttribute="trailing" secondItem="Psn-JP-ShY" secondAttribute="trailing" id="pR3-FJ-kb5"/>
+                            <constraint firstItem="Psn-JP-ShY" firstAttribute="leading" secondItem="BDd-Gq-3Bn" secondAttribute="leading" id="vzH-Hr-dST"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="5wh-q3-wtX" appends="YES" id="NSU-hr-1ZW"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="background" destination="qHG-Kk-Mtc" id="4Xc-GW-25k"/>
+                        <outlet property="bottomSheetView" destination="Psn-JP-ShY" id="WeM-GG-GG1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V3d-NV-pAO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="5wh-q3-wtX">
+                    <connections>
+                        <action selector="tapBackground:" destination="NsW-u9-zfx" id="gsw-XF-D6F"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-768" y="444"/>
+        </scene>
         <!--Food Modi View Controller-->
         <scene sceneID="F5s-Ia-SrQ">
             <objects>
@@ -214,7 +254,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Os-Nz-K1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-744.92753623188412" y="443.97321428571428"/>
+            <point key="canvasLocation" x="-3" y="444"/>
         </scene>
         <!--음식찾기-->
         <scene sceneID="sp1-cl-KQh">

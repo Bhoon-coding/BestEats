@@ -14,9 +14,13 @@ class MainViewController: UIViewController {
 //    @IBOutlet weak var foodImageView: UIImageView!
     
     
-    var restaurantNames: [String] = ["BHC", "카레", "엘루이피자", "대게", "중평떡볶이", "낙원타코"]
-    var oneLineTips: [String] = ["뿌링클", "김치랑 먹자", "파마산치즈 듬뿍", "게껍딱 👍", "떡순오가 최고", "대창파히타 > 낙원파히타"]
-    var cautionTips: [String?] = ["배달이 1시간 걸림", nil, "화장실 밖", "손조심", nil, "물셀프"]
+//    var restaurantNames: [String] = ["BHC", "카레", "엘루이피자", "대게", "중평떡볶이", "낙원타코"]
+//    var oneLineTips: [String] = ["뿌링클", "김치랑 먹자", "파마산치즈 듬뿍", "게껍딱 👍", "떡순오가 최고", "대창파히타 > 낙원파히타"]
+//    var cautionTips: [String?] = ["배달이 1시간 걸림", nil, "화장실 밖", "손조심", nil, "물셀프"]
+    
+    var restaurantNames: [String] = ["무난무난"]
+    var oneLineTips: [String] = ["괜찮"]
+    var cautionTips: [String?] = [":- )"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +32,11 @@ class MainViewController: UIViewController {
         
     }
     @IBAction func tapMore(_ sender: Any) {
-        print("더보기 터치")
+        guard let moreVC = storyboard?.instantiateViewController(withIdentifier: "MoreBottomSheetViewController") as? MoreBottomSheetViewController else { return}
+        
+//        moreVC.modalPresentationStyle = .overCurrentContext
+        moreVC.modalPresentationStyle = .custom
+        present(moreVC, animated: true, completion: nil)
     }
 }
 
