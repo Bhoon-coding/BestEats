@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     var oneLineTips: [String] = ["괜찮"]
     var cautionTips: [String?] = [":- )"]
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,11 +33,11 @@ class MainViewController: UIViewController {
         
     }
     @IBAction func tapMore(_ sender: Any) {
-        guard let moreVC = storyboard?.instantiateViewController(withIdentifier: "MoreBottomSheetViewController") as? MoreBottomSheetViewController else { return}
+        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
         
 //        moreVC.modalPresentationStyle = .overCurrentContext
-        moreVC.modalPresentationStyle = .custom
-        present(moreVC, animated: true, completion: nil)
+        BTSheetVC.modalPresentationStyle = .overFullScreen
+        present(BTSheetVC, animated: false, completion: nil)
     }
 }
 

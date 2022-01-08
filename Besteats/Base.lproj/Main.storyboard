@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfP-Ew-fVZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tfP-Ew-fVZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -201,43 +201,12 @@
             </objects>
             <point key="canvasLocation" x="-3486" y="521"/>
         </scene>
-        <!--More Bottom Sheet View Controller-->
+        <!--Bottom Sheet View Controller-->
         <scene sceneID="0Ux-dI-wZC">
             <objects>
-                <viewController storyboardIdentifier="MoreBottomSheetViewController" id="NsW-u9-zfx" customClass="MoreBottomSheetViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="qHG-Kk-Mtc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Psn-JP-ShY">
-                                <rect key="frame" x="0.0" y="644" width="414" height="252"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="BDd-Gq-3Bn"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Psn-JP-ShY" secondAttribute="bottom" id="Hv6-b7-1B3"/>
-                            <constraint firstItem="Psn-JP-ShY" firstAttribute="top" secondItem="BDd-Gq-3Bn" secondAttribute="top" constant="600" id="bPg-3y-GzD"/>
-                            <constraint firstItem="BDd-Gq-3Bn" firstAttribute="trailing" secondItem="Psn-JP-ShY" secondAttribute="trailing" id="pR3-FJ-kb5"/>
-                            <constraint firstItem="Psn-JP-ShY" firstAttribute="leading" secondItem="BDd-Gq-3Bn" secondAttribute="leading" id="vzH-Hr-dST"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="5wh-q3-wtX" appends="YES" id="NSU-hr-1ZW"/>
-                        </connections>
-                    </view>
-                    <connections>
-                        <outlet property="background" destination="qHG-Kk-Mtc" id="4Xc-GW-25k"/>
-                        <outlet property="bottomSheetView" destination="Psn-JP-ShY" id="WeM-GG-GG1"/>
-                    </connections>
-                </viewController>
+                <viewController storyboardIdentifier="BottomSheetViewController" id="NsW-u9-zfx" customClass="BottomSheetViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3d-NV-pAO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="5wh-q3-wtX">
-                    <connections>
-                        <action selector="tapBackground:" destination="NsW-u9-zfx" id="gsw-XF-D6F"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="5wh-q3-wtX"/>
             </objects>
             <point key="canvasLocation" x="-768" y="444"/>
         </scene>
