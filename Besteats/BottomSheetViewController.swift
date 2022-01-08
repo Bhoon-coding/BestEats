@@ -35,6 +35,13 @@ class BottomSheetViewController: UIViewController {
         let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
                 dimmedView.addGestureRecognizer(dimmedTap)
                 dimmedView.isUserInteractionEnabled = true
+        
+        let bottomSheetViewPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewPanned(_:)))
+        
+        // iOS 터치할때 딜레이를 없애기 위함 (기본적으로 딜레이가 발생함)
+//        bottomSheetViewPan.delaysTouchesBegan = false
+//        bottomSheetViewPan.delaysTouchesEnded = false
+        bottomSheetView.addGestureRecognizer(bottomSheetViewPan)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,5 +109,11 @@ class BottomSheetViewController: UIViewController {
     
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
         hideBottomSheetAndGoBack()
+    }
+    
+    @objc private func bottomSheetViewPanned(_ panGestureRecognizer: UIPanGestureRecognizer) {
+        let translation = panGestureRecognizer.translation(in: self.bottomSheetView)
+        
+        print("유저가 위아래로 \(translation.y)만큼 드래그했습니다.")
     }
 }
