@@ -26,6 +26,8 @@ class BottomSheetViewController: UIViewController {
     
     private var bottomSheetViewTopConstraint: NSLayoutConstraint!
     var defaultHeight: CGFloat = 250
+    var bottomSheetPanMinTopConstant: CGFloat = 30
+    private lazy var bottomSheetPanStartingTopConstant: CGFloat = bottomSheetPanMinTopConstant
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,9 +87,9 @@ class BottomSheetViewController: UIViewController {
         bottomSheetViewTopConstraint.constant = (safeAreaHeight + bottomPadding) - defaultHeight
         
         UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
-                    // 4 - 1
+                    
             self.dimmedView.alpha = 0.7
-                    // 4 - 2
+                    
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -113,6 +115,19 @@ class BottomSheetViewController: UIViewController {
     
     @objc private func bottomSheetViewPanned(_ panGestureRecognizer: UIPanGestureRecognizer) {
         let translation = panGestureRecognizer.translation(in: self.bottomSheetView)
+        
+        switch panGestureRecognizer.state {
+        case .began:
+            bottomSheetPanStartingTopConstant = bottomSheetViewTopConstraint.constant
+        case .changed:
+            if bottomSheetPanStartingTopConstant + translation.y > bottomSheetPanMinTopConstant {
+                bottomSheetViewTopConstraint.constant = bottomSheetPanStartingTopConstant + translation.y
+            }
+        case .ended:
+            print("드래그가 끝남")
+        default:
+            break
+        }
         
         print("유저가 위아래로 \(translation.y)만큼 드래그했습니다.")
     }
