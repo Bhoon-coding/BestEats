@@ -25,8 +25,9 @@ class BottomSheetViewController: UIViewController {
     }()
     
     private var bottomSheetViewTopConstraint: NSLayoutConstraint!
+    // bottomSheet 기본 높이
     var defaultHeight: CGFloat = 250
-    var bottomSheetPanMinTopConstant: CGFloat = 30
+    var bottomSheetPanMinTopConstant: CGFloat = 550
     private lazy var bottomSheetPanStartingTopConstant: CGFloat = bottomSheetPanMinTopConstant
     
     override func viewDidLoad() {
@@ -129,6 +130,5 @@ class BottomSheetViewController: UIViewController {
             break
         }
         
-        print("유저가 위아래로 \(translation.y)만큼 드래그했습니다.")
     }
 }
