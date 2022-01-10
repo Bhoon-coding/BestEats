@@ -110,6 +110,13 @@ class BottomSheetViewController: UIViewController {
             
         }
     
+    // 주어진 CGFloat 배열의 값 중 number로 주어진 값과 가까운 값을 찾아내는 메소드
+    private func nearest(to number: CGFloat, inValues values: [CGFloat]) -> CGFloat {
+        
+        guard let nearestVal = values.min(by: { abs(number - $0) < abs(number - $1) }) else { return number }
+        return nearestVal
+    }
+    
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
         hideBottomSheetAndGoBack()
     }
@@ -121,11 +128,16 @@ class BottomSheetViewController: UIViewController {
         case .began:
             bottomSheetPanStartingTopConstant = bottomSheetViewTopConstraint.constant
         case .changed:
+            print("bottomSheetPanStartingTopConstant:",bottomSheetPanStartingTopConstant)
+            print("bottomSheetPanMinTopConstant:",bottomSheetPanMinTopConstant)
+            print("translation.y:",translation.y)
             if bottomSheetPanStartingTopConstant + translation.y > bottomSheetPanMinTopConstant {
                 bottomSheetViewTopConstraint.constant = bottomSheetPanStartingTopConstant + translation.y
             }
         case .ended:
-            print("드래그가 끝남")
+            if bottomSheetPanStartingTopConstant + translation.y > bottomSheetPanMinTopConstant {
+                hideBottomSheetAndGoBack()
+            }
         default:
             break
         }
