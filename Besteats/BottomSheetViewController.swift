@@ -18,7 +18,6 @@ class BottomSheetViewController: UIViewController {
     private let bottomSheetView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
         return view
@@ -31,15 +30,41 @@ class BottomSheetViewController: UIViewController {
         return view
     }()
     
+    private let bottomSheetStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 30
+        stackView.backgroundColor = .lightGray
+        return stackView
+    }()
+    
+    private let modifyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("수정", for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("삭제", for: .normal)
+        button.tintColor = .red
+        return button
+    }()
+    
+    
     private var bottomSheetViewTopConstraint: NSLayoutConstraint!
     // bottomSheet 기본 높이
-    var defaultHeight: CGFloat = 250
-    var bottomSheetPanMinTopConstant: CGFloat = 550
+//    var defaultHeight: CGFloat = 250
+    var defaultHeight = UIScreen.main.bounds.size.height / 4
+//    var bottomSheetPanMinTopConstant: CGFloat = 550
+    var bottomSheetPanMinTopConstant = UIScreen.main.bounds.size.height * 0.7
     private lazy var bottomSheetPanStartingTopConstant: CGFloat = bottomSheetPanMinTopConstant
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print("defaultHeight:",defaultHeight)
         setupUI()
         
         let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
@@ -49,8 +74,8 @@ class BottomSheetViewController: UIViewController {
         let bottomSheetViewSnapPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewSnapPanned(_:)))
         
         // iOS 터치할때 딜레이를 없애기 위함 (기본적으로 딜레이가 발생함)
-//        bottomSheetViewPan.delaysTouchesBegan = false
-//        bottomSheetViewPan.delaysTouchesEnded = false
+        bottomSheetViewSnapPan.delaysTouchesBegan = false
+        bottomSheetViewSnapPan.delaysTouchesEnded = false
         dragIndicatorView.addGestureRecognizer(bottomSheetViewSnapPan)
     }
     
@@ -63,6 +88,9 @@ class BottomSheetViewController: UIViewController {
         view.addSubview(dimmedView)
         view.addSubview(bottomSheetView)
         view.addSubview(dragIndicatorView)
+        view.addSubview(bottomSheetStackView)
+        view.addSubview(modifyButton)
+        view.addSubview(deleteButton)
     
         dimmedView.alpha = 0.0
         
@@ -73,9 +101,9 @@ class BottomSheetViewController: UIViewController {
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
-            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            dimmedView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
 
         bottomSheetView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,9 +119,22 @@ class BottomSheetViewController: UIViewController {
         dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dragIndicatorView.widthAnchor.constraint(equalToConstant: 60),
-            dragIndicatorView.heightAnchor.constraint(equalToConstant: 5),
+            dragIndicatorView.heightAnchor.constraint(equalToConstant: 8),
             dragIndicatorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             dragIndicatorView.bottomAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: 20)
+        ])
+        
+        bottomSheetStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomSheetStackView.topAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: 30),
+            bottomSheetStackView.trailingAnchor.constraint(equalTo: bottomSheetView.trailingAnchor),
+            bottomSheetStackView.bottomAnchor.constraint(equalTo: bottomSheetView.bottomAnchor),
+            bottomSheetStackView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor)
+        ])
+        
+        modifyButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            
         ])
     }
     
