@@ -24,6 +24,13 @@ class BottomSheetViewController: UIViewController {
         return view
     }()
     
+    private let dragIndicatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        view.layer.cornerRadius = 3
+        return view
+    }()
+    
     private var bottomSheetViewTopConstraint: NSLayoutConstraint!
     // bottomSheet 기본 높이
     var defaultHeight: CGFloat = 250
@@ -39,12 +46,12 @@ class BottomSheetViewController: UIViewController {
                 dimmedView.addGestureRecognizer(dimmedTap)
                 dimmedView.isUserInteractionEnabled = true
         
-        let bottomSheetViewPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewPanned(_:)))
+        let bottomSheetViewSnapPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewSnapPanned(_:)))
         
         // iOS 터치할때 딜레이를 없애기 위함 (기본적으로 딜레이가 발생함)
 //        bottomSheetViewPan.delaysTouchesBegan = false
 //        bottomSheetViewPan.delaysTouchesEnded = false
-        bottomSheetView.addGestureRecognizer(bottomSheetViewPan)
+        dragIndicatorView.addGestureRecognizer(bottomSheetViewSnapPan)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,7 +62,8 @@ class BottomSheetViewController: UIViewController {
     private func setupUI() {
         view.addSubview(dimmedView)
         view.addSubview(bottomSheetView)
-        
+        view.addSubview(dragIndicatorView)
+    
         dimmedView.alpha = 0.0
         
         setupLayout()
@@ -79,6 +87,14 @@ class BottomSheetViewController: UIViewController {
                     bottomSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                     bottomSheetViewTopConstraint
                 ])
+        
+        dragIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dragIndicatorView.widthAnchor.constraint(equalToConstant: 60),
+            dragIndicatorView.heightAnchor.constraint(equalToConstant: 5),
+            dragIndicatorView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            dragIndicatorView.bottomAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: 20)
+        ])
     }
     
     private func showBottomSheet() {
@@ -110,27 +126,17 @@ class BottomSheetViewController: UIViewController {
             
         }
     
-    // 주어진 CGFloat 배열의 값 중 number로 주어진 값과 가까운 값을 찾아내는 메소드
-    private func nearest(to number: CGFloat, inValues values: [CGFloat]) -> CGFloat {
-        
-        guard let nearestVal = values.min(by: { abs(number - $0) < abs(number - $1) }) else { return number }
-        return nearestVal
-    }
-    
     @objc private func dimmedViewTapped(_ tapRecognizer: UITapGestureRecognizer) {
         hideBottomSheetAndGoBack()
     }
     
-    @objc private func bottomSheetViewPanned(_ panGestureRecognizer: UIPanGestureRecognizer) {
+    @objc private func bottomSheetViewSnapPanned(_ panGestureRecognizer: UIPanGestureRecognizer) {
         let translation = panGestureRecognizer.translation(in: self.bottomSheetView)
         
         switch panGestureRecognizer.state {
         case .began:
             bottomSheetPanStartingTopConstant = bottomSheetViewTopConstraint.constant
         case .changed:
-            print("bottomSheetPanStartingTopConstant:",bottomSheetPanStartingTopConstant)
-            print("bottomSheetPanMinTopConstant:",bottomSheetPanMinTopConstant)
-            print("translation.y:",translation.y)
             if bottomSheetPanStartingTopConstant + translation.y > bottomSheetPanMinTopConstant {
                 bottomSheetViewTopConstraint.constant = bottomSheetPanStartingTopConstant + translation.y
             }
