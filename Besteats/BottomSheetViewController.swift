@@ -12,6 +12,7 @@ class BottomSheetViewController: UIViewController {
     private let dimmedView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.darkGray.withAlphaComponent(0.7)
+        
         return view
     }()
     
@@ -33,7 +34,7 @@ class BottomSheetViewController: UIViewController {
     private let bottomSheetStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fillEqually
         stackView.backgroundColor = .brown
         return stackView
     }()
@@ -41,7 +42,7 @@ class BottomSheetViewController: UIViewController {
     private let modifyButton: UIButton = {
         let button = UIButton()
         button.setTitle("수정", for: .normal)
-        button.tintColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+        button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .yellow
         return button
     }()
@@ -50,7 +51,7 @@ class BottomSheetViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .blue
         button.setTitle("삭제", for: .normal)
-        button.tintColor = .red
+        button.setTitleColor(.red, for: .normal)
         return button
     }()
     
@@ -67,10 +68,6 @@ class BottomSheetViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
-        
-        let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
-        dimmedView.addGestureRecognizer(dimmedTap)
-        dimmedView.isUserInteractionEnabled = true
         
         let bottomSheetViewSnapPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewSnapPanned(_:)))
         
@@ -91,8 +88,8 @@ class BottomSheetViewController: UIViewController {
         view.addSubview(bottomSheetView)
         view.addSubview(dragIndicatorView)
         view.addSubview(bottomSheetStackView)
-        bottomSheetStackView.addSubview(modifyButton)
-        bottomSheetStackView.addSubview(deleteButton)
+        view.addSubview(modifyButton)
+        view.addSubview(deleteButton)
         
         dimmedView.alpha = 0.0
         
@@ -100,7 +97,11 @@ class BottomSheetViewController: UIViewController {
     }
     
     private func setupLayout() {
+        
+        let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
         dimmedView.translatesAutoresizingMaskIntoConstraints = false
+        dimmedView.addGestureRecognizer(dimmedTap)
+        dimmedView.isUserInteractionEnabled = true
         NSLayoutConstraint.activate([
             dimmedView.topAnchor.constraint(equalTo: view.topAnchor),
             dimmedView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -108,13 +109,14 @@ class BottomSheetViewController: UIViewController {
             dimmedView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
         ])
         
+        
         bottomSheetView.translatesAutoresizingMaskIntoConstraints = false
         let topConstant = view.safeAreaInsets.bottom + view.safeAreaLayoutGuide.layoutFrame.height
         bottomSheetViewTopConstraint = bottomSheetView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstant)
         NSLayoutConstraint.activate([
             bottomSheetView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             bottomSheetView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomSheetView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            bottomSheetView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 50),
             bottomSheetViewTopConstraint
         ])
         
@@ -139,16 +141,16 @@ class BottomSheetViewController: UIViewController {
             modifyButton.topAnchor.constraint(equalTo: bottomSheetStackView.topAnchor),
             modifyButton.leadingAnchor.constraint(equalTo: bottomSheetStackView.leadingAnchor),
             modifyButton.trailingAnchor.constraint(equalTo: bottomSheetStackView.trailingAnchor),
-//            modifyButton.bottomAnchor.constraint(equalTo: deleteButton.topAnchor)
+            modifyButton.bottomAnchor.constraint(equalTo: deleteButton.topAnchor)
         ])
         
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            deleteButton.topAnchor.constraint(equalTo: modifyButton.bottomAnchor),
+            deleteButton.topAnchor.constraint(equalTo: modifyButton.bottomAnchor),
             deleteButton.leadingAnchor.constraint(equalTo: bottomSheetStackView.leadingAnchor),
             deleteButton.trailingAnchor.constraint(equalTo: bottomSheetStackView.trailingAnchor),
             deleteButton.bottomAnchor.constraint(equalTo: bottomSheetStackView.bottomAnchor)
-            
+
         ])
     }
     
