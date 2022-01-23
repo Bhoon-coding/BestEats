@@ -31,41 +31,46 @@ class BottomSheetViewController: UIViewController {
         return view
     }()
     
-    private let modifyView: UIView = {
-        let view = UIView()
-        return view
+    private let bottomSheetTableView: UITableView = {
+        let tableView = UITableView()
+        let items: [String] = ["수정", "삭제"]
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BottomSheetTableViewCell")
+        return tableView
     }()
     
-    private let deleteView: UIView = {
-        let view = UIView()
-        return view
-        
-    }()
-    
-    private let bottomSheetStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-    
-        return stackView
-    }()
-    
-    
-    
-    private let modifyButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("수정", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-    
-        return button
-    }()
-    
-    private let deleteButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("삭제", for: .normal)
-        button.setTitleColor(.red, for: .normal)
-        return button
-    }()
+//    private let bottomSheetStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.axis = .vertical
+//        stackView.distribution = .fillEqually
+//
+//        return stackView
+//    }()
+//
+//        private let modifyView: UIView = {
+//            let view = UIView()
+//            return view
+//        }()
+//
+//        private let deleteView: UIView = {
+//            let view = UIView()
+//            return view
+//
+//        }()
+//
+//    private let modifyButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("수정", for: .normal)
+//        button.setTitleColor(.black, for: .normal)
+//
+//        return button
+//    }()
+//
+//    private let deleteButton: UIButton = {
+//        let button = UIButton()
+//        button.setTitle("삭제", for: .normal)
+//        button.setTitleColor(.red, for: .normal)
+//        return button
+//    }()
     
     
     private var bottomSheetViewTopConstraint: NSLayoutConstraint!
@@ -79,6 +84,9 @@ class BottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        bottomSheetTableView.dataSource = self
+        bottomSheetTableView.delegate = self
+        
         setupUI()
         
         let bottomSheetViewSnapPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewSnapPanned(_:)))
@@ -87,7 +95,7 @@ class BottomSheetViewController: UIViewController {
         bottomSheetViewSnapPan.delaysTouchesBegan = false
         bottomSheetViewSnapPan.delaysTouchesEnded = false
         bottomSheetView.addGestureRecognizer(bottomSheetViewSnapPan)
-        bottomSheetStackView.addGestureRecognizer(bottomSheetViewSnapPan)
+//        bottomSheetStackView.addGestureRecognizer(bottomSheetViewSnapPan)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,25 +103,33 @@ class BottomSheetViewController: UIViewController {
         showBottomSheet()
     }
     
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented ")
+    }
+    
+    // tableViewCell 추가 참고 (https://shark-sea.kr/entry/iOS-TableView-Code%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
+    
     private func setupUI() {
         view.addSubview(dimmedView)
         view.addSubview(bottomSheetView)
         view.addSubview(dragIndicatorView)
-        view.addSubview(bottomSheetStackView)
+        view.addSubview(bottomSheetTableView)
+//        view.addSubview(bottomSheetStackView)
         
         
         dimmedView.alpha = 0.0
-        setStackView()
         setupLayout()
+//        setStackView()
     }
     
-    private func setStackView() {
-        bottomSheetStackView.addArrangedSubview(modifyView)
-        bottomSheetStackView.addArrangedSubview(deleteView)
-        modifyView.addSubview(modifyButton)
-        deleteView.addSubview(deleteButton)
-
-    }
+//    private func setStackView() {
+//        bottomSheetStackView.addArrangedSubview(modifyView)
+//        bottomSheetStackView.addArrangedSubview(deleteView)
+//        modifyView.addSubview(modifyButton)
+//        deleteView.addSubview(deleteButton)
+//
+//    }
     
     private func setupLayout() {
         
@@ -147,25 +163,25 @@ class BottomSheetViewController: UIViewController {
             dragIndicatorView.bottomAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: 20)
         ])
         
-        bottomSheetStackView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            bottomSheetStackView.topAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: 30),
-            bottomSheetStackView.trailingAnchor.constraint(equalTo: bottomSheetView.trailingAnchor),
-            bottomSheetStackView.bottomAnchor.constraint(equalTo: bottomSheetView.bottomAnchor),
-            bottomSheetStackView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor)
-        ])
+//        bottomSheetStackView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            bottomSheetStackView.topAnchor.constraint(equalTo: bottomSheetView.topAnchor, constant: 30),
+//            bottomSheetStackView.trailingAnchor.constraint(equalTo: bottomSheetView.trailingAnchor),
+//            bottomSheetStackView.bottomAnchor.constraint(equalTo: bottomSheetView.bottomAnchor),
+//            bottomSheetStackView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor)
+//        ])
         
-        modifyButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            modifyButton.centerXAnchor.constraint(equalTo: modifyView.centerXAnchor),
-            modifyButton.centerYAnchor.constraint(equalTo: modifyView.centerYAnchor)
-        ])
-        
-        deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            deleteButton.centerXAnchor.constraint(equalTo: deleteView.centerXAnchor),
-            deleteButton.centerYAnchor.constraint(equalTo: deleteView.centerYAnchor)
-        ])
+//        modifyButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            modifyButton.centerXAnchor.constraint(equalTo: modifyView.centerXAnchor),
+//            modifyButton.centerYAnchor.constraint(equalTo: modifyView.centerYAnchor)
+//        ])
+//
+//        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            deleteButton.centerXAnchor.constraint(equalTo: deleteView.centerXAnchor),
+//            deleteButton.centerYAnchor.constraint(equalTo: deleteView.centerYAnchor)
+//        ])
     }
     
     private func showBottomSheet() {
@@ -220,6 +236,22 @@ class BottomSheetViewController: UIViewController {
         }
         
     }
+}
+
+extension BottomSheetViewController: UITableViewDelegate {
+    
+}
+
+extension BottomSheetViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    
 }
 
 
