@@ -31,25 +31,37 @@ class BottomSheetViewController: UIViewController {
         return view
     }()
     
+    private let modifyView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let deleteView: UIView = {
+        let view = UIView()
+        return view
+        
+    }()
+    
     private let bottomSheetStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        stackView.backgroundColor = .brown
+    
         return stackView
     }()
+    
+    
     
     private let modifyButton: UIButton = {
         let button = UIButton()
         button.setTitle("수정", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .yellow
+    
         return button
     }()
     
     private let deleteButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .blue
         button.setTitle("삭제", for: .normal)
         button.setTitleColor(.red, for: .normal)
         return button
@@ -88,12 +100,19 @@ class BottomSheetViewController: UIViewController {
         view.addSubview(bottomSheetView)
         view.addSubview(dragIndicatorView)
         view.addSubview(bottomSheetStackView)
-        view.addSubview(modifyButton)
-        view.addSubview(deleteButton)
+        
         
         dimmedView.alpha = 0.0
-        
+        setStackView()
         setupLayout()
+    }
+    
+    private func setStackView() {
+        bottomSheetStackView.addArrangedSubview(modifyView)
+        bottomSheetStackView.addArrangedSubview(deleteView)
+        modifyView.addSubview(modifyButton)
+        deleteView.addSubview(deleteButton)
+
     }
     
     private func setupLayout() {
@@ -116,7 +135,7 @@ class BottomSheetViewController: UIViewController {
         NSLayoutConstraint.activate([
             bottomSheetView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             bottomSheetView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomSheetView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 50),
+            bottomSheetView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 35),
             bottomSheetViewTopConstraint
         ])
         
@@ -138,19 +157,14 @@ class BottomSheetViewController: UIViewController {
         
         modifyButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            modifyButton.topAnchor.constraint(equalTo: bottomSheetStackView.topAnchor),
-            modifyButton.leadingAnchor.constraint(equalTo: bottomSheetStackView.leadingAnchor),
-            modifyButton.trailingAnchor.constraint(equalTo: bottomSheetStackView.trailingAnchor),
-            modifyButton.bottomAnchor.constraint(equalTo: deleteButton.topAnchor)
+            modifyButton.centerXAnchor.constraint(equalTo: modifyView.centerXAnchor),
+            modifyButton.centerYAnchor.constraint(equalTo: modifyView.centerYAnchor)
         ])
         
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            deleteButton.topAnchor.constraint(equalTo: modifyButton.bottomAnchor),
-            deleteButton.leadingAnchor.constraint(equalTo: bottomSheetStackView.leadingAnchor),
-            deleteButton.trailingAnchor.constraint(equalTo: bottomSheetStackView.trailingAnchor),
-            deleteButton.bottomAnchor.constraint(equalTo: bottomSheetStackView.bottomAnchor)
-
+            deleteButton.centerXAnchor.constraint(equalTo: deleteView.centerXAnchor),
+            deleteButton.centerYAnchor.constraint(equalTo: deleteView.centerYAnchor)
         ])
     }
     
@@ -207,6 +221,8 @@ class BottomSheetViewController: UIViewController {
         
     }
 }
+
+
 // 전처리
 #if DEBUG
 
