@@ -9,6 +9,62 @@ import UIKit
 
 class BottomSheetViewController: UIViewController {
     
+    class StackViewController: UIViewController {
+        
+        
+        // StackView 참고
+//        private let stackView: UIStackView = {
+//            let stackView = UIStackView()
+//            stackView.translatesAutoresizingMaskIntoConstraints = false
+//            stackView.axis                                      = .vertical
+//            stackView.distribution                              = .fillEqually
+//            return stackView
+//        }()
+//
+//        private let modifyView: UIView = {
+//            let view = UIView()
+//            view.translatesAutoresizingMaskIntoConstraints      = false
+//            view.backgroundColor                                = .yellow
+//            return view
+//        }()
+//
+//        private let deleteView: UIView = {
+//            let view = UIView()
+//            view.translatesAutoresizingMaskIntoConstraints      = false
+//            view.backgroundColor                                = .red
+//            return view
+//        }()
+//
+//
+//
+//        override func viewDidLoad() {
+//            super.viewDidLoad()
+//
+//            addSubView()
+//            setupLayout()
+//
+//        }
+//
+//        private func addSubView() {
+//            view.addSubview(stackView)
+//            stackView.addArrangedSubview(modifyView)
+//            stackView.addArrangedSubview(deleteView)
+//
+//        }
+//
+//        private func setupLayout() {
+//
+//            NSLayoutConstraint.activate([
+//
+//                stackView.widthAnchor.constraint(equalToConstant: 250),
+//                stackView.heightAnchor.constraint(equalToConstant: 250),
+//                stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//                stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//
+//            ])
+//        }
+//    }
+    
     private let dimmedView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.darkGray.withAlphaComponent(0.7)
