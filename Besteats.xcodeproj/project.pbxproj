@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AE5FA420992969D5A4540B1 /* Pods_Besteats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */; };
 		E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DB06F276E248400F78037 /* RecommendViewController.swift */; };
 		E11E3C9B2764CF6300B70E3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */; };
 		E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */; };
@@ -23,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Besteats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69E5733A7F57145E26A4A0A4 /* Pods-Besteats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.debug.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.debug.xcconfig"; sourceTree = "<group>"; };
+		6A83352490499A030FAD40CB /* Pods-Besteats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.release.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.release.xcconfig"; sourceTree = "<group>"; };
 		E11DB06F276E248400F78037 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		E11E3C972764CF6300B70E3A /* Besteats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Besteats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,17 +49,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE5FA420992969D5A4540B1 /* Pods_Besteats.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2DFB6BB5CB9741ECB4D351E6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				69E5733A7F57145E26A4A0A4 /* Pods-Besteats.debug.xcconfig */,
+				6A83352490499A030FAD40CB /* Pods-Besteats.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		466EFB9A5B83B2EC5646386C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E11E3C8E2764CF6300B70E3A = {
 			isa = PBXGroup;
 			children = (
 				E11E3C992764CF6300B70E3A /* Besteats */,
 				E11E3C982764CF6300B70E3A /* Products */,
+				2DFB6BB5CB9741ECB4D351E6 /* Pods */,
+				466EFB9A5B83B2EC5646386C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E11E3CAB2764CF6400B70E3A /* Build configuration list for PBXNativeTarget "Besteats" */;
 			buildPhases = (
+				FB63AAA76FE3934A901E78FF /* [CP] Check Pods Manifest.lock */,
 				E11E3C932764CF6300B70E3A /* Sources */,
 				E11E3C942764CF6300B70E3A /* Frameworks */,
 				E11E3C952764CF6300B70E3A /* Resources */,
+				BB2AD23707E345A77F80BA83 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,6 +190,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BB2AD23707E345A77F80BA83 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Besteats/Pods-Besteats-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Besteats/Pods-Besteats-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Besteats/Pods-Besteats-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB63AAA76FE3934A901E78FF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Besteats-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E11E3C932764CF6300B70E3A /* Sources */ = {
@@ -320,6 +389,7 @@
 		};
 		E11E3CAC2764CF6400B70E3A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69E5733A7F57145E26A4A0A4 /* Pods-Besteats.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -351,6 +421,7 @@
 		};
 		E11E3CAD2764CF6400B70E3A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A83352490499A030FAD40CB /* Pods-Besteats.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

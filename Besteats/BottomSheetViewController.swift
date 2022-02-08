@@ -84,8 +84,8 @@ class BottomSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bottomSheetTableView.dataSource = self
-        bottomSheetTableView.delegate = self
+//        bottomSheetTableView.dataSource = self
+//        bottomSheetTableView.delegate = self
         
         setupUI()
         
@@ -242,49 +242,15 @@ extension BottomSheetViewController: UITableViewDelegate {
     
 }
 
-extension BottomSheetViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }
-    
-    
-}
+//extension BottomSheetViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        return UITableViewCell
+//    }
+//
+//
+//}
 
-
-// 전처리
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct BottomSheetViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-        // Preview를 보고자 하는 Viewcontroller 이름
-        // e.g.)
-        BottomSheetViewController()
-    }
-}
-
-struct BottomSheetViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        BottomSheetViewControllerRepresentable()
-        
-        // 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 12")
-    }
-}
-#endif
