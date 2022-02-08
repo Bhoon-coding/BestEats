@@ -131,6 +131,7 @@
 				E11E3C932764CF6300B70E3A /* Sources */,
 				E11E3C942764CF6300B70E3A /* Frameworks */,
 				E11E3C952764CF6300B70E3A /* Resources */,
+				74F71E11DDF6301473A6B781 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -190,6 +191,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		74F71E11DDF6301473A6B781 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Besteats/Pods-Besteats-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Besteats/Pods-Besteats-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Besteats/Pods-Besteats-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FB63AAA76FE3934A901E78FF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
