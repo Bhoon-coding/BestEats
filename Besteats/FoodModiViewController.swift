@@ -10,15 +10,22 @@ import SnapKit
 
 class FoodModiViewController: UIViewController {
     
+    lazy var restaurantNameWrapper: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     lazy var restaurantNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "맛집명"
+        label.text = "맛집명:"
         return label
     }()
     
     lazy var restaurantNameTextField: UITextField = {
         let textField = UITextField()
-        textField.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        textField.backgroundColor = .white
+        textField.placeholder = "맛집 이름을 입력해주세요."
+        textField.paddingLeft()
         return textField
     }()
 
@@ -26,33 +33,51 @@ class FoodModiViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .lightGray
-        setupUI()
+        setUpUI()
         
     }
     
-    private func setupUI() {
+    private func setUpUI() {
         // MARK: addSubView
-        view.addSubview(restaurantNameLabel)
-        view.addSubview(restaurantNameTextField)
+        view.addSubview(restaurantNameWrapper)
+        restaurantNameWrapper.addSubview(restaurantNameLabel)
+        restaurantNameWrapper.addSubview(restaurantNameTextField)
         
-        restaurantNameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(100)
-            $0.leading.equalToSuperview().inset(40)
+        restaurantNameWrapper.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(100)
         }
         
-        restaurantNameTextField.snp.makeConstraints {
-            $0.leading.equalTo(restaurantNameLabel).offset(32)
-            $0.top.equalTo(restaurantNameLabel)
-            $0.width.equalTo(150)
+        restaurantNameLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(80)
             $0.height.equalTo(40)
+
+        }
+
+        restaurantNameTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(restaurantNameLabel)
             
         }
         
         
+        
+        
     }
     
+}
 
-
+extension UITextField {
+    func paddingLeft() {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+        self.leftView = paddingView
+        self.leftViewMode = ViewMode.always
+    }
 }
 
 #if DEBUG
