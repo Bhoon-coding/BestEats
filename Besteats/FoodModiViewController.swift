@@ -38,7 +38,7 @@ class FoodModiViewController: UIViewController {
     
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.text = "한줄평"
+        label.text = "한줄평:"
         return label
     }()
     
@@ -46,6 +46,26 @@ class FoodModiViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "맛있게 먹는 꿀팁을 작성해주세요."
+        textField.paddingLeft()
+        return textField
+    }()
+    
+    lazy var cautionWrapper: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cyan
+        return view
+    }()
+    
+    lazy var cautionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "주의점:"
+        return label
+    }()
+    
+    lazy var cautionTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.placeholder = "다음엔 이거 빼고!!"
         textField.paddingLeft()
         return textField
     }()
