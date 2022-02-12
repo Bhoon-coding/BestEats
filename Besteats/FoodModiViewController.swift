@@ -12,6 +12,7 @@ class FoodModiViewController: UIViewController {
     
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
+        view.backgroundColor = .green
         return view
     }()
     
@@ -28,6 +29,28 @@ class FoodModiViewController: UIViewController {
         textField.paddingLeft()
         return textField
     }()
+    
+    lazy var oneLinerWrapper: UIView = {
+        let view = UIView()
+        view.backgroundColor = .cyan
+        return view
+    }()
+    
+    lazy var oneLinerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "한줄평"
+        return label
+    }()
+    
+    lazy var oneLinerTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .white
+        textField.placeholder = "맛있게 먹는 꿀팁을 작성해주세요."
+        textField.paddingLeft()
+        return textField
+    }()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +65,9 @@ class FoodModiViewController: UIViewController {
         view.addSubview(restaurantNameWrapper)
         restaurantNameWrapper.addSubview(restaurantNameLabel)
         restaurantNameWrapper.addSubview(restaurantNameTextField)
+        view.addSubview(oneLinerWrapper)
+        oneLinerWrapper.addSubview(oneLinerLabel)
+        oneLinerWrapper.addSubview(oneLinerTextField)
         
         restaurantNameWrapper.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
@@ -63,6 +89,27 @@ class FoodModiViewController: UIViewController {
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(restaurantNameLabel)
             
+        }
+        
+        oneLinerWrapper.snp.makeConstraints {
+            $0.top.equalTo(restaurantNameWrapper.snp.bottom).offset(24)
+            $0.leading.equalTo(restaurantNameWrapper.snp.leading)
+            $0.trailing.equalTo(restaurantNameWrapper.snp.trailing)
+            $0.height.equalTo(restaurantNameWrapper.snp.height)
+        }
+        
+        oneLinerLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(80)
+            $0.height.equalTo(40)
+        }
+        
+        oneLinerTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(restaurantNameLabel)
         }
         
         
@@ -96,9 +143,10 @@ struct FoodModiViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
     // Preview를 보고자 하는 Viewcontroller 이름
     // e.g.)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "FoodModiViewController") as! FoodModiViewController
-        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        return storyboard.instantiateViewController(withIdentifier: "FoodModiViewController") as! FoodModiViewController
+//
+        return FoodModiViewController()
     }
 }
 
