@@ -49,10 +49,11 @@ class FoodModiViewController: UIViewController {
         return stackView
     }()
     
-//    lazy var rateGreatButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
-//    }
+    lazy var rateLikeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "like"), for: .normal)
+        
+    }
     
     lazy var oneLinerWrapper: UIView = {
         let view = UIView()
