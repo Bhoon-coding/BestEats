@@ -55,23 +55,21 @@ class FoodModiViewController: UIViewController {
     
     lazy var rateLikeButton: UIButton = {
         let button = UIButton()
-        
-        button.setImage(UIImage(named: selectedLike ? "likeFill" : "like"), for: .normal)
-        
-        button.addTarget(self, action: #selector(tappedLike), for: .touchUpInside)
+        button.setImage(UIImage(named: "like"), for: .normal)
+        button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var rateCuriousButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: selectedCurious ? "curious" : "curiousFill"), for: .normal)
-        button.addTarget(self, action: #selector(tappedCurious), for: .touchUpInside)
+        button.setImage(UIImage(named: "curious"), for: .normal)
+        button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var rateWarningButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: selectedWarning ? "warning" : "warningFill"), for: .normal)
+        button.setImage(UIImage(named: "warning"), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning), for: .touchUpInside)
         return button
     }()
@@ -217,19 +215,28 @@ class FoodModiViewController: UIViewController {
         }
     }
     
-    @objc func tappedLike() {
+    @objc func tappedLike(button: UIButton) {
         selectedLike = !selectedLike
-        print("selectedLike:",selectedLike)
+
+        selectedLike
+        ? button.setImage(UIImage(named: "likeFill"), for: .normal)
+        : button.setImage(UIImage(named: "like"), for: .normal)
     }
     
-    @objc func tappedCurious() {
+    @objc func tappedCurious(button: UIButton) {
         selectedCurious = !selectedCurious
-        print("selectedCurious:",selectedCurious)
+        
+        selectedCurious
+        ? button.setImage(UIImage(named: "curiousFill"), for: .normal)
+        : button.setImage(UIImage(named: "curious"), for: .normal)
     }
     
-    @objc func tappedWarning() {
+    @objc func tappedWarning(button: UIButton) {
         selectedWarning = !selectedWarning
-        print("selectedWarning:",selectedWarning)
+        
+        selectedWarning
+        ? button.setImage(UIImage(named: "warningFill"), for: .normal)
+        : button.setImage(UIImage(named: "warning"), for: .normal)
     }
     
 }
