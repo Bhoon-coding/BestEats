@@ -10,6 +10,10 @@ import SnapKit
 
 class FoodModiViewController: UIViewController {
     
+    var selectedLike = false
+    var selectedCurious = false
+    var selectedWarning = false
+    
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
         view.backgroundColor = .green
@@ -45,15 +49,32 @@ class FoodModiViewController: UIViewController {
     lazy var rateStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.backgroundColor = .magenta
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
     lazy var rateLikeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "like"), for: .normal)
         
-    }
+        button.setImage(UIImage(named: selectedLike ? "likeFill" : "like"), for: .normal)
+        
+        button.addTarget(self, action: #selector(tappedLike), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var rateCuriousButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: selectedCurious ? "curious" : "curiousFill"), for: .normal)
+        button.addTarget(self, action: #selector(tappedCurious), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var rateWarningButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: selectedWarning ? "warning" : "warningFill"), for: .normal)
+        button.addTarget(self, action: #selector(tappedWarning), for: .touchUpInside)
+        return button
+    }()
     
     lazy var oneLinerWrapper: UIView = {
         let view = UIView()
@@ -116,7 +137,11 @@ class FoodModiViewController: UIViewController {
         view.addSubview(rateWrapper)
         rateWrapper.addSubview(rateLabel)
         rateWrapper.addSubview(rateStackView)
+        rateStackView.addArrangedSubview(rateLikeButton)
+        rateStackView.addArrangedSubview(rateCuriousButton)
+        rateStackView.addArrangedSubview(rateWarningButton)
         
+        // MARK: layout
         restaurantNameWrapper.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
             $0.leading.trailing.equalToSuperview().inset(24)
@@ -158,6 +183,18 @@ class FoodModiViewController: UIViewController {
             $0.height.equalTo(rateLabel)
         }
         
+        rateLikeButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+
+        rateCuriousButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+
+        rateWarningButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+        
         oneLinerWrapper.snp.makeConstraints {
             $0.top.equalTo(rateWrapper.snp.bottom).offset(24)
             $0.leading.equalTo(rateWrapper.snp.leading)
@@ -178,9 +215,21 @@ class FoodModiViewController: UIViewController {
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(restaurantNameLabel)
         }
-        
-        
-        
+    }
+    
+    @objc func tappedLike() {
+        selectedLike = !selectedLike
+        print("selectedLike:",selectedLike)
+    }
+    
+    @objc func tappedCurious() {
+        selectedCurious = !selectedCurious
+        print("selectedCurious:",selectedCurious)
+    }
+    
+    @objc func tappedWarning() {
+        selectedWarning = !selectedWarning
+        print("selectedWarning:",selectedWarning)
     }
     
 }
