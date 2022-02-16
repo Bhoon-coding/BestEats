@@ -10,9 +10,10 @@ import SnapKit
 
 class FoodModiViewController: UIViewController {
     
-    var selectedLike = false
-    var selectedCurious = false
-    var selectedWarning = false
+    // 변수추가시 preview 에러
+    var selectedLike: Bool = false
+    var selectedCurious: Bool = false
+    var selectedWarning: Bool = false
     
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
@@ -57,6 +58,7 @@ class FoodModiViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "like"), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
+        
         return button
     }()
     
@@ -70,7 +72,7 @@ class FoodModiViewController: UIViewController {
     lazy var rateWarningButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "warning"), for: .normal)
-        button.addTarget(self, action: #selector(tappedWarning), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
     
@@ -181,17 +183,17 @@ class FoodModiViewController: UIViewController {
             $0.height.equalTo(rateLabel)
         }
         
-        rateLikeButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-
-        rateCuriousButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-
-        rateWarningButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
+//        rateLikeButton.snp.makeConstraints {
+//            $0.width.equalTo(44)
+//        }
+//
+//        rateCuriousButton.snp.makeConstraints {
+//            $0.width.equalTo(44)
+//        }
+//
+//        rateWarningButton.snp.makeConstraints {
+//            $0.width.equalTo(44)
+//        }
         
         oneLinerWrapper.snp.makeConstraints {
             $0.top.equalTo(rateWrapper.snp.bottom).offset(24)
@@ -222,18 +224,18 @@ class FoodModiViewController: UIViewController {
         ? button.setImage(UIImage(named: "likeFill"), for: .normal)
         : button.setImage(UIImage(named: "like"), for: .normal)
     }
-    
+
     @objc func tappedCurious(button: UIButton) {
         selectedCurious = !selectedCurious
-        
+
         selectedCurious
         ? button.setImage(UIImage(named: "curiousFill"), for: .normal)
         : button.setImage(UIImage(named: "curious"), for: .normal)
     }
-    
+
     @objc func tappedWarning(button: UIButton) {
         selectedWarning = !selectedWarning
-        
+
         selectedWarning
         ? button.setImage(UIImage(named: "warningFill"), for: .normal)
         : button.setImage(UIImage(named: "warning"), for: .normal)
