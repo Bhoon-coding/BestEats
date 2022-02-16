@@ -17,6 +17,9 @@ class FoodModiViewController: UIViewController {
     
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09988100166)
         return view
     }()
     
@@ -30,12 +33,16 @@ class FoodModiViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "맛집 이름을 입력 해주세요."
+        textField.layer.cornerRadius = 10
         textField.paddingLeft()
         return textField
     }()
     
     lazy var rateWrapper: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09988100166)
         return view
     }()
     
@@ -76,6 +83,9 @@ class FoodModiViewController: UIViewController {
     
     lazy var menuWrapper: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09988100166)
         return view
     }()
     
@@ -89,11 +99,16 @@ class FoodModiViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "메뉴 이름을 입력 해주세요."
         textField.backgroundColor = .white
+        textField.layer.cornerRadius = 10
+        textField.paddingLeft()
         return textField
     }()
     
     lazy var oneLinerWrapper: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09988100166)
         return view
     }()
     
@@ -107,12 +122,15 @@ class FoodModiViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "꿀팁을 입력 해주세요."
+        textField.layer.cornerRadius = 10
         textField.paddingLeft()
         return textField
     }()
     
     lazy var cautionWrapper: UIView = {
         let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
         return view
     }()
     
@@ -126,6 +144,7 @@ class FoodModiViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.placeholder = "다음엔 이거 빼고!!"
+        textField.layer.cornerRadius = 10
         textField.paddingLeft()
         return textField
     }()
@@ -135,7 +154,6 @@ class FoodModiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .lightGray
         setUpUI()
         
     }
