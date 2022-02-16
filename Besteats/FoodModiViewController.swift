@@ -17,7 +17,6 @@ class FoodModiViewController: UIViewController {
     
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
-        view.backgroundColor = .green
         return view
     }()
     
@@ -30,14 +29,13 @@ class FoodModiViewController: UIViewController {
     lazy var restaurantNameTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.placeholder = "맛집 이름을 입력해주세요."
+        textField.placeholder = "맛집 이름을 입력 해주세요."
         textField.paddingLeft()
         return textField
     }()
     
     lazy var rateWrapper: UIView = {
         let view = UIView()
-        view.backgroundColor = .blue
         return view
     }()
     
@@ -76,9 +74,26 @@ class FoodModiViewController: UIViewController {
         return button
     }()
     
+    lazy var menuWrapper: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    lazy var menuLabel: UILabel = {
+        let label = UILabel()
+        label.text = "메뉴명"
+        return label
+    }()
+    
+    lazy var menuTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "메뉴 이름을 입력 해주세요."
+        textField.backgroundColor = .white
+        return textField
+    }()
+    
     lazy var oneLinerWrapper: UIView = {
         let view = UIView()
-        view.backgroundColor = .cyan
         return view
     }()
     
@@ -91,14 +106,13 @@ class FoodModiViewController: UIViewController {
     lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
-        textField.placeholder = "꿀팁을 입력해주세요."
+        textField.placeholder = "꿀팁을 입력 해주세요."
         textField.paddingLeft()
         return textField
     }()
     
     lazy var cautionWrapper: UIView = {
         let view = UIView()
-        view.backgroundColor = .cyan
         return view
     }()
     
@@ -128,12 +142,19 @@ class FoodModiViewController: UIViewController {
     
     private func setUpUI() {
         // MARK: addSubView
+        
         view.addSubview(restaurantNameWrapper)
         restaurantNameWrapper.addSubview(restaurantNameLabel)
         restaurantNameWrapper.addSubview(restaurantNameTextField)
+        
         view.addSubview(oneLinerWrapper)
         oneLinerWrapper.addSubview(oneLinerLabel)
         oneLinerWrapper.addSubview(oneLinerTextField)
+        
+        view.addSubview(menuWrapper)
+        menuWrapper.addSubview(menuLabel)
+        menuWrapper.addSubview(menuTextField)
+        
         view.addSubview(rateWrapper)
         rateWrapper.addSubview(rateLabel)
         rateWrapper.addSubview(rateStackView)
@@ -183,23 +204,44 @@ class FoodModiViewController: UIViewController {
             $0.height.equalTo(rateLabel)
         }
         
-//        rateLikeButton.snp.makeConstraints {
-//            $0.width.equalTo(44)
-//        }
-//
-//        rateCuriousButton.snp.makeConstraints {
-//            $0.width.equalTo(44)
-//        }
-//
-//        rateWarningButton.snp.makeConstraints {
-//            $0.width.equalTo(44)
-//        }
+        rateLikeButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+
+        rateCuriousButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+
+        rateWarningButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
         
-        oneLinerWrapper.snp.makeConstraints {
+        menuWrapper.snp.makeConstraints {
             $0.top.equalTo(rateWrapper.snp.bottom).offset(24)
             $0.leading.equalTo(rateWrapper.snp.leading)
             $0.trailing.equalTo(rateWrapper.snp.trailing)
             $0.height.equalTo(rateWrapper.snp.height)
+        }
+        
+        menuLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(80)
+            $0.height.equalTo(40)
+        }
+        
+        menuTextField.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(menuLabel.snp.trailing).inset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(menuLabel)
+        }
+        
+        oneLinerWrapper.snp.makeConstraints {
+            $0.top.equalTo(menuWrapper.snp.bottom).offset(24)
+            $0.leading.equalTo(menuWrapper.snp.leading)
+            $0.trailing.equalTo(menuWrapper.snp.trailing)
+            $0.height.equalTo(menuWrapper.snp.height)
         }
         
         oneLinerLabel.snp.makeConstraints {
@@ -211,9 +253,9 @@ class FoodModiViewController: UIViewController {
         
         oneLinerTextField.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
+            $0.leading.equalTo(oneLinerLabel.snp.trailing).inset(16)
             $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(restaurantNameLabel)
+            $0.height.equalTo(oneLinerLabel)
         }
     }
     
