@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FoodModiViewController: UIViewController {
+class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     // 변수추가시 preview 에러
     var selectedLike: Bool = false
@@ -131,7 +131,13 @@ class FoodModiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        oneLinerTextField.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         setUpUI()
+        
         
     }
     
@@ -278,6 +284,13 @@ class FoodModiViewController: UIViewController {
         : button.setImage(UIImage(named: "warning"), for: .normal)
     }
     
+    @objc func keyboardWillShow(_ sender: Notification) {
+        self.view.frame.origin.y = -100 // view를 150만큼 위로 올림
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        self.view.frame.origin.y = 0
+    }
 }
 
 extension UITextField {
