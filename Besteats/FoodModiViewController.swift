@@ -35,6 +35,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         textField.backgroundColor = .white
         textField.placeholder = "맛집 이름을 입력 해주세요."
         textField.layer.cornerRadius = 10
+        textField.returnKeyType = .next
         textField.paddingLeft()
         return textField
     }()
@@ -58,6 +59,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         textField.placeholder = "메뉴 이름을 입력 해주세요."
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
+        textField.returnKeyType = .next
         textField.paddingLeft()
         return textField
     }()
@@ -81,6 +83,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         textField.backgroundColor = .white
         textField.placeholder = "꿀팁을 입력 해주세요."
         textField.layer.cornerRadius = 10
+        textField.returnKeyType = .done
         textField.paddingLeft()
         return textField
     }()
@@ -130,8 +133,10 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        restaurantNameTextField.delegate = self
+        menuTextField.delegate = self
         oneLinerTextField.delegate = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -261,7 +266,13 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        if textField == restaurantNameTextField {
+            menuTextField.becomeFirstResponder()
+        } else if textField == menuTextField {
+            oneLinerTextField.becomeFirstResponder()
+        } else {
+            oneLinerTextField.resignFirstResponder()
+        }
         return true
     }
     
