@@ -15,6 +15,7 @@ class FoodModiViewController: UIViewController {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     
+    
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -91,7 +92,7 @@ class FoodModiViewController: UIViewController {
     
     lazy var menuLabel: UILabel = {
         let label = UILabel()
-        label.text = "메뉴명"
+        label.text = "메뉴명:"
         return label
     }()
     
@@ -126,30 +127,6 @@ class FoodModiViewController: UIViewController {
         textField.paddingLeft()
         return textField
     }()
-    
-    lazy var cautionWrapper: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 3
-        return view
-    }()
-    
-    lazy var cautionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "주의점:"
-        return label
-    }()
-    
-    lazy var cautionTextField: UITextField = {
-        let textField = UITextField()
-        textField.backgroundColor = .white
-        textField.placeholder = "다음엔 이거 빼고!!"
-        textField.layer.cornerRadius = 10
-        textField.paddingLeft()
-        return textField
-    }()
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
