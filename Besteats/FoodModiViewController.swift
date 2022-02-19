@@ -39,49 +39,6 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
-    lazy var rateWrapper: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.layer.borderWidth = 3
-        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09988100166)
-        return view
-    }()
-    
-    lazy var rateLabel: UILabel = {
-        let label = UILabel()
-        label.text = "내 평가:"
-        return label
-    }()
-    
-    lazy var rateStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        return stackView
-    }()
-    
-    lazy var rateLikeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "like"), for: .normal)
-        button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    lazy var rateCuriousButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "curious"), for: .normal)
-        button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var rateWarningButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "warning"), for: .normal)
-        button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
-        return button
-    }()
-    
     lazy var menuWrapper: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -127,6 +84,49 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         textField.paddingLeft()
         return textField
     }()
+    
+    lazy var rateWrapper: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 3
+        view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09988100166)
+        return view
+    }()
+    
+    lazy var rateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "내 평가:"
+        return label
+    }()
+    
+    lazy var rateStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+    
+    lazy var rateLikeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "like"), for: .normal)
+        button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    lazy var rateCuriousButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "curious"), for: .normal)
+        button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var rateWarningButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "warning"), for: .normal)
+        button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,13 +148,13 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         restaurantNameWrapper.addSubview(restaurantNameLabel)
         restaurantNameWrapper.addSubview(restaurantNameTextField)
         
-        view.addSubview(oneLinerWrapper)
-        oneLinerWrapper.addSubview(oneLinerLabel)
-        oneLinerWrapper.addSubview(oneLinerTextField)
-        
         view.addSubview(menuWrapper)
         menuWrapper.addSubview(menuLabel)
         menuWrapper.addSubview(menuTextField)
+        
+        view.addSubview(oneLinerWrapper)
+        oneLinerWrapper.addSubview(oneLinerLabel)
+        oneLinerWrapper.addSubview(oneLinerTextField)
         
         view.addSubview(rateWrapper)
         rateWrapper.addSubview(rateLabel)
@@ -163,7 +163,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         rateStackView.addArrangedSubview(rateCuriousButton)
         rateStackView.addArrangedSubview(rateWarningButton)
         
-        // MARK: layout
+        // MARK: Layout
         restaurantNameWrapper.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
             $0.leading.trailing.equalToSuperview().inset(24)
@@ -184,44 +184,11 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             $0.height.equalTo(restaurantNameLabel)
         }
         
-        rateWrapper.snp.makeConstraints {
+        menuWrapper.snp.makeConstraints {
             $0.top.equalTo(restaurantNameWrapper.snp.bottom).offset(24)
             $0.leading.equalTo(restaurantNameWrapper.snp.leading)
             $0.trailing.equalTo(restaurantNameWrapper.snp.trailing)
             $0.height.equalTo(restaurantNameWrapper.snp.height)
-        }
-        
-        rateLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(80)
-            $0.height.equalTo(40)
-        }
-        
-        rateStackView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(rateLabel)
-        }
-        
-        rateLikeButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-
-        rateCuriousButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-
-        rateWarningButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-        
-        menuWrapper.snp.makeConstraints {
-            $0.top.equalTo(rateWrapper.snp.bottom).offset(24)
-            $0.leading.equalTo(rateWrapper.snp.leading)
-            $0.trailing.equalTo(rateWrapper.snp.trailing)
-            $0.height.equalTo(rateWrapper.snp.height)
         }
         
         menuLabel.snp.makeConstraints {
@@ -258,6 +225,44 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             $0.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(oneLinerLabel)
         }
+        
+        rateWrapper.snp.makeConstraints {
+            $0.top.equalTo(oneLinerWrapper.snp.bottom).offset(24)
+            $0.leading.equalTo(oneLinerWrapper.snp.leading)
+            $0.trailing.equalTo(oneLinerWrapper.snp.trailing)
+            $0.height.equalTo(oneLinerWrapper.snp.height)
+        }
+        
+        rateLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(80)
+            $0.height.equalTo(40)
+        }
+        
+        rateStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(rateLabel)
+        }
+        
+        rateLikeButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+
+        rateCuriousButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+
+        rateWarningButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     
     @objc func tappedLike(button: UIButton) {
