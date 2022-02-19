@@ -15,7 +15,6 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     
-    
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -143,7 +142,10 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         setUpUI()
         
-        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     private func setUpUI() {
