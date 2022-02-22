@@ -142,13 +142,22 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         setUpUI()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneTapped))
+        navigationController?.navigationBar.tintColor = .darkGray
+        navigationController?.navigationBar.topItem?.title = ""
         navigationItem.backButtonTitle = ""
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneTapped))
         navigationItem.title = "맛집 기록소"
         
     }
     
     @objc func doneTapped() {
+        
+        let foodModiData: FoodModiModel = FoodModiModel(restaurantName: restaurantNameTextField.text!, menu: menuTextField.text!, oneLiner: oneLinerTextField.text!, rate: ["test"])
+        restaurantNameTextField.text = foodModiData.restaurantName
+        menuTextField.text = foodModiData.menu
+        oneLinerTextField.text = foodModiData.oneLiner
+        dump(foodModiData)
+        
         navigationController?.popViewController(animated: true)
     }
     
