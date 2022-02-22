@@ -142,25 +142,16 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         setUpUI()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneTapped))
+        navigationItem.backButtonTitle = ""
+        navigationItem.title = "맛집 기록소"
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        navigationController?.navigationBar.topItem?.title = "맛집 기록소"
-        navigationController?.navigationBar.topItem?.rightBarButtonItem?.title = "저장"
-        navigationController?.navigationBar.topItem?.rightBarButtonItem?.tintColor = .blue
+    @objc func doneTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveData() {
-        print("저장되었습니다.")
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)

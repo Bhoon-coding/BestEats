@@ -107,9 +107,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
         navigationController?.pushViewController(foodModiVC, animated: true)
-        navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        navigationController?.navigationBar.topItem?.title = "맛집 기록소"
-        navigationController?.navigationBar.topItem?.rightBarButtonItem?.title = "저장"
         
         print("\(indexPath.item + 1) 번째 셀이 눌림")
     }
