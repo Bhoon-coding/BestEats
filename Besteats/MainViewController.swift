@@ -32,6 +32,14 @@ class MainViewController: UIViewController {
 //        foodList.map{ foodLabel.text = $0 }
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+            let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+            dump(getFoodDatas)
+        }
+    }
     @IBAction func tapMore(_ sender: Any) {
         guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
         
