@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4AE5FA420992969D5A4540B1 /* Pods_Besteats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */; };
+		E10161DF27C528C200215F5B /* FoodModi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10161DE27C528C200215F5B /* FoodModi.swift */; };
 		E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DB06F276E248400F78037 /* RecommendViewController.swift */; };
 		E11E3C9B2764CF6300B70E3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */; };
 		E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */; };
@@ -27,6 +28,7 @@
 		1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Besteats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69E5733A7F57145E26A4A0A4 /* Pods-Besteats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.debug.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.debug.xcconfig"; sourceTree = "<group>"; };
 		6A83352490499A030FAD40CB /* Pods-Besteats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.release.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.release.xcconfig"; sourceTree = "<group>"; };
+		E10161DE27C528C200215F5B /* FoodModi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModi.swift; sourceTree = "<group>"; };
 		E11DB06F276E248400F78037 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		E11E3C972764CF6300B70E3A /* Besteats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Besteats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E10161DB27C5287600215F5B /* FoodModi */ = {
+			isa = PBXGroup;
+			children = (
+				E10161DD27C528AA00215F5B /* ViewController */,
+				E10161DC27C5289800215F5B /* Model */,
+			);
+			path = FoodModi;
+			sourceTree = "<group>";
+		};
+		E10161DC27C5289800215F5B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E10161DE27C528C200215F5B /* FoodModi.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E10161DD27C528AA00215F5B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E1574856277DEC5D00D645F8 /* FoodModiViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		E11E3C8E2764CF6300B70E3A = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +121,7 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E10161DB27C5287600215F5B /* FoodModi */,
 				E16975E9277ED7C1004547F6 /* Fonts */,
 				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
 				E15A3F88278987A000CD810B /* BottomSheetViewController.swift */,
@@ -102,7 +130,6 @@
 				E11E3C9E2764CF6300B70E3A /* MainViewController.swift */,
 				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
 				E11E3CA02764CF6300B70E3A /* Main.storyboard */,
-				E1574856277DEC5D00D645F8 /* FoodModiViewController.swift */,
 				E191C4FF276F54DC0031F036 /* TabBarController.swift */,
 				E11E3CA32764CF6400B70E3A /* Assets.xcassets */,
 				E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */,
@@ -238,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E11E3C9F2764CF6300B70E3A /* MainViewController.swift in Sources */,
+				E10161DF27C528C200215F5B /* FoodModi.swift in Sources */,
 				E1D3A47B279D21450083C437 /* CALayer.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */,
@@ -395,7 +423,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U7HG3H3F72;
+				DEVELOPMENT_TEAM = H84YUCF7F5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Besteats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -427,7 +455,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U7HG3H3F72;
+				DEVELOPMENT_TEAM = H84YUCF7F5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Besteats/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

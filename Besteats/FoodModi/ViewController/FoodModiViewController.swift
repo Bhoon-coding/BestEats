@@ -15,6 +15,8 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     
+    var foodDataBag: [FoodModiModel] = []
+    
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -129,9 +131,20 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+            let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+        
+            foodDataBag.append(contentsOf: getFoodDatas ?? [])
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         restaurantNameTextField.delegate = self
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
@@ -142,7 +155,36 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         setUpUI()
         
+        navigationController?.navigationBar.tintColor = .darkGray
+        navigationController?.navigationBar.topItem?.title = ""
+        navigationItem.backButtonTitle = ""
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneTapped))
+        navigationItem.title = "맛집 기록소"
+        
     }
+    
+    @objc func doneTapped() {
+
+        guard let restaurantName = restaurantNameTextField.text else { return }
+        guard let menu = menuTextField.text else { return }
+        guard let oneLiner = oneLinerTextField.text else { return }
+        
+        let foodModiData: [FoodModiModel] = [
+            FoodModiModel(
+            restaurantName: restaurantName,
+            menu: menu,
+            oneLiner: oneLiner,
+            rate: ["test"])
+            ]
+        
+        foodDataBag.append(contentsOf: foodModiData)
+        print("foodDataBag:", foodDataBag)
+        
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(foodDataBag), forKey: "foodDatas")
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
