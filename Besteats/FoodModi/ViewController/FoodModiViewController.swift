@@ -89,7 +89,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
-    lazy var rateWrapper: UIView = {
+    lazy var typeWrapper: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
         view.layer.borderWidth = 3
@@ -97,20 +97,20 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    lazy var rateLabel: UILabel = {
+    lazy var typeLabel: UILabel = {
         let label = UILabel()
         label.text = "내 평가:"
         return label
     }()
     
-    lazy var rateStackView: UIStackView = {
+    lazy var typeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         return stackView
     }()
     
-    lazy var rateLikeButton: UIButton = {
+    lazy var typeLikeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "like"), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
@@ -118,14 +118,14 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    lazy var rateCuriousButton: UIButton = {
+    lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "curious"), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var rateWarningButton: UIButton = {
+    lazy var typeWarningButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "warning"), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
@@ -174,7 +174,8 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             restaurantName: restaurantName,
             menu: menu,
             oneLiner: oneLiner,
-            rate: ["test"])
+            type: "test"
+            )
             ]
         
         foodDataBag.append(contentsOf: foodModiData)
@@ -205,12 +206,12 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         oneLinerWrapper.addSubview(oneLinerLabel)
         oneLinerWrapper.addSubview(oneLinerTextField)
         
-        view.addSubview(rateWrapper)
-        rateWrapper.addSubview(rateLabel)
-        rateWrapper.addSubview(rateStackView)
-        rateStackView.addArrangedSubview(rateLikeButton)
-        rateStackView.addArrangedSubview(rateCuriousButton)
-        rateStackView.addArrangedSubview(rateWarningButton)
+        view.addSubview(typeWrapper)
+        typeWrapper.addSubview(typeLabel)
+        typeWrapper.addSubview(typeStackView)
+        typeStackView.addArrangedSubview(typeLikeButton)
+        typeStackView.addArrangedSubview(typeCuriousButton)
+        typeStackView.addArrangedSubview(typeWarningButton)
         
         // MARK: Layout
         restaurantNameWrapper.snp.makeConstraints {
@@ -275,36 +276,36 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             $0.height.equalTo(oneLinerLabel)
         }
         
-        rateWrapper.snp.makeConstraints {
+        typeWrapper.snp.makeConstraints {
             $0.top.equalTo(oneLinerWrapper.snp.bottom).offset(24)
             $0.leading.equalTo(oneLinerWrapper.snp.leading)
             $0.trailing.equalTo(oneLinerWrapper.snp.trailing)
             $0.height.equalTo(oneLinerWrapper.snp.height)
         }
         
-        rateLabel.snp.makeConstraints {
+        typeLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
             $0.width.equalTo(80)
             $0.height.equalTo(40)
         }
         
-        rateStackView.snp.makeConstraints {
+        typeStackView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
             $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(rateLabel)
+            $0.height.equalTo(typeLabel)
         }
         
-        rateLikeButton.snp.makeConstraints {
+        typeLikeButton.snp.makeConstraints {
             $0.width.equalTo(44)
         }
 
-        rateCuriousButton.snp.makeConstraints {
+        typeCuriousButton.snp.makeConstraints {
             $0.width.equalTo(44)
         }
 
-        rateWarningButton.snp.makeConstraints {
+        typeWarningButton.snp.makeConstraints {
             $0.width.equalTo(44)
         }
     }

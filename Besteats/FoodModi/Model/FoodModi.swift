@@ -11,16 +11,17 @@ struct FoodModiModel: Codable {
     let restaurantName: String
     let menu: String
     let oneLiner: String
-    let rate: [String]
+    let type: String
     
     init(restaurantName: String,
          menu: String,
          oneLiner: String,
-         rate: [String])
+         type: String
+        )
     {
         self.restaurantName = restaurantName
         self.menu = menu
         self.oneLiner = oneLiner
-        self.rate = rate
+        self.type = type
     }
 }
