@@ -10,10 +10,14 @@ import SnapKit
 
 class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
+    // MARK: Properties
+    
     // 변수추가시 preview 에러
+    
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
-    var selectedWarning: Bool = false
+    var selectedCaution: Bool = false
+    var type: String? = nil
     
     var foodDataBag: [FoodModiModel] = []
     
@@ -168,13 +172,14 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         guard let restaurantName = restaurantNameTextField.text else { return }
         guard let menu = menuTextField.text else { return }
         guard let oneLiner = oneLinerTextField.text else { return }
+        guard let type = self.type else { return }
         
         let foodModiData: [FoodModiModel] = [
             FoodModiModel(
             restaurantName: restaurantName,
             menu: menu,
             oneLiner: oneLiner,
-            type: "test"
+            type: type
             )
             ]
         
@@ -325,6 +330,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         selectedLike = !selectedLike
 
         if selectedLike {
+            type = "like"
             typeLikeButton.setImage(UIImage(named: "likeFill"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
@@ -338,6 +344,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         selectedCurious = !selectedCurious
 
         if selectedCurious {
+            type = "curious"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curiousFill"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
@@ -348,9 +355,10 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func tappedWarning(button: UIButton) {
-        selectedWarning = !selectedWarning
+        selectedCaution = !selectedCaution
 
-        if selectedWarning {
+        if selectedCaution {
+            type = "caution"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
