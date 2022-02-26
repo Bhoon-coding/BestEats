@@ -171,28 +171,31 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func doneTapped() {
-
-        guard let restaurantName = restaurantNameTextField.text else {
+        
+        if restaurantNameTextField.text == "" {
             self.view.makeToast("맛집명을 입력 해주세요.")
-            return }
-        guard let menu = menuTextField.text else {
+            return
+        } else if menuTextField.text == "" {
             self.view.makeToast("메뉴명을 입력 해주세요.")
-            return }
-        guard let oneLiner = oneLinerTextField.text else {
+            return
+        } else if oneLinerTextField.text == "" {
             self.view.makeToast("한줄팁을 입력 해주세요.")
-            return }
+            return
+        }
+
+        guard let restaurantName = restaurantNameTextField.text else { return }
+        guard let menu = menuTextField.text else { return }
+        guard let oneLiner = oneLinerTextField.text else { return }
         guard let type = self.type else {
             self.view.makeToast("평가버튼을 눌러 주세요.")
             return }
         
         let foodModiData: [FoodModiModel] = [
-            FoodModiModel(
-            restaurantName: restaurantName,
-            menu: menu,
-            oneLiner: oneLiner,
-            type: type
-            )
-            ]
+            FoodModiModel(restaurantName: restaurantName,
+                          menu: menu,
+                          oneLiner: oneLiner,
+                          type: type)
+        ]
         
         foodDataBag.append(contentsOf: foodModiData)
         print("foodDataBag:", foodDataBag)
