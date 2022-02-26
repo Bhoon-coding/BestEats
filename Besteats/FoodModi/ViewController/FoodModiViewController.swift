@@ -148,6 +148,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -155,10 +156,11 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         restaurantNameTextField.delegate = self
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        // 키보드 크기 따라 View 위로 올리기
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         setUpUI()
         
@@ -173,13 +175,13 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     @objc func doneTapped() {
         
         if restaurantNameTextField.text == "" {
-            self.view.makeToast("맛집명을 입력 해주세요.")
+            self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
             return
         } else if menuTextField.text == "" {
-            self.view.makeToast("메뉴명을 입력 해주세요.")
+            self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
             return
         } else if oneLinerTextField.text == "" {
-            self.view.makeToast("한줄팁을 입력 해주세요.")
+            self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
             return
         }
 
@@ -187,7 +189,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         guard let menu = menuTextField.text else { return }
         guard let oneLiner = oneLinerTextField.text else { return }
         guard let type = self.type else {
-            self.view.makeToast("평가버튼을 눌러 주세요.")
+            self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
         let foodModiData: [FoodModiModel] = [
@@ -349,9 +351,10 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         } else {
+            type = nil
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
         }
-        
+
     }
 
     @objc func tappedCurious(button: UIButton) {
@@ -363,6 +366,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             typeCuriousButton.setImage(UIImage(named: "curiousFill"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         } else {
+            type = nil
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
         }
 
@@ -377,18 +381,19 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
         } else {
+            type = nil
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         }
-        
+
     }
     
-    @objc func keyboardWillShow(_ sender: Notification) {
-        self.view.frame.origin.y = -100 // view를 150만큼 위로 올림
-    }
-    
-    @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y = 0
-    }
+//    @objc func keyboardWillShow(_ sender: Notification) {
+//        self.view.frame.origin.y = -100 // view를 150만큼 위로 올림
+//    }
+//
+//    @objc func keyboardWillHide(_ sender: Notification) {
+//        self.view.frame.origin.y = 0
+//    }
 }
 
 extension UITextField {
