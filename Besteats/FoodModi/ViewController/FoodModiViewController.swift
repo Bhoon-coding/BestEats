@@ -6,7 +6,9 @@
 //
 
 import UIKit
+
 import SnapKit
+import Toast_Swift
 
 class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
@@ -90,6 +92,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         textField.layer.cornerRadius = 10
         textField.returnKeyType = .done
         textField.paddingLeft()
+        textField.text = nil
         return textField
     }()
     
@@ -169,10 +172,18 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     @objc func doneTapped() {
 
-        guard let restaurantName = restaurantNameTextField.text else { return }
-        guard let menu = menuTextField.text else { return }
-        guard let oneLiner = oneLinerTextField.text else { return }
-        guard let type = self.type else { return }
+        guard let restaurantName = restaurantNameTextField.text else {
+            self.view.makeToast("맛집명을 입력 해주세요.")
+            return }
+        guard let menu = menuTextField.text else {
+            self.view.makeToast("메뉴명을 입력 해주세요.")
+            return }
+        guard let oneLiner = oneLinerTextField.text else {
+            self.view.makeToast("한줄팁을 입력 해주세요.")
+            return }
+        guard let type = self.type else {
+            self.view.makeToast("평가버튼을 눌러 주세요.")
+            return }
         
         let foodModiData: [FoodModiModel] = [
             FoodModiModel(
