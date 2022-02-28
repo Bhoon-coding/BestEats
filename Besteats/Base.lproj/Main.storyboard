@@ -93,9 +93,9 @@
                                         <gestureRecognizers/>
                                         <size key="customSize" width="330" height="150"/>
                                         <connections>
-                                            <outlet property="cautionTipsLabel" destination="92Q-W0-fyL" id="5lE-6b-C0F"/>
                                             <outlet property="oneLineTipsLabel" destination="nBJ-Z0-VVq" id="7gf-dg-GZy"/>
                                             <outlet property="restaurantNamesLabel" destination="Oa8-Ig-1E0" id="rEZ-gq-QnP"/>
+                                            <outlet property="warningTipsLabel" destination="92Q-W0-fyL" id="l6N-jM-BBC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

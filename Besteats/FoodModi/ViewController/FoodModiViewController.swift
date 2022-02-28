@@ -18,7 +18,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
-    var selectedCaution: Bool = false
+    var selectedWarning: Bool = false
     var type: String? = nil
     
     var foodDataBag: [FoodModiModel] = []
@@ -373,10 +373,10 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func tappedWarning(button: UIButton) {
-        selectedCaution = !selectedCaution
+        selectedWarning = !selectedWarning
 
-        if selectedCaution {
-            type = "caution"
+        if selectedWarning {
+            type = "warning"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)

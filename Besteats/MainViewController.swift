@@ -16,11 +16,11 @@ class MainViewController: UIViewController {
     
 //    var restaurantNames: [String] = ["BHC", "카레", "엘루이피자", "대게", "중평떡볶이", "낙원타코"]
 //    var oneLineTips: [String] = ["뿌링클", "김치랑 먹자", "파마산치즈 듬뿍", "게껍딱 👍", "떡순오가 최고", "대창파히타 > 낙원파히타"]
-//    var cautionTips: [String?] = ["배달이 1시간 걸림", nil, "화장실 밖", "손조심", nil, "물셀프"]
+//    var warningTips: [String?] = ["배달이 1시간 걸림", nil, "화장실 밖", "손조심", nil, "물셀프"]
     
     var restaurantNames: [String] = ["무난무난"]
     var oneLineTips: [String] = ["괜찮"]
-    var cautionTips: [String?] = [":- )"]
+    var warningTips: [String?] = [":- )"]
     
     
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var restaurantNamesLabel: UILabel!
     @IBOutlet weak var oneLineTipsLabel: UILabel!
-    @IBOutlet weak var cautionTipsLabel: UILabel!
+    @IBOutlet weak var warningTipsLabel: UILabel!
     
 }
 extension MainViewController: UISearchBarDelegate {
@@ -95,7 +95,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.restaurantNamesLabel.text = restaurantNames[indexPath.row]
         cell.oneLineTipsLabel.text = oneLineTips[indexPath.row]
-        cell.cautionTipsLabel.text = cautionTips[indexPath.row]
+        cell.warningTipsLabel.text = warningTips[indexPath.row]
         
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 10
@@ -113,8 +113,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // 해당
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
-        navigationController?.pushViewController(foodModiVC, animated: true)
+        
+        let foodDetailVC = FoodDetailViewController()
+        navigationController?.pushViewController(foodDetailVC, animated: true)
+//        guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
+//        navigationController?.pushViewController(foodModiVC, animated: true)
         
         print("\(indexPath.item + 1) 번째 셀이 눌림")
     }
