@@ -12,6 +12,12 @@ import SnapKit
 class FoodDetailViewController: UIViewController {
     
     // MARK: Properties
+    
+    var selectedLike = true
+    var selectedCurious = false
+    var selectedWarning = false
+    var type: String = "like"
+    
     lazy var typeStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [likeTypeButton, curiousTypeButton, warningTypeButton])
         stackView.distribution = .fillEqually
@@ -23,8 +29,8 @@ class FoodDetailViewController: UIViewController {
     lazy var likeTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("좋아요", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .white
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemRed
         button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(tappedLikeButton), for: .touchUpInside)
         return button
@@ -84,23 +90,59 @@ class FoodDetailViewController: UIViewController {
         }
         
     }
-    
     // MARK: @objc
     
     @objc func tappedLikeButton() {
-        likeTypeButton.backgroundColor = .systemRed
-        likeTypeButton.setTitleColor(.white, for: .normal)
+//        selectedLike = !selectedLike
+        type = "like"
+        
+        if type == "like" {
+            likeTypeButton.setTitleColor(.white, for: .normal)
+            likeTypeButton.backgroundColor = .systemRed
+            curiousTypeButton.setTitleColor(.black, for: .normal)
+            curiousTypeButton.backgroundColor = .white
+            warningTypeButton.setTitleColor(.black, for: .normal)
+            warningTypeButton.backgroundColor = .white
+        } else {
+            likeTypeButton.setTitleColor(.black, for: .normal)
+            likeTypeButton.backgroundColor = .white
+        }
     }
     
     @objc func tappedCuriousButton() {
-        curiousTypeButton.backgroundColor = .systemRed
-        curiousTypeButton.setTitleColor(.white, for: .normal)
+//        selectedCurious = !selectedCurious
+        type = "curious"
+        
+        if type == "curious" {
+            likeTypeButton.setTitleColor(.black, for: .normal)
+            likeTypeButton.backgroundColor = .white
+            curiousTypeButton.setTitleColor(.white, for: .normal)
+            curiousTypeButton.backgroundColor = .systemRed
+            warningTypeButton.setTitleColor(.black, for: .normal)
+            warningTypeButton.backgroundColor = .white
+        } else {
+            curiousTypeButton.setTitleColor(.black, for: .normal)
+            curiousTypeButton.backgroundColor = .white
+        }
     }
     
     @objc func tappedWarningButton() {
-        warningTypeButton.backgroundColor = .systemRed
-        warningTypeButton.setTitleColor(.white, for: .normal)
+//        selectedWarning = !selectedWarning
+        type = "warning"
+        
+        if type == "warning" {
+            likeTypeButton.setTitleColor(.black, for: .normal)
+            likeTypeButton.backgroundColor = .white
+            curiousTypeButton.setTitleColor(.black, for: .normal)
+            curiousTypeButton.backgroundColor = .white
+            warningTypeButton.setTitleColor(.white, for: .normal)
+            warningTypeButton.backgroundColor = .systemRed
+        } else {
+            warningTypeButton.setTitleColor(.black, for: .normal)
+            warningTypeButton.backgroundColor = .white
+        }
     }
+        
 }
 
 #if DEBUG
