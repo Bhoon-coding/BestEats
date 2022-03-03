@@ -9,6 +9,10 @@ import UIKit
 
 import SnapKit
 
+class FoodDetailTableViewCell: UITableViewCell {
+    
+}
+
 class FoodDetailViewController: UIViewController {
     
     // MARK: Properties
@@ -22,7 +26,6 @@ class FoodDetailViewController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [likeTypeButton, curiousTypeButton, warningTypeButton])
         stackView.distribution = .fillEqually
         stackView.spacing = 16
-        stackView.backgroundColor = .red
         return stackView
     }()
     
@@ -56,8 +59,23 @@ class FoodDetailViewController: UIViewController {
         return button
     }()
     
+    lazy var foodDetailTableView: UITableView = {
+        let tableView = UITableView()
+//        tableView.backgroundColor = .green
+        return tableView
+    }()
+    
     
     // MARK: LifeCycle
+    
+    override func loadView() {
+        super.loadView()
+        setUpTableView()
+        foodDetailTableView.dataSource = self
+        foodDetailTableView.delegate = self
+        foodDetailTableView.rowHeight = 100
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,13 +86,22 @@ class FoodDetailViewController: UIViewController {
     
     // MARK: Methods
     
+    private func setUpTableView() {
+        
+        view.addSubview(foodDetailTableView)
+        foodDetailTableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
     private func setUpUI() {
         
         view.addSubview(typeStackView)
         typeStackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(16)
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-            $0.height.equalTo(44)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(40)
         }
         
         likeTypeButton.snp.makeConstraints {
@@ -93,7 +120,6 @@ class FoodDetailViewController: UIViewController {
     // MARK: @objc
     
     @objc func tappedLikeButton() {
-//        selectedLike = !selectedLike
         type = "like"
         
         if type == "like" {
@@ -143,6 +169,27 @@ class FoodDetailViewController: UIViewController {
         }
     }
         
+}
+
+// MARK: Extension
+
+extension FoodDetailViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodDetailTableViewCell", for: indexPath) as! FoodDetailTableViewCell
+        
+        return cell
+    }
+    
+    
+}
+
+extension FoodDetailViewController: UITableViewDelegate {
+    
 }
 
 #if DEBUG
