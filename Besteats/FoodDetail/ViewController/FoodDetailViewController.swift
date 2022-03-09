@@ -10,7 +10,42 @@ import UIKit
 import SnapKit
 
 class FoodDetailTableViewCell: UITableViewCell {
+    static let identifier = "FoodDetailTableViewCell"
     
+    lazy var blueView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        return view
+    }()
+    
+    lazy var testLabel: UILabel = {
+        let label = UILabel()
+        label.text = "test"
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setUpCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUpCell() {
+        contentView.addSubview(blueView)
+        contentView.addSubview(testLabel)
+        
+        blueView.snp.makeConstraints {
+            $0.leading.top.equalToSuperview()
+        }
+        
+        testLabel.snp.makeConstraints {
+            $0.trailing.top.equalToSuperview()
+        }
+    }
 }
 
 class FoodDetailViewController: UIViewController {
@@ -61,7 +96,7 @@ class FoodDetailViewController: UIViewController {
     
     lazy var foodDetailTableView: UITableView = {
         let tableView = UITableView()
-//        tableView.backgroundColor = .green
+        tableView.register(FoodDetailTableViewCell.self, forCellReuseIdentifier: "foodTableViewCell")
         return tableView
     }()
     
@@ -73,7 +108,7 @@ class FoodDetailViewController: UIViewController {
         setUpTableView()
         foodDetailTableView.dataSource = self
         foodDetailTableView.delegate = self
-        foodDetailTableView.rowHeight = 100
+        foodDetailTableView.rowHeight = 150
     }
     
     override func viewDidLoad() {
@@ -82,6 +117,12 @@ class FoodDetailViewController: UIViewController {
         view.backgroundColor = .brown
         setUpUI()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setUpTableView()
     }
     
     // MARK: Methods
@@ -104,17 +145,17 @@ class FoodDetailViewController: UIViewController {
             $0.height.equalTo(40)
         }
         
-        likeTypeButton.snp.makeConstraints {
-            $0.width.equalTo(68)
-        }
-        
-        curiousTypeButton.snp.makeConstraints {
-            $0.width.equalTo(68)
-        }
-        
-        warningTypeButton.snp.makeConstraints {
-            $0.width.equalTo(68)
-        }
+//        likeTypeButton.snp.makeConstraints {
+//            $0.width.equalTo(68)
+//        }
+//
+//        curiousTypeButton.snp.makeConstraints {
+//            $0.width.equalTo(68)
+//        }
+//
+//        warningTypeButton.snp.makeConstraints {
+//            $0.width.equalTo(68)
+//        }
         
     }
     // MARK: @objc
@@ -180,7 +221,7 @@ extension FoodDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodDetailTableViewCell", for: indexPath) as! FoodDetailTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath)
         
         return cell
     }
