@@ -18,7 +18,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
-    var selectedCaution: Bool = false
+    var selectedWarning: Bool = false
     var type: String? = nil
     
     var foodDataBag: [FoodModiModel] = []
@@ -151,7 +151,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         
         restaurantNameTextField.delegate = self
         menuTextField.delegate = self
@@ -373,10 +373,10 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func tappedWarning(button: UIButton) {
-        selectedCaution = !selectedCaution
+        selectedWarning = !selectedWarning
 
-        if selectedCaution {
-            type = "caution"
+        if selectedWarning {
+            type = "warning"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
@@ -394,14 +394,6 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
 //    @objc func keyboardWillHide(_ sender: Notification) {
 //        self.view.frame.origin.y = 0
 //    }
-}
-
-extension UITextField {
-    func paddingLeft() {
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
-        self.leftView = paddingView
-        self.leftViewMode = ViewMode.always
-    }
 }
 
 #if DEBUG

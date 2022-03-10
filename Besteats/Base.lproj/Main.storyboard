@@ -93,9 +93,9 @@
                                         <gestureRecognizers/>
                                         <size key="customSize" width="330" height="150"/>
                                         <connections>
-                                            <outlet property="cautionTipsLabel" destination="92Q-W0-fyL" id="5lE-6b-C0F"/>
                                             <outlet property="oneLineTipsLabel" destination="nBJ-Z0-VVq" id="7gf-dg-GZy"/>
                                             <outlet property="restaurantNamesLabel" destination="Oa8-Ig-1E0" id="rEZ-gq-QnP"/>
+                                            <outlet property="warningTipsLabel" destination="92Q-W0-fyL" id="l6N-jM-BBC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -217,6 +217,7 @@
         <!--Food Modi View Controller-->
         <scene sceneID="F5s-Ia-SrQ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Os-Nz-K1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="foodModiVC" id="PEF-Ld-8bW" customClass="FoodModiViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wbP-SB-cja">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -225,7 +226,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Os-Nz-K1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3" y="444"/>
         </scene>
