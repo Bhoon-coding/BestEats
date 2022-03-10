@@ -175,6 +175,8 @@ class FoodDetailViewController: UIViewController {
     // MARK: @objc
     
     @objc func addTapped() {
+//        guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
+//        navigationController?.pushViewController(foodModiVC, animated: true)
         let foodModiVC = FoodModiViewController()
         navigationController?.pushViewController(foodModiVC, animated: true)
     }

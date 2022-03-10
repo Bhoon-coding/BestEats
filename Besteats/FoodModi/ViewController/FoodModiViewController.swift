@@ -151,7 +151,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         
         restaurantNameTextField.delegate = self
         menuTextField.delegate = self
