@@ -12,21 +12,28 @@ import SnapKit
 class FoodDetailTableViewCell: UITableViewCell {
     static let identifier = "FoodDetailTableViewCell"
     
-    lazy var blueView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .blue
-        return view
+    lazy var menuLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "BM JUA_OTF", size: 30)
+        label.text = "메뉴명"
+        return label
     }()
     
-    lazy var testLabel: UILabel = {
+    lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.text = "test"
+        label.text = "∙ 소스에 찍먹"
+        label.font = UIFont(name: "BM JUA_OTF", size: 15)
         return label
+    }()
+    
+    lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+//        button.
+        return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setUpCell()
     }
     
@@ -35,15 +42,16 @@ class FoodDetailTableViewCell: UITableViewCell {
     }
     
     private func setUpCell() {
-        contentView.addSubview(blueView)
-        contentView.addSubview(testLabel)
+        contentView.addSubview(menuLabel)
+        contentView.addSubview(oneLinerLabel)
         
-        blueView.snp.makeConstraints {
-            $0.leading.top.equalToSuperview()
+        menuLabel.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().inset(30)
         }
         
-        testLabel.snp.makeConstraints {
-            $0.trailing.top.equalToSuperview()
+        oneLinerLabel.snp.makeConstraints {
+            $0.leading.equalTo(menuLabel)
+            $0.top.equalTo(menuLabel.snp.bottom).offset(30)
         }
     }
 }
@@ -96,7 +104,7 @@ class FoodDetailViewController: UIViewController {
     
     lazy var foodDetailTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(FoodDetailTableViewCell.self, forCellReuseIdentifier: "foodTableViewCell")
+        tableView.register(FoodDetailTableViewCell.self, forCellReuseIdentifier: FoodDetailTableViewCell.identifier)
         return tableView
     }()
     
@@ -113,7 +121,7 @@ class FoodDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .brown
         setUpUI()
         
@@ -221,7 +229,7 @@ extension FoodDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "foodTableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath)
         
         return cell
     }
