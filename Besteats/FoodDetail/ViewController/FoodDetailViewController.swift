@@ -19,10 +19,12 @@ class FoodDetailTableViewCell: UITableViewCell {
         return label
     }()
     
+//    lazy var favor
+    
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.text = "∙ 소스에 찍먹"
-        label.font = UIFont(name: "BM JUA_OTF", size: 15)
+        label.font = UIFont(name: "BM JUA_OTF", size: 20)
         return label
     }()
     
@@ -75,6 +77,7 @@ class FoodDetailViewController: UIViewController {
     lazy var likeTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("좋아요", for: .normal)
+        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 8
@@ -85,6 +88,7 @@ class FoodDetailViewController: UIViewController {
     lazy var curiousTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("먹어볼래요", for: .normal)
+        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
@@ -95,6 +99,7 @@ class FoodDetailViewController: UIViewController {
     lazy var warningTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("별로에요", for: .normal)
+        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
@@ -123,6 +128,7 @@ class FoodDetailViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .brown
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addTapped))
         setUpUI()
         
     }
@@ -167,6 +173,11 @@ class FoodDetailViewController: UIViewController {
         
     }
     // MARK: @objc
+    
+    @objc func addTapped() {
+        let foodModiVC = FoodModiViewController()
+        navigationController?.pushViewController(foodModiVC, animated: true)
+    }
     
     @objc func tappedLikeButton() {
         type = "like"

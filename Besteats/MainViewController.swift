@@ -118,6 +118,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         navigationController?.pushViewController(foodDetailVC, animated: true)
 //        guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
 //        navigationController?.pushViewController(foodModiVC, animated: true)
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
         
         print("\(indexPath.item + 1) 번째 셀이 눌림")
     }
