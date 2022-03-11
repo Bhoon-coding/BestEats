@@ -116,8 +116,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let foodDetailVC = FoodDetailViewController()
         navigationController?.pushViewController(foodDetailVC, animated: true)
-//        guard let foodModiVC = storyboard?.instantiateViewController(withIdentifier: "foodModiVC") as? FoodModiViewController else { return }
-//        navigationController?.pushViewController(foodModiVC, animated: true)
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
