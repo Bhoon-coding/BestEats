@@ -19,6 +19,8 @@
 - iOS 12.0
 
 # 기능
+
+## Main page (메인 페이지)
 ### TabBar Controller
 - 하단 탭의 버튼으로 페이지 별 보여지는 화면을 다르게 구현
 
@@ -27,3 +29,11 @@
 
 ### 음식점 찾기
 - 등록되어 있는 음식점을 filter메소드를 이용해서 사용자가 찾고자 하는 음식점을 직관적으로 추려내게 구현
+
+### Empty State (CollectionView, TableView)
+- 데이터가 없을시 빈 화면이 아닌 맛집 데이터 추가를 유도하는 View를 보여줌
+
+
+## Detail page (상세 페이지)
+
+## Modi page (수정 페이지)
