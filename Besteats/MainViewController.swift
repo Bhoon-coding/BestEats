@@ -21,7 +21,20 @@ class MainViewController: UIViewController {
     var restaurantNames: [String] = ["무난무난"]
     var oneLineTips: [String] = ["괜찮"]
     var warningTips: [String?] = [":- )"]
+    var restaurantsData: [FoodModiModel] = []
     
+    // MARK: LifeCycle
+    
+    override func loadView() {
+        super.loadView()
+        if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+            let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+            restaurantsData = getFoodDatas ?? []
+        }
+//        print("loadView 호출 ")
+        print("data -> \(restaurantsData)")
+//        print("접근 \(restaurantsData[0])")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +43,20 @@ class MainViewController: UIViewController {
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
 //        foodList.map{ foodLabel.text = $0 }
+        print("viewDidLoad")
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
-            dump(getFoodDatas)
+    
+        if restaurantsData.isEmpty {
+            if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+                let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+                restaurantsData = getFoodDatas ?? []
+            }
         }
+
     }
     @IBAction func tapMore(_ sender: Any) {
         guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
@@ -94,25 +112,33 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
         cell.restaurantNamesLabel.text = restaurantNames[indexPath.row]
+//        cell.restaurantNamesLabel.text = restaurantsData[indexPath.row].restaurantName
         cell.oneLineTipsLabel.text = oneLineTips[indexPath.row]
+//        cell.oneLineTipsLabel.text = restaurantsData[indexPath.row].menu
         cell.warningTipsLabel.text = warningTips[indexPath.row]
+//        cell.warningTipsLabel.text = restaurantsData[indexPath.row].oneLiner
         
         cell.backgroundColor = .lightGray
-        cell.layer.cornerRadius = 10
-        cell.layer.borderWidth = 1
+//        cell.layer.cornerRadius = 10
+//        cell.layer.borderWidth = 1
         
-
         return cell
     }
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return restaurantNames.count
+        if restaurantsData.count == 0 {
+            print("count is 0")
+            collectionView.setEmptyMessage("Nothing to show")
+        } else {
+            collectionView.restore()
+        }
+//        return 1
+        return restaurantsData.count
     }
     
     // 해당
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         
         let foodDetailVC = FoodDetailViewController()
         navigationController?.pushViewController(foodDetailVC, animated: true)
