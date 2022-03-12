@@ -18,7 +18,7 @@ extension UICollectionView {
         let messageLabel: UILabel = {
             let label = UILabel()
             label.text = message
-            label.textColor = .white
+            label.textColor = .label
             label.numberOfLines = 0;
             label.textAlignment = .center;
             label.font = UIFont(name: "BM JUA_OTF", size: 18)
