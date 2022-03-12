@@ -42,9 +42,12 @@ class MainViewController: UIViewController {
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
-//        foodList.map{ foodLabel.text = $0 }
-        print("viewDidLoad")
         
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(showFoodModi))
+    }
+    @objc func showFoodModi() {
+        let foodModiVC = FoodModiViewController()
+        present(foodModiVC, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,12 +131,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // numberOfItemsInSection: Cell을 몇개 보여줄지
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if restaurantsData.count == 0 {
-            print("count is 0")
-            collectionView.setEmptyMessage("Nothing to show")
+            collectionView.setEmptyMessage("추가된 맛집이 없어요..\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
         } else {
             collectionView.restore()
         }
-//        return 1
         return restaurantsData.count
     }
     
