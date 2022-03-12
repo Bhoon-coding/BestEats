@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
+protocol SendUpdateDelegate {
+    func sendUpdate(foodsData: [FoodModiModel])
+}
+
 class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
@@ -21,7 +25,8 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     var selectedWarning: Bool = false
     var type: String? = nil
     
-    var foodDataBag: [FoodModiModel] = []
+    var foodsData: [FoodModiModel] = []
+    var delegate: SendUpdateDelegate?
     
     lazy var closeButton: UIButton = {
         let button = UIButton()
@@ -162,7 +167,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
             let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
         
-            foodDataBag.append(contentsOf: getFoodDatas ?? [])
+            foodsData.append(contentsOf: getFoodDatas ?? [])
         }
     }
 
@@ -181,18 +186,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         setUpUI()
         
-//      네비게이션 push로 할시 주석 풀기. (현재 modal형식)
-        
-//        navigationController?.navigationBar.tintColor = .darkGray
-//        navigationController?.navigationBar.topItem?.title = ""
-//        navigationItem.backButtonTitle = ""
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneTapped))
-//        navigationItem.title = "맛집 기록소"
-        
     }
-    
-    
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -225,7 +219,8 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(doneButton)
         
         closeButton.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(24)
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
             $0.size.equalTo(20)
         }
         
@@ -418,13 +413,14 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
                           type: type)
         ]
         
-        foodDataBag.append(contentsOf: foodModiData)
-        print("foodDataBag:", foodDataBag)
+        foodsData.append(contentsOf: foodModiData)
         
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(foodDataBag), forKey: "foodDatas")
+        print("foodDataBag:", foodsData)
         
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(foodsData), forKey: "foodDatas")
+        
+        delegate?.sendUpdate(foodsData: foodsData)
         dismiss(animated: true, completion: nil)
-//        navigationController?.popViewController(animated: true)
     }
     
     @objc func closeTapped() {
@@ -439,39 +435,3 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
 //        self.view.frame.origin.y = 0
 //    }
 }
-
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct FoodModiViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        return storyboard.instantiateViewController(withIdentifier: "FoodModiViewController") as! FoodModiViewController
-//
-        return FoodModiViewController()
-    }
-}
-
-struct FoodModiViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        FoodModiViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 12")
-    }
-}
-#endif
