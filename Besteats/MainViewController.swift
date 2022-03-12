@@ -13,14 +13,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var foodCollectionView: UICollectionView!
 //    @IBOutlet weak var foodImageView: UIImageView!
     
-    
-//    var restaurantNames: [String] = ["BHC", "카레", "엘루이피자", "대게", "중평떡볶이", "낙원타코"]
-//    var oneLineTips: [String] = ["뿌링클", "김치랑 먹자", "파마산치즈 듬뿍", "게껍딱 👍", "떡순오가 최고", "대창파히타 > 낙원파히타"]
-//    var warningTips: [String?] = ["배달이 1시간 걸림", nil, "화장실 밖", "손조심", nil, "물셀프"]
-    
-    var restaurantNames: [String] = ["무난무난"]
-    var oneLineTips: [String] = ["괜찮"]
-    var warningTips: [String?] = [":- )"]
     var restaurantsData: [FoodModiModel] = []
     
     // MARK: LifeCycle
@@ -45,10 +37,6 @@ class MainViewController: UIViewController {
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(showFoodModi))
     }
-    @objc func showFoodModi() {
-        let foodModiVC = FoodModiViewController()
-        present(foodModiVC, animated: true, completion: nil)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -59,14 +47,27 @@ class MainViewController: UIViewController {
                 restaurantsData = getFoodDatas ?? []
             }
         }
-
+        
+        DispatchQueue.main.async {
+            self.foodCollectionView.reloadData()
+        }
+        
     }
+    
     @IBAction func tapMore(_ sender: Any) {
         guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
         
 //        moreVC.modalPresentationStyle = .overCurrentContext
         BTSheetVC.modalPresentationStyle = .overFullScreen
         present(BTSheetVC, animated: false, completion: nil)
+    }
+    
+    // MARK: @objc
+    @objc func showFoodModi() {
+        let foodModiVC = FoodModiViewController()
+        foodModiVC.delegate = self
+        foodModiVC.modalPresentationStyle = .fullScreen
+        present(foodModiVC, animated: true, completion: nil)
     }
 }
 
@@ -82,7 +83,9 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText.count > 1 {
-           let filteredFoodArr = restaurantNames.filter { $0 == searchText }
+            let filteredFoodArr = restaurantsData.map({ data in
+                data.restaurantName
+            }).filter { $0 == searchText }
             let filterdFood =  filteredFoodArr.joined(separator: "")
             
         }
@@ -114,16 +117,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
-        cell.restaurantNamesLabel.text = restaurantNames[indexPath.row]
-//        cell.restaurantNamesLabel.text = restaurantsData[indexPath.row].restaurantName
-        cell.oneLineTipsLabel.text = oneLineTips[indexPath.row]
-//        cell.oneLineTipsLabel.text = restaurantsData[indexPath.row].menu
-        cell.warningTipsLabel.text = warningTips[indexPath.row]
-//        cell.warningTipsLabel.text = restaurantsData[indexPath.row].oneLiner
+        cell.restaurantNamesLabel.text = restaurantsData[indexPath.row].restaurantName
+        cell.oneLineTipsLabel.text = restaurantsData[indexPath.row].menu
+        cell.warningTipsLabel.text = restaurantsData[indexPath.row].oneLiner
         
         cell.backgroundColor = .lightGray
-//        cell.layer.cornerRadius = 10
-//        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = 8
+        cell.layer.borderWidth = 1
         
         return cell
     }
@@ -150,6 +150,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         print("\(indexPath.item + 1) 번째 셀이 눌림")
     }
     
+}
+
+extension MainViewController: SendUpdateDelegate {
+    func sendUpdate(foodsData: [FoodModiModel]) {
+        restaurantsData = foodsData
+    }
 }
 
 #if DEBUG

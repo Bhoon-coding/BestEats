@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
+protocol SendUpdateDelegate {
+    func sendUpdate(foodsData: [FoodModiModel])
+}
+
 class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
@@ -21,7 +25,15 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     var selectedWarning: Bool = false
     var type: String? = nil
     
-    var foodDataBag: [FoodModiModel] = []
+    var foodsData: [FoodModiModel] = []
+    var delegate: SendUpdateDelegate?
+    
+    lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+        return button
+    }()
     
     lazy var restaurantNameWrapper: UIView = {
         let view = UIView()
@@ -139,16 +151,26 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    lazy var doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("완료", for: .normal)
+        button.tintColor = .label
+        button.backgroundColor = .systemGreen
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    // MARK: LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
             let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
         
-            foodDataBag.append(contentsOf: getFoodDatas ?? [])
+            foodsData.append(contentsOf: getFoodDatas ?? [])
         }
     }
 
-    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -164,56 +186,16 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         setUpUI()
         
-        navigationController?.navigationBar.tintColor = .darkGray
-        navigationController?.navigationBar.topItem?.title = ""
-        navigationItem.backButtonTitle = ""
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneTapped))
-        navigationItem.title = "맛집 기록소"
-        
     }
-    
-    @objc func doneTapped() {
-        
-        if restaurantNameTextField.text == "" {
-            self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
-            return
-        } else if menuTextField.text == "" {
-            self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
-            return
-        } else if oneLinerTextField.text == "" {
-            self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
-            return
-        }
-
-        guard let restaurantName = restaurantNameTextField.text else { return }
-        guard let menu = menuTextField.text else { return }
-        guard let oneLiner = oneLinerTextField.text else { return }
-        guard let type = self.type else {
-            self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
-            return }
-        
-        let foodModiData: [FoodModiModel] = [
-            FoodModiModel(restaurantName: restaurantName,
-                          menu: menu,
-                          oneLiner: oneLiner,
-                          type: type)
-        ]
-        
-        foodDataBag.append(contentsOf: foodModiData)
-        print("foodDataBag:", foodDataBag)
-        
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(foodDataBag), forKey: "foodDatas")
-        
-        navigationController?.popViewController(animated: true)
-    }
-    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
     private func setUpUI() {
-        // MARK: addSubView
+        
+        
+        view.addSubview(closeButton)
         
         view.addSubview(restaurantNameWrapper)
         restaurantNameWrapper.addSubview(restaurantNameLabel)
@@ -234,9 +216,16 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         typeStackView.addArrangedSubview(typeCuriousButton)
         typeStackView.addArrangedSubview(typeWarningButton)
         
-        // MARK: Layout
+        view.addSubview(doneButton)
+        
+        closeButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
+            $0.size.equalTo(20)
+        }
+        
         restaurantNameWrapper.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(50)
+            $0.top.equalTo(closeButton.snp.top).inset(64)
             $0.leading.trailing.equalToSuperview().inset(24)
             $0.height.equalTo(100)
         }
@@ -329,7 +318,15 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         typeWarningButton.snp.makeConstraints {
             $0.width.equalTo(44)
         }
+        
+        doneButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(24)
+            $0.height.equalTo(52)
+        }
     }
+    
+    // MARK: Methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == restaurantNameTextField {
@@ -342,6 +339,8 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    
+    // MARK: @objc
     @objc func tappedLike(button: UIButton) {
         selectedLike = !selectedLike
 
@@ -387,6 +386,47 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
 
     }
     
+    @objc func doneTapped() {
+        
+        if restaurantNameTextField.text == "" {
+            self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
+            return
+        } else if menuTextField.text == "" {
+            self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+            return
+        } else if oneLinerTextField.text == "" {
+            self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+            return
+        }
+
+        guard let restaurantName = restaurantNameTextField.text else { return }
+        guard let menu = menuTextField.text else { return }
+        guard let oneLiner = oneLinerTextField.text else { return }
+        guard let type = self.type else {
+            self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
+            return }
+        
+        let foodModiData: [FoodModiModel] = [
+            FoodModiModel(restaurantName: restaurantName,
+                          menu: menu,
+                          oneLiner: oneLiner,
+                          type: type)
+        ]
+        
+        foodsData.append(contentsOf: foodModiData)
+        
+        print("foodDataBag:", foodsData)
+        
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(foodsData), forKey: "foodDatas")
+        
+        delegate?.sendUpdate(foodsData: foodsData)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func closeTapped() {
+        dismiss(animated: true, completion: nil)
+    }
+    
 //    @objc func keyboardWillShow(_ sender: Notification) {
 //        self.view.frame.origin.y = -100 // view를 150만큼 위로 올림
 //    }
@@ -395,39 +435,3 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
 //        self.view.frame.origin.y = 0
 //    }
 }
-
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct FoodModiViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        return storyboard.instantiateViewController(withIdentifier: "FoodModiViewController") as! FoodModiViewController
-//
-        return FoodModiViewController()
-    }
-}
-
-struct FoodModiViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        FoodModiViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 12")
-    }
-}
-#endif
