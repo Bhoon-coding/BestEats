@@ -217,7 +217,6 @@
         <!--Food Modi View Controller-->
         <scene sceneID="F5s-Ia-SrQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Os-Nz-K1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="foodModiVC" id="PEF-Ld-8bW" customClass="FoodModiViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wbP-SB-cja">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -226,6 +225,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Os-Nz-K1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3" y="444"/>
         </scene>
