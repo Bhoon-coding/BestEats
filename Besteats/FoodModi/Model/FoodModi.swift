@@ -16,9 +16,7 @@ struct FoodModiModel: Codable {
     init(restaurantName: String,
          menu: String,
          oneLiner: String,
-         type: String
-        )
-    {
+         type: String) {
         self.restaurantName = restaurantName
         self.menu = menu
         self.oneLiner = oneLiner

@@ -141,13 +141,20 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // 해당
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let foodDetailVC = FoodDetailViewController()
-        navigationController?.pushViewController(foodDetailVC, animated: true)
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        let items = restaurantsData
+        let foodDetailVC = FoodDetailViewController(selectedItem: items[indexPath.row].restaurantName, relatedItems: items[indexPath.row])
+        
+        
+        let backBarButtonItem = UIBarButtonItem(title: "",
+                                                style: .plain,
+                                                target: self, action: nil)
+        navigationController?.pushViewController(foodDetailVC,
+                                                 animated: true)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
         print("\(indexPath.item + 1) 번째 셀이 눌림")
+        print("\(restaurantsData[indexPath.item].restaurantName)")
     }
     
 }

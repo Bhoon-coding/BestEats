@@ -30,7 +30,6 @@ class FoodDetailTableViewCell: UITableViewCell {
     
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
-//        button.
         return button
     }()
     
@@ -66,6 +65,19 @@ class FoodDetailViewController: UIViewController {
     var selectedCurious = false
     var selectedWarning = false
     var type: String = "like"
+    
+    private let selectedItem: String
+    private let relatedItems: FoodModiModel
+    
+    init(selectedItem: String, relatedItems: FoodModiModel) {
+        self.selectedItem = selectedItem
+        self.relatedItems = relatedItems
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var typeStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [likeTypeButton, curiousTypeButton, warningTypeButton])
@@ -109,7 +121,8 @@ class FoodDetailViewController: UIViewController {
     
     lazy var foodDetailTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(FoodDetailTableViewCell.self, forCellReuseIdentifier: FoodDetailTableViewCell.identifier)
+        tableView.register(FoodDetailTableViewCell.self,
+                           forCellReuseIdentifier: FoodDetailTableViewCell.identifier)
         return tableView
     }()
     
@@ -127,8 +140,15 @@ class FoodDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 20)!]
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(addTapped))
+        title = selectedItem
+        
         view.backgroundColor = .brown
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addTapped))
         setUpUI()
         
     }
@@ -137,6 +157,7 @@ class FoodDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         setUpTableView()
+        
     }
     
     // MARK: Methods
@@ -177,7 +198,7 @@ class FoodDetailViewController: UIViewController {
     @objc func addTapped() {
         
         let foodModiVC = FoodModiViewController()
-        navigationController?.pushViewController(foodModiVC, animated: true)
+        present(foodModiVC, animated: true, completion: nil)
     }
     
     @objc func tappedLikeButton() {
@@ -246,51 +267,9 @@ extension FoodDetailViewController: UITableViewDataSource {
         return cell
     }
     
-    
 }
 
 extension FoodDetailViewController: UITableViewDelegate {
     
 }
 
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct FoodDetailViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        return storyboard.instantiateViewController(withIdentifier: "FoodDetailViewController") as! FoodDetailViewController
-//
-        return FoodDetailViewController()
-    }
-}
-
-struct FoodDetailViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        Group {
-            FoodDetailViewControllerRepresentable()
-
-    // 테스트 해보고자 하는 기기
-                .previewDevice("iPhone 12")
-            FoodDetailViewControllerRepresentable()
-            
-            // 테스트 해보고자 하는 기기
-                .previewDevice("iPhone 12")
-        }
-    }
-}
-#endif
