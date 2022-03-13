@@ -30,7 +30,6 @@ class FoodDetailTableViewCell: UITableViewCell {
     
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
-//        button.
         return button
     }()
     
@@ -68,11 +67,11 @@ class FoodDetailViewController: UIViewController {
     var type: String = "like"
     
     private let selectedItem: String
-//    private let relatedItems: [String]
+    private let relatedItems: FoodModiModel
     
-    init(selectedItem: String) {
+    init(selectedItem: String, relatedItems: FoodModiModel) {
         self.selectedItem = selectedItem
-//        self.relatedItems = relatedItems
+        self.relatedItems = relatedItems
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -122,7 +121,8 @@ class FoodDetailViewController: UIViewController {
     
     lazy var foodDetailTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(FoodDetailTableViewCell.self, forCellReuseIdentifier: FoodDetailTableViewCell.identifier)
+        tableView.register(FoodDetailTableViewCell.self,
+                           forCellReuseIdentifier: FoodDetailTableViewCell.identifier)
         return tableView
     }()
     
@@ -139,8 +139,13 @@ class FoodDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 20)!]
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addTapped))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(addTapped))
         title = selectedItem
         
         view.backgroundColor = .brown
@@ -152,6 +157,7 @@ class FoodDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         setUpTableView()
+        
     }
     
     // MARK: Methods
@@ -260,7 +266,6 @@ extension FoodDetailViewController: UITableViewDataSource {
         
         return cell
     }
-    
     
 }
 
