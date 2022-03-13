@@ -16,7 +16,7 @@
 - Xcode(v13.1)
 
 # Version Target 
-- iOS 12.0
+- iOS 13.0
 
 # 기능
 
@@ -33,7 +33,13 @@
 ### Empty State (CollectionView, TableView)
 - 데이터가 없을시 빈 화면이 아닌 맛집 데이터 추가를 유도하는 View를 보여줌
 
+----
 
 ## Detail page (상세 페이지)
+- Main page에서 받아온 데이터를 네비게이션 제목, tableViewCell에 보여줌
+
+### 체크리스트
+- [ ] FoodModiModel 구조체 구조 수정 
+- [ ] 중복 맛집명의 경우로 데이터 추가시 안되게 토스트 띄워주기
 
 ## Modi page (수정 페이지)
