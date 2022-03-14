@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4AE5FA420992969D5A4540B1 /* Pods_Besteats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */; };
-		E10161DF27C528C200215F5B /* FoodModi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10161DE27C528C200215F5B /* FoodModi.swift */; };
+		E10161DF27C528C200215F5B /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10161DE27C528C200215F5B /* FoodModel.swift */; };
 		E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DB06F276E248400F78037 /* RecommendViewController.swift */; };
 		E11E3C9B2764CF6300B70E3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */; };
 		E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */; };
@@ -29,7 +29,7 @@
 		1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Besteats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69E5733A7F57145E26A4A0A4 /* Pods-Besteats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.debug.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.debug.xcconfig"; sourceTree = "<group>"; };
 		6A83352490499A030FAD40CB /* Pods-Besteats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.release.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.release.xcconfig"; sourceTree = "<group>"; };
-		E10161DE27C528C200215F5B /* FoodModi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModi.swift; sourceTree = "<group>"; };
+		E10161DE27C528C200215F5B /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		E11DB06F276E248400F78037 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		E11E3C972764CF6300B70E3A /* Besteats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Besteats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		E10161DC27C5289800215F5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E10161DE27C528C200215F5B /* FoodModi.swift */,
+				E10161DE27C528C200215F5B /* FoodModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,7 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E11E3C9F2764CF6300B70E3A /* MainViewController.swift in Sources */,
-				E10161DF27C528C200215F5B /* FoodModi.swift in Sources */,
+				E10161DF27C528C200215F5B /* FoodModel.swift in Sources */,
 				E1784F1527CD06E90005AB03 /* FoodDetailViewController.swift in Sources */,
 				E1784F1827CD070C0005AB03 /* Extension.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,

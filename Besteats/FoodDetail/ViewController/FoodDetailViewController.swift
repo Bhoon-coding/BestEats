@@ -19,8 +19,6 @@ class FoodDetailTableViewCell: UITableViewCell {
         return label
     }()
     
-//    lazy var favor
-    
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.text = "∙ 소스에 찍먹"
@@ -67,9 +65,9 @@ class FoodDetailViewController: UIViewController {
     var type: String = "like"
     
     private let selectedItem: String
-    private let relatedItems: FoodModiModel
+    private let relatedItems: Restaurants
     
-    init(selectedItem: String, relatedItems: FoodModiModel) {
+    init(selectedItem: String, relatedItems: Restaurants) {
         self.selectedItem = selectedItem
         self.relatedItems = relatedItems
         super.init(nibName: nil, bundle: nil)
@@ -197,7 +195,7 @@ class FoodDetailViewController: UIViewController {
     
     @objc func addTapped() {
         
-        let foodModiVC = FoodModiViewController()
+        let foodModiVC = FoodModiViewController(currentRestaurantName: title!)
         present(foodModiVC, animated: true, completion: nil)
     }
     
