@@ -145,7 +145,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let items = restaurantsData
-        let foodDetailVC = FoodDetailViewController(selectedItem: items[indexPath.row].restaurantName, relatedItems: items[indexPath.row])
+        let foodDetailVC = FoodDetailViewController(selectedItem: items[indexPath.row].restaurantName, relatedItems: items[indexPath.row].menu)
         
         
         let backBarButtonItem = UIBarButtonItem(title: "",

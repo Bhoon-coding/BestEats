@@ -9,51 +9,6 @@ import UIKit
 
 import SnapKit
 
-class FoodDetailTableViewCell: UITableViewCell {
-    static let identifier = "FoodDetailTableViewCell"
-    
-    lazy var menuLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "BM JUA_OTF", size: 30)
-        label.text = "메뉴명"
-        return label
-    }()
-    
-    lazy var oneLinerLabel: UILabel = {
-        let label = UILabel()
-        label.text = "∙ 소스에 찍먹"
-        label.font = UIFont(name: "BM JUA_OTF", size: 20)
-        return label
-    }()
-    
-    lazy var favoriteButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpCell()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setUpCell() {
-        contentView.addSubview(menuLabel)
-        contentView.addSubview(oneLinerLabel)
-        
-        menuLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(30)
-        }
-        
-        oneLinerLabel.snp.makeConstraints {
-            $0.leading.equalTo(menuLabel)
-            $0.top.equalTo(menuLabel.snp.bottom).offset(30)
-        }
-    }
-}
 
 class FoodDetailViewController: UIViewController {
     
@@ -65,9 +20,9 @@ class FoodDetailViewController: UIViewController {
     var type: String = "like"
     
     private let selectedItem: String
-    private let relatedItems: Restaurants
+    private let relatedItems: [Menus]
     
-    init(selectedItem: String, relatedItems: Restaurants) {
+    init(selectedItem: String, relatedItems: [Menus]) {
         self.selectedItem = selectedItem
         self.relatedItems = relatedItems
         super.init(nibName: nil, bundle: nil)
@@ -78,7 +33,10 @@ class FoodDetailViewController: UIViewController {
     }
     
     lazy var typeStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [likeTypeButton, curiousTypeButton, warningTypeButton])
+        let stackView = UIStackView(arrangedSubviews: [likeTypeButton,
+                                                       curiousTypeButton,
+                                                       warningTypeButton
+                                                      ])
         stackView.distribution = .fillEqually
         stackView.spacing = 16
         return stackView
@@ -255,12 +213,15 @@ class FoodDetailViewController: UIViewController {
 
 extension FoodDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return relatedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath) as! FoodDetailTableViewCell
+        
+        cell.menuLabel.text = relatedItems[indexPath.row].menu
+        cell.oneLinerLabel.text = relatedItems[indexPath.row].oneLiner
         
         return cell
     }
