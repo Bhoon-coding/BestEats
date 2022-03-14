@@ -424,7 +424,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     @objc func doneTapped() {
         
-        if currentRestaurantName == "" {
+        if currentRestaurantName.isEmpty {
             
             if restaurantNameTextField.text == "" {
                 self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
@@ -437,6 +437,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
                 return
             }
         } else {
+            
             if menuTextField.text == "" {
                 self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
                 return
@@ -454,7 +455,11 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             return }
         
         let menusModel: [Menus] = [Menus(menu: menu, oneLiner: oneLiner, type: type)]
-        let restaurantModel: [Restaurants] = [ Restaurants(restaurantName: restaurantName, menu: menusModel)]
+        let restaurantModel: [Restaurants] = [Restaurants(restaurantName:
+                                                           currentRestaurantName.isEmpty
+                                                           ? restaurantName
+                                                           : currentRestaurantName,
+                                                           menu: menusModel)]
         
         restaurantData.append(contentsOf: restaurantModel)
         
