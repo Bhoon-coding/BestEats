@@ -13,14 +13,14 @@ class MainViewController: UIViewController {
     @IBOutlet weak var foodCollectionView: UICollectionView!
 //    @IBOutlet weak var foodImageView: UIImageView!
     
-    var restaurantsData: [FoodModiModel] = []
+    var restaurantsData: [Restaurants] = []
     
     // MARK: LifeCycle
     
     override func loadView() {
         super.loadView()
         if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+            let getFoodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: foodDatas)
             restaurantsData = getFoodDatas ?? []
         }
 //        print("loadView 호출 ")
@@ -44,7 +44,7 @@ class MainViewController: UIViewController {
     
         if restaurantsData.isEmpty {
             if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-                let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+                let getFoodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: foodDatas)
                 restaurantsData = getFoodDatas ?? []
             }
         }
@@ -119,8 +119,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
         cell.restaurantNamesLabel.text = restaurantsData[indexPath.row].restaurantName
-        cell.oneLineTipsLabel.text = restaurantsData[indexPath.row].menu
-        cell.warningTipsLabel.text = restaurantsData[indexPath.row].oneLiner
+        cell.oneLineTipsLabel.text = "한줄평"
+//        restaurantsData[indexPath.row].menu
+        cell.warningTipsLabel.text = "경고"
+//        restaurantsData[indexPath.row].oneLiner
         
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 8
@@ -161,7 +163,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension MainViewController: SendUpdateDelegate {
-    func sendUpdate(foodsData: [FoodModiModel]) {
+    func sendUpdate(foodsData: [Restaurants]) {
         restaurantsData = foodsData
     }
 }

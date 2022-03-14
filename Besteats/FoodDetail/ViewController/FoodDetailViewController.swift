@@ -65,9 +65,9 @@ class FoodDetailViewController: UIViewController {
     var type: String = "like"
     
     private let selectedItem: String
-    private let relatedItems: FoodModiModel
+    private let relatedItems: Restaurants
     
-    init(selectedItem: String, relatedItems: FoodModiModel) {
+    init(selectedItem: String, relatedItems: Restaurants) {
         self.selectedItem = selectedItem
         self.relatedItems = relatedItems
         super.init(nibName: nil, bundle: nil)

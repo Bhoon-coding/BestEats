@@ -11,7 +11,7 @@ import SnapKit
 import Toast_Swift
 
 protocol SendUpdateDelegate {
-    func sendUpdate(foodsData: [FoodModiModel])
+    func sendUpdate(foodsData: [Restaurants])
 }
 
 class FoodModiViewController: UIViewController, UITextFieldDelegate {
@@ -25,7 +25,8 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     var selectedWarning: Bool = false
     var type: String? = nil
     
-    var foodsData: [FoodModiModel] = []
+    var restaurantData: [Restaurants] = []
+    var menusData: [Menus] = []
     var delegate: SendUpdateDelegate?
     
     private var currentRestaurantName: String
@@ -184,9 +185,9 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let getFoodDatas = try? PropertyListDecoder().decode([FoodModiModel].self, from: foodDatas)
+            let getFoodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: foodDatas)
         
-            foodsData.append(contentsOf: getFoodDatas ?? [])
+            restaurantData.append(contentsOf: getFoodDatas ?? [])
         }
     }
 
@@ -452,20 +453,16 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
-        let foodModiData: [FoodModiModel] = [
-            FoodModiModel(restaurantName: restaurantName,
-                          menu: menu,
-                          oneLiner: oneLiner,
-                          type: type)
-        ]
+        let menusModel: [Menus] = [Menus(menu: menu, oneLiner: oneLiner, type: type)]
+        let restaurantModel: [Restaurants] = [ Restaurants(restaurantName: restaurantName, menu: menusModel)]
         
-        foodsData.append(contentsOf: foodModiData)
+        restaurantData.append(contentsOf: restaurantModel)
         
-        print("foodDataBag:", foodsData)
+        print("foodDataBag:", restaurantData)
         
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(foodsData), forKey: "foodDatas")
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(restaurantData), forKey: "foodDatas")
         
-        delegate?.sendUpdate(foodsData: foodsData)
+        delegate?.sendUpdate(foodsData: restaurantData)
         dismiss(animated: true, completion: nil)
     }
     
