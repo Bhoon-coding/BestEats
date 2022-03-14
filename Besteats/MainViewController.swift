@@ -35,6 +35,7 @@ class MainViewController: UIViewController {
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
         
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(showFoodModi))
     }
     
@@ -64,7 +65,7 @@ class MainViewController: UIViewController {
     
     // MARK: @objc
     @objc func showFoodModi() {
-        let foodModiVC = FoodModiViewController()
+        let foodModiVC = FoodModiViewController(currentRestaurantName: "")
         foodModiVC.delegate = self
         foodModiVC.modalPresentationStyle = .fullScreen
         present(foodModiVC, animated: true, completion: nil)

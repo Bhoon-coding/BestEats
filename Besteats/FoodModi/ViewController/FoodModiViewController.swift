@@ -28,6 +28,17 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     var foodsData: [FoodModiModel] = []
     var delegate: SendUpdateDelegate?
     
+    private var currentRestaurantName: String
+    
+    init(currentRestaurantName: String) {
+        self.currentRestaurantName = currentRestaurantName
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
@@ -59,6 +70,13 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
+    lazy var restaurantNameFixedLabel: UILabel = {
+        let label = UILabel()
+        label.text = currentRestaurantName
+        label.font = UIFont(name: "BM JUA_OTF", size: 16)
+        return label
+    }()
+    
     lazy var menuWrapper: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -82,6 +100,7 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         textField.paddingLeft()
         return textField
     }()
+    
     
     lazy var oneLinerWrapper: UIView = {
         let view = UIView()
@@ -199,7 +218,13 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
         
         view.addSubview(restaurantNameWrapper)
         restaurantNameWrapper.addSubview(restaurantNameLabel)
-        restaurantNameWrapper.addSubview(restaurantNameTextField)
+        
+        if currentRestaurantName == "" {
+            restaurantNameWrapper.addSubview(restaurantNameTextField)
+        } else {
+            restaurantNameWrapper.addSubview(restaurantNameFixedLabel)
+        }
+        
         
         view.addSubview(menuWrapper)
         menuWrapper.addSubview(menuLabel)
@@ -237,11 +262,21 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
             $0.height.equalTo(40)
         }
 
-        restaurantNameTextField.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(restaurantNameLabel)
+        if currentRestaurantName == "" {
+            restaurantNameTextField.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
+                $0.trailing.equalToSuperview().inset(16)
+                $0.height.equalTo(restaurantNameLabel)
+            }
+        } else {
+            restaurantNameFixedLabel.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.leading.equalTo(restaurantNameLabel.snp.trailing).inset(16)
+                $0.trailing.equalToSuperview().inset(16)
+                $0.height.equalTo(restaurantNameLabel)
+            }
+            
         }
         
         menuWrapper.snp.makeConstraints {
@@ -388,15 +423,26 @@ class FoodModiViewController: UIViewController, UITextFieldDelegate {
     
     @objc func doneTapped() {
         
-        if restaurantNameTextField.text == "" {
-            self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
-            return
-        } else if menuTextField.text == "" {
-            self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
-            return
-        } else if oneLinerTextField.text == "" {
-            self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
-            return
+        if currentRestaurantName == "" {
+            
+            if restaurantNameTextField.text == "" {
+                self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
+                return
+            } else if menuTextField.text == "" {
+                self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+                return
+            } else if oneLinerTextField.text == "" {
+                self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+                return
+            }
+        } else {
+            if menuTextField.text == "" {
+                self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+                return
+            } else if oneLinerTextField.text == "" {
+                self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+                return
+            }
         }
 
         guard let restaurantName = restaurantNameTextField.text else { return }
