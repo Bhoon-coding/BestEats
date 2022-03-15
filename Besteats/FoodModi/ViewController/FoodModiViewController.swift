@@ -1,5 +1,5 @@
 //
-//  FoodModiViewController.swift
+//  RestaurantAddViewController.swift
 //  Besteats
 //
 //  Created by BH on 2021/12/30.
@@ -14,7 +14,7 @@ protocol SendUpdateDelegate {
     func sendUpdate(foodsData: [Restaurants])
 }
 
-class FoodModiViewController: UIViewController, UITextFieldDelegate {
+class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     

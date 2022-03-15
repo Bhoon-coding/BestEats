@@ -65,10 +65,10 @@ class MainViewController: UIViewController {
     
     // MARK: @objc
     @objc func showFoodModi() {
-        let foodModiVC = FoodModiViewController(currentRestaurantName: "")
-        foodModiVC.delegate = self
-        foodModiVC.modalPresentationStyle = .fullScreen
-        present(foodModiVC, animated: true, completion: nil)
+        let restaurantAddVC = RestaurantAddViewController(currentRestaurantName: "")
+        restaurantAddVC.delegate = self
+        restaurantAddVC.modalPresentationStyle = .fullScreen
+        present(restaurantAddVC, animated: true, completion: nil)
     }
 }
 
