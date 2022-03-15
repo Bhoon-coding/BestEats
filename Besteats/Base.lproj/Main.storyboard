@@ -214,10 +214,10 @@
             </objects>
             <point key="canvasLocation" x="-768" y="444"/>
         </scene>
-        <!--Food Modi View Controller-->
+        <!--Restaurant Add View Controller-->
         <scene sceneID="F5s-Ia-SrQ">
             <objects>
-                <viewController storyboardIdentifier="foodModiVC" id="PEF-Ld-8bW" customClass="FoodModiViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="foodModiVC" id="PEF-Ld-8bW" customClass="RestaurantAddViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wbP-SB-cja">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -195,8 +195,8 @@ class FoodDetailViewController: UIViewController {
     
     @objc func addTapped() {
         
-        let foodModiVC = FoodModiViewController(currentRestaurantName: title!)
-        present(foodModiVC, animated: true, completion: nil)
+        let restaurantAddVC = RestaurantAddViewController()
+        present(restaurantAddVC, animated: true, completion: nil)
     }
     
     @objc func tappedLikeButton() {
