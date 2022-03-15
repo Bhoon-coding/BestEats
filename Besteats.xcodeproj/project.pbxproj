@@ -16,7 +16,8 @@
 		E11E3CA22764CF6300B70E3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA02764CF6300B70E3A /* Main.storyboard */; };
 		E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA32764CF6400B70E3A /* Assets.xcassets */; };
 		E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */; };
-		E1574857277DEC5D00D645F8 /* FoodModiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1574856277DEC5D00D645F8 /* FoodModiViewController.swift */; };
+		E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */; };
+		E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */; };
 		E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15A3F88278987A000CD810B /* BottomSheetViewController.swift */; };
 		E16975EC277ED86B004547F6 /* BMJUA_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E16975EA277ED86A004547F6 /* BMJUA_ttf.ttf */; };
 		E16975ED277ED86B004547F6 /* BMJUA_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = E16975EB277ED86A004547F6 /* BMJUA_otf.otf */; };
@@ -39,7 +40,8 @@
 		E11E3CA32764CF6400B70E3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11E3CA62764CF6400B70E3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11E3CA82764CF6400B70E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1574856277DEC5D00D645F8 /* FoodModiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModiViewController.swift; sourceTree = "<group>"; };
+		E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddViewController.swift; sourceTree = "<group>"; };
+		E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAddViewController.swift; sourceTree = "<group>"; };
 		E15A3F88278987A000CD810B /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E16975EA277ED86A004547F6 /* BMJUA_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_ttf.ttf; sourceTree = "<group>"; };
 		E16975EB277ED86A004547F6 /* BMJUA_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_otf.otf; sourceTree = "<group>"; };
@@ -77,15 +79,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E10161DB27C5287600215F5B /* FoodModi */ = {
-			isa = PBXGroup;
-			children = (
-				E10161DD27C528AA00215F5B /* ViewController */,
-				E10161DC27C5289800215F5B /* Model */,
-			);
-			path = FoodModi;
-			sourceTree = "<group>";
-		};
 		E10161DC27C5289800215F5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,7 +90,7 @@
 		E10161DD27C528AA00215F5B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E1574856277DEC5D00D645F8 /* FoodModiViewController.swift */,
+				E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -123,9 +116,11 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E131C79927E0D3AF00AEAE8D /* MenuAdd */,
+				E131C79827E0D33E00AEAE8D /* RestaurantAdd */,
+				E10161DC27C5289800215F5B /* Model */,
 				E1784F1627CD07000005AB03 /* Helper */,
 				E1784F1127CD06B90005AB03 /* FoodDetail */,
-				E10161DB27C5287600215F5B /* FoodModi */,
 				E16975E9277ED7C1004547F6 /* Fonts */,
 				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
 				E15A3F88278987A000CD810B /* BottomSheetViewController.swift */,
@@ -141,6 +136,22 @@
 			path = Besteats;
 			sourceTree = "<group>";
 		};
+		E131C79827E0D33E00AEAE8D /* RestaurantAdd */ = {
+			isa = PBXGroup;
+			children = (
+				E10161DD27C528AA00215F5B /* ViewController */,
+			);
+			path = RestaurantAdd;
+			sourceTree = "<group>";
+		};
+		E131C79927E0D3AF00AEAE8D /* MenuAdd */ = {
+			isa = PBXGroup;
+			children = (
+				E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */,
+			);
+			path = MenuAdd;
+			sourceTree = "<group>";
+		};
 		E16975E9277ED7C1004547F6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,7 +164,6 @@
 		E1784F1127CD06B90005AB03 /* FoodDetail */ = {
 			isa = PBXGroup;
 			children = (
-				E1784F1327CD06D90005AB03 /* Model */,
 				E1784F1227CD06D00005AB03 /* ViewController */,
 			);
 			path = FoodDetail;
@@ -165,13 +175,6 @@
 				E1784F1427CD06E90005AB03 /* FoodDetailViewController.swift */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		E1784F1327CD06D90005AB03 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		E1784F1627CD07000005AB03 /* Helper */ = {
@@ -306,7 +309,8 @@
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */,
 				E11E3C9B2764CF6300B70E3A /* AppDelegate.swift in Sources */,
-				E1574857277DEC5D00D645F8 /* FoodModiViewController.swift in Sources */,
+				E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */,
+				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
 				E191C500276F54DC0031F036 /* TabBarController.swift in Sources */,
 				E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */,
 			);
