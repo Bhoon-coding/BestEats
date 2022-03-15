@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
     
     // MARK: @objc
     @objc func showFoodModi() {
-        let restaurantAddVC = RestaurantAddViewController(currentRestaurantName: "")
+        let restaurantAddVC = RestaurantAddViewController()
         restaurantAddVC.delegate = self
         restaurantAddVC.modalPresentationStyle = .fullScreen
         present(restaurantAddVC, animated: true, completion: nil)
