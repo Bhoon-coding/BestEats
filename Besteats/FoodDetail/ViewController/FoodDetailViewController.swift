@@ -18,11 +18,11 @@ class FoodDetailViewController: UIViewController {
     var selectedWarning = false
     var type: String = "like"
     
-    private let selectedItem: String
+    private let selectedRestaurant: String
     private let relatedItems: Restaurants
     
-    init(selectedItem: String, relatedItems: Restaurants) {
-        self.selectedItem = selectedItem
+    init(selectedRestaurant: String, relatedItems: Restaurants) {
+        self.selectedRestaurant = selectedRestaurant
         self.relatedItems = relatedItems
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,7 +98,7 @@ class FoodDetailViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(addTapped))
-        title = selectedItem
+        title = selectedRestaurant
         
         view.backgroundColor = .brown
         setUpUI()
@@ -149,7 +149,7 @@ class FoodDetailViewController: UIViewController {
     
     @objc func addTapped() {
         
-        let menuAddVC = MenuAddViewController()
+        let menuAddVC = MenuAddViewController(with: selectedRestaurant)
         present(menuAddVC, animated: true, completion: nil)
     }
     
