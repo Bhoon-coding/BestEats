@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 class FoodDetailViewController: UIViewController {
     
@@ -227,7 +228,11 @@ extension FoodDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath) as! FoodDetailTableViewCell
+
+        
+        cell.menuLabel.text = totalRestaurants[index].menu[indexPath.row].menu
+        cell.oneLinerLabel.text = totalRestaurants[index].menu[indexPath.row].oneLiner
         
         return cell
     }
