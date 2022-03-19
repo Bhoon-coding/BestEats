@@ -2,7 +2,7 @@
 //  FoodDetailTableViewCell.swift
 //  Besteats
 //
-//  Created by BH on 2022/03/14.
+//  Created by BH on 2022/03/17.
 //
 
 import UIKit
@@ -13,14 +13,12 @@ class FoodDetailTableViewCell: UITableViewCell {
     lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "BM JUA_OTF", size: 30)
-        label.text = "메뉴명"
         return label
     }()
     
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.text = "∙ 소스에 찍먹"
-        label.font = UIFont(name: "BM JUA_OTF", size: 20)
+        label.font = UIFont(name: "BM JUA_OTF", size: 16)
         return label
     }()
     
@@ -38,11 +36,8 @@ class FoodDetailTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpData() {
+    private func setUpCell() {
         
-    }
-    
-    func setUpCell() {
         contentView.addSubview(menuLabel)
         contentView.addSubview(oneLinerLabel)
         

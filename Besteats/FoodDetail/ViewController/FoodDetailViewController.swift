@@ -6,9 +6,7 @@
 //
 
 import UIKit
-
 import SnapKit
-
 
 class FoodDetailViewController: UIViewController {
     
@@ -18,13 +16,13 @@ class FoodDetailViewController: UIViewController {
     var selectedCurious = false
     var selectedWarning = false
     var type: String = "like"
+    var index: Int
+    private var totalRestaurants: [Restaurants]
     
-    private let selectedItem: String
-    private let relatedItems: [Menus]
-    
-    init(selectedItem: String, relatedItems: [Menus]) {
-        self.selectedItem = selectedItem
-        self.relatedItems = relatedItems
+    init(totalRestaurants: [Restaurants],
+         index: Int) {
+        self.totalRestaurants = totalRestaurants
+        self.index = index
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -91,6 +89,7 @@ class FoodDetailViewController: UIViewController {
         foodDetailTableView.dataSource = self
         foodDetailTableView.delegate = self
         foodDetailTableView.rowHeight = 150
+        
     }
     
     override func viewDidLoad() {
@@ -102,11 +101,19 @@ class FoodDetailViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(addTapped))
-        title = selectedItem
+        title = totalRestaurants[index].restaurantName
         
         view.backgroundColor = .brown
         setUpUI()
         
+    }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateTableData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,6 +122,7 @@ class FoodDetailViewController: UIViewController {
         setUpTableView()
         
     }
+    
     
     // MARK: Methods
     
@@ -135,26 +143,30 @@ class FoodDetailViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(40)
         }
-        
-//        likeTypeButton.snp.makeConstraints {
-//            $0.width.equalTo(68)
-//        }
-//
-//        curiousTypeButton.snp.makeConstraints {
-//            $0.width.equalTo(68)
-//        }
-//
-//        warningTypeButton.snp.makeConstraints {
-//            $0.width.equalTo(68)
-//        }
-        
     }
+    
+    private func updateTableData() {
+           if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+               let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
+               totalRestaurants = foodDatas ?? []
+               
+               DispatchQueue.main.async {
+                   self.foodDetailTableView.reloadData()
+               }
+           }
+       }
+        
+    
     // MARK: @objc
     
     @objc func addTapped() {
         
-        let foodModiVC = FoodModiViewController(currentRestaurantName: title!)
-        present(foodModiVC, animated: true, completion: nil)
+        let menuAddVC = MenuAddViewController(totalRestaurants: totalRestaurants,
+                                              index: index
+        )
+        
+        menuAddVC.modalPresentationStyle = .fullScreen
+        present(menuAddVC, animated: true, completion: nil)
     }
     
     @objc func tappedLikeButton() {
@@ -213,15 +225,14 @@ class FoodDetailViewController: UIViewController {
 
 extension FoodDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return relatedItems.count
+        return totalRestaurants[index].menu.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath) as! FoodDetailTableViewCell
-        
-        cell.menuLabel.text = relatedItems[indexPath.row].menu
-        cell.oneLinerLabel.text = relatedItems[indexPath.row].oneLiner
+        cell.menuLabel.text = totalRestaurants[index].menu[indexPath.row].menu
+        cell.oneLinerLabel.text = totalRestaurants[index].menu[indexPath.row].oneLiner
         
         return cell
     }
