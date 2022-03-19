@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import SwiftUI
 
 class FoodDetailViewController: UIViewController {
     
@@ -32,7 +31,10 @@ class FoodDetailViewController: UIViewController {
     }
     
     lazy var typeStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [likeTypeButton, curiousTypeButton, warningTypeButton])
+        let stackView = UIStackView(arrangedSubviews: [likeTypeButton,
+                                                       curiousTypeButton,
+                                                       warningTypeButton
+                                                      ])
         stackView.distribution = .fillEqually
         stackView.spacing = 16
         return stackView
@@ -229,8 +231,6 @@ extension FoodDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath) as! FoodDetailTableViewCell
-
-        
         cell.menuLabel.text = totalRestaurants[index].menu[indexPath.row].menu
         cell.oneLinerLabel.text = totalRestaurants[index].menu[indexPath.row].oneLiner
         
