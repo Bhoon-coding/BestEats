@@ -105,16 +105,12 @@ class FoodDetailViewController: UIViewController {
         
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
-            totalRestaurants = foodDatas ?? []
-            
-            DispatchQueue.main.async {
-                self.foodDetailTableView.reloadData()
-            }
-        }
+        
+        updateTableData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -123,6 +119,7 @@ class FoodDetailViewController: UIViewController {
         setUpTableView()
         
     }
+    
     
     // MARK: Methods
     
@@ -143,20 +140,20 @@ class FoodDetailViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(40)
         }
-        
-//        likeTypeButton.snp.makeConstraints {
-//            $0.width.equalTo(68)
-//        }
-//
-//        curiousTypeButton.snp.makeConstraints {
-//            $0.width.equalTo(68)
-//        }
-//
-//        warningTypeButton.snp.makeConstraints {
-//            $0.width.equalTo(68)
-//        }
-        
     }
+    
+    private func updateTableData() {
+           if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+               let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
+               totalRestaurants = foodDatas ?? []
+               
+               DispatchQueue.main.async {
+                   self.foodDetailTableView.reloadData()
+               }
+           }
+       }
+        
+    
     // MARK: @objc
     
     @objc func addTapped() {

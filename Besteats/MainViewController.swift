@@ -19,12 +19,9 @@ class MainViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
-            totalRestaurants = foodDatas ?? []
-        }
-//        print("loadView 호출 ")
-//        print("접근 \(restaurantsData[0])")
+        
+        updateCollectionData()
+        
     }
     
     override func viewDidLoad() {
@@ -42,14 +39,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
     
         if totalRestaurants.isEmpty {
-            if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-                let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
-                totalRestaurants = foodDatas ?? []
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.foodCollectionView.reloadData()
+            updateCollectionData()
         }
         
     }
@@ -61,6 +51,17 @@ class MainViewController: UIViewController {
         BTSheetVC.modalPresentationStyle = .overFullScreen
         present(BTSheetVC, animated: false, completion: nil)
     }
+    
+    private func updateCollectionData() {
+          if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+              let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
+              totalRestaurants = foodDatas ?? []
+              
+              DispatchQueue.main.async {
+                  self.foodCollectionView.reloadData()
+              }
+          }
+      }
     
     // MARK: @objc
     @objc func showFoodModi() {
