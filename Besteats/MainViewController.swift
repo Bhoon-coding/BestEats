@@ -13,19 +13,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var foodCollectionView: UICollectionView!
 //    @IBOutlet weak var foodImageView: UIImageView!
     
-    var restaurantsData: [Restaurants] = []
+    var totalRestaurants: [Restaurants] = []
     
     // MARK: LifeCycle
     
     override func loadView() {
         super.loadView()
-        if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let getFoodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: foodDatas)
-            restaurantsData = getFoodDatas ?? []
-        }
-//        print("loadView 호출 ")
-        print("data -> \(restaurantsData)")
-//        print("접근 \(restaurantsData[0])")
+        
+        updateCollectionData()
+        
     }
     
     override func viewDidLoad() {
@@ -42,15 +38,8 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        if restaurantsData.isEmpty {
-            if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-                let getFoodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: foodDatas)
-                restaurantsData = getFoodDatas ?? []
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.foodCollectionView.reloadData()
+        if totalRestaurants.isEmpty {
+            updateCollectionData()
         }
         
     }
@@ -62,6 +51,17 @@ class MainViewController: UIViewController {
         BTSheetVC.modalPresentationStyle = .overFullScreen
         present(BTSheetVC, animated: false, completion: nil)
     }
+    
+    private func updateCollectionData() {
+          if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
+              let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
+              totalRestaurants = foodDatas ?? []
+              
+              DispatchQueue.main.async {
+                  self.foodCollectionView.reloadData()
+              }
+          }
+      }
     
     // MARK: @objc
     @objc func showFoodModi() {
@@ -84,7 +84,7 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if searchText.count > 1 {
-            let filteredFoodArr = restaurantsData.map({ data in
+            let filteredFoodArr = totalRestaurants.map({ data in
                 data.restaurantName
             }).filter { $0 == searchText }
             let filterdFood =  filteredFoodArr.joined(separator: "")
@@ -118,7 +118,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
-        cell.restaurantNamesLabel.text = restaurantsData[indexPath.row].restaurantName
+        cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
         cell.oneLineTipsLabel.text = "한줄평"
 //        restaurantsData[indexPath.row].menu
         cell.warningTipsLabel.text = "경고"
@@ -133,19 +133,20 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if restaurantsData.count == 0 {
+        if totalRestaurants.count == 0 {
             collectionView.setEmptyMessage("추가된 맛집이 없어요..\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
         } else {
             collectionView.restore()
         }
-        return restaurantsData.count
+        return totalRestaurants.count
     }
     
     // 해당
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let items = restaurantsData
-        let foodDetailVC = FoodDetailViewController(selectedRestaurant: items[indexPath.row].restaurantName, relatedItems: items[indexPath.row])
+        
+        let foodDetailVC = FoodDetailViewController(totalRestaurants: totalRestaurants,
+                                                    index: indexPath.row)
         
         
         let backBarButtonItem = UIBarButtonItem(title: "",
@@ -156,15 +157,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
-        print("\(indexPath.item + 1) 번째 셀이 눌림")
-        print("\(restaurantsData[indexPath.item].restaurantName)")
     }
     
 }
 
 extension MainViewController: SendUpdateDelegate {
     func sendUpdate(foodsData: [Restaurants]) {
-        restaurantsData = foodsData
+        totalRestaurants = foodsData
     }
 }
 
