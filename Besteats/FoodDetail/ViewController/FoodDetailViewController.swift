@@ -172,6 +172,10 @@ class FoodDetailViewController: UIViewController {
     @objc func tappedLikeButton() {
         type = "like"
         
+        DispatchQueue.main.async {
+            self.foodDetailTableView.reloadData()
+        }
+        
         if type == "like" {
             likeTypeButton.setTitleColor(.white, for: .normal)
             likeTypeButton.backgroundColor = .systemRed
@@ -189,6 +193,10 @@ class FoodDetailViewController: UIViewController {
 //        selectedCurious = !selectedCurious
         type = "curious"
         
+        DispatchQueue.main.async {
+            self.foodDetailTableView.reloadData()
+        }
+        
         if type == "curious" {
             likeTypeButton.setTitleColor(.black, for: .normal)
             likeTypeButton.backgroundColor = .white
@@ -205,6 +213,10 @@ class FoodDetailViewController: UIViewController {
     @objc func tappedWarningButton() {
 //        selectedWarning = !selectedWarning
         type = "warning"
+        
+        DispatchQueue.main.async {
+            self.foodDetailTableView.reloadData()
+        }
         
         if type == "warning" {
             likeTypeButton.setTitleColor(.black, for: .normal)
@@ -224,15 +236,61 @@ class FoodDetailViewController: UIViewController {
 // MARK: Extension
 
 extension FoodDetailViewController: UITableViewDataSource {
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return totalRestaurants[index].menu.count
-    }
+        
+        let typeLike = totalRestaurants[index].menu.filter {
+            $0.type == "like"
+        }
+        let typeCurious = totalRestaurants[index].menu.filter {
+            $0.type == "curious"
+        }
+        let typeWarning = totalRestaurants[index].menu.filter {
+            $0.type == "warning"
+        }
+        
+            if type == "like" {
+                return typeLike.count
+                
+            } else if type == "curious" {
+                return typeCurious.count
+                
+            } else {
+                return typeWarning.count
+                
+            }
+        
+        }
+        
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath) as! FoodDetailTableViewCell
-        cell.menuLabel.text = totalRestaurants[index].menu[indexPath.row].menu
-        cell.oneLinerLabel.text = totalRestaurants[index].menu[indexPath.row].oneLiner
+        
+        let typeLike = totalRestaurants[index].menu.filter {
+            $0.type == "like"
+        }
+        let typeCurious = totalRestaurants[index].menu.filter {
+            $0.type == "curious"
+        }
+        let typeWarning = totalRestaurants[index].menu.filter {
+            $0.type == "warning"
+        }
+        
+        if type == "like" {
+            cell.menuLabel.text = typeLike[indexPath.row].menu
+            cell.oneLinerLabel.text = typeLike[indexPath.row].oneLiner
+            
+        } else if type == "curious" {
+            cell.menuLabel.text = typeCurious[indexPath.row].menu
+            cell.oneLinerLabel.text = typeCurious[indexPath.row].oneLiner
+            
+        } else {
+            cell.menuLabel.text = typeWarning[indexPath.row].menu
+            cell.oneLinerLabel.text = typeWarning[indexPath.row].oneLiner
+            
+        }
         
         return cell
     }
