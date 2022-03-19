@@ -8,8 +8,8 @@
 import Foundation
 
 struct Restaurants: Codable {
-    let restaurantName: String
-    let menu: [Menus]
+    var restaurantName: String
+    var menu: [Menus]
     
     init(
         restaurantName: String,
@@ -21,9 +21,9 @@ struct Restaurants: Codable {
 }
 
 struct Menus: Codable {
-    let menu: String
-    let oneLiner: String
-    let type: String
+    var menu: String
+    var oneLiner: String
+    var type: String
     
     init(
         menu: String,

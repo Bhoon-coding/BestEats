@@ -18,11 +18,12 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     var type: String? = nil
+    var index: Int
+    private var totalRestautrants: [Restaurants]
     
-    private var selectedRestaurant = ""
-    
-    init(with selectedRestaurant: String) {
-        self.selectedRestaurant = selectedRestaurant
+    init(totalRestaurants: [Restaurants], index: Int) {
+        self.totalRestautrants = totalRestaurants
+        self.index = index
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,7 +45,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(selectedRestaurant)"
+        label.text = "\(totalRestautrants[index].restaurantName)"
         label.font = UIFont(name: "BM JUA_OTF", size: 24)
         return label
     }()
@@ -315,13 +316,21 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        guard let menu = menuTextField.text else { return }
+        guard let menuName = menuTextField.text else { return }
         guard let oneLiner = oneLinerTextField.text else { return }
         guard let type = self.type else {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
-        let menusModel: [Menus] = [Menus(menu: menu, oneLiner: oneLiner, type: type)]
+        let menu: [Menus] = [Menus(menu: menuName,
+                                oneLiner: oneLiner,
+                                type: type)]
+            
+        totalRestautrants[index].menu.append(contentsOf: menu)
+        
+        UserDefaults.standard.set(try? PropertyListEncoder().encode(totalRestautrants), forKey: "foodDatas")
+        
+        
         dismiss(animated: true, completion: nil)
     }
 
@@ -329,37 +338,37 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
 
 // MARK: Extension
 
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct MenuAddViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-        let menuAddVC = MenuAddViewController(with: "")
-        return menuAddVC
-        
-    }
-}
-
-struct MenuAddViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        MenuAddViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 12")
-    }
-}
-#endif
+//#if DEBUG
+//
+//import SwiftUI
+//@available(iOS 13.0, *)
+//
+//// UIViewControllerRepresentable을 채택
+//struct MenuAddViewControllerRepresentable: UIViewControllerRepresentable {
+//    // update
+//    // _ uiViewController: UIViewController로 지정
+//    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
+//
+//    }
+//    // makeui
+//    func makeUIViewController(context: Context) -> UIViewController {
+//    // Preview를 보고자 하는 Viewcontroller 이름
+//    // e.g.)
+//        let menuAddVC = MenuAddViewController(with: Restaurants.)
+//        return menuAddVC
+//
+//    }
+//}
+//
+//struct MenuAddViewController_Previews: PreviewProvider {
+//
+//    @available(iOS 13.0, *)
+//    static var previews: some View {
+//        // UIViewControllerRepresentable에 지정된 이름.
+//        MenuAddViewControllerRepresentable()
+//
+//// 테스트 해보고자 하는 기기
+//            .previewDevice("iPhone 12")
+//    }
+//}
+//#endif
