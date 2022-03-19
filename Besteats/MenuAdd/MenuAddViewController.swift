@@ -19,6 +19,17 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     var selectedWarning: Bool = false
     var type: String? = nil
     
+    private var selectedRestaurant = ""
+    
+    init(with selectedRestaurant: String) {
+        self.selectedRestaurant = selectedRestaurant
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     lazy var wholeView: UIView = {
         let view = UIView()
         return view
@@ -33,7 +44,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
-        label.text = "맛집명"
+        label.text = "\(selectedRestaurant)"
         label.font = UIFont(name: "BM JUA_OTF", size: 24)
         return label
     }()
@@ -334,7 +345,7 @@ struct MenuAddViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
     // Preview를 보고자 하는 Viewcontroller 이름
     // e.g.)
-        let menuAddVC = MenuAddViewController()
+        let menuAddVC = MenuAddViewController(with: "")
         return menuAddVC
         
     }
