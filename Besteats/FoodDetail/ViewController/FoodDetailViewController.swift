@@ -230,6 +230,42 @@ class FoodDetailViewController: UIViewController {
             warningTypeButton.backgroundColor = .white
         }
     }
+    
+    @objc func deleteTapped(_ sender: UIButton) {
+        
+        var typeLike = totalRestaurants[index].menu.filter {
+            $0.type == "like"
+        }
+        var typeCurious = totalRestaurants[index].menu.filter {
+            $0.type == "curious"
+        }
+        var typeWarning = totalRestaurants[index].menu.filter {
+            $0.type == "warning"
+        }
+        
+        let point = sender.convert(CGPoint.zero, to: foodDetailTableView)
+        guard let indexPath = foodDetailTableView.indexPathForRow(at: point) else { return }
+        
+        
+        if type == "like" {
+            print("삭제전: \(typeLike)")
+            typeLike.remove(at: indexPath.row)
+            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+            print("삭제후: \(typeLike)")
+        } else if type == "curious" {
+            print("삭제전: \(typeCurious)")
+            typeCurious.remove(at: indexPath.row)
+            print("삭제후: \(typeCurious)")
+            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+        } else {
+            print("삭제전: \(typeWarning)")
+            typeWarning.remove(at: indexPath.row)
+            print("삭제후: \(typeWarning)")
+            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+//        totalRestaurants.remove(at: indexPath.row)
+        
+    }
         
 }
 
@@ -291,6 +327,8 @@ extension FoodDetailViewController: UITableViewDataSource {
             cell.oneLinerLabel.text = typeWarning[indexPath.row].oneLiner
             
         }
+        
+        cell.deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         
         return cell
     }
