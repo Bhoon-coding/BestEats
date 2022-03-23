@@ -27,6 +27,12 @@ class FoodDetailTableViewCell: UITableViewCell {
         return button
     }()
     
+    lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "close"), for: .normal)
+        return button
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpCell()
@@ -40,6 +46,7 @@ class FoodDetailTableViewCell: UITableViewCell {
         
         contentView.addSubview(menuLabel)
         contentView.addSubview(oneLinerLabel)
+        contentView.addSubview(deleteButton)
         
         menuLabel.snp.makeConstraints {
             $0.leading.top.equalToSuperview().inset(30)
@@ -49,5 +56,11 @@ class FoodDetailTableViewCell: UITableViewCell {
             $0.leading.equalTo(menuLabel)
             $0.top.equalTo(menuLabel.snp.bottom).offset(30)
         }
+        
+        deleteButton.snp.makeConstraints {
+            $0.trailing.top.equalToSuperview().inset(30)
+            $0.size.equalTo(12)
+        }
     }
+    
 }
