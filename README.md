@@ -39,7 +39,10 @@
 - Main page에서 받아온 데이터를 네비게이션 제목, tableViewCell에 보여줌
 
 ### 체크리스트
-- [ ] FoodModiModel 구조체 구조 수정 
+- [x] FoodModiModel 구조체 구조 수정 
+- [x] 메뉴리스트 Cell에 보여주기
+- [ ] 메뉴리스트 삭제 기능
+- [ ] type 별로 array filter (like, curious, warning)
 - [ ] 중복 맛집명의 경우로 데이터 추가시 안되게 토스트 띄워주기
 
-## Modi page (수정 페이지)
+## MenuAdd page (메뉴 추가 페이지)
