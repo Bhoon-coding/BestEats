@@ -15,24 +15,32 @@ struct UserDefaultsManager {
     
     
     // MARK: Methods
-    func updateRestaurants(newRestaurant: Restaurants) {
+    func updateRestaurants(selectedRestaurant: Restaurants ,selectedIdx: Int) {
         var restaurants = getRestaurants()
-        var newRestaurantIndex = -1
         
-        for (index, restaurant) in restaurants.enumerated() {
-            if restaurant == newRestaurant {
-                newRestaurantIndex = index
-            }
-        }
-
-        if newRestaurantIndex == -1 {
-            print("바꿀가게가 없어")
-            return
-        }
-
-        restaurants[newRestaurantIndex] = newRestaurant
-        saveRestaurants(restaurants: restaurants)
+        restaurants[selectedIdx] = selectedRestaurant
+        
+        dump(restaurants)
+        
     }
+//    func updateRestaurants(newRestaurant: Restaurants) {
+//        var restaurants = getRestaurants()
+//        var newRestaurantIndex = -1
+//
+//        for (index, restaurant) in restaurants.enumerated() {
+//            if restaurant == newRestaurant {
+//                newRestaurantIndex = index
+//            }
+//        }
+//
+//        if newRestaurantIndex == -1 {
+//            print("바꿀가게가 없어")
+//            return
+//        }
+//
+//        restaurants[newRestaurantIndex] = newRestaurant
+//        saveRestaurants(restaurants: restaurants)
+//    }
 
     func getRestaurants() -> [Restaurants] {
         guard let getRsEncodeData = defaults.value(forKey: "restaurantsData") as? Data else {

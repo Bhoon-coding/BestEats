@@ -16,13 +16,14 @@ class FoodDetailViewController: UIViewController {
     var selectedCurious = false
     var selectedWarning = false
     var type: String = "like"
-    var index: Int
-    private var totalRestaurants: [Restaurants]
+    var totalRestaurants: [Restaurants] = []
+    var selectedRestaurant: Restaurants
+    var selectedIdx: Int
     
-    init(totalRestaurants: [Restaurants],
-         index: Int) {
-        self.totalRestaurants = totalRestaurants
-        self.index = index
+    
+    init(selectedRestaurant: Restaurants ,index: Int) {
+        self.selectedRestaurant = selectedRestaurant
+        self.selectedIdx = index
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -85,6 +86,9 @@ class FoodDetailViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
+        
+        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
+        dump(selectedRestaurant)
         setUpTableView()
         foodDetailTableView.dataSource = self
         foodDetailTableView.delegate = self
@@ -101,7 +105,7 @@ class FoodDetailViewController: UIViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(addTapped))
-        title = totalRestaurants[index].restaurantName
+        title = selectedRestaurant.restaurantName
         
         view.backgroundColor = .brown
         setUpUI()
@@ -113,7 +117,7 @@ class FoodDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateTableData()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -162,7 +166,7 @@ class FoodDetailViewController: UIViewController {
     @objc func addTapped() {
         
         let menuAddVC = MenuAddViewController(totalRestaurants: totalRestaurants,
-                                              index: index
+                                              index: selectedIdx
         )
         
         menuAddVC.modalPresentationStyle = .fullScreen
@@ -233,50 +237,52 @@ class FoodDetailViewController: UIViewController {
     
     @objc func deleteTapped(_ sender: UIButton) {
         
-        var typeLike = totalRestaurants[index].menu.filter {
-            $0.type == "like"
-        }
-        var typeCurious = totalRestaurants[index].menu.filter {
-            $0.type == "curious"
-        }
-        var typeWarning = totalRestaurants[index].menu.filter {
-            $0.type == "warning"
-        }
+        UserDefaultsManager.shared.updateRestaurants(selectedRestaurant: selectedRestaurant, selectedIdx: selectedIdx)
         
-        let point = sender.convert(CGPoint.zero, to: foodDetailTableView)
-        guard let indexPath = foodDetailTableView.indexPathForRow(at: point) else { return }
-        
-        
-        if type == "like" {
-            print("삭제전: \(typeLike)")
-//            typeLike.remove(at: indexPath.row)
-            let deletedMenu = totalRestaurants[index].menu.filter { menu in
-                if menu == typeLike[indexPath.row] {
-                    print("menu:",menu)
-                    return true
-                } else {
-                    return false
-                }
-            }
-            guard let firstMenu = deletedMenu.first else { return }
-            var testIndex = totalRestaurants[index].menu.firstIndex{$0 == firstMenu}
-            
-            var test = Int(testIndex!)
-            totalRestaurants[index].menu.remove(at: test)
-            foodDetailTableView.reloadData()
+//        var typeLike = totalRestaurants[selectedIdx].menu.filter {
+//            $0.type == "like"
+//        }
+//        var typeCurious = totalRestaurants[selectedIdx].menu.filter {
+//            $0.type == "curious"
+//        }
+//        var typeWarning = totalRestaurants[selectedIdx].menu.filter {
+//            $0.type == "warning"
+//        }
+//
+//        let point = sender.convert(CGPoint.zero, to: foodDetailTableView)
+//        guard let indexPath = foodDetailTableView.indexPathForRow(at: point) else { return }
+//
+//
+//        if type == "like" {
+//            print("삭제전: \(typeLike)")
+////            typeLike.remove(at: indexPath.row)
+//            let deletedMenu = totalRestaurants[selectedIdx].menu.filter { menu in
+//                if menu == typeLike[indexPath.row] {
+//                    print("menu:",menu)
+//                    return true
+//                } else {
+//                    return false
+//                }
+//            }
+//            guard let firstMenu = deletedMenu.first else { return }
+//            var testIndex = totalRestaurants[selectedIdx].menu.firstIndex{$0 == firstMenu}
+//
+//            var test = Int(testIndex!)
+//            totalRestaurants[selectedIdx].menu.remove(at: test)
+//            foodDetailTableView.reloadData()
+////            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+//            print("삭제후: \(typeLike)")
+//        } else if type == "curious" {
+//            print("삭제전: \(typeCurious)")
+//            typeCurious.remove(at: indexPath.row)
+//            print("삭제후: \(typeCurious)")
 //            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
-            print("삭제후: \(typeLike)")
-        } else if type == "curious" {
-            print("삭제전: \(typeCurious)")
-            typeCurious.remove(at: indexPath.row)
-            print("삭제후: \(typeCurious)")
-            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
-        } else {
-            print("삭제전: \(typeWarning)")
-            typeWarning.remove(at: indexPath.row)
-            print("삭제후: \(typeWarning)")
-            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
-        }
+//        } else {
+//            print("삭제전: \(typeWarning)")
+//            typeWarning.remove(at: indexPath.row)
+//            print("삭제후: \(typeWarning)")
+//            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
 //        totalRestaurants.remove(at: indexPath.row)
         
     }
@@ -290,13 +296,13 @@ extension FoodDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let typeLike = totalRestaurants[index].menu.filter {
+        let typeLike = selectedRestaurant.menu.filter {
             $0.type == "like"
         }
-        let typeCurious = totalRestaurants[index].menu.filter {
+        let typeCurious = selectedRestaurant.menu.filter {
             $0.type == "curious"
         }
-        let typeWarning = totalRestaurants[index].menu.filter {
+        let typeWarning = selectedRestaurant.menu.filter {
             $0.type == "warning"
         }
         
@@ -318,13 +324,13 @@ extension FoodDetailViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: FoodDetailTableViewCell.identifier, for: indexPath) as! FoodDetailTableViewCell
         
-        let typeLike = totalRestaurants[index].menu.filter {
+        let typeLike = selectedRestaurant.menu.filter {
             $0.type == "like"
         }
-        let typeCurious = totalRestaurants[index].menu.filter {
+        let typeCurious = selectedRestaurant.menu.filter {
             $0.type == "curious"
         }
-        let typeWarning = totalRestaurants[index].menu.filter {
+        let typeWarning = selectedRestaurant.menu.filter {
             $0.type == "warning"
         }
         

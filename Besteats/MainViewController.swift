@@ -11,7 +11,6 @@ class MainViewController: UIViewController {
 
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
-//    @IBOutlet weak var foodImageView: UIImageView!
     
     var totalRestaurants: [Restaurants] = []
     
@@ -50,24 +49,13 @@ class MainViewController: UIViewController {
         
     }
     
+    // MARK: 보류
     @IBAction func tapMore(_ sender: Any) {
         guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
         
-//        moreVC.modalPresentationStyle = .overCurrentContext
         BTSheetVC.modalPresentationStyle = .overFullScreen
         present(BTSheetVC, animated: false, completion: nil)
     }
-    
-    private func updateCollectionData() {
-          if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-              let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
-              totalRestaurants = foodDatas ?? []
-              
-              DispatchQueue.main.async {
-                  self.foodCollectionView.reloadData()
-              }
-          }
-      }
     
     // MARK: @objc
     @objc func showFoodModi() {
@@ -125,10 +113,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
         cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
-        cell.oneLineTipsLabel.text = "한줄평"
-//        restaurantsData[indexPath.row].menu
+        // MARK: need refactor (대표메뉴 한줄팁 필요)
+        cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu[0].oneLiner
         cell.warningTipsLabel.text = "경고"
-//        restaurantsData[indexPath.row].oneLiner
         
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 8
@@ -150,8 +137,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // 해당
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let foodDetailVC = FoodDetailViewController(totalRestaurants: totalRestaurants,
-                                                    index: indexPath.row)
+        let foodDetailVC = FoodDetailViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
         
         
         let backBarButtonItem = UIBarButtonItem(title: "",
