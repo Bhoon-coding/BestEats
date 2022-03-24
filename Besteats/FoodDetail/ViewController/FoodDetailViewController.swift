@@ -249,8 +249,22 @@ class FoodDetailViewController: UIViewController {
         
         if type == "like" {
             print("삭제전: \(typeLike)")
-            typeLike.remove(at: indexPath.row)
-            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
+//            typeLike.remove(at: indexPath.row)
+            let deletedMenu = totalRestaurants[index].menu.filter { menu in
+                if menu == typeLike[indexPath.row] {
+                    print("menu:",menu)
+                    return true
+                } else {
+                    return false
+                }
+            }
+            guard let firstMenu = deletedMenu.first else { return }
+            var testIndex = totalRestaurants[index].menu.firstIndex{$0 == firstMenu}
+            
+            var test = Int(testIndex!)
+            totalRestaurants[index].menu.remove(at: test)
+            foodDetailTableView.reloadData()
+//            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
             print("삭제후: \(typeLike)")
         } else if type == "curious" {
             print("삭제전: \(typeCurious)")

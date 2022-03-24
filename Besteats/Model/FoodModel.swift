@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct Restaurants: Codable {
+struct Restaurants: Codable, Equatable {
     var restaurantName: String
     var menu: [Menus]
+    
+    static func == (lhs: Restaurants, rhs: Restaurants) -> Bool {
+        return lhs.restaurantName == rhs.restaurantName && lhs.menu == rhs.menu
+    }
     
     init(
         restaurantName: String,
@@ -20,7 +24,7 @@ struct Restaurants: Codable {
     }
 }
 
-struct Menus: Codable {
+struct Menus: Codable, Equatable {
     var menu: String
     var oneLiner: String
     var type: String

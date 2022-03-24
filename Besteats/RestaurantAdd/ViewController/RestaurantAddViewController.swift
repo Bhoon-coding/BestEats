@@ -25,7 +25,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     var selectedWarning: Bool = false
     var type: String? = nil
     
-    var restaurantData: [Restaurants] = []
+    var totalRestaurants: [Restaurants] = []
     var menusData: [Menus] = []
     var delegate: SendUpdateDelegate?
     
@@ -166,11 +166,9 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     // MARK: LifeCycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let foodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-            let getFoodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: foodDatas)
         
-            restaurantData.append(contentsOf: getFoodDatas ?? [])
-        }
+        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
+
     }
 
     override func viewDidLoad() {
@@ -412,17 +410,17 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
+        
+        
         let menusModel: [Menus] = [Menus(menu: menu, oneLiner: oneLiner, type: type)]
         let restaurantModel: [Restaurants] = [Restaurants(restaurantName: restaurantName,
                                                           menu: menusModel)]
         
-        restaurantData.append(contentsOf: restaurantModel)
+        totalRestaurants.append(contentsOf: restaurantModel)
         
-        print("foodDataBag:", restaurantData)
+        UserDefaultsManager.shared.saveRestaurants(restaurants: totalRestaurants)
         
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(restaurantData), forKey: "foodDatas")
-        
-        delegate?.sendUpdate(foodsData: restaurantData)
+        delegate?.sendUpdate(foodsData: totalRestaurants)
         dismiss(animated: true, completion: nil)
     }
     

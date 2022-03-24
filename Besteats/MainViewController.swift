@@ -20,7 +20,11 @@ class MainViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        updateCollectionData()
+         totalRestaurants = UserDefaultsManager.shared.getRestaurants()
+        
+        DispatchQueue.main.async {
+            self.foodCollectionView.reloadData()
+        }
         
     }
     
@@ -38,7 +42,11 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-            updateCollectionData()
+        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
+        
+        DispatchQueue.main.async {
+            self.foodCollectionView.reloadData()
+        }
         
     }
     
