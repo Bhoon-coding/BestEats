@@ -88,7 +88,7 @@ class FoodDetailViewController: UIViewController {
         super.loadView()
         
         selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
-        dump(selectedRestaurant)
+        
         setUpTableView()
         foodDetailTableView.dataSource = self
         foodDetailTableView.delegate = self
@@ -165,8 +165,7 @@ class FoodDetailViewController: UIViewController {
     
     @objc func addTapped() {
         
-        let menuAddVC = MenuAddViewController(totalRestaurants: totalRestaurants,
-                                              index: selectedIdx
+        let menuAddVC = MenuAddViewController(selectedRestaurant: selectedRestaurant, selectedIndex: selectedIdx
         )
         
         menuAddVC.modalPresentationStyle = .fullScreen
@@ -237,7 +236,8 @@ class FoodDetailViewController: UIViewController {
     
     @objc func deleteTapped(_ sender: UIButton) {
         
-        UserDefaultsManager.shared.updateRestaurants(selectedRestaurant: selectedRestaurant, selectedIdx: selectedIdx)
+        UserDefaultsManager.shared.updateRestaurant(restaurant: selectedRestaurant,
+                                                    index: selectedIdx)
         
 //        var typeLike = totalRestaurants[selectedIdx].menu.filter {
 //            $0.type == "like"

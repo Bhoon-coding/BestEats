@@ -15,10 +15,10 @@ struct UserDefaultsManager {
     
     
     // MARK: Methods
-    func updateRestaurants(selectedRestaurant: Restaurants ,selectedIdx: Int) {
+    func updateRestaurant(restaurant: Restaurants , index: Int) {
         var restaurants = getRestaurants()
         
-        restaurants[selectedIdx] = selectedRestaurant
+        restaurants[index] = restaurant
         
         dump(restaurants)
         
@@ -55,4 +55,5 @@ struct UserDefaultsManager {
     func saveRestaurants(restaurants: [Restaurants]) {
         defaults.set(try? PropertyListEncoder().encode(restaurants), forKey: "restaurantsData")
     }
+    
 }

@@ -18,12 +18,12 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     var type: String? = nil
-    var index: Int
-    private var totalRestautrants: [Restaurants]
+    var selectedIndex: Int
+    private var selectedRestaurant: Restaurants
     
-    init(totalRestaurants: [Restaurants], index: Int) {
-        self.totalRestautrants = totalRestaurants
-        self.index = index
+    init(selectedRestaurant: Restaurants, selectedIndex: Int) {
+        self.selectedRestaurant = selectedRestaurant
+        self.selectedIndex = selectedIndex
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,7 +45,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(totalRestautrants[index].restaurantName)"
+        label.text = "\(selectedRestaurant.restaurantName)"
         label.font = UIFont(name: "BM JUA_OTF", size: 24)
         return label
     }()
@@ -326,12 +326,12 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
                                 oneLiner: oneLiner,
                                 type: type)]
             
-        totalRestautrants[index].menu.append(contentsOf: menu)
+//        selectedRestaurant[index].menu.append(contentsOf: menu)
         
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(totalRestautrants), forKey: "foodDatas")
+//        UserDefaults.standard.set(try? PropertyListEncoder().encode(selectedRestaurant), forKey: "foodDatas")
         
         
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
     }
 
 }
