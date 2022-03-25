@@ -322,16 +322,17 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
-        let menu: [Menus] = [Menus(menu: menuName,
-                                oneLiner: oneLiner,
-                                type: type)]
-            
-//        selectedRestaurant[index].menu.append(contentsOf: menu)
+        let menu: Menus = Menus(menu: menuName,
+                                   oneLiner: oneLiner,
+                                   type: type
+                                  )
+    
+        UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
+                                           selectedIndex: selectedIndex,
+                                           addedMenu: menu)
         
-//        UserDefaults.standard.set(try? PropertyListEncoder().encode(selectedRestaurant), forKey: "foodDatas")
         
-        
-//        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
 }

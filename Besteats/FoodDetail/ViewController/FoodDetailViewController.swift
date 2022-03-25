@@ -117,7 +117,11 @@ class FoodDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
         
+        DispatchQueue.main.async {
+            self.foodDetailTableView.reloadData()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -236,8 +240,7 @@ class FoodDetailViewController: UIViewController {
     
     @objc func deleteTapped(_ sender: UIButton) {
         
-        UserDefaultsManager.shared.updateRestaurant(restaurant: selectedRestaurant,
-                                                    index: selectedIdx)
+//        UserDefaultsManager.shared.updateRestaurant(restaurant: selectedRestaurant, index: selectedIdx)
         
 //        var typeLike = totalRestaurants[selectedIdx].menu.filter {
 //            $0.type == "like"

@@ -15,13 +15,26 @@ struct UserDefaultsManager {
     
     
     // MARK: Methods
-    func updateRestaurant(restaurant: Restaurants , index: Int) {
+    func updateRestaurant(selectedRestaurant: Restaurants, selectedIndex: Int) {
         var restaurants = getRestaurants()
         
-        restaurants[index] = restaurant
+        restaurants[selectedIndex] = selectedRestaurant
         
         dump(restaurants)
         
+    }
+    
+    func addMenu(selectedRestaurant: Restaurants, selectedIndex: Int, addedMenu: Menus) {
+        // [x] 파라미터 (선택된맛집, 선택된idx, 메뉴)
+        // [x] 전체 맛집 데이터 호출
+        var restaurants = getRestaurants()
+        var restaturant = selectedRestaurant
+        // [x] 메뉴 추가 -> 선택된 맛집의 [메뉴]에 메뉴추가
+        restaturant.menu.append(addedMenu)
+        // [x] 전체 맛집[idx] = 선택된 맛집
+        restaurants[selectedIndex] = restaturant
+        // save맛집
+        saveRestaurants(restaurants: restaurants)
     }
 //    func updateRestaurants(newRestaurant: Restaurants) {
 //        var restaurants = getRestaurants()
@@ -53,7 +66,8 @@ struct UserDefaultsManager {
     }
 
     func saveRestaurants(restaurants: [Restaurants]) {
-        defaults.set(try? PropertyListEncoder().encode(restaurants), forKey: "restaurantsData")
+        defaults.set(try? PropertyListEncoder().encode(restaurants),
+                     forKey: "restaurantsData")
     }
     
 }
