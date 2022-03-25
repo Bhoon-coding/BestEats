@@ -134,7 +134,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return totalRestaurants.count
     }
     
-    // 해당
+    //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let foodDetailVC = FoodDetailViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)

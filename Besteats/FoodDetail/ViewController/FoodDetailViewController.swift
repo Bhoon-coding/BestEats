@@ -19,6 +19,7 @@ class FoodDetailViewController: UIViewController {
     var totalRestaurants: [Restaurants] = []
     var selectedRestaurant: Restaurants
     var selectedIdx: Int
+    var totalMenus: [Menus] = []
     
     
     init(selectedRestaurant: Restaurants ,index: Int) {
@@ -153,23 +154,12 @@ class FoodDetailViewController: UIViewController {
         }
     }
     
-    private func updateTableData() {
-           if let getFoodDatas = UserDefaults.standard.value(forKey: "foodDatas") as? Data {
-               let foodDatas = try? PropertyListDecoder().decode([Restaurants].self, from: getFoodDatas)
-               totalRestaurants = foodDatas ?? []
-               
-               DispatchQueue.main.async {
-                   self.foodDetailTableView.reloadData()
-               }
-           }
-       }
-        
-    
     // MARK: @objc
     
     @objc func addTapped() {
         
-        let menuAddVC = MenuAddViewController(selectedRestaurant: selectedRestaurant, selectedIndex: selectedIdx
+        let menuAddVC = MenuAddViewController(selectedRestaurant: selectedRestaurant,
+                                              selectedIndex: selectedIdx
         )
         
         menuAddVC.modalPresentationStyle = .fullScreen
@@ -218,7 +208,6 @@ class FoodDetailViewController: UIViewController {
     }
     
     @objc func tappedWarningButton() {
-//        selectedWarning = !selectedWarning
         type = "warning"
         
         DispatchQueue.main.async {
@@ -240,53 +229,29 @@ class FoodDetailViewController: UIViewController {
     
     @objc func deleteTapped(_ sender: UIButton) {
         
-//        UserDefaultsManager.shared.updateRestaurant(restaurant: selectedRestaurant, index: selectedIdx)
+        let point = sender.convert(CGPoint.zero, to: foodDetailTableView)
+        guard let indexPath = foodDetailTableView.indexPathForRow(at: point) else { return }
         
-//        var typeLike = totalRestaurants[selectedIdx].menu.filter {
-//            $0.type == "like"
-//        }
-//        var typeCurious = totalRestaurants[selectedIdx].menu.filter {
-//            $0.type == "curious"
-//        }
-//        var typeWarning = totalRestaurants[selectedIdx].menu.filter {
-//            $0.type == "warning"
-//        }
-//
-//        let point = sender.convert(CGPoint.zero, to: foodDetailTableView)
-//        guard let indexPath = foodDetailTableView.indexPathForRow(at: point) else { return }
-//
-//
-//        if type == "like" {
-//            print("삭제전: \(typeLike)")
-////            typeLike.remove(at: indexPath.row)
-//            let deletedMenu = totalRestaurants[selectedIdx].menu.filter { menu in
-//                if menu == typeLike[indexPath.row] {
-//                    print("menu:",menu)
-//                    return true
-//                } else {
-//                    return false
-//                }
-//            }
-//            guard let firstMenu = deletedMenu.first else { return }
-//            var testIndex = totalRestaurants[selectedIdx].menu.firstIndex{$0 == firstMenu}
-//
-//            var test = Int(testIndex!)
-//            totalRestaurants[selectedIdx].menu.remove(at: test)
-//            foodDetailTableView.reloadData()
-////            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
-//            print("삭제후: \(typeLike)")
-//        } else if type == "curious" {
-//            print("삭제전: \(typeCurious)")
-//            typeCurious.remove(at: indexPath.row)
-//            print("삭제후: \(typeCurious)")
-//            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
-//        } else {
-//            print("삭제전: \(typeWarning)")
-//            typeWarning.remove(at: indexPath.row)
-//            print("삭제후: \(typeWarning)")
-//            foodDetailTableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//        totalRestaurants.remove(at: indexPath.row)
+        // MARK: 타입 별로 나누기 위해 filter로 array 재정렬 및 타입별 array index를 파라미터로 보냄
+        if type == "like" {
+            let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
+            selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
+                                                                     selectedIndex: selectedIdx,
+                                                                       menu: typeLike[indexPath.row])
+        } else if type == "curious" {
+            let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
+            selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
+                                                                     selectedIndex: selectedIdx,
+                                                                       menu: typeCurious[indexPath.row])
+
+        } else {
+            let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
+            selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
+                                                                     selectedIndex: selectedIdx,
+                                                                       menu: typeWarning[indexPath.row])
+        }
+        
+        foodDetailTableView.reloadData()
         
     }
         

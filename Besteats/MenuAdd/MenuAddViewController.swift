@@ -307,6 +307,8 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func doneTapped() {
+        
+        var menuId = 0
             
         if menuTextField.text == "" {
             self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
@@ -315,6 +317,13 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
             return
         }
+        
+        // FoodDetail 타입별 수정, 삭제를 고유 id로 판단
+        if selectedRestaurant.menu.isEmpty {
+            menuId = 1
+        } else {
+            menuId = selectedRestaurant.menu.last!.id + 1
+        }
 
         guard let menuName = menuTextField.text else { return }
         guard let oneLiner = oneLinerTextField.text else { return }
@@ -322,10 +331,11 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
-        let menu: Menus = Menus(menu: menuName,
-                                   oneLiner: oneLiner,
-                                   type: type
-                                  )
+        let menu: Menus = Menus(id: menuId,
+                                menu: menuName,
+                                oneLiner: oneLiner,
+                                type: type
+                                )
     
         UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
                                            selectedIndex: selectedIndex,

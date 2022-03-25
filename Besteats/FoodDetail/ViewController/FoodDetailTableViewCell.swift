@@ -59,7 +59,7 @@ class FoodDetailTableViewCell: UITableViewCell {
         
         deleteButton.snp.makeConstraints {
             $0.trailing.top.equalToSuperview().inset(30)
-            $0.size.equalTo(12)
+            $0.size.equalTo(16)
         }
     }
     
