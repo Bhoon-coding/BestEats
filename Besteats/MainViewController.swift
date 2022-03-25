@@ -115,6 +115,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
         // MARK: need refactor (대표메뉴 한줄팁 필요)
         cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu[0].oneLiner
+        cell.oneLineTipsLabel.text = "한줄평"
         cell.warningTipsLabel.text = "경고"
         
         cell.backgroundColor = .lightGray
