@@ -25,15 +25,18 @@ struct Restaurants: Codable, Equatable {
 }
 
 struct Menus: Codable, Equatable {
+    var id: Int
     var menu: String
     var oneLiner: String
     var type: String
     
     init(
+        id: Int,
         menu: String,
         oneLiner: String,
         type:String
     ) {
+        self.id = id
         self.menu = menu
         self.oneLiner = oneLiner
         self.type = type

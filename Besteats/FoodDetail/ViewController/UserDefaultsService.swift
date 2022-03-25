@@ -15,26 +15,38 @@ struct UserDefaultsManager {
     
     
     // MARK: Methods
-    func updateRestaurant(selectedRestaurant: Restaurants, selectedIndex: Int) {
+    func updateRestaurant(selectedRestaurant: Restaurants,
+                          selectedIndex: Int) {
+        
         var restaurants = getRestaurants()
         
         restaurants[selectedIndex] = selectedRestaurant
-        
-        dump(restaurants)
-        
     }
     
-    func addMenu(selectedRestaurant: Restaurants, selectedIndex: Int, addedMenu: Menus) {
-        // [x] 파라미터 (선택된맛집, 선택된idx, 메뉴)
-        // [x] 전체 맛집 데이터 호출
+    func addMenu(selectedRestaurant: Restaurants,
+                 selectedIndex: Int,
+                 addedMenu: Menus) {
+        
         var restaurants = getRestaurants()
         var restaturant = selectedRestaurant
-        // [x] 메뉴 추가 -> 선택된 맛집의 [메뉴]에 메뉴추가
+        
         restaturant.menu.append(addedMenu)
-        // [x] 전체 맛집[idx] = 선택된 맛집
         restaurants[selectedIndex] = restaturant
-        // save맛집
         saveRestaurants(restaurants: restaurants)
+    }
+    
+    func deleteMenu(selectedRestaurant: Restaurants,
+                    selectedIndex: Int,
+                    menu: Menus
+                    ) -> Restaurants {
+        
+        var restaurants = getRestaurants()
+        var restaurant = selectedRestaurant
+        let filteredMenu = restaurant.menu.filter { $0.id != menu.id }
+        restaurant.menu = filteredMenu
+        restaurants[selectedIndex] = restaurant
+        saveRestaurants(restaurants: restaurants)
+        return restaurant
     }
 //    func updateRestaurants(newRestaurant: Restaurants) {
 //        var restaurants = getRestaurants()

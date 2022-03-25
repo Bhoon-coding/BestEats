@@ -412,7 +412,10 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         
         
         
-        let menusModel: [Menus] = [Menus(menu: menu, oneLiner: oneLiner, type: type)]
+        let menusModel: [Menus] = [Menus(id: 1, // 최초 맛집 생성후 메뉴 추가니 id = 1
+                                         menu: menu,
+                                         oneLiner: oneLiner,
+                                         type: type)]
         let restaurantModel: [Restaurants] = [Restaurants(restaurantName: restaurantName,
                                                           menu: menusModel)]
         
