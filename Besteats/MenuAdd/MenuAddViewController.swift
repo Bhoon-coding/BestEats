@@ -18,12 +18,12 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     var type: String? = nil
-    var index: Int
-    private var totalRestautrants: [Restaurants]
+    var selectedIndex: Int
+    private var selectedRestaurant: Restaurants
     
-    init(totalRestaurants: [Restaurants], index: Int) {
-        self.totalRestautrants = totalRestaurants
-        self.index = index
+    init(selectedRestaurant: Restaurants, selectedIndex: Int) {
+        self.selectedRestaurant = selectedRestaurant
+        self.selectedIndex = selectedIndex
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,7 +45,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(totalRestautrants[index].restaurantName)"
+        label.text = "\(selectedRestaurant.restaurantName)"
         label.font = UIFont(name: "BM JUA_OTF", size: 24)
         return label
     }()
@@ -322,13 +322,14 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
-        let menu: [Menus] = [Menus(menu: menuName,
-                                oneLiner: oneLiner,
-                                type: type)]
-            
-        totalRestautrants[index].menu.append(contentsOf: menu)
-        
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(totalRestautrants), forKey: "foodDatas")
+        let menu: Menus = Menus(menu: menuName,
+                                   oneLiner: oneLiner,
+                                   type: type
+                                  )
+    
+        UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
+                                           selectedIndex: selectedIndex,
+                                           addedMenu: menu)
         
         
         dismiss(animated: true, completion: nil)
