@@ -50,12 +50,12 @@ class MainViewController: UIViewController {
     }
     
     // MARK: 보류
-    @IBAction func tapMore(_ sender: Any) {
-        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
-        
-        BTSheetVC.modalPresentationStyle = .overFullScreen
-        present(BTSheetVC, animated: false, completion: nil)
-    }
+//    @IBAction func tapMore(_ sender: Any) {
+//        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
+//
+//        BTSheetVC.modalPresentationStyle = .overFullScreen
+//        present(BTSheetVC, animated: false, completion: nil)
+//    }
     
     // MARK: @objc
     @objc func showFoodModi() {
@@ -73,18 +73,17 @@ class FoodCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var warningTipsLabel: UILabel!
     
 }
+
 extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText.count > 1 {
-            let filteredFoodArr = totalRestaurants.map({ data in
-                data.restaurantName
-            }).filter { $0 == searchText }
-            let filterdFood =  filteredFoodArr.joined(separator: "")
-            
-        }
-    }
+        totalRestaurants = searchText.isEmpty
+        ? UserDefaultsManager.shared.getRestaurants()
+        : UserDefaultsManager.shared.getRestaurants().filter { $0.restaurantName.contains(searchText) || $0.restaurantName.lowercased().contains(searchText.lowercased())}
+         
+        foodCollectionView.reloadData()
+  }
 }
 
 // Cell layout
@@ -115,7 +114,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
         // MARK: need refactor (대표메뉴 한줄팁 필요)
         cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu[0].oneLiner
-        cell.oneLineTipsLabel.text = "한줄평"
+//        cell.oneLineTipsLabel.text = "한줄평"
         cell.warningTipsLabel.text = "경고"
         
         cell.backgroundColor = .lightGray
@@ -128,7 +127,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // numberOfItemsInSection: Cell을 몇개 보여줄지
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if totalRestaurants.count == 0 {
-            collectionView.setEmptyMessage("추가된 맛집이 없어요.\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
+            collectionView.setEmptyMessage("맛집이 없어요.\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
         } else {
             collectionView.restore()
         }
@@ -144,6 +143,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let backBarButtonItem = UIBarButtonItem(title: "",
                                                 style: .plain,
                                                 target: self, action: nil)
+        
         navigationController?.pushViewController(foodDetailVC,
                                                  animated: true)
         backBarButtonItem.tintColor = .black
