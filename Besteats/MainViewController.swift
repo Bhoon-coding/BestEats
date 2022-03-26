@@ -49,6 +49,10 @@ class MainViewController: UIViewController {
         
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        foodSearchBar.resignFirstResponder()
+    }
+    
     // MARK: 보류
 //    @IBAction func tapMore(_ sender: Any) {
 //        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
@@ -76,7 +80,12 @@ class FoodCollectionViewCell: UICollectionViewCell {
 
 extension MainViewController: UISearchBarDelegate {
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         
         totalRestaurants = searchText.isEmpty
         ? UserDefaultsManager.shared.getRestaurants()
@@ -125,7 +134,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         if totalRestaurants.count == 0 {
             collectionView.setEmptyMessage("맛집이 없어요.\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
         } else {
@@ -137,7 +147,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let foodDetailVC = FoodDetailViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
+        let foodDetailVC = FoodDetailViewController(selectedRestaurant: totalRestaurants[indexPath.row],
+                                                    index: indexPath.row)
         
         
         let backBarButtonItem = UIBarButtonItem(title: "",
@@ -148,6 +159,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                                  animated: true)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+        
+        foodSearchBar.resignFirstResponder()
+        foodSearchBar.text = ""
         
     }
     
