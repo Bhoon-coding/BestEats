@@ -27,8 +27,8 @@
                                 <rect key="frame" x="16" y="108" width="382" height="51"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="no" returnKeyType="search"/>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S0C-WR-3bN">
-                                <rect key="frame" x="-29" y="131" width="414" height="634"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S0C-WR-3bN">
+                                <rect key="frame" x="0.0" y="179" width="414" height="634"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vdo-Au-SWq">
                                     <size key="itemSize" width="128" height="128"/>
@@ -142,11 +142,11 @@
                                         <size key="customSize" width="330" height="150"/>
                                         <connections>
                                             <outlet property="TypeCountStackView" destination="epo-79-Nhe" id="WoA-z7-37S"/>
+                                            <outlet property="bestMenuLabel" destination="nBJ-Z0-VVq" id="s3e-En-1ju"/>
                                             <outlet property="curiousContView" destination="4Tm-Xo-mop" id="Wok-w9-D8l"/>
                                             <outlet property="curiousCountLabel" destination="PVt-OX-GH2" id="Xhr-D2-mRS"/>
                                             <outlet property="likeCountLabel" destination="hJN-H3-hwD" id="gwv-rj-WQb"/>
                                             <outlet property="likeCountView" destination="tB7-yI-lof" id="cEV-rR-Qzg"/>
-                                            <outlet property="oneLineTipsLabel" destination="nBJ-Z0-VVq" id="7gf-dg-GZy"/>
                                             <outlet property="restaurantNamesLabel" destination="Oa8-Ig-1E0" id="rEZ-gq-QnP"/>
                                             <outlet property="typeCountStackView" destination="epo-79-Nhe" id="FUF-Ci-2ur"/>
                                             <outlet property="warningCountLabel" destination="K5q-s5-y1b" id="SVv-iT-wyK"/>

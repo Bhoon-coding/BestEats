@@ -49,16 +49,25 @@ class MainViewController: UIViewController {
         
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        foodSearchBar.resignFirstResponder()
+    // MARK: IBAction
+    @IBAction func tapMore(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "작업을 선택해주세요.", message: "선택 메시지", preferredStyle: .actionSheet)
+        let changeRestaurantName = UIAlertAction(title: "맛집명 변경", style: .default, handler: nil)
+        let delete = UIAlertAction(title: "맛집 삭제", style: .destructive , handler: nil)
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(changeRestaurantName)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+
     }
     
-    // MARK: 보류
-    @IBAction func tapMore(_ sender: Any) {
-//        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
-//
-//        BTSheetVC.modalPresentationStyle = .overFullScreen
-//        present(BTSheetVC, animated: false, completion: nil)
+    
+    // MARK: Methods
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        foodSearchBar.resignFirstResponder()
     }
     
     // MARK: @objc
@@ -74,7 +83,8 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     // MARK: Cell Outlet
     @IBOutlet weak var restaurantNamesLabel: UILabel!
-    @IBOutlet weak var oneLineTipsLabel: UILabel!
+    @IBOutlet weak var bestMenuLabel: UILabel!
+    
     @IBOutlet weak var typeCountStackView: UIStackView!
     @IBOutlet weak var likeCountView: UIView!
     @IBOutlet weak var likeCountLabel: UILabel!
@@ -133,7 +143,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
         // MARK: need refactor (대표메뉴 한줄팁 필요)
-        cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu.isEmpty
+        cell.bestMenuLabel.text = totalRestaurants[indexPath.row].menu.isEmpty
         ? "최애 메뉴를 추가해주세요."
         : totalRestaurants[indexPath.row].menu[0].menu
 //        cell.oneLineTipsLabel.text = "대표 메뉴명"
