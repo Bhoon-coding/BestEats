@@ -27,8 +27,8 @@
                                 <rect key="frame" x="16" y="108" width="382" height="51"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="no" returnKeyType="search"/>
                             </searchBar>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S0C-WR-3bN">
-                                <rect key="frame" x="0.0" y="179" width="414" height="634"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S0C-WR-3bN">
+                                <rect key="frame" x="-29" y="131" width="414" height="634"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Vdo-Au-SWq">
                                     <size key="itemSize" width="128" height="128"/>
@@ -50,12 +50,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cautionTip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92Q-W0-fyL">
-                                                    <rect key="frame" x="16" y="119.5" width="65" height="14.5"/>
-                                                    <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="14"/>
-                                                    <color key="textColor" systemColor="systemRedColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mir-XL-nEZ" userLabel="30">
                                                     <rect key="frame" x="284" y="16" width="30" height="30"/>
                                                     <constraints>
@@ -71,31 +65,92 @@
                                                         <action selector="tapMore:" destination="UFK-hJ-mRZ" eventType="touchUpInside" id="xSa-4n-Qu5"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oneLineTip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
-                                                    <rect key="frame" x="16" y="67" width="75" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
+                                                    <rect key="frame" x="16" y="62" width="68.5" height="16"/>
                                                     <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <stackView opaque="NO" clipsSubviews="YES" contentMode="center" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="epo-79-Nhe" userLabel="TypeCountStackView">
+                                                    <rect key="frame" x="80" y="100" width="170" height="50"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tB7-yI-lof" userLabel="LikeCountView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="51.5" height="50"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hJN-H3-hwD">
+                                                                    <rect key="frame" x="7" y="34" width="37" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="16"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="hJN-H3-hwD" secondAttribute="bottom" id="79u-bJ-9tE"/>
+                                                                <constraint firstItem="hJN-H3-hwD" firstAttribute="centerX" secondItem="tB7-yI-lof" secondAttribute="centerX" id="hyK-bx-6Rc"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tm-Xo-mop" userLabel="CuriousCountView">
+                                                            <rect key="frame" x="59.5" y="0.0" width="51" height="50"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVt-OX-GH2">
+                                                                    <rect key="frame" x="7" y="34" width="37" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="16"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="PVt-OX-GH2" secondAttribute="bottom" id="JuY-EH-B2b"/>
+                                                                <constraint firstItem="PVt-OX-GH2" firstAttribute="centerX" secondItem="4Tm-Xo-mop" secondAttribute="centerX" id="qbS-bx-fgM"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiK-pg-v9X" userLabel="WarningCountView">
+                                                            <rect key="frame" x="118.5" y="0.0" width="51.5" height="50"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5q-s5-y1b">
+                                                                    <rect key="frame" x="7.5" y="34" width="37" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="BMJUAOTF" family="BM JUA_OTF" pointSize="16"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="0.94621792218543044" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="K5q-s5-y1b" secondAttribute="bottom" id="Sti-UM-nHV"/>
+                                                                <constraint firstItem="K5q-s5-y1b" firstAttribute="centerX" secondItem="PiK-pg-v9X" secondAttribute="centerX" id="Vk9-Dj-CbH"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="92Q-W0-fyL" secondAttribute="bottom" constant="16" id="7mn-qO-ZAr"/>
+                                                <constraint firstAttribute="trailing" secondItem="epo-79-Nhe" secondAttribute="trailing" constant="80" id="5Sl-06-sSh"/>
+                                                <constraint firstItem="epo-79-Nhe" firstAttribute="top" secondItem="bga-N1-xEL" secondAttribute="top" constant="100" id="BsY-Ju-lPP"/>
+                                                <constraint firstItem="nBJ-Z0-VVq" firstAttribute="leading" secondItem="Oa8-Ig-1E0" secondAttribute="leading" id="Ksn-C7-dkA"/>
                                                 <constraint firstItem="Oa8-Ig-1E0" firstAttribute="top" secondItem="bga-N1-xEL" secondAttribute="top" constant="16" id="OUi-rF-qWb"/>
-                                                <constraint firstItem="Oa8-Ig-1E0" firstAttribute="leading" secondItem="bga-N1-xEL" secondAttribute="leading" constant="16" id="Rxb-hL-OPC"/>
                                                 <constraint firstAttribute="trailing" secondItem="mir-XL-nEZ" secondAttribute="trailing" constant="16" id="ZZB-Jc-Ui5"/>
-                                                <constraint firstItem="92Q-W0-fyL" firstAttribute="leading" secondItem="nBJ-Z0-VVq" secondAttribute="leading" id="cJ9-Qa-QCW"/>
-                                                <constraint firstItem="92Q-W0-fyL" firstAttribute="top" secondItem="nBJ-Z0-VVq" secondAttribute="bottom" constant="36.5" id="r8s-T4-XR9"/>
+                                                <constraint firstAttribute="bottom" secondItem="epo-79-Nhe" secondAttribute="bottom" id="cro-A2-NHA"/>
+                                                <constraint firstItem="Oa8-Ig-1E0" firstAttribute="leading" secondItem="bga-N1-xEL" secondAttribute="leading" constant="16" id="qDN-4e-g53"/>
                                                 <constraint firstItem="mir-XL-nEZ" firstAttribute="top" secondItem="bga-N1-xEL" secondAttribute="top" constant="16" id="taz-4m-5kR"/>
-                                                <constraint firstItem="nBJ-Z0-VVq" firstAttribute="top" secondItem="Oa8-Ig-1E0" secondAttribute="bottom" constant="29" id="x6U-h0-8GX"/>
-                                                <constraint firstItem="nBJ-Z0-VVq" firstAttribute="leading" secondItem="Oa8-Ig-1E0" secondAttribute="leading" id="xzu-4x-x8X"/>
+                                                <constraint firstItem="epo-79-Nhe" firstAttribute="leading" secondItem="bga-N1-xEL" secondAttribute="leading" constant="80" id="ugg-UE-cbY"/>
+                                                <constraint firstItem="nBJ-Z0-VVq" firstAttribute="top" secondItem="Oa8-Ig-1E0" secondAttribute="bottom" constant="24" id="x6U-h0-8GX"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <gestureRecognizers/>
                                         <size key="customSize" width="330" height="150"/>
                                         <connections>
+                                            <outlet property="TypeCountStackView" destination="epo-79-Nhe" id="WoA-z7-37S"/>
+                                            <outlet property="curiousContView" destination="4Tm-Xo-mop" id="Wok-w9-D8l"/>
+                                            <outlet property="curiousCountLabel" destination="PVt-OX-GH2" id="Xhr-D2-mRS"/>
+                                            <outlet property="likeCountLabel" destination="hJN-H3-hwD" id="gwv-rj-WQb"/>
+                                            <outlet property="likeCountView" destination="tB7-yI-lof" id="cEV-rR-Qzg"/>
                                             <outlet property="oneLineTipsLabel" destination="nBJ-Z0-VVq" id="7gf-dg-GZy"/>
                                             <outlet property="restaurantNamesLabel" destination="Oa8-Ig-1E0" id="rEZ-gq-QnP"/>
-                                            <outlet property="warningTipsLabel" destination="92Q-W0-fyL" id="l6N-jM-BBC"/>
+                                            <outlet property="typeCountStackView" destination="epo-79-Nhe" id="FUF-Ci-2ur"/>
+                                            <outlet property="warningCountLabel" destination="K5q-s5-y1b" id="SVv-iT-wyK"/>
+                                            <outlet property="warningCountView" destination="PiK-pg-v9X" id="5OK-JS-GG7"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -262,8 +317,11 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

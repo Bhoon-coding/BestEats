@@ -35,7 +35,7 @@ class MainViewController: UIViewController {
         foodCollectionView.dataSource = self
         
         navigationController?.navigationBar.tintColor = .black
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(showFoodModi))
+        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addRestaurant))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,15 +54,15 @@ class MainViewController: UIViewController {
     }
     
     // MARK: 보류
-//    @IBAction func tapMore(_ sender: Any) {
+    @IBAction func tapMore(_ sender: Any) {
 //        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
 //
 //        BTSheetVC.modalPresentationStyle = .overFullScreen
 //        present(BTSheetVC, animated: false, completion: nil)
-//    }
+    }
     
     // MARK: @objc
-    @objc func showFoodModi() {
+    @objc func addRestaurant() {
         let restaurantAddVC = RestaurantAddViewController()
         restaurantAddVC.delegate = self
         restaurantAddVC.modalPresentationStyle = .fullScreen
@@ -72,9 +72,16 @@ class MainViewController: UIViewController {
 
 class FoodCollectionViewCell: UICollectionViewCell {
     
+    // MARK: Cell Outlet
     @IBOutlet weak var restaurantNamesLabel: UILabel!
     @IBOutlet weak var oneLineTipsLabel: UILabel!
-    @IBOutlet weak var warningTipsLabel: UILabel!
+    @IBOutlet weak var typeCountStackView: UIStackView!
+    @IBOutlet weak var likeCountView: UIView!
+    @IBOutlet weak var likeCountLabel: UILabel!
+    @IBOutlet weak var curiousContView: UIView!
+    @IBOutlet weak var curiousCountLabel: UILabel!
+    @IBOutlet weak var warningCountView: UIView!
+    @IBOutlet weak var warningCountLabel: UILabel!
     
 }
 
@@ -120,11 +127,23 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         
+        let filterLikeMenu = totalRestaurants[indexPath.row].menu.filter { $0.type == "like" }
+        let filterCuriousMenu = totalRestaurants[indexPath.row].menu.filter { $0.type == "curious" }
+        let filterWarningMenu = totalRestaurants[indexPath.row].menu.filter { $0.type == "warning" }
+        
         cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
         // MARK: need refactor (대표메뉴 한줄팁 필요)
-        cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu[0].oneLiner
-//        cell.oneLineTipsLabel.text = "한줄평"
-        cell.warningTipsLabel.text = "경고"
+        cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu.isEmpty
+        ? "최애 메뉴를 추가해주세요."
+        : totalRestaurants[indexPath.row].menu[0].menu
+//        cell.oneLineTipsLabel.text = "대표 메뉴명"
+        cell.likeCountView.circleView(cell.likeCountView)
+        cell.likeCountLabel.text = "\(filterLikeMenu.count)"
+        cell.curiousContView.circleView(cell.curiousContView)
+        cell.curiousCountLabel.text = "\(filterCuriousMenu.count)"
+        cell.warningCountView.circleView(cell.warningCountView)
+        cell.warningCountLabel.text = "\(filterWarningMenu.count)"
+
         
         cell.backgroundColor = .lightGray
         cell.layer.cornerRadius = 8

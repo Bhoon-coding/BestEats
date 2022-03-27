@@ -26,7 +26,7 @@ struct Restaurants: Codable, Equatable {
 
 struct Menus: Codable, Equatable {
     var id: Int
-    var menu: String
+    var menu: String?
     var oneLiner: String
     var type: String
     
