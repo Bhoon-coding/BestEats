@@ -52,11 +52,11 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restaurantNameTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+        textField.placeholderConvention(textField: textField)
         textField.placeholder = "맛집 이름을 입력 해주세요."
-        textField.layer.cornerRadius = 10
+//        textField.layer.cornerRadius = 10
         textField.returnKeyType = .next
-        textField.paddingLeft()
+//        textField.paddingLeft()
         return textField
     }()
     
@@ -77,10 +77,11 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     lazy var menuTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "메뉴 이름을 입력 해주세요."
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = 10
+//        textField.backgroundColor = .white
+        textField.placeholderConvention(textField: textField)
+//        textField.layer.cornerRadius = 10
         textField.returnKeyType = .next
-        textField.paddingLeft()
+//        textField.paddingLeft()
         return textField
     }()
     
@@ -101,12 +102,13 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
-        textField.backgroundColor = .white
+//        textField.backgroundColor = .white
         textField.placeholder = "꿀팁을 입력 해주세요."
-        textField.layer.cornerRadius = 10
+//        textField.layer.cornerRadius = 10
         textField.returnKeyType = .done
-        textField.paddingLeft()
-        textField.text = nil
+//        textField.paddingLeft()
+        textField.placeholderConvention(textField: textField)
+//        textField.text = nil
         return textField
     }()
     
