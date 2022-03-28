@@ -46,50 +46,42 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
         label.text = "\(selectedRestaurant.restaurantName)"
-        label.font = UIFont(name: "BM JUA_OTF", size: 24)
+        label.mediumLabel(label: label)
         return label
     }()
     
     lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.text = "메뉴명"
-        label.font = UIFont(name: "BM JUA_OTF", size: 24)
+        label.mediumLabel(label: label)
         return label
     }()
     
     lazy var menuTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "메뉴를 적어주세요."
-        textField.font = UIFont(name: "BM JUA_OTF", size: 16)
-        textField.backgroundColor = .white
-        textField.paddingLeft()
-        textField.layer.cornerRadius = 6
-        textField.layer.borderWidth = 1
+        textField.placeholderConvention(textField: textField)
         return textField
     }()
     
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.text = "한줄팁"
-        label.font = UIFont(name: "BM JUA_OTF", size: 24)
+        label.mediumLabel(label: label)
         return label
     }()
     
     lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "한줄팁을 적어주세요."
-        textField.font = UIFont(name: "BM JUA_OTF", size: 16)
-        textField.backgroundColor = .white
-        textField.paddingLeft()
-        textField.layer.cornerRadius = 6
-        textField.layer.borderWidth = 1
+        textField.placeholderConvention(textField: textField)
         return textField
     }()
     
     lazy var typeLabel: UILabel = {
         let label = UILabel()
         label.text = "내평가"
-        label.font = UIFont(name: "BM JUA_OTF", size: 24)
+        label.mediumLabel(label: label)
         return label
     }()
     

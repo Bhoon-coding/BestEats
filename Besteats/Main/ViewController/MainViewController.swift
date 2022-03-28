@@ -166,7 +166,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     //
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let foodDetailVC = FoodDetailViewController(selectedRestaurant: totalRestaurants[indexPath.row],
+        let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row],
                                                     index: indexPath.row)
         
         
@@ -174,7 +174,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                                 style: .plain,
                                                 target: self, action: nil)
         
-        navigationController?.pushViewController(foodDetailVC,
+        navigationController?.pushViewController(menuListVC,
                                                  animated: true)
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
