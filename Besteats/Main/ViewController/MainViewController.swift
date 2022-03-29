@@ -55,6 +55,16 @@ class MainViewController: UIViewController {
     
     // MARK: 보류
     @IBAction func tapMore(_ sender: Any) {
+        let alert = UIAlertController(title: "맛집 수정, 삭제", message: "아래 항목을 선택해 주세요.", preferredStyle: .actionSheet)
+        let modiRestaurant = UIAlertAction(title: "맛집명 변경", style: .default, handler: nil)
+        let deleteRestaurant = UIAlertAction(title: "맛집 삭제", style: .destructive, handler: nil)
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(modiRestaurant)
+        alert.addAction(deleteRestaurant)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+        
+        // 보톰시트 커스텀 보류
 //        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
 //
 //        BTSheetVC.modalPresentationStyle = .overFullScreen
