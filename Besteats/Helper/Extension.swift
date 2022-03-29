@@ -35,7 +35,14 @@ extension UICollectionView {
 
 // MARK: UITextField
 extension UITextField {
-    func paddingLeft() {
+    
+    func placeholderConvention(textField: UITextField) {
+        textField.font = UIFont(name: "BM JUA_OTF", size: 18)
+        textField.backgroundColor = .systemBackground
+//        textField.pla
+        textField.layer.cornerRadius = 6
+        textField.layer.borderWidth = 1
+        
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
         self.leftView = paddingView
         self.leftViewMode = ViewMode.always
@@ -75,5 +82,30 @@ extension UIView {
         view.clipsToBounds = true
         view.layer.shadowOpacity = 0.5
         view.layer.shadowRadius = 7
+    }
+}
+
+extension UIButton {
+    func mediumButton (button: UIButton) {
+        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 18)
+        button.layer.cornerRadius = 8
+        
+    }
+}
+
+extension UILabel {
+    func bigLabel(label: UILabel) {
+        label.font = UIFont(name: "BM JUA_OTF", size: 24)
+        label.textColor = .label
+    }
+    
+    func mediumLabel(label: UILabel) {
+        label.font = UIFont(name: "BM JUA_OTF", size: 18)
+        label.textColor = .label
+    }
+    
+    func smallLabel(label: UILabel) {
+        label.font = UIFont(name: "BM JUA_OTF", size: 16)
+        label.textColor = .label
     }
 }
