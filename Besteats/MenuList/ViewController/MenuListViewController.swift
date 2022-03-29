@@ -324,6 +324,9 @@ extension MenuListViewController: UITableViewDataSource {
 }
 
 extension MenuListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let menuDetailVC = MenuDetailViewController()
+        navigationController?.pushViewController(menuDetailVC, animated: true)
+    }
 }
 
