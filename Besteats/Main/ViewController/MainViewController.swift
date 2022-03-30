@@ -56,16 +56,43 @@ class MainViewController: UIViewController {
     // MARK: 보류
     @IBAction func tapMore(_ sender: UIButton) {
         
+        let point = sender.convert(CGPoint.zero, to: foodCollectionView)
+        guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
+        
         // MARK: ActionSheet
         let actionSheet = UIAlertController(title: "맛집 수정, 삭제",
                                             message: "아래 항목을 선택해 주세요.",
                                             preferredStyle: .actionSheet)
         
-        let modiRestaurant = UIAlertAction(title: "맛집명 변경",
-                                           style: .default,
-                                           handler: nil)
-        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let modiRestaurant = UIAlertAction(title: "맛집명 변경", style: .default) {_ in
+            let modiAlert = UIAlertController(title: "맛집명 변경",
+                                              message: "변경할 맛집의 이름을 입력해주세요.",
+                                              preferredStyle: .alert)
+            let modi = UIAlertAction(title: "변경", style: .default) {_ in
+                if let txtField = modiAlert.textFields?.first,
+                   let text = txtField.text {
+                    self.totalRestaurants[indexPath.row].restaurantName = text
+                    
+                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+                    
+                    DispatchQueue.main.async {
+                        self.foodCollectionView.reloadData()
+                    }
+                }
+            }
+            modiAlert.addTextField { textField in
+                textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
+            }
+            modiAlert.addAction(modi)
+            modiAlert.addAction(cancel)
+            
+            DispatchQueue.main.async {
+                self.present(modiAlert, animated: true, completion: nil)
+            }
+            
+        }
+        
         let tappedDelete = UIAlertAction(title: "맛집 삭제", style: .destructive) {_ in
             
             // MARK: Alert
@@ -74,8 +101,7 @@ class MainViewController: UIViewController {
                                                        preferredStyle: .alert)
             
             let deleteRestaurant = UIAlertAction(title: "삭제", style: .destructive) {_ in
-                let point = sender.convert(CGPoint.zero, to: self.foodCollectionView)
-                guard let indexPath = self.foodCollectionView.indexPathForItem(at: point) else { return }
+                
                 
                 self.totalRestaurants.remove(at: indexPath.row)
                 
