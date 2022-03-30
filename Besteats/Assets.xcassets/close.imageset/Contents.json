@@ -3,6 +3,16 @@
     {
       "filename" : "close.png",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "close-2.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

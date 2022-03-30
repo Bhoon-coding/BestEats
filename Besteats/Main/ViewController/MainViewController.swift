@@ -33,8 +33,10 @@ class MainViewController: UIViewController {
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
+        foodCollectionView.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .secondarySystemBackground
         
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .label
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addRestaurant))
     }
     
