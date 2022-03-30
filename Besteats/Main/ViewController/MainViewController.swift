@@ -59,79 +59,74 @@ class MainViewController: UIViewController {
         let point = sender.convert(CGPoint.zero, to: foodCollectionView)
         guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
         
-        // MARK: ActionSheet
-        let actionSheet = UIAlertController(title: "맛집 수정, 삭제",
-                                            message: "아래 항목을 선택해 주세요.",
-                                            preferredStyle: .actionSheet)
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        let modiRestaurant = UIAlertAction(title: "맛집명 변경", style: .default) {_ in
-            let modiAlert = UIAlertController(title: "맛집명 변경",
-                                              message: "변경할 맛집의 이름을 입력해주세요.",
-                                              preferredStyle: .alert)
-            let modi = UIAlertAction(title: "변경", style: .default) {_ in
-                if let txtField = modiAlert.textFields?.first,
-                   let text = txtField.text {
-                    self.totalRestaurants[indexPath.row].restaurantName = text
-                    
-                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                    
-                    DispatchQueue.main.async {
+        DispatchQueue.main.async {
+            
+            // MARK: ActionSheet
+            let actionSheet = UIAlertController(title: "맛집 수정, 삭제",
+                                                message: "아래 항목을 선택해 주세요.",
+                                                preferredStyle: .actionSheet)
+            
+            let cancelButton = UIAlertAction(title: "취소",
+                                       style: .cancel,
+                                       handler: nil)
+            let modiRestaurant = UIAlertAction(title: "맛집명 변경",
+                                               style: .default) {_ in
+                
+                let modiAlert = UIAlertController(title: "맛집명 변경",
+                                                  message: "변경할 맛집의 이름을 입력해주세요.",
+                                                  preferredStyle: .alert)
+                
+                let modiButton = UIAlertAction(title: "변경",
+                                               style: .default) {_ in
+                    if let txtField = modiAlert.textFields?.first,
+                       let text = txtField.text {
+                        self.totalRestaurants[indexPath.row].restaurantName = text
+                        
+                        UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+                        
                         self.foodCollectionView.reloadData()
                     }
                 }
-            }
-            modiAlert.addTextField { textField in
-                textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
-            }
-            modiAlert.addAction(modi)
-            modiAlert.addAction(cancel)
-            
-            DispatchQueue.main.async {
+                modiAlert.addTextField { textField in
+                    textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
+                }
+                modiAlert.addAction(modiButton)
+                modiAlert.addAction(cancelButton)
+                
                 self.present(modiAlert, animated: true, completion: nil)
             }
             
-        }
-        
-        let tappedDelete = UIAlertAction(title: "맛집 삭제", style: .destructive) {_ in
             
-            // MARK: Alert
-            let deleteConfirmAlert = UIAlertController(title: "해당 맛집에 포함된 메뉴들도 삭제 됩니다.",
-                                                       message: "정말로 삭제 하시겠습니까?",
-                                                       preferredStyle: .alert)
-            
-            let deleteRestaurant = UIAlertAction(title: "삭제", style: .destructive) {_ in
+            let tappedDelete = UIAlertAction(title: "맛집 삭제",
+                                             style: .destructive) {_ in
                 
+                let deleteConfirmAlert = UIAlertController(title: "해당 맛집에 포함된 메뉴들도 삭제 됩니다.",
+                                                           message: "정말로 삭제 하시겠습니까?",
+                                                           preferredStyle: .alert)
                 
-                self.totalRestaurants.remove(at: indexPath.row)
-                
-                UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                
-                DispatchQueue.main.async {
+                let deleteRestaurant = UIAlertAction(title: "삭제",
+                                                     style: .destructive) {_ in
+                    
+                    self.totalRestaurants.remove(at: indexPath.row)
+                    
+                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+                    
                     self.foodCollectionView.reloadData()
+                    
                 }
                 
-            }
-            
-            DispatchQueue.main.async {
                 deleteConfirmAlert.addAction(deleteRestaurant)
-                deleteConfirmAlert.addAction(cancel)
+                deleteConfirmAlert.addAction(cancelButton)
                 self.present(deleteConfirmAlert, animated: true, completion: nil)
             }
+            
+            actionSheet.addAction(modiRestaurant)
+            actionSheet.addAction(tappedDelete)
+            actionSheet.addAction(cancelButton)
+            
+            self.present(actionSheet, animated: true, completion: nil)
+            
         }
-        
-        actionSheet.addAction(modiRestaurant)
-        actionSheet.addAction(tappedDelete)
-        actionSheet.addAction(cancel)
-        
-        present(actionSheet, animated: true, completion: nil)
-        
-        
-        // 보톰시트 커스텀 보류
-//        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
-//
-//        BTSheetVC.modalPresentationStyle = .overFullScreen
-//        present(BTSheetVC, animated: false, completion: nil)
     }
     
     // MARK: @objc
