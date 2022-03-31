@@ -145,15 +145,9 @@ class FoodCollectionViewCell: UICollectionViewCell {
     // MARK: Cell Outlet
     @IBOutlet weak var restaurantNamesLabel: UILabel!
     @IBOutlet weak var bestMenuLabel: UILabel!
-    
-    @IBOutlet weak var typeCountStackView: UIStackView!
-    @IBOutlet weak var likeCountView: UIView!
     @IBOutlet weak var likeCountLabel: UILabel!
-    @IBOutlet weak var curiousContView: UIView!
     @IBOutlet weak var curiousCountLabel: UILabel!
-    @IBOutlet weak var warningCountView: UIView!
     @IBOutlet weak var warningCountLabel: UILabel!
-    
 }
 
 extension MainViewController: UISearchBarDelegate {
@@ -208,11 +202,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         ? "최애 메뉴를 추가해주세요."
         : totalRestaurants[indexPath.row].menu[0].menu
 //        cell.oneLineTipsLabel.text = "대표 메뉴명"
-        cell.likeCountView.circleView(cell.likeCountView)
         cell.likeCountLabel.text = "\(filterLikeMenu.count)"
-        cell.curiousContView.circleView(cell.curiousContView)
         cell.curiousCountLabel.text = "\(filterCuriousMenu.count)"
-        cell.warningCountView.circleView(cell.warningCountView)
         cell.warningCountLabel.text = "\(filterWarningMenu.count)"
 
         
