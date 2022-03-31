@@ -177,18 +177,18 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     // 위 아래 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 40
+        return 16
     }
     
     // 좌우 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 50
+        return 0
     }
     
     // Cell 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let size = CGSize(width: 320, height: 150)
+        let size = CGSize(width: view.frame.width - 80, height: 150)
         return size
     }
 }
@@ -216,9 +216,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.warningCountLabel.text = "\(filterWarningMenu.count)"
 
         
-        cell.backgroundColor = .lightGray
-        cell.layer.cornerRadius = 8
-        cell.layer.borderWidth = 1
+        cell.layer.masksToBounds = false
+        cell.layer.shadowOpacity = 0.3
+        cell.layer.shadowOffset = CGSize(width: -2, height: 2)
+        cell.layer.shadowRadius = 3
+        cell.layer.cornerRadius = 20
+
         
         return cell
     }
