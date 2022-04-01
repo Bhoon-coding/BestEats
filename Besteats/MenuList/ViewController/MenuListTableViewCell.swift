@@ -26,7 +26,6 @@ class MenuListTableViewCell: UITableViewCell {
     
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .orange
         button.setImage(UIImage(named: "star"), for: .normal)
         button.addTarget(self, action: #selector(tappedFavorite(button:)), for: .touchUpInside)
         return button
@@ -56,10 +55,10 @@ class MenuListTableViewCell: UITableViewCell {
             $0.top.equalTo(menuLabel.snp.bottom).offset(30)
         }
         
-        
         favoriteButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview().inset(30)
-            $0.size.equalTo(28)
+            $0.top.equalTo(menuLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(30)
+            $0.size.equalTo(26)
         }
     }
     
