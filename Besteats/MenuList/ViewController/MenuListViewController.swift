@@ -226,34 +226,6 @@ class MenuListViewController: UIViewController {
             warningTypeButton.backgroundColor = .white
         }
     }
-    
-    @objc func deleteTapped(_ sender: UIButton) {
-        
-        let point = sender.convert(CGPoint.zero, to: menuListTableView)
-        guard let indexPath = menuListTableView.indexPathForRow(at: point) else { return }
-        
-        // MARK: 타입 별로 나누기 위해 filter로 array 재정렬 및 타입별 array index를 파라미터로 보냄
-        if type == "like" {
-            let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
-            selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                     selectedIndex: selectedIdx,
-                                                                       menu: typeLike[indexPath.row])
-        } else if type == "curious" {
-            let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
-            selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                     selectedIndex: selectedIdx,
-                                                                       menu: typeCurious[indexPath.row])
-
-        } else {
-            let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
-            selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                     selectedIndex: selectedIdx,
-                                                                       menu: typeWarning[indexPath.row])
-        }
-        
-        menuListTableView.reloadData()
-        
-    }
         
 }
 
@@ -316,9 +288,43 @@ extension MenuListViewController: UITableViewDataSource {
             
         }
         
-        cell.deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        
+        if editingStyle == .delete {
+
+            if type == "like" {
+                let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
+                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
+                                                                         selectedIndex: selectedIdx,
+                                                                           menu: typeLike[indexPath.row])
+                menuListTableView.deleteRows(at: [indexPath], with: .left)
+            } else if type == "curious" {
+                let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
+                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
+                                                                         selectedIndex: selectedIdx,
+                                                                           menu: typeCurious[indexPath.row])
+                menuListTableView.deleteRows(at: [indexPath], with: .left)
+
+            } else {
+                let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
+                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
+                                                                         selectedIndex: selectedIdx,
+                                                                           menu: typeWarning[indexPath.row])
+                menuListTableView.deleteRows(at: [indexPath], with: .left)
+            }
+            
+            menuListTableView.reloadData()
+            
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        
+        return "삭제"
     }
     
 }
