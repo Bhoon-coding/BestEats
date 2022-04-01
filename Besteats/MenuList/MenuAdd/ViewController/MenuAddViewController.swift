@@ -87,7 +87,6 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var typeView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .brown
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         return view
@@ -151,7 +150,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     private func setUpUI() {
         
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
         
         view.addSubview(wholeView)
         wholeView.snp.makeConstraints {

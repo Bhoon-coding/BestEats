@@ -54,9 +54,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         let textField = UITextField()
         textField.placeholderConvention(textField: textField)
         textField.placeholder = "맛집 이름을 입력 해주세요."
-//        textField.layer.cornerRadius = 10
         textField.returnKeyType = .next
-//        textField.paddingLeft()
         return textField
     }()
     
@@ -77,9 +75,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     lazy var menuTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "메뉴 이름을 입력 해주세요."
-//        textField.backgroundColor = .white
         textField.placeholderConvention(textField: textField)
-//        textField.layer.cornerRadius = 10
         textField.returnKeyType = .next
 //        textField.paddingLeft()
         return textField
@@ -175,7 +171,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .secondarySystemBackground
         
         restaurantNameTextField.delegate = self
         menuTextField.delegate = self

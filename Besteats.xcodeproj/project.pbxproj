@@ -122,6 +122,7 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */,
 				E1B4C9AE27F1F50B00B0E5E9 /* Main */,
 				E155E4DC27F28E9E000E20A7 /* MenuList */,
 				E10161DC27C5289800215F5B /* Model */,
@@ -171,7 +172,6 @@
 			children = (
 				E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */,
 				E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */,
-				E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

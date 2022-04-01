@@ -108,7 +108,7 @@ class MenuListViewController: UIViewController {
                                                             action: #selector(addTapped))
         title = selectedRestaurant.restaurantName
         
-        view.backgroundColor = .brown
+        view.backgroundColor = .secondarySystemBackground
         setUpUI()
         
     }

@@ -33,8 +33,10 @@ class MainViewController: UIViewController {
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
+        foodCollectionView.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .secondarySystemBackground
         
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .label
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addRestaurant))
     }
     
@@ -54,11 +56,79 @@ class MainViewController: UIViewController {
     }
     
     // MARK: 보류
-    @IBAction func tapMore(_ sender: Any) {
-//        guard let BTSheetVC = storyboard?.instantiateViewController(withIdentifier: "BottomSheetViewController") as? BottomSheetViewController else { return }
-//
-//        BTSheetVC.modalPresentationStyle = .overFullScreen
-//        present(BTSheetVC, animated: false, completion: nil)
+    @IBAction func tapMore(_ sender: UIButton) {
+        
+        let point = sender.convert(CGPoint.zero, to: foodCollectionView)
+        guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
+        
+        DispatchQueue.main.async {
+            
+            // MARK: ActionSheet
+            let actionSheet = UIAlertController(title: "맛집 수정, 삭제",
+                                                message: "아래 항목을 선택해 주세요.",
+                                                preferredStyle: .actionSheet)
+            
+            let cancelButton = UIAlertAction(title: "취소",
+                                       style: .cancel,
+                                       handler: nil)
+            let modiRestaurant = UIAlertAction(title: "맛집명 변경",
+                                               style: .default) {_ in
+                
+                let modiAlert = UIAlertController(title: "맛집명 변경",
+                                                  message: "변경할 맛집의 이름을 입력해주세요.",
+                                                  preferredStyle: .alert)
+                
+                let modiButton = UIAlertAction(title: "변경",
+                                               style: .default) {_ in
+                    if let txtField = modiAlert.textFields?.first,
+                       let text = txtField.text {
+                        self.totalRestaurants[indexPath.row].restaurantName = text
+                        
+                        UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+                        
+                        self.foodCollectionView.reloadData()
+                    }
+                }
+                modiAlert.addTextField { textField in
+                    textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
+                }
+                modiAlert.addAction(modiButton)
+                modiAlert.addAction(cancelButton)
+                
+                self.present(modiAlert, animated: true, completion: nil)
+            }
+            
+            
+            let tappedDelete = UIAlertAction(title: "맛집 삭제",
+                                             style: .destructive) {_ in
+                
+                let deleteConfirmAlert = UIAlertController(title: "해당 맛집에 포함된 메뉴들도 삭제 됩니다.",
+                                                           message: "정말로 삭제 하시겠습니까?",
+                                                           preferredStyle: .alert)
+                
+                let deleteRestaurant = UIAlertAction(title: "삭제",
+                                                     style: .destructive) {_ in
+                    
+                    self.totalRestaurants.remove(at: indexPath.row)
+                    
+                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+                    
+                    self.foodCollectionView.reloadData()
+                    
+                }
+                
+                deleteConfirmAlert.addAction(deleteRestaurant)
+                deleteConfirmAlert.addAction(cancelButton)
+                self.present(deleteConfirmAlert, animated: true, completion: nil)
+            }
+            
+            actionSheet.addAction(modiRestaurant)
+            actionSheet.addAction(tappedDelete)
+            actionSheet.addAction(cancelButton)
+            
+            self.present(actionSheet, animated: true, completion: nil)
+            
+        }
     }
     
     // MARK: @objc
@@ -74,15 +144,10 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     // MARK: Cell Outlet
     @IBOutlet weak var restaurantNamesLabel: UILabel!
-    @IBOutlet weak var oneLineTipsLabel: UILabel!
-    @IBOutlet weak var typeCountStackView: UIStackView!
-    @IBOutlet weak var likeCountView: UIView!
+    @IBOutlet weak var bestMenuLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
-    @IBOutlet weak var curiousContView: UIView!
     @IBOutlet weak var curiousCountLabel: UILabel!
-    @IBOutlet weak var warningCountView: UIView!
     @IBOutlet weak var warningCountLabel: UILabel!
-    
 }
 
 extension MainViewController: UISearchBarDelegate {
@@ -106,18 +171,18 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     // 위 아래 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 40
+        return 16
     }
     
     // 좌우 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 50
+        return 0
     }
     
     // Cell 사이즈
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let size = CGSize(width: 320, height: 150)
+        let size = CGSize(width: view.frame.width - 80, height: 150)
         return size
     }
 }
@@ -133,21 +198,21 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
         // MARK: need refactor (대표메뉴 한줄팁 필요)
-        cell.oneLineTipsLabel.text = totalRestaurants[indexPath.row].menu.isEmpty
+        cell.bestMenuLabel.text = totalRestaurants[indexPath.row].menu.isEmpty
         ? "최애 메뉴를 추가해주세요."
         : totalRestaurants[indexPath.row].menu[0].menu
 //        cell.oneLineTipsLabel.text = "대표 메뉴명"
-        cell.likeCountView.circleView(cell.likeCountView)
         cell.likeCountLabel.text = "\(filterLikeMenu.count)"
-        cell.curiousContView.circleView(cell.curiousContView)
         cell.curiousCountLabel.text = "\(filterCuriousMenu.count)"
-        cell.warningCountView.circleView(cell.warningCountView)
         cell.warningCountLabel.text = "\(filterWarningMenu.count)"
 
         
-        cell.backgroundColor = .lightGray
-        cell.layer.cornerRadius = 8
-        cell.layer.borderWidth = 1
+        cell.layer.masksToBounds = false
+        cell.layer.shadowOpacity = 0.3
+        cell.layer.shadowOffset = CGSize(width: -2, height: 2)
+        cell.layer.shadowRadius = 3
+        cell.layer.cornerRadius = 20
+
         
         return cell
     }
