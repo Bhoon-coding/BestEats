@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 
+
+let checkedFavorite = UIImage(named: "starFill")
+let uncheckedFavorite = UIImage(named: "star")
+
 class MenuListViewController: UIViewController {
     
     // MARK: Properties
@@ -15,11 +19,13 @@ class MenuListViewController: UIViewController {
     var selectedLike = true
     var selectedCurious = false
     var selectedWarning = false
+
     var type: String = "like"
     var totalRestaurants: [Restaurants] = []
     var selectedRestaurant: Restaurants
     var selectedIdx: Int
     var totalMenus: [Menus] = []
+    var favoriteMenu: [String] = []
     
     
     init(selectedRestaurant: Restaurants ,index: Int) {
@@ -187,7 +193,6 @@ class MenuListViewController: UIViewController {
     }
     
     @objc func tappedCuriousButton() {
-//        selectedCurious = !selectedCurious
         type = "curious"
         
         DispatchQueue.main.async {
@@ -225,6 +230,20 @@ class MenuListViewController: UIViewController {
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
         }
+    }
+    
+    @objc func tappedFavorite(_ sender: UIButton) {
+        var typeLike = self.selectedRestaurant.menu.filter {
+            $0.type == "like"
+        }
+        let indexPath = sender.tag
+        var selectedItem = typeLike[indexPath]
+        
+        selectedRestaurant = UserDefaultsManager.shared.updateMenus(selectedRestaurant: selectedRestaurant,
+                                               selectedIndex: selectedIdx,
+                                               selectedMenu: selectedItem,
+                                               menuIndex: indexPath)
+        
     }
         
 }
@@ -275,17 +294,34 @@ extension MenuListViewController: UITableViewDataSource {
         }
         
         if type == "like" {
-            cell.menuLabel.text = typeLike[indexPath.row].menu
-            cell.oneLinerLabel.text = typeLike[indexPath.row].oneLiner
             
-        } else if type == "curious" {
+            let selectedItem = typeLike[indexPath.row]
+            cell.menuLabel.text = selectedItem.menu
+            cell.oneLinerLabel.text = selectedItem.oneLiner
+            cell.favoriteButton.tag = indexPath.row
+            cell.favoriteButton.addTarget(self, action: #selector(tappedFavorite), for: .touchUpInside)
+            cell.favoriteButton.isHidden = false
+                
+
+            DispatchQueue.main.async {
+                selectedItem.isFavorite
+                ? cell.favoriteButton.setImage(checkedFavorite, for: .normal)
+                : cell.favoriteButton.setImage(uncheckedFavorite, for: .normal)
+                
+            }
+
+            
+            }
+        
+        else if type == "curious" {
             cell.menuLabel.text = typeCurious[indexPath.row].menu
             cell.oneLinerLabel.text = typeCurious[indexPath.row].oneLiner
+            cell.favoriteButton.isHidden = true
             
-        } else {
+        } else if type == "warning" {
             cell.menuLabel.text = typeWarning[indexPath.row].menu
             cell.oneLinerLabel.text = typeWarning[indexPath.row].oneLiner
-            
+            cell.favoriteButton.isHidden = true
         }
         
         return cell

@@ -77,7 +77,6 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         textField.placeholder = "메뉴 이름을 입력 해주세요."
         textField.placeholderConvention(textField: textField)
         textField.returnKeyType = .next
-//        textField.paddingLeft()
         return textField
     }()
     
@@ -98,13 +97,9 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
-//        textField.backgroundColor = .white
         textField.placeholder = "꿀팁을 입력 해주세요."
-//        textField.layer.cornerRadius = 10
         textField.returnKeyType = .done
-//        textField.paddingLeft()
         textField.placeholderConvention(textField: textField)
-//        textField.text = nil
         return textField
     }()
     
@@ -411,10 +406,12 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         
         
         let menusModel: [Menus] = [Menus(id: 1, // 최초 맛집 생성후 메뉴 추가니 id = 1
+                                         isFavorite: false,
                                          menu: menu,
                                          oneLiner: oneLiner,
                                          type: type)]
         let restaurantModel: [Restaurants] = [Restaurants(restaurantName: restaurantName,
+                                                          favoriteMenus: [],
                                                           menu: menusModel)]
         
         totalRestaurants.append(contentsOf: restaurantModel)

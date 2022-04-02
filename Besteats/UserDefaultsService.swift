@@ -48,6 +48,37 @@ struct UserDefaultsManager {
         saveRestaurants(restaurants: restaurants)
         return restaurant
     }
+    
+    func updateMenus(selectedRestaurant: Restaurants,
+                     selectedIndex: Int,
+                     selectedMenu: Menus,
+                     menuIndex: Int) -> Restaurants {
+        
+        var restaurants = getRestaurants()
+        var restaurant = selectedRestaurant
+        var menus = selectedRestaurant.menu
+        var menu = selectedMenu
+
+        if menu.isFavorite {
+            print("isFavorite: true? \(menu.isFavorite) ")
+            menu.isFavorite = false
+            restaurant.favoriteMenus.remove(at: menuIndex)
+            
+        } else {
+            print("isFavorite: false? \(menu.isFavorite) ")
+            menu.isFavorite = true
+            restaurant.favoriteMenus.append(menu.menu!)
+            
+            
+        }
+        menus[menuIndex] = menu
+        restaurant.menu = menus
+        restaurants[selectedIndex] = restaurant
+        
+        dump(restaurants)
+        saveRestaurants(restaurants: restaurants)
+        return restaurant
+    }
 //    func updateRestaurants(newRestaurant: Restaurants) {
 //        var restaurants = getRestaurants()
 //        var newRestaurantIndex = -1

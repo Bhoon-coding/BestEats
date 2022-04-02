@@ -323,6 +323,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             return }
         
         let menu: Menus = Menus(id: menuId,
+                                isFavorite: false,
                                 menu: menuName,
                                 oneLiner: oneLiner,
                                 type: type
