@@ -8,6 +8,8 @@
 import UIKit
 
 class MenuListTableViewCell: UITableViewCell {
+    
+    // MARK: Properties
     static let identifier = "MenuListTableViewCell"
     
     var selectedFavorite = false
@@ -27,11 +29,11 @@ class MenuListTableViewCell: UITableViewCell {
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "star"), for: .normal)
-        button.addTarget(self, action: #selector(tappedFavorite(button:)), for: .touchUpInside)
         return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpCell()
     }
@@ -40,6 +42,8 @@ class MenuListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: Methods
     private func setUpCell() {
         
         contentView.addSubview(menuLabel)
@@ -60,15 +64,6 @@ class MenuListTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().inset(30)
             $0.size.equalTo(26)
         }
-    }
-    
-      @objc func tappedFavorite(button: UIButton) {
-        selectedFavorite = !selectedFavorite
-          
-        selectedFavorite
-          ? favoriteButton.setImage(UIImage(named: "starFill"), for: .normal)
-          : favoriteButton.setImage(UIImage(named: "star"), for: .normal)
-        
     }
     
 }
