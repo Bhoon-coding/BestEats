@@ -244,6 +244,7 @@ class MenuListViewController: UIViewController {
                                                selectedMenu: selectedItem,
                                                menuIndex: indexPath)
         
+        menuListTableView.reloadData()
     }
         
 }
