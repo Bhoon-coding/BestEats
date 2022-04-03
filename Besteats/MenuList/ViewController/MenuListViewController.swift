@@ -233,11 +233,11 @@ class MenuListViewController: UIViewController {
     }
     
     @objc func tappedFavorite(_ sender: UIButton) {
-        var typeLike = self.selectedRestaurant.menu.filter {
+        let typeLike = selectedRestaurant.menu.filter {
             $0.type == "like"
         }
         let indexPath = sender.tag
-        var selectedItem = typeLike[indexPath]
+        let selectedItem = typeLike[indexPath]
         
         selectedRestaurant = UserDefaultsManager.shared.updateMenus(selectedRestaurant: selectedRestaurant,
                                                selectedIndex: selectedIdx,

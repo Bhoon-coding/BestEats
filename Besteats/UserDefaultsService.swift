@@ -60,22 +60,18 @@ struct UserDefaultsManager {
         var menu = selectedMenu
 
         if menu.isFavorite {
-            print("isFavorite: true? \(menu.isFavorite) ")
             menu.isFavorite = false
             restaurant.favoriteMenus.remove(at: menuIndex)
             
         } else {
-            print("isFavorite: false? \(menu.isFavorite) ")
             menu.isFavorite = true
             restaurant.favoriteMenus.append(menu.menu!)
-            
             
         }
         menus[menuIndex] = menu
         restaurant.menu = menus
         restaurants[selectedIndex] = restaurant
         
-        dump(restaurants)
         saveRestaurants(restaurants: restaurants)
         return restaurant
     }

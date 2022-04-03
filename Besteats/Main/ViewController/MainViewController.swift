@@ -191,17 +191,27 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
+        let restaurant: Restaurants = totalRestaurants[indexPath.row]
         
-        let filterLikeMenu = totalRestaurants[indexPath.row].menu.filter { $0.type == "like" }
-        let filterCuriousMenu = totalRestaurants[indexPath.row].menu.filter { $0.type == "curious" }
-        let filterWarningMenu = totalRestaurants[indexPath.row].menu.filter { $0.type == "warning" }
+        let filterLikeMenu = restaurant.menu.filter { $0.type == "like" }
+        let filterCuriousMenu = restaurant.menu.filter { $0.type == "curious" }
+        let filterWarningMenu = restaurant.menu.filter { $0.type == "warning" }
         
-        cell.restaurantNamesLabel.text = totalRestaurants[indexPath.row].restaurantName
-        // MARK: need refactor (대표메뉴 한줄팁 필요)
-        cell.bestMenuLabel.text = totalRestaurants[indexPath.row].menu.isEmpty
-        ? "최애 메뉴를 추가해주세요."
-        : totalRestaurants[indexPath.row].menu[0].menu
-//        cell.oneLineTipsLabel.text = "대표 메뉴명"
+        var favoriteString = ""
+        
+        if restaurant.favoriteMenus.isEmpty {
+            favoriteString = "⭐️ 메뉴를 추가해주세요"
+            
+        } else if restaurant.favoriteMenus.count == 1 {
+            favoriteString = "\(restaurant.favoriteMenus.first!)"
+            
+        } else {
+            favoriteString = "\(restaurant.favoriteMenus.first!) (외 ⭐️ \(restaurant.favoriteMenus.count - 1 )개)"
+        }
+
+        
+        cell.restaurantNamesLabel.text = restaurant.restaurantName
+        cell.bestMenuLabel.text = favoriteString
         cell.likeCountLabel.text = "\(filterLikeMenu.count)"
         cell.curiousCountLabel.text = "\(filterCuriousMenu.count)"
         cell.warningCountLabel.text = "\(filterWarningMenu.count)"
