@@ -37,13 +37,15 @@ struct UserDefaultsManager {
     
     func deleteMenu(selectedRestaurant: Restaurants,
                     selectedIndex: Int,
-                    menu: Menus
+                    menu: Menus,
+                    menuIndex: Int
                     ) -> Restaurants {
         
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
-        let filteredMenu = restaurant.menu.filter { $0.id != menu.id }
-        restaurant.menu = filteredMenu
+        let filteredMenus = restaurant.menu.filter { $0.id != menu.id }
+        restaurant.menu = filteredMenus
+        restaurant.favoriteMenus.removeAll { $0.contains(menu.menu!) }
         restaurants[selectedIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         return restaurant
@@ -61,18 +63,19 @@ struct UserDefaultsManager {
 
         if menu.isFavorite {
             menu.isFavorite = false
-            restaurant.favoriteMenus.remove(at: menuIndex)
+            restaurant.favoriteMenus.removeAll { $0.contains(selectedMenu.menu!) }
             
         } else {
             menu.isFavorite = true
             restaurant.favoriteMenus.append(menu.menu!)
             
         }
+        
         menus[menuIndex] = menu
         restaurant.menu = menus
         restaurants[selectedIndex] = restaurant
-        
         saveRestaurants(restaurants: restaurants)
+        
         return restaurant
     }
 //    func updateRestaurants(newRestaurant: Restaurants) {

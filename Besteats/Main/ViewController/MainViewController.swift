@@ -200,7 +200,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         var favoriteString = ""
         
         if restaurant.favoriteMenus.isEmpty {
-            favoriteString = "⭐️ 메뉴를 추가해주세요"
+            favoriteString = "즐겨찾는 메뉴를 추가해주세요"
             
         } else if restaurant.favoriteMenus.count == 1 {
             favoriteString = "\(restaurant.favoriteMenus.first!)"
