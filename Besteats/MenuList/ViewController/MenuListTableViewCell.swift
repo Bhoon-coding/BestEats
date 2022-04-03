@@ -17,6 +17,7 @@ class MenuListTableViewCell: UITableViewCell {
     lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "BM JUA_OTF", size: 30)
+        label.textColor = .systemOrange
         return label
     }()
     

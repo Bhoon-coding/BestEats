@@ -53,7 +53,7 @@ class MenuListViewController: UIViewController {
         button.setTitle("좋아요", for: .normal)
         button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemRed
+        button.backgroundColor = .systemGreen
         button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(tappedLikeButton), for: .touchUpInside)
         return button
@@ -181,7 +181,7 @@ class MenuListViewController: UIViewController {
         
         if type == "like" {
             likeTypeButton.setTitleColor(.white, for: .normal)
-            likeTypeButton.backgroundColor = .systemRed
+            likeTypeButton.backgroundColor = .systemGreen
             curiousTypeButton.setTitleColor(.black, for: .normal)
             curiousTypeButton.backgroundColor = .white
             warningTypeButton.setTitleColor(.black, for: .normal)
@@ -203,7 +203,7 @@ class MenuListViewController: UIViewController {
             likeTypeButton.setTitleColor(.black, for: .normal)
             likeTypeButton.backgroundColor = .white
             curiousTypeButton.setTitleColor(.white, for: .normal)
-            curiousTypeButton.backgroundColor = .systemRed
+            curiousTypeButton.backgroundColor = .systemGreen
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
         } else {
@@ -225,7 +225,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.setTitleColor(.black, for: .normal)
             curiousTypeButton.backgroundColor = .white
             warningTypeButton.setTitleColor(.white, for: .normal)
-            warningTypeButton.backgroundColor = .systemRed
+            warningTypeButton.backgroundColor = .systemGreen
         } else {
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
@@ -332,25 +332,28 @@ extension MenuListViewController: UITableViewDataSource {
         
         
         if editingStyle == .delete {
-
+            
             if type == "like" {
                 let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                         selectedIndex: selectedIdx,
-                                                                           menu: typeLike[indexPath.row])
+                                                                           selectedIndex: selectedIdx,
+                                                                           menu: typeLike[indexPath.row],
+                                                                           menuIndex: indexPath.row)
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
             } else if type == "curious" {
                 let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                         selectedIndex: selectedIdx,
-                                                                           menu: typeCurious[indexPath.row])
+                                                                           selectedIndex: selectedIdx,
+                                                                           menu: typeCurious[indexPath.row],
+                                                                           menuIndex: indexPath.row)
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
-
+                
             } else {
                 let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                         selectedIndex: selectedIdx,
-                                                                           menu: typeWarning[indexPath.row])
+                                                                           selectedIndex: selectedIdx,
+                                                                           menu: typeWarning[indexPath.row],
+                                                                           menuIndex: indexPath.row)
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
             }
             
