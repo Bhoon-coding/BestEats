@@ -61,18 +61,19 @@ struct UserDefaultsManager {
 
         if menu.isFavorite {
             menu.isFavorite = false
-            restaurant.favoriteMenus.remove(at: menuIndex)
+            restaurant.favoriteMenus.removeAll { $0.contains(selectedMenu.menu!) }
             
         } else {
             menu.isFavorite = true
             restaurant.favoriteMenus.append(menu.menu!)
             
         }
+        
         menus[menuIndex] = menu
         restaurant.menu = menus
         restaurants[selectedIndex] = restaurant
-        
         saveRestaurants(restaurants: restaurants)
+        
         return restaurant
     }
 //    func updateRestaurants(newRestaurant: Restaurants) {
