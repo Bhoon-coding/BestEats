@@ -30,7 +30,7 @@ class MenuDetailViewController: UIViewController {
     // MARK: Methods
     private func setUpUI() {
         
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .secondarySystemBackground
         view.addSubview(noticeLabel)
         
         noticeLabel.snp.makeConstraints {

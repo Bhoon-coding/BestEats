@@ -15,6 +15,15 @@ struct UserDefaultsManager {
     
     
     // MARK: Methods
+    
+    func addRestaurant(restaurant: Restaurants) {
+        
+        var restaurants = getRestaurants()
+        restaurants.append(restaurant)
+        
+        saveRestaurants(restaurants: restaurants)
+    }
+    
     func updateRestaurant(selectedRestaurant: Restaurants,
                           selectedIndex: Int) {
         

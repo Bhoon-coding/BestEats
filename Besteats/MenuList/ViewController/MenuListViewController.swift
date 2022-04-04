@@ -85,6 +85,7 @@ class MenuListViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(MenuListTableViewCell.self,
                            forCellReuseIdentifier: MenuListTableViewCell.identifier)
+        tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
     

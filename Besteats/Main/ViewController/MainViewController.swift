@@ -141,7 +141,6 @@ class MainViewController: UIViewController {
     // MARK: @objc
     @objc func addRestaurant() {
         let restaurantAddVC = RestaurantAddViewController()
-        restaurantAddVC.delegate = self
         restaurantAddVC.modalPresentationStyle = .fullScreen
         present(restaurantAddVC, animated: true, completion: nil)
     }
@@ -276,11 +275,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-extension MainViewController: SendUpdateDelegate {
-    func sendUpdate(foodsData: [Restaurants]) {
-        totalRestaurants = foodsData
-    }
-}
+//extension MainViewController: SendUpdateDelegate {
+//    func sendUpdate(foodsData: [Restaurants]) {
+//        totalRestaurants = foodsData
+//    }
+//}
 
 #if DEBUG
 
