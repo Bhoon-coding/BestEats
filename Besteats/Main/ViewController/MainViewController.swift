@@ -33,11 +33,18 @@ class MainViewController: UIViewController {
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
-        foodCollectionView.backgroundColor = .secondarySystemBackground
-        view.backgroundColor = .secondarySystemBackground
         
+        view.backgroundColor = .secondarySystemBackground
+        foodCollectionView.backgroundColor = .secondarySystemBackground
+                
         navigationController?.navigationBar.tintColor = .label
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addRestaurant))
+        
+        let addButton = UIBarButtonItem(title: "추가",
+                                        style: .plain,
+                                        target: self, action: #selector(addRestaurant))
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 16)!], for: .normal)
+        navigationItem.rightBarButtonItem = addButton
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
