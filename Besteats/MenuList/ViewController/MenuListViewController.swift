@@ -85,6 +85,7 @@ class MenuListViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(MenuListTableViewCell.self,
                            forCellReuseIdentifier: MenuListTableViewCell.identifier)
+        tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
     
@@ -106,13 +107,23 @@ class MenuListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 20)!]
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(addTapped))
+        // MARK: NavigationBar
+        let mediumFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF",
+                                                                        size: 20)!]
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF",
+                                                                       size: 16)!]
+        // left
+        self.navigationController?.navigationBar.titleTextAttributes = mediumFontAttributes
+        // center
         title = selectedRestaurant.restaurantName
+        // right
+        let addButton = UIBarButtonItem(title: "추가",
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(addTapped))
+        
+        addButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = addButton
         
         view.backgroundColor = .secondarySystemBackground
         setUpUI()
