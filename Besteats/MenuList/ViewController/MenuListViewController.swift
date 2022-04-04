@@ -277,16 +277,30 @@ extension MenuListViewController: UITableViewDataSource {
             $0.type == "warning"
         }
         
-            if type == "like" {
-                return typeLike.count
-                
-            } else if type == "curious" {
-                return typeCurious.count
-                
+        if type == "like" {
+            if typeLike.count == 0 {
+                tableView.setEmptyMessage("맛있었던 메뉴를 \n\n추가해 주세요.")
             } else {
-                return typeWarning.count
-                
+                tableView.restore()
             }
+            return typeLike.count
+            
+        } else if type == "curious" {
+            if typeCurious.count == 0 {
+                tableView.setEmptyMessage("다음에 먹어보고 싶었던 메뉴를 \n\n추가해 주세요.")
+            } else {
+                tableView.restore()
+            }
+            return typeCurious.count
+            
+        } else {
+            if typeWarning.count == 0 {
+                tableView.setEmptyMessage("나랑은 안맞았던 메뉴를 \n\n추가해 주세요.")
+            } else {
+                tableView.restore()
+            }
+            return typeWarning.count
+        }
         
         }
         
