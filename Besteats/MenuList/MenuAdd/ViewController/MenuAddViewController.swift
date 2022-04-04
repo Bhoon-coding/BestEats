@@ -123,9 +123,9 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     lazy var doneButton: UIButton = {
         let button = UIButton()
         button.setTitle("메뉴 추가", for: .normal)
+        button.mediumButton(button: button)
         button.tintColor = .label
         button.backgroundColor = .systemGreen
-        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
         return button
     }()

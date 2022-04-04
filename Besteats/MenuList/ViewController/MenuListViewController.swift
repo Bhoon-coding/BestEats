@@ -88,9 +88,6 @@ class MenuListViewController: UIViewController {
         return tableView
     }()
     
-    let mediumFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 20)!]
-    let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 16)!]
-    
     
     // MARK: LifeCycle
     
@@ -110,6 +107,10 @@ class MenuListViewController: UIViewController {
         super.viewDidLoad()
         
         // MARK: NavigationBar
+        let mediumFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF",
+                                                                        size: 20)!]
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF",
+                                                                       size: 16)!]
         // left
         self.navigationController?.navigationBar.titleTextAttributes = mediumFontAttributes
         // center
