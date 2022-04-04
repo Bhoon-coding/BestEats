@@ -33,11 +33,18 @@ class MainViewController: UIViewController {
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
-        foodCollectionView.backgroundColor = .secondarySystemBackground
-        view.backgroundColor = .secondarySystemBackground
         
+        view.backgroundColor = .secondarySystemBackground
+        foodCollectionView.backgroundColor = .secondarySystemBackground
+                
         navigationController?.navigationBar.tintColor = .label
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(addRestaurant))
+        
+        let addButton = UIBarButtonItem(title: "추가",
+                                        style: .plain,
+                                        target: self, action: #selector(addRestaurant))
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 16)!], for: .normal)
+        navigationItem.rightBarButtonItem = addButton
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +141,6 @@ class MainViewController: UIViewController {
     // MARK: @objc
     @objc func addRestaurant() {
         let restaurantAddVC = RestaurantAddViewController()
-        restaurantAddVC.delegate = self
         restaurantAddVC.modalPresentationStyle = .fullScreen
         present(restaurantAddVC, animated: true, completion: nil)
     }
@@ -193,28 +199,35 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         let restaurant: Restaurants = totalRestaurants[indexPath.row]
         
-        let filterLikeMenu = restaurant.menu.filter { $0.type == "like" }
-        let filterCuriousMenu = restaurant.menu.filter { $0.type == "curious" }
-        let filterWarningMenu = restaurant.menu.filter { $0.type == "warning" }
+        let likeMenus = restaurant.menu.filter { $0.type == "like" }
+        let curiousMenus = restaurant.menu.filter { $0.type == "curious" }
+        let warningMenus = restaurant.menu.filter { $0.type == "warning" }
+        
+        let favoriteMenus = likeMenus.filter { menu in
+            menu.isFavorite == true
+        }
+        
+        let favoriteMenu = favoriteMenus.first?.menu
         
         var favoriteString = ""
         
-        if restaurant.favoriteMenus.isEmpty {
+        
+        if favoriteMenus.isEmpty {
             favoriteString = "즐겨찾는 메뉴를 추가해주세요"
-            
-        } else if restaurant.favoriteMenus.count == 1 {
-            favoriteString = "\(restaurant.favoriteMenus.first!)"
-            
+
+        } else if favoriteMenus.count == 1 {
+            favoriteString = "\(favoriteMenu!)"
+
         } else {
-            favoriteString = "\(restaurant.favoriteMenus.first!) (외 ⭐️ \(restaurant.favoriteMenus.count - 1 )개)"
+            favoriteString = "\(favoriteMenu!) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
         }
 
         
         cell.restaurantNamesLabel.text = restaurant.restaurantName
         cell.bestMenuLabel.text = favoriteString
-        cell.likeCountLabel.text = "\(filterLikeMenu.count)"
-        cell.curiousCountLabel.text = "\(filterCuriousMenu.count)"
-        cell.warningCountLabel.text = "\(filterWarningMenu.count)"
+        cell.likeCountLabel.text = "\(likeMenus.count)"
+        cell.curiousCountLabel.text = "\(curiousMenus.count)"
+        cell.warningCountLabel.text = "\(warningMenus.count)"
 
         
         cell.layer.masksToBounds = false
@@ -262,11 +275,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-extension MainViewController: SendUpdateDelegate {
-    func sendUpdate(foodsData: [Restaurants]) {
-        totalRestaurants = foodsData
-    }
-}
+//extension MainViewController: SendUpdateDelegate {
+//    func sendUpdate(foodsData: [Restaurants]) {
+//        totalRestaurants = foodsData
+//    }
+//}
 
 #if DEBUG
 

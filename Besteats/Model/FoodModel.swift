@@ -9,7 +9,6 @@ import Foundation
 
 struct Restaurants: Codable, Equatable {
     var restaurantName: String
-    var favoriteMenus: [String]
     var menu: [Menus]
     
     static func == (lhs: Restaurants, rhs: Restaurants) -> Bool {
@@ -18,11 +17,9 @@ struct Restaurants: Codable, Equatable {
     
     init(
         restaurantName: String,
-        favoriteMenus: [String],
         menu: [Menus]
         ) {
         self.restaurantName = restaurantName
-        self.favoriteMenus = favoriteMenus
         self.menu = menu
     }
 }
