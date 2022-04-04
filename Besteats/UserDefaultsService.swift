@@ -45,7 +45,6 @@ struct UserDefaultsManager {
         var restaurant = selectedRestaurant
         let filteredMenus = restaurant.menu.filter { $0.id != menu.id }
         restaurant.menu = filteredMenus
-        restaurant.favoriteMenus.removeAll { $0.contains(menu.menu!) }
         restaurants[selectedIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         return restaurant
@@ -60,16 +59,8 @@ struct UserDefaultsManager {
         var restaurant = selectedRestaurant
         var menus = selectedRestaurant.menu
         var menu = selectedMenu
-
-        if menu.isFavorite {
-            menu.isFavorite = false
-            restaurant.favoriteMenus.removeAll { $0.contains(selectedMenu.menu!) }
-            
-        } else {
-            menu.isFavorite = true
-            restaurant.favoriteMenus.append(menu.menu!)
-            
-        }
+        
+        menu.isFavorite = !menu.isFavorite
         
         menus[menuIndex] = menu
         restaurant.menu = menus

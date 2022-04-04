@@ -411,7 +411,6 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                                          oneLiner: oneLiner,
                                          type: type)]
         let restaurantModel: [Restaurants] = [Restaurants(restaurantName: restaurantName,
-                                                          favoriteMenus: [],
                                                           menu: menusModel)]
         
         totalRestaurants.append(contentsOf: restaurantModel)
