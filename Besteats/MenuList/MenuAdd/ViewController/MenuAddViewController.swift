@@ -59,7 +59,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var menuTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "메뉴를 적어주세요."
+        textField.placeholder = "메뉴를 입력해 주세요."
         textField.placeholderConvention(textField: textField)
         return textField
     }()
@@ -73,7 +73,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "한줄팁을 적어주세요."
+        textField.placeholder = "한줄팁을 입력해 주세요."
         textField.placeholderConvention(textField: textField)
         return textField
     }()

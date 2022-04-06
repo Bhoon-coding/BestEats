@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="음식을 검색해주세요." translatesAutoresizingMaskIntoConstraints="NO" id="Ehr-GE-L8z">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="맛집을 검색해주세요." translatesAutoresizingMaskIntoConstraints="NO" id="Ehr-GE-L8z">
                                 <rect key="frame" x="32" y="108" width="350" height="51"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="yes" spellCheckingType="no" returnKeyType="search"/>
                             </searchBar>
@@ -166,23 +166,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VcI-WX-paf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1531.8840579710145" y="443.97321428571428"/>
-        </scene>
-        <!--설정-->
-        <scene sceneID="642-8n-Jjx">
-            <objects>
-                <viewController id="VOg-eE-GiR" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fdz-Dy-ZrB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="zKV-QI-FRM"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="설정" image="gearshape" catalog="system" selectedImage="gearshape.fill" id="idr-nM-KB2"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gBI-yw-ueN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2442" y="1106"/>
+            <point key="canvasLocation" x="-2125" y="1242"/>
         </scene>
         <!--추천-->
         <scene sceneID="cM7-XW-8U8">
@@ -228,7 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AtY-Dy-2PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2442" y="-279"/>
+            <point key="canvasLocation" x="-4162" y="1242"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yH1-2Z-KYR">
@@ -242,12 +226,11 @@
                     <connections>
                         <segue destination="hsd-dy-z1l" kind="relationship" relationship="viewControllers" id="Bcv-vu-Xgt"/>
                         <segue destination="wCN-XA-yWo" kind="relationship" relationship="viewControllers" id="GCY-Me-hfh"/>
-                        <segue destination="VOg-eE-GiR" kind="relationship" relationship="viewControllers" id="mT7-S5-jAy"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbL-hD-ukB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3486" y="521"/>
+            <point key="canvasLocation" x="-3646" y="435"/>
         </scene>
         <!--Bottom Sheet View Controller-->
         <scene sceneID="0Ux-dI-wZC">
@@ -256,22 +239,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V3d-NV-pAO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="5wh-q3-wtX"/>
             </objects>
-            <point key="canvasLocation" x="-768" y="444"/>
-        </scene>
-        <!--Restaurant Add View Controller-->
-        <scene sceneID="F5s-Ia-SrQ">
-            <objects>
-                <viewController storyboardIdentifier="foodModiVC" id="PEF-Ld-8bW" customClass="RestaurantAddViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wbP-SB-cja">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="QM8-WD-rOe"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Os-Nz-K1n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3" y="444"/>
+            <point key="canvasLocation" x="-1241" y="1242"/>
         </scene>
         <!--음식찾기-->
         <scene sceneID="sp1-cl-KQh">
@@ -287,25 +255,23 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="UFK-hJ-mRZ" kind="relationship" relationship="rootViewController" id="Ww4-Iy-Duo"/>
+                        <segue destination="UFK-hJ-mRZ" kind="relationship" relationship="rootViewController" id="pE1-G0-KIL"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXA-4u-sN7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2442.0289855072465" y="443.97321428571428"/>
+            <point key="canvasLocation" x="-3065" y="1242"/>
         </scene>
     </scenes>
     <resources>
-        <image name="curiousFill" width="64" height="64"/>
-        <image name="gearshape" catalog="system" width="128" height="121"/>
-        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
-        <image name="likeFill" width="64" height="64"/>
+        <image name="curiousFill" width="87" height="87"/>
+        <image name="likeFill" width="72" height="72"/>
         <image name="moreOptions" width="16" height="16"/>
         <image name="person.fill.checkmark" catalog="system" width="128" height="88"/>
         <image name="person.fill.questionmark" catalog="system" width="128" height="104"/>
         <image name="searchFoods" width="25" height="25"/>
         <image name="searchFoodsSelected" width="25" height="25"/>
-        <image name="warningFill" width="64" height="64"/>
+        <image name="warningFill" width="72" height="72"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

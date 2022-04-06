@@ -42,7 +42,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restuarantTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "맛집명을 입력해 주세요."
+        textField.placeholder = "맛집을 입력해 주세요."
         textField.placeholderConvention(textField: textField)
         return textField
     }()

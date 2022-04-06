@@ -1,8 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "warningFill.png",
-      "idiom" : "universal"
+      "filename" : "thumbs-down-1.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

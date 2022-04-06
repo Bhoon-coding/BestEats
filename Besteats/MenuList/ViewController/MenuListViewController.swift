@@ -295,7 +295,7 @@ extension MenuListViewController: UITableViewDataSource {
             
         } else {
             if typeWarning.count == 0 {
-                tableView.setEmptyMessage("나랑은 안맞았던 메뉴를 \n\n추가해 주세요.")
+                tableView.setEmptyMessage("나와 안맞았던 메뉴를 \n\n추가해 주세요.")
             } else {
                 tableView.restore()
             }
