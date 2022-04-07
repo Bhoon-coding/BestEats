@@ -328,6 +328,32 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
                                 oneLiner: oneLiner,
                                 type: type
                                 )
+        
+        if type == "like" {
+            let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
+            let confirm = UIAlertAction(title: "등록", style: .default) {_ in
+                
+                let menu: Menus = Menus(id: menuId, isFavorite: true, menu: menuName, oneLiner: oneLiner, type: type)
+                
+                UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant, selectedIndex: self.selectedIndex, addedMenu: menu)
+                self.dismiss(animated: true, completion: nil)
+            }
+            let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
+                
+                let menu: Menus = Menus(id: menuId, isFavorite: false, menu: menuName, oneLiner: oneLiner, type: type)
+                
+                UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant, selectedIndex: self.selectedIndex, addedMenu: menu)
+                
+                self.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            
+            DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }
     
         UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
                                            selectedIndex: selectedIndex,
