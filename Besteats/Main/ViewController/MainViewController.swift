@@ -61,6 +61,9 @@ class MainViewController: UIViewController {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         foodSearchBar.resignFirstResponder()
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        foodSearchBar.resignFirstResponder()
+    }
     
     // MARK: 보류
     @IBAction func tapMore(_ sender: UIButton) {
