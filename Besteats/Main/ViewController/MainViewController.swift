@@ -167,7 +167,6 @@ extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        
         totalRestaurants = searchText.isEmpty
         ? UserDefaultsManager.shared.getRestaurants()
         : UserDefaultsManager.shared.getRestaurants().filter { $0.restaurantName.contains(searchText) || $0.restaurantName.lowercased().contains(searchText.lowercased())}
@@ -277,12 +276,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
-
-//extension MainViewController: SendUpdateDelegate {
-//    func sendUpdate(foodsData: [Restaurants]) {
-//        totalRestaurants = foodsData
-//    }
-//}
 
 #if DEBUG
 
