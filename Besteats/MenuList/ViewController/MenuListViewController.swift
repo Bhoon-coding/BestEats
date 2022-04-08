@@ -267,57 +267,40 @@ extension MenuListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let typeLike = selectedRestaurant.menu.filter {
-            $0.type == "like"
-        }
-        let typeCurious = selectedRestaurant.menu.filter {
-            $0.type == "curious"
-        }
-        let typeWarning = selectedRestaurant.menu.filter {
-            $0.type == "warning"
-        }
+        let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
+        let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
+        let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
         
         if type == "like" {
-            if typeLike.count == 0 {
-                tableView.setEmptyMessage("맛있었던 메뉴를 \n\n추가해 주세요.")
-            } else {
-                tableView.restore()
-            }
+            typeLike.count == 0
+            ? tableView.setEmptyMessage("맛있었던 메뉴를 \n\n추가해 주세요.")
+            : tableView.restore()
             return typeLike.count
             
         } else if type == "curious" {
-            if typeCurious.count == 0 {
-                tableView.setEmptyMessage("다음에 먹어보고 싶었던 메뉴를 \n\n추가해 주세요.")
-            } else {
-                tableView.restore()
-            }
+            typeCurious.count == 0
+            ? tableView.setEmptyMessage("다음에 먹어보고 싶었던 메뉴를 \n\n추가해 주세요.")
+            : tableView.restore()
             return typeCurious.count
             
         } else {
-            if typeWarning.count == 0 {
-                tableView.setEmptyMessage("나와 안맞았던 메뉴를 \n\n추가해 주세요.")
-            } else {
-                tableView.restore()
-            }
+            
+            typeWarning.count == 0
+            ? tableView.setEmptyMessage("나와 안맞았던 메뉴를 \n\n추가해 주세요.")
+            : tableView.restore()
             return typeWarning.count
         }
         
-        }
-        
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier, for: indexPath) as! MenuListTableViewCell
         
-        let typeLike = selectedRestaurant.menu.filter {
-            $0.type == "like"
-        }
-        let typeCurious = selectedRestaurant.menu.filter {
-            $0.type == "curious"
-        }
-        let typeWarning = selectedRestaurant.menu.filter {
-            $0.type == "warning"
-        }
+        let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
+        let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
+        let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
         
         if type == "like" {
             
