@@ -25,7 +25,6 @@ class MenuListViewController: UIViewController {
     var selectedRestaurant: Restaurants
     var selectedIdx: Int
     var totalMenus: [Menus] = []
-    var favoriteMenu: [String] = []
     
     
     init(selectedRestaurant: Restaurants ,index: Int) {
@@ -244,16 +243,16 @@ class MenuListViewController: UIViewController {
     }
     
     @objc func tappedFavorite(_ sender: UIButton) {
-        let typeLike = selectedRestaurant.menu.filter {
-            $0.type == "like"
-        }
-        let indexPath = sender.tag
-        let selectedItem = typeLike[indexPath]
         
-        selectedRestaurant = UserDefaultsManager.shared.updateMenus(selectedRestaurant: selectedRestaurant,
-                                               selectedIndex: selectedIdx,
-                                               selectedMenu: selectedItem,
-                                               menuIndex: indexPath)
+        let id = sender.tag
+        let selectedItem = selectedRestaurant.menu.filter { $0.id == id }
+        
+        selectedRestaurant = UserDefaultsManager.shared.updateMenus(
+            selectedRestaurant: selectedRestaurant,
+            selectedIndex: selectedIdx,
+            selectedMenu: selectedItem[0],
+            menuIndex: id - 1
+        )
         
         menuListTableView.reloadData()
     }
@@ -307,7 +306,7 @@ extension MenuListViewController: UITableViewDataSource {
             let selectedItem = typeLike[indexPath.row]
             cell.menuLabel.text = selectedItem.menu
             cell.oneLinerLabel.text = selectedItem.oneLiner
-            cell.favoriteButton.tag = indexPath.row
+            cell.favoriteButton.tag = selectedRestaurant.menu[indexPath.row].id + 1
             cell.favoriteButton.addTarget(self, action: #selector(tappedFavorite), for: .touchUpInside)
             cell.favoriteButton.isHidden = false
                 

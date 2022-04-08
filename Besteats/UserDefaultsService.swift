@@ -98,13 +98,13 @@ struct UserDefaultsManager {
 //    }
 
     func getRestaurants() -> [Restaurants] {
-        guard let getRsEncodeData = defaults.value(forKey: "restaurantsData") as? Data else {
+        guard let getRestaurnatsEncodeData = defaults.value(forKey: "restaurantsData") as? Data else {
             return []
         }
         
-        let restaurantData = try! PropertyListDecoder().decode([Restaurants].self,
-                                                               from: getRsEncodeData)
-        return restaurantData
+        let restaurantsData = try! PropertyListDecoder().decode([Restaurants].self,
+                                                               from: getRestaurnatsEncodeData)
+        return restaurantsData
     }
 
     func saveRestaurants(restaurants: [Restaurants]) {
