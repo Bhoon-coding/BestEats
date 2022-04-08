@@ -353,14 +353,15 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
             
+        } else {
+            UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
+                                               selectedIndex: selectedIndex,
+                                               addedMenu: menu)
+            
+            
+            dismiss(animated: true, completion: nil)
         }
-    
-        UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
-                                           selectedIndex: selectedIndex,
-                                           addedMenu: menu)
         
-        
-        dismiss(animated: true, completion: nil)
     }
 
 }
