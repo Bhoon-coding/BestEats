@@ -27,6 +27,9 @@
 ### TabBar Controller
 - 하단 탭의 버튼으로 페이지 별 보여지는 화면을 다르게 구현 하였습니다.
 
+### 맛집 티켓 (CollectionView)
+- CollectionView를 활용하여 사용자가 등록한 맛집들을 한눈에 볼 수 있도록 구현 하였습니다.
+
 ### BottomSheet (ActionSheet)
 - '...' 버튼을 누르면 하단에서 ActionSheet를 보여주며 '맛집 이름 변경', '맛집 삭제'를 할 수 있습니다.
 
@@ -54,7 +57,7 @@
 
 ----
 
-## Detail page (상세 페이지)
+## MenuList page (메뉴리스트 페이지)
 - TableView를 사용하여 등록한 `메뉴`와 `한줄팁`을 보기쉽게 구현 하였습니다.
 - Main page에서 받아온 데이터를 navigation title, tableViewCell에 보여주도록 하였습니다.
 - `좋아요`, `먹어볼래요`, `별로에요` 버튼 클릭시 `filter 메소드`를 사용하여 타입별로 나타내게 하였습니다.
@@ -72,3 +75,4 @@
 
 ## MenuAdd page (메뉴 추가 페이지)
 - 메뉴 추가시 `해당 맛집`에 추가 되게 구현 하였습니다.
+- UserDefaults를 활용하여 사용자가 등록한 맛집들을 로컬에 저장하게 하였습니다. 
