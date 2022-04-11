@@ -30,6 +30,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        foodCollectionView.addGestureRecognizer(tap)
+        
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
         foodCollectionView.dataSource = self
@@ -58,9 +61,6 @@ class MainViewController: UIViewController {
         
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        foodSearchBar.resignFirstResponder()
-    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         foodSearchBar.resignFirstResponder()
     }
@@ -140,12 +140,24 @@ class MainViewController: UIViewController {
             
         }
     }
+
+    // MARK: Methods
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        foodSearchBar.resignFirstResponder()
+    }
+    
+    
     
     // MARK: @objc
     @objc func addRestaurant() {
         let restaurantAddVC = RestaurantAddViewController()
         restaurantAddVC.modalPresentationStyle = .fullScreen
         present(restaurantAddVC, animated: true, completion: nil)
+    }
+    
+    @objc func dismissKeyboard() {
+        foodSearchBar.resignFirstResponder()
     }
 }
 
