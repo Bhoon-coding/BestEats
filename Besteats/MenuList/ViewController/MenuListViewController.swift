@@ -50,7 +50,7 @@ class MenuListViewController: UIViewController {
     lazy var likeTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("좋아요", for: .normal)
-        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
+        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
         button.layer.cornerRadius = 8
@@ -61,7 +61,7 @@ class MenuListViewController: UIViewController {
     lazy var curiousTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("먹어볼래요", for: .normal)
-        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
+        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
@@ -72,7 +72,7 @@ class MenuListViewController: UIViewController {
     lazy var warningTypeButton: UIButton = {
         let button = UIButton()
         button.setTitle("별로에요", for: .normal)
-        button.titleLabel?.font = UIFont(name: "BM JUA_OTF", size: 20)
+        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
@@ -107,10 +107,10 @@ class MenuListViewController: UIViewController {
         super.viewDidLoad()
         
         // MARK: NavigationBar
-        let mediumFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF",
-                                                                        size: 20)!]
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF",
-                                                                       size: 16)!]
+        let mediumFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                        size: 16)!]
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                       size: 14)!]
         // left
         self.navigationController?.navigationBar.titleTextAttributes = mediumFontAttributes
         // center

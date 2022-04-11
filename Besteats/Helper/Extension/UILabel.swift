@@ -10,17 +10,17 @@ import UIKit
 
 extension UILabel {
     func bigLabel(label: UILabel) {
-        label.font = UIFont(name: "BM JUA_OTF", size: 24)
+        label.font = UIFont(name: "GmarketSansBold", size: 20)
         label.textColor = .label
     }
     
     func mediumLabel(label: UILabel) {
-        label.font = UIFont(name: "BM JUA_OTF", size: 18)
+        label.font = UIFont(name: "GmarketSansBold", size: 16)
         label.textColor = .label
     }
     
     func smallLabel(label: UILabel) {
-        label.font = UIFont(name: "BM JUA_OTF", size: 16)
+        label.font = UIFont(name: "GmarketSansBold", size: 14)
         label.textColor = .label
     }
 }

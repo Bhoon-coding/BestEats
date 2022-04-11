@@ -6,7 +6,7 @@
 	<string>Light</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>BMJUA_ttf</string>
+		<string>GmarketSansBold</string>
 		<string>BMJUA_otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

@@ -20,7 +20,7 @@ extension UITableView {
             label.textColor = .label
             label.numberOfLines = 0;
             label.textAlignment = .center;
-            label.font = UIFont(name: "BM JUA_OTF", size: 18)
+            label.font = UIFont(name: "GmarketSansBold", size: 16)
             label.sizeToFit()
             return label
         }()

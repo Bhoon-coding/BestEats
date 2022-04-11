@@ -28,7 +28,7 @@
 		E159D5AC27F6E7B800C841DD /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159D5AB27F6E7B800C841DD /* UICollectionView.swift */; };
 		E159D5AE27F6E7DD00C841DD /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159D5AD27F6E7DD00C841DD /* CALayer.swift */; };
 		E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15A3F88278987A000CD810B /* BottomSheetViewController.swift */; };
-		E16975EC277ED86B004547F6 /* BMJUA_ttf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E16975EA277ED86A004547F6 /* BMJUA_ttf.ttf */; };
+		E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E15D0109280470CA007BB795 /* GmarketSansBold.otf */; };
 		E16975ED277ED86B004547F6 /* BMJUA_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = E16975EB277ED86A004547F6 /* BMJUA_otf.otf */; };
 		E16F1EA127FB378500103E6B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F1EA027FB378500103E6B /* UITableView.swift */; };
 		E191C500276F54DC0031F036 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarController.swift */; };
@@ -61,7 +61,7 @@
 		E159D5AB27F6E7B800C841DD /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		E159D5AD27F6E7DD00C841DD /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		E15A3F88278987A000CD810B /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		E16975EA277ED86A004547F6 /* BMJUA_ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_ttf.ttf; sourceTree = "<group>"; };
+		E15D0109280470CA007BB795 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		E16975EB277ED86A004547F6 /* BMJUA_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_otf.otf; sourceTree = "<group>"; };
 		E16F1EA027FB378500103E6B /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		E16975E9277ED7C1004547F6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E15D0109280470CA007BB795 /* GmarketSansBold.otf */,
 				E16975EB277ED86A004547F6 /* BMJUA_otf.otf */,
-				E16975EA277ED86A004547F6 /* BMJUA_ttf.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -321,7 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */,
-				E16975EC277ED86B004547F6 /* BMJUA_ttf.ttf in Resources */,
+				E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */,
 				E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */,
 				E11E3CA22764CF6300B70E3A /* Main.storyboard in Resources */,
 				E16975ED277ED86B004547F6 /* BMJUA_otf.otf in Resources */,

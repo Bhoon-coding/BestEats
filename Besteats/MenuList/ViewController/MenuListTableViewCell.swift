@@ -16,14 +16,14 @@ class MenuListTableViewCell: UITableViewCell {
     
     lazy var menuLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "BM JUA_OTF", size: 30)
+        label.font = UIFont(name: "GmarketSansBold", size: 26)
         label.textColor = .systemOrange
         return label
     }()
     
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "BM JUA_OTF", size: 16)
+        label.font = UIFont(name: "GmarketSansBold", size: 14)
         return label
     }()
     

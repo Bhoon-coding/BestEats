@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
         let addButton = UIBarButtonItem(title: "추가",
                                         style: .plain,
                                         target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "BM JUA_OTF", size: 16)!], for: .normal)
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "GmarketSansBold", size: 14)!], for: .normal)
         navigationItem.rightBarButtonItem = addButton
         
     }
@@ -164,7 +164,7 @@ extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         totalRestaurants = searchText.isEmpty

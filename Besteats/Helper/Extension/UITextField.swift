@@ -11,7 +11,7 @@ import UIKit
 extension UITextField {
     
     func placeholderConvention(textField: UITextField) {
-        textField.font = UIFont(name: "BM JUA_OTF", size: 18)
+        textField.font = UIFont(name: "GmarketSansBold", size: 14)
         textField.backgroundColor = .systemBackground
         textField.layer.cornerRadius = 6
         textField.layer.borderWidth = 1
