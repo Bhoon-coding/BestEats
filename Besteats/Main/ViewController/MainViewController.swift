@@ -31,6 +31,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         foodCollectionView.addGestureRecognizer(tap)
         
         foodSearchBar.delegate = self
