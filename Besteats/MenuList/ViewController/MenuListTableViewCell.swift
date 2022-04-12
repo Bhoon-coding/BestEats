@@ -16,14 +16,16 @@ class MenuListTableViewCell: UITableViewCell {
     
     lazy var menuLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "GmarketSansBold", size: 26)
+        label.font = UIFont(name: "GmarketSansBold", size: 20)
         label.textColor = .systemOrange
+        label.numberOfLines = 2
         return label
     }()
     
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "GmarketSansBold", size: 14)
+        label.numberOfLines = 2
         return label
     }()
     
@@ -52,12 +54,17 @@ class MenuListTableViewCell: UITableViewCell {
         contentView.addSubview(favoriteButton)
         
         menuLabel.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().inset(30)
+            $0.top.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(30)
+            $0.width.equalTo(200)
+            $0.height.equalTo(48)
         }
         
         oneLinerLabel.snp.makeConstraints {
             $0.leading.equalTo(menuLabel)
             $0.top.equalTo(menuLabel.snp.bottom).offset(30)
+            $0.width.equalTo(200)
+            $0.height.equalTo(32)
         }
         
         favoriteButton.snp.makeConstraints {
