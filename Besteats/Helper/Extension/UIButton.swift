@@ -16,7 +16,7 @@ extension UIButton {
     }
     
     func mediumButton (button: UIButton) {
-        button.titleLabel?.font = UIFont(name: "BM DoHyeon OTF", size: 16)
+        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 14)
         button.layer.cornerRadius = 8
         
     }

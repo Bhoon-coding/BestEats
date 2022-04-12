@@ -40,7 +40,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         return label
     }()
     
-    lazy var restuarantTextField: UITextField = {
+    lazy var restaurantTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "맛집을 입력해 주세요."
         textField.placeholderConvention(textField: textField)
@@ -119,7 +119,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("메뉴 추가", for: .normal)
+        button.setTitle("맛집 추가", for: .normal)
         button.mediumButton(button: button)
         button.tintColor = .label
         button.backgroundColor = .systemGreen
@@ -134,7 +134,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         
         totalRestaurant = UserDefaultsManager.shared.getRestaurants()
         
-        restuarantTextField.delegate = self
+        restaurantTextField.delegate = self
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
 
@@ -170,8 +170,8 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             $0.leading.equalToSuperview()
         }
         
-        wholeView.addSubview(restuarantTextField)
-        restuarantTextField.snp.makeConstraints {
+        wholeView.addSubview(restaurantTextField)
+        restaurantTextField.snp.makeConstraints {
             $0.top.equalTo(restaurantLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(44)
@@ -179,7 +179,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         
         wholeView.addSubview(menuLabel)
         menuLabel.snp.makeConstraints {
-            $0.top.equalTo(restuarantTextField.snp.bottom).offset(36)
+            $0.top.equalTo(restaurantTextField.snp.bottom).offset(36)
             $0.leading.equalToSuperview()
         }
         
@@ -245,7 +245,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == restuarantTextField {
+        if textField == restaurantTextField {
             menuTextField.becomeFirstResponder()
         } else if textField == menuTextField {
             oneLinerTextField.becomeFirstResponder()
@@ -309,24 +309,40 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     @objc func doneTapped() {
         
         let menuId = 0
-            
-        if restuarantTextField.text == "" {
-            self.view.makeToast("맛집명을 입력 해주세요.", position: .top)
-            return
-        } else if menuTextField.text == "" {
-            self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
-            return
-        } else if oneLinerTextField.text == "" {
-            self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
-            return
-        }
+        var restaurantName = ""
+        var menuName = ""
+        var oneLiner = ""
         
-        guard let restaurantName = restuarantTextField.text else { return }
-        guard let menuName = menuTextField.text else { return }
-        guard let oneLiner = oneLinerTextField.text else { return }
+        guard let inputRestaurant = restaurantTextField.text else { return }
+        guard let inputMenuName = menuTextField.text else { return }
+        guard let inputOneLiner = oneLinerTextField.text else { return }
         guard let type = self.type else {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
+        
+        
+        // TODO: 빈공백 확인 (trimming)
+        if !inputRestaurant.trimmingCharacters(in: .whitespaces).isEmpty {
+            restaurantName = inputRestaurant.trimmingCharacters(in: .whitespaces)
+            
+        } else {
+            view.makeToast("맛집명을 입력 해주세요.", position: .top)
+            return
+        }
+        
+        if !inputMenuName.trimmingCharacters(in: .whitespaces).isEmpty {
+            menuName = inputMenuName.trimmingCharacters(in: .whitespaces)
+        } else {
+            view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+            return
+        }
+        
+        if !inputOneLiner.trimmingCharacters(in: .whitespaces).isEmpty {
+            oneLiner = inputOneLiner.trimmingCharacters(in: .whitespaces)
+        } else {
+            view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+            return
+        }
         
         var menus: [Menus] = [Menus(id: menuId + 1,
                                 isFavorite: false,
