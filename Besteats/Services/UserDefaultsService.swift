@@ -12,10 +12,8 @@ struct UserDefaultsManager {
     // MARK: Properties
     static let shared = UserDefaultsManager()
     let defaults = UserDefaults.standard
-    
-    
+
     // MARK: Methods
-    
     func addRestaurant(restaurant: Restaurants) {
         
         var restaurants = getRestaurants()
