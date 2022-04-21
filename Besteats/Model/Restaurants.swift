@@ -7,24 +7,24 @@
 
 import Foundation
 
-struct Restaurants: Codable, Equatable {
+struct Restaurant: Codable, Equatable {
     var restaurantName: String
-    var menu: [Menus]
+    var menus: [Menu]
     
-    static func == (lhs: Restaurants, rhs: Restaurants) -> Bool {
-        return lhs.restaurantName == rhs.restaurantName && lhs.menu == rhs.menu
+    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+        return lhs.restaurantName == rhs.restaurantName && lhs.menus == rhs.menus
     }
     
     init(
         restaurantName: String,
-        menu: [Menus]
+        menus: [Menu]
         ) {
         self.restaurantName = restaurantName
-        self.menu = menu
+        self.menus = menus
     }
 }
 
-struct Menus: Codable, Equatable {
+struct Menu: Codable, Equatable {
     var id: Int
     var isFavorite: Bool
     var menu: String?

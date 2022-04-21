@@ -14,7 +14,7 @@ struct UserDefaultsManager {
     let defaults = UserDefaults.standard
 
     // MARK: Methods
-    func addRestaurant(restaurant: Restaurants) {
+    func addRestaurant(restaurant: Restaurant) {
         
         var restaurants = getRestaurants()
         restaurants.append(restaurant)
@@ -22,7 +22,7 @@ struct UserDefaultsManager {
         saveRestaurants(restaurants: restaurants)
     }
     
-    func updateRestaurant(selectedRestaurant: Restaurants,
+    func updateRestaurant(selectedRestaurant: Restaurant,
                           selectedIndex: Int) {
         
         var restaurants = getRestaurants()
@@ -30,47 +30,47 @@ struct UserDefaultsManager {
         restaurants[selectedIndex] = selectedRestaurant
     }
     
-    func addMenu(selectedRestaurant: Restaurants,
+    func addMenu(selectedRestaurant: Restaurant,
                  selectedIndex: Int,
-                 addedMenu: Menus) {
+                 addedMenu: Menu) {
         
         var restaurants = getRestaurants()
         var restaturant = selectedRestaurant
         
-        restaturant.menu.append(addedMenu)
+        restaturant.menus.append(addedMenu)
         restaurants[selectedIndex] = restaturant
         saveRestaurants(restaurants: restaurants)
     }
     
-    func deleteMenu(selectedRestaurant: Restaurants,
+    func deleteMenu(selectedRestaurant: Restaurant,
                     selectedIndex: Int,
-                    menu: Menus,
+                    menu: Menu,
                     menuIndex: Int
-                    ) -> Restaurants {
+                    ) -> Restaurant {
         
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
-        let filteredMenus = restaurant.menu.filter { $0.id != menu.id }
-        restaurant.menu = filteredMenus
+        let filteredMenus = restaurant.menus.filter { $0.id != menu.id }
+        restaurant.menus = filteredMenus
         restaurants[selectedIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         return restaurant
     }
     
-    func updateMenus(selectedRestaurant: Restaurants,
+    func updateMenus(selectedRestaurant: Restaurant,
                      selectedIndex: Int,
-                     selectedMenu: Menus,
-                     menuIndex: Int) -> Restaurants {
+                     selectedMenu: Menu,
+                     menuIndex: Int) -> Restaurant {
         
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
-        var menus = selectedRestaurant.menu
+        var menus = selectedRestaurant.menus
         var menu = selectedMenu
         
         menu.isFavorite = !menu.isFavorite
         
         menus[menuIndex] = menu
-        restaurant.menu = menus
+        restaurant.menus = menus
         restaurants[selectedIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         
@@ -95,17 +95,17 @@ struct UserDefaultsManager {
 //        saveRestaurants(restaurants: restaurants)
 //    }
 
-    func getRestaurants() -> [Restaurants] {
+    func getRestaurants() -> [Restaurant] {
         guard let getRestaurnatsEncodeData = defaults.value(forKey: "restaurantsData") as? Data else {
             return []
         }
         
-        let restaurantsData = try! PropertyListDecoder().decode([Restaurants].self,
+        let restaurantsData = try! PropertyListDecoder().decode([Restaurant].self,
                                                                from: getRestaurnatsEncodeData)
         return restaurantsData
     }
 
-    func saveRestaurants(restaurants: [Restaurants]) {
+    func saveRestaurants(restaurants: [Restaurant]) {
         defaults.set(try? PropertyListEncoder().encode(restaurants),
                      forKey: "restaurantsData")
     }

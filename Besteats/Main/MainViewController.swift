@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
-    var totalRestaurants: [Restaurants] = []
+    var totalRestaurants: [Restaurant] = []
     
     // MARK: LifeCycle
     
@@ -210,13 +210,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
-        let restaurant: Restaurants = totalRestaurants[indexPath.row]
+        let restaurant: Restaurant = totalRestaurants[indexPath.row]
         
-        let likeMenus = restaurant.menu.filter { $0.type == "like" }
-        let curiousMenus = restaurant.menu.filter { $0.type == "curious" }
-        let warningMenus = restaurant.menu.filter { $0.type == "warning" }
+        let likeMenus = restaurant.menus
+            .filter { $0.type == "like" }
+        let curiousMenus = restaurant.menus
+            .filter { $0.type == "curious" }
+        let warningMenus = restaurant.menus
+            .filter { $0.type == "warning" }
         
-        let favoriteMenus = likeMenus.filter { menu in
+        let favoriteMenus = likeMenus
+            .filter { menu in
             menu.isFavorite == true
         }
         

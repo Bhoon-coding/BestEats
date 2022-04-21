@@ -19,7 +19,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     var type: String? = nil
-    var totalRestaurant: [Restaurants] = []
+    var totalRestaurants: [Restaurant] = []
     
     lazy var wholeView: UIView = {
         let view = UIView()
@@ -132,7 +132,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        totalRestaurant = UserDefaultsManager.shared.getRestaurants()
+        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
         
         restaurantTextField.delegate = self
         menuTextField.delegate = self
@@ -344,7 +344,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        var menus: [Menus] = [Menus(id: menuId + 1,
+        var menus: [Menu] = [Menu(id: menuId + 1,
                                 isFavorite: false,
                                 menu: menuName,
                                 oneLiner: oneLiner,
@@ -355,13 +355,14 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
             let confirm = UIAlertAction(title: "등록", style: .default) {_ in
                 menus[0].isFavorite = true
-                let restaurant: Restaurants = Restaurants(restaurantName: restaurantName, menu: menus)
+                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName, menus: menus)
                 
                 UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
             }
             let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
-                let restaurant: Restaurants = Restaurants(restaurantName: restaurantName, menu: menus)
+                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+                                                        menus: menus)
                 
                 UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
@@ -375,7 +376,8 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             
         } else {
         
-        let restaurant: Restaurants = Restaurants(restaurantName: restaurantName, menu: menus)
+        let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+                                                menus: menus)
         
         UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
             
