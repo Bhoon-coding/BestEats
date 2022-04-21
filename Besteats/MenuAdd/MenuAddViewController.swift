@@ -46,7 +46,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
         label.text = "\(selectedRestaurant.restaurantName)"
-        label.mediumLabel(label: label)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
@@ -134,11 +134,9 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        menuTextField.delegate = self
-        oneLinerTextField.delegate = self
-
+    
         setUpUI()
+        setUpDelegate()
     
     }
     
@@ -235,6 +233,11 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
             $0.bottom.equalToSuperview().inset(24)
             $0.height.equalTo(52)
         }
+    }
+    
+    private func setUpDelegate() {
+        menuTextField.delegate = self
+        oneLinerTextField.delegate = self
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

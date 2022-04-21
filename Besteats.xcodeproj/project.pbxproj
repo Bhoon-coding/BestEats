@@ -29,7 +29,6 @@
 		E159D5AE27F6E7DD00C841DD /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159D5AD27F6E7DD00C841DD /* CALayer.swift */; };
 		E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15A3F88278987A000CD810B /* BottomSheetViewController.swift */; };
 		E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E15D0109280470CA007BB795 /* GmarketSansBold.otf */; };
-		E16975ED277ED86B004547F6 /* BMJUA_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = E16975EB277ED86A004547F6 /* BMJUA_otf.otf */; };
 		E16F1EA127FB378500103E6B /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F1EA027FB378500103E6B /* UITableView.swift */; };
 		E191C500276F54DC0031F036 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarController.swift */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
@@ -62,7 +61,6 @@
 		E159D5AD27F6E7DD00C841DD /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		E15A3F88278987A000CD810B /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E15D0109280470CA007BB795 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
-		E16975EB277ED86A004547F6 /* BMJUA_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMJUA_otf.otf; sourceTree = "<group>"; };
 		E16F1EA027FB378500103E6B /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
@@ -105,14 +103,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E10161DD27C528AA00215F5B /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		E10DD94E280707A80004E90C /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,9 +132,11 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E131C79827E0D33E00AEAE8D /* RestaurantAdd */,
+				E155E4DC27F28E9E000E20A7 /* MenuList */,
+				E131C79927E0D3AF00AEAE8D /* MenuAdd */,
 				E10DD94E280707A80004E90C /* Services */,
 				E1B4C9AE27F1F50B00B0E5E9 /* Main */,
-				E155E4DC27F28E9E000E20A7 /* MenuList */,
 				E10161DC27C5289800215F5B /* Model */,
 				E1784F1627CD07000005AB03 /* Helper */,
 				E16975E9277ED7C1004547F6 /* Fonts */,
@@ -164,7 +156,7 @@
 		E131C79827E0D33E00AEAE8D /* RestaurantAdd */ = {
 			isa = PBXGroup;
 			children = (
-				E10161DD27C528AA00215F5B /* ViewController */,
+				E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */,
 			);
 			path = RestaurantAdd;
 			sourceTree = "<group>";
@@ -172,7 +164,7 @@
 		E131C79927E0D3AF00AEAE8D /* MenuAdd */ = {
 			isa = PBXGroup;
 			children = (
-				E1B4C9AD27F1F43100B0E5E9 /* ViewController */,
+				E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */,
 			);
 			path = MenuAdd;
 			sourceTree = "<group>";
@@ -180,20 +172,11 @@
 		E155E4DC27F28E9E000E20A7 /* MenuList */ = {
 			isa = PBXGroup;
 			children = (
-				E155E4DD27F28E9E000E20A7 /* ViewController */,
-				E131C79927E0D3AF00AEAE8D /* MenuAdd */,
+				E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */,
+				E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */,
 				E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */,
 			);
 			path = MenuList;
-			sourceTree = "<group>";
-		};
-		E155E4DD27F28E9E000E20A7 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */,
-				E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		E159D5A227F6E5F700C841DD /* Extension */ = {
@@ -214,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				E15D0109280470CA007BB795 /* GmarketSansBold.otf */,
-				E16975EB277ED86A004547F6 /* BMJUA_otf.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -230,42 +212,17 @@
 		E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */ = {
 			isa = PBXGroup;
 			children = (
-				E1B4C9AC27F1F42500B0E5E9 /* ViewController */,
-			);
-			path = MenuDetail;
-			sourceTree = "<group>";
-		};
-		E1B4C9AC27F1F42500B0E5E9 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
 				E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */,
 			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		E1B4C9AD27F1F43100B0E5E9 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */,
-			);
-			path = ViewController;
+			path = MenuDetail;
 			sourceTree = "<group>";
 		};
 		E1B4C9AE27F1F50B00B0E5E9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E1B4C9AF27F1F51500B0E5E9 /* ViewController */,
-				E131C79827E0D33E00AEAE8D /* RestaurantAdd */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		E1B4C9AF27F1F51500B0E5E9 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
 				E11E3C9E2764CF6300B70E3A /* MainViewController.swift */,
 			);
-			path = ViewController;
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,7 +289,6 @@
 				E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */,
 				E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */,
 				E11E3CA22764CF6300B70E3A /* Main.storyboard in Resources */,
-				E16975ED277ED86B004547F6 /* BMJUA_otf.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

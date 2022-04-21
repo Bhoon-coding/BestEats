@@ -148,8 +148,6 @@ class MainViewController: UIViewController {
         foodSearchBar.resignFirstResponder()
     }
     
-    
-    
     // MARK: @objc
     @objc func addRestaurant() {
         let restaurantAddVC = RestaurantAddViewController()
@@ -267,10 +265,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     //
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         
-        let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row],
-                                                    index: indexPath.row)
+        let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
         
         
         let backBarButtonItem = UIBarButtonItem(title: "",

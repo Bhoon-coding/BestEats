@@ -106,30 +106,11 @@ class MenuListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: NavigationBar
-        let mediumFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
-                                                                        size: 16)!]
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
-                                                                       size: 14)!]
-        // left
-        self.navigationController?.navigationBar.titleTextAttributes = mediumFontAttributes
-        // center
-        title = selectedRestaurant.restaurantName
-        // right
-        let addButton = UIBarButtonItem(title: "추가",
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(addTapped))
-        
-        addButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
-        navigationItem.rightBarButtonItem = addButton
-        
         view.backgroundColor = .secondarySystemBackground
+        setUpNavigationBar()
         setUpUI()
         
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -158,6 +139,21 @@ class MenuListViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    private func setUpNavigationBar() {
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                       size: 14)!]
+        let boldFontAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
+        let addButton = UIBarButtonItem(title: "추가",
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(addTapped))
+        navigationController?.navigationBar.titleTextAttributes = boldFontAttributes
+        title = selectedRestaurant.restaurantName
+        
+        addButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = addButton
     }
     
     private func setUpUI() {
