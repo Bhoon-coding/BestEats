@@ -73,9 +73,8 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best menu" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
-                                                    <rect key="frame" x="16" y="55" width="200" height="40"/>
+                                                    <rect key="frame" x="16" y="67" width="200" height="16"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="40" id="2Aw-AM-6bo"/>
                                                         <constraint firstAttribute="width" constant="200" id="rfr-kF-FRU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="GmarketSansBold" family="Gmarket Sans" pointSize="16"/>
@@ -83,43 +82,43 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleAspectFill" semanticContentAttribute="forceLeftToRight" distribution="equalCentering" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="gfI-lW-Yd4">
-                                                    <rect key="frame" x="16" y="119" width="150" height="15"/>
+                                                    <rect key="frame" x="16" y="107" width="150" height="27"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8X-8c-OYA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="20" height="15"/>
+                                                            <rect key="frame" x="0.0" y="7" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="V2L-8X-gQZ"/>
                                                                 <constraint firstAttribute="height" constant="20" id="VKH-bS-eOh"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGb-7L-FfP">
-                                                            <rect key="frame" x="20" y="0.0" width="30" height="15"/>
+                                                            <rect key="frame" x="20" y="8" width="30" height="19"/>
                                                             <fontDescription key="fontDescription" name="BMJUAOTF" family="BM Jua" pointSize="16"/>
                                                             <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="curiousFill" translatesAutoresizingMaskIntoConstraints="NO" id="IUG-IG-vGD">
-                                                            <rect key="frame" x="50" y="0.0" width="20" height="15"/>
+                                                            <rect key="frame" x="50" y="7" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="90K-KU-2Et"/>
                                                                 <constraint firstAttribute="width" constant="20" id="Hon-e8-tzR"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTD-0f-Ft5">
-                                                            <rect key="frame" x="70" y="0.0" width="30" height="15"/>
+                                                            <rect key="frame" x="70" y="8" width="30" height="19"/>
                                                             <fontDescription key="fontDescription" name="BMJUAOTF" family="BM Jua" pointSize="16"/>
                                                             <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warningFill" translatesAutoresizingMaskIntoConstraints="NO" id="07d-P2-BLH">
-                                                            <rect key="frame" x="100" y="0.0" width="20" height="15"/>
+                                                            <rect key="frame" x="100" y="7" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="jEb-FV-WI8"/>
                                                                 <constraint firstAttribute="width" constant="20" id="xvx-aa-gdW"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beE-gn-n4t">
-                                                            <rect key="frame" x="120" y="0.0" width="30" height="15"/>
+                                                            <rect key="frame" x="120" y="8" width="30" height="19"/>
                                                             <fontDescription key="fontDescription" name="BMJUAOTF" family="BM Jua" pointSize="16"/>
                                                             <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                                             <nil key="highlightedColor"/>

@@ -16,19 +16,10 @@ class MainViewController: UIViewController {
     
     // MARK: LifeCycle
     
-    override func loadView() {
-        super.loadView()
-        
-         totalRestaurants = UserDefaultsManager.shared.getRestaurants()
-        
-        DispatchQueue.main.async {
-            self.foodCollectionView.reloadData()
-        }
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
