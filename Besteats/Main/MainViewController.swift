@@ -15,7 +15,6 @@ class MainViewController: UIViewController {
     var totalRestaurants: [Restaurant] = []
     
     // MARK: LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

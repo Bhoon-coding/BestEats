@@ -91,24 +91,15 @@ class MenuListViewController: UIViewController {
     
     // MARK: LifeCycle
     
-    override func loadView() {
-        super.loadView()
-        
-        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
-        
-        setUpTableView()
-        menuListTableView.dataSource = self
-        menuListTableView.delegate = self
-        menuListTableView.rowHeight = 150
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .secondarySystemBackground
         setUpNavigationBar()
         setUpUI()
+        setUpTableView()
+        setUpDelegate()
+        
+        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
         
     }
     
@@ -135,10 +126,19 @@ class MenuListViewController: UIViewController {
     private func setUpTableView() {
         
         view.addSubview(menuListTableView)
+        menuListTableView.rowHeight = 150
         menuListTableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+    }
+    
+    private func setUpDelegate() {
+        
+        menuListTableView.dataSource = self
+        menuListTableView.delegate = self
+        
     }
     
     private func setUpNavigationBar() {
@@ -157,6 +157,8 @@ class MenuListViewController: UIViewController {
     }
     
     private func setUpUI() {
+        
+        view.backgroundColor = .secondarySystemBackground
         
         view.addSubview(typeStackView)
         typeStackView.snp.makeConstraints {
