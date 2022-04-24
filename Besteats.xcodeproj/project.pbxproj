@@ -132,14 +132,10 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
-				E131C79827E0D33E00AEAE8D /* RestaurantAdd */,
-				E155E4DC27F28E9E000E20A7 /* MenuList */,
-				E131C79927E0D3AF00AEAE8D /* MenuAdd */,
+				E123ED262815941500E63B68 /* Screens */,
 				E10DD94E280707A80004E90C /* Services */,
-				E1B4C9AE27F1F50B00B0E5E9 /* Main */,
 				E10161DC27C5289800215F5B /* Model */,
-				E1784F1627CD07000005AB03 /* Helper */,
-				E16975E9277ED7C1004547F6 /* Fonts */,
+				E1784F1627CD07000005AB03 /* Utils */,
 				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
 				E15A3F88278987A000CD810B /* BottomSheetViewController.swift */,
 				E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */,
@@ -151,6 +147,18 @@
 				E11E3CA82764CF6400B70E3A /* Info.plist */,
 			);
 			path = Besteats;
+			sourceTree = "<group>";
+		};
+		E123ED262815941500E63B68 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				E1B4C9AE27F1F50B00B0E5E9 /* Main */,
+				E131C79827E0D33E00AEAE8D /* RestaurantAdd */,
+				E155E4DC27F28E9E000E20A7 /* MenuList */,
+				E131C79927E0D3AF00AEAE8D /* MenuAdd */,
+				E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		E131C79827E0D33E00AEAE8D /* RestaurantAdd */ = {
@@ -174,7 +182,6 @@
 			children = (
 				E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */,
 				E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */,
-				E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */,
 			);
 			path = MenuList;
 			sourceTree = "<group>";
@@ -201,12 +208,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		E1784F1627CD07000005AB03 /* Helper */ = {
+		E1784F1627CD07000005AB03 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E16975E9277ED7C1004547F6 /* Fonts */,
 				E159D5A227F6E5F700C841DD /* Extension */,
 			);
-			path = Helper;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */ = {
