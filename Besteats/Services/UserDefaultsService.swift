@@ -58,7 +58,7 @@ struct UserDefaultsManager {
     }
     
     func updateMenus(selectedRestaurant: Restaurant,
-                     selectedIndex: Int,
+                     selectedRestauransIndex: Int,
                      selectedMenu: Menu,
                      menuIndex: Int) -> Restaurant {
         
@@ -66,12 +66,18 @@ struct UserDefaultsManager {
         var restaurant = selectedRestaurant
         var menus = selectedRestaurant.menus
         var menu = selectedMenu
+//        dump(menu)
         
         menu.isFavorite = !menu.isFavorite
-        
+        print("selectedRestaurant:")
+        dump(selectedRestaurant)
+        print("selectedIndex:\(selectedRestauransIndex)")
+        print("selectedMenu:")
+        dump(selectedMenu)
+        print("menuIndex: \(menuIndex)")
         menus[menuIndex] = menu
         restaurant.menus = menus
-        restaurants[selectedIndex] = restaurant
+        restaurants[selectedRestauransIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         
         return restaurant
