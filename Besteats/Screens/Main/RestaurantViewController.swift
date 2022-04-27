@@ -154,7 +154,7 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     // MARK: Cell Outlet
     @IBOutlet weak var restaurantNamesLabel: UILabel!
-    @IBOutlet weak var bestMenuLabel: UILabel!
+    @IBOutlet weak var favoriteMenuLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var curiousCountLabel: UILabel!
     @IBOutlet weak var warningCountLabel: UILabel!
@@ -202,27 +202,30 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         let restaurant: Restaurant = totalRestaurants[indexPath.row]
         
-        let favoriteMenu = favoriteMenus.first?.menu
+        
+        
+        let favoriteMenus = restaurant.likeMenus.filter {
+            $0.isFavorite == true
+        }
         
         var favoriteString = ""
-        
-        
+
         if favoriteMenus.isEmpty {
             favoriteString = "즐겨찾는 메뉴를 추가해주세요"
 
         } else if favoriteMenus.count == 1 {
-            favoriteString = "\(favoriteMenu!)"
+            favoriteString = "\(favoriteMenus.first?.menu!)"
 
         } else {
-            favoriteString = "\(favoriteMenu!) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
+            favoriteString = "\(favoriteMenus.first) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
         }
 
         
         cell.restaurantNamesLabel.text = restaurant.restaurantName
-        cell.bestMenuLabel.text = favoriteString
-        cell.likeCountLabel.text = "\(likeMenus.count)"
-        cell.curiousCountLabel.text = "\(curiousMenus.count)"
-        cell.warningCountLabel.text = "\(badMenus.count)"
+        cell.favoriteMenuLabel.text = favoriteString
+        cell.likeCountLabel.text = "\(restaurant.likeMenus.count)"
+        cell.curiousCountLabel.text = "\(restaurant.curiousMenus.count)"
+        cell.warningCountLabel.text = "\(restaurant.badMenus.count)"
 
         
         cell.layer.masksToBounds = false

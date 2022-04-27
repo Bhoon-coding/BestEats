@@ -72,7 +72,7 @@
                                                         <action selector="tapMore:" destination="UFK-hJ-mRZ" eventType="touchUpInside" id="xSa-4n-Qu5"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best menu" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="favoritemenu" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBJ-Z0-VVq">
                                                     <rect key="frame" x="16" y="67" width="200" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="rfr-kF-FRU"/>
@@ -145,8 +145,8 @@
                                         <gestureRecognizers/>
                                         <size key="customSize" width="330" height="150"/>
                                         <connections>
-                                            <outlet property="bestMenuLabel" destination="nBJ-Z0-VVq" id="s3e-En-1ju"/>
                                             <outlet property="curiousCountLabel" destination="aTD-0f-Ft5" id="MhZ-ea-fx7"/>
+                                            <outlet property="favoriteMenuLabel" destination="nBJ-Z0-VVq" id="f6Q-vh-kSn"/>
                                             <outlet property="likeCountLabel" destination="YGb-7L-FfP" id="Q2T-bx-GDb"/>
                                             <outlet property="restaurantNamesLabel" destination="Oa8-Ig-1E0" id="rEZ-gq-QnP"/>
                                             <outlet property="warningCountLabel" destination="beE-gn-n4t" id="uVw-Nj-07x"/>
