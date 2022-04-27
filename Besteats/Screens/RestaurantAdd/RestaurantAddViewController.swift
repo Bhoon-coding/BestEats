@@ -348,7 +348,6 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                                 isFavorite: false,
                                 menu: menuName,
                                 oneLiner: oneLiner,
-                                type: type
                                 )]
         
         if type == "like" {

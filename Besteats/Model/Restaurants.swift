@@ -9,18 +9,27 @@ import Foundation
 
 struct Restaurant: Codable, Equatable {
     var restaurantName: String
-    var menus: [Menu]
+    var type: String
+    var likeMenus: [Menu]
+    var curiousMenus: [Menu]
+    var badMenus: [Menu]
     
-    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
-        return lhs.restaurantName == rhs.restaurantName && lhs.menus == rhs.menus
-    }
+//    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+//        return lhs.restaurantName == rhs.restaurantName
+//    }
     
     init(
         restaurantName: String,
-        menus: [Menu]
+        type: String,
+        likeMenus: [Menu],
+        curiousMenus: [Menu],
+        badMenus: [Menu]
         ) {
-        self.restaurantName = restaurantName
-        self.menus = menus
+            self.restaurantName = restaurantName
+            self.type = type
+            self.likeMenus = likeMenus
+            self.curiousMenus = curiousMenus
+            self.badMenus = badMenus
     }
 }
 
@@ -29,19 +38,16 @@ struct Menu: Codable, Equatable {
     var isFavorite: Bool
     var menu: String?
     var oneLiner: String
-    var type: String
     
     init(
         id: Int,
         isFavorite: Bool,
         menu: String,
-        oneLiner: String,
-        type:String
+        oneLiner: String
     ) {
         self.id = id
         self.isFavorite = isFavorite
         self.menu = menu
         self.oneLiner = oneLiner
-        self.type = type
     }
 }
