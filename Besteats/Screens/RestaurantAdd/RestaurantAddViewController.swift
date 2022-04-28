@@ -126,7 +126,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         button.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
         return button
     }()
-
+    
     // MARK: LifeCycle
     
     override func viewDidLoad() {
@@ -137,9 +137,9 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         restaurantTextField.delegate = self
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
-
+        
         setUpUI()
-    
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -263,7 +263,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     @objc func tappedLike(button: UIButton) {
         selectedLike = !selectedLike
-
+        
         if selectedLike {
             type = "like"
             typeLikeButton.setImage(UIImage(named: "likeFill"), for: .normal)
@@ -273,12 +273,12 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             type = nil
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
         }
-
+        
     }
-
+    
     @objc func tappedCurious(button: UIButton) {
         selectedCurious = !selectedCurious
-
+        
         if selectedCurious {
             type = "curious"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
@@ -288,12 +288,12 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             type = nil
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
         }
-
+        
     }
-
+    
     @objc func tappedWarning(button: UIButton) {
         selectedWarning = !selectedWarning
-
+        
         if selectedWarning {
             type = "warning"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
@@ -303,7 +303,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             type = nil
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         }
-
+        
     }
     
     @objc func doneTapped() {
@@ -320,8 +320,6 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
         
-        
-        // TODO: 빈공백 확인 (trimming)
         if !inputRestaurant.trimmingCharacters(in: .whitespaces).isEmpty {
             restaurantName = inputRestaurant.trimmingCharacters(in: .whitespaces)
             
@@ -345,32 +343,32 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         }
         
         var menus: [Menu] = [Menu(id: menuId + 1,
-                                isFavorite: false,
-                                menu: menuName,
-                                oneLiner: oneLiner
-                                )]
-//        TODO: switch문으로 리팩토링하기
-//        switch type {
-//        case "like":
-//            <#code#>
-//        case "curious":
-//
-//        case "warning":
-//
-//        default:
-//            <#code#>
-//        }
+                                  isFavorite: false,
+                                  menu: menuName,
+                                  oneLiner: oneLiner
+                                 )]
+        //        TODO: switch문으로 리팩토링하기
+        //        switch type {
+        //        case "like":
+        //            <#code#>
+        //        case "curious":
+        //
+        //        case "warning":
+        //
+        //        default:
+        //            <#code#>
+        //        }
         if type == "like" {
             let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
             let confirm = UIAlertAction(title: "등록", style: .default) {_ in
                 menus[0].isFavorite = true
-//                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-//                                                        menus: menus)
+                //                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+                //                                                        menus: menus)
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                           type: "like",
-                           likeMenus: menus,
-                           curiousMenus: [],
-                           badMenus: [])
+                                                        type: "like",
+                                                        likeMenus: menus,
+                                                        curiousMenus: [],
+                                                        badMenus: [])
                 
                 UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
@@ -393,19 +391,26 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             }
             
         } else if type == "curious" {
-        
-        let restaurant: Restaurant = Restaurant(restaurantName: restaurantName, type: "curious", likeMenus: [], curiousMenus: menus, badMenus: [])
-        
+            let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+                                                    type: "curious",
+                                                    likeMenus: [],
+                                                    curiousMenus: menus,
+                                                    badMenus: [])
+            
             UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
             dismiss(animated: true, completion: nil)
             
         } else {
-            let restaurant: Restaurant = Restaurant(restaurantName: restaurantName, type: "warning", likeMenus: [], curiousMenus: [], badMenus: menus)
+            let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+                                                    type: "warning",
+                                                    likeMenus: [],
+                                                    curiousMenus: [],
+                                                    badMenus: menus)
             
-                UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-                dismiss(animated: true, completion: nil)
+            UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
+            dismiss(animated: true, completion: nil)
         }
         
     }
-
+    
 }
