@@ -347,21 +347,40 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         var menus: [Menu] = [Menu(id: menuId + 1,
                                 isFavorite: false,
                                 menu: menuName,
-                                oneLiner: oneLiner,
+                                oneLiner: oneLiner
                                 )]
-        
+//        TODO: switch문으로 리팩토링하기
+//        switch type {
+//        case "like":
+//            <#code#>
+//        case "curious":
+//
+//        case "warning":
+//
+//        default:
+//            <#code#>
+//        }
         if type == "like" {
             let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
             let confirm = UIAlertAction(title: "등록", style: .default) {_ in
                 menus[0].isFavorite = true
-                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName, menus: menus)
+//                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+//                                                        menus: menus)
+                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
+                           type: "like",
+                           likeMenus: menus,
+                           curiousMenus: [],
+                           badMenus: [])
                 
                 UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
             }
             let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        menus: menus)
+                                                        type: "like",
+                                                        likeMenus: menus,
+                                                        curiousMenus: [],
+                                                        badMenus: [])
                 
                 UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
@@ -373,15 +392,18 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
             
-        } else {
+        } else if type == "curious" {
         
-        let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                menus: menus)
+        let restaurant: Restaurant = Restaurant(restaurantName: restaurantName, type: "curious", likeMenus: [], curiousMenus: menus, badMenus: [])
         
-        UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-            
+            UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
             dismiss(animated: true, completion: nil)
             
+        } else {
+            let restaurant: Restaurant = Restaurant(restaurantName: restaurantName, type: "warning", likeMenus: [], curiousMenus: [], badMenus: menus)
+            
+                UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
+                dismiss(animated: true, completion: nil)
         }
         
     }
