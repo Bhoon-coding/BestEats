@@ -74,31 +74,31 @@ struct UserDefaultsManager {
         return restaurant
     }
     
-    func updateMenus(selectedRestaurant: Restaurant,
-                     selectedRestauransIndex: Int,
-                     selectedMenu: Menu,
-                     menuIndex: Int) -> Restaurant {
-        
-        var restaurants = getRestaurants()
-        var restaurant = selectedRestaurant
-        var menus = selectedRestaurant.menus
-        var menu = selectedMenu
-//        dump(menu)
-        
-        menu.isFavorite = !menu.isFavorite
-        print("selectedRestaurant:")
-        dump(selectedRestaurant)
-        print("selectedIndex:\(selectedRestauransIndex)")
-        print("selectedMenu:")
-        dump(selectedMenu)
-        print("menuIndex: \(menuIndex)")
-        menus[menuIndex] = menu
-        restaurant.menus = menus
-        restaurants[selectedRestauransIndex] = restaurant
-        saveRestaurants(restaurants: restaurants)
-        
-        return restaurant
-    }
+//    func updateMenus(selectedRestaurant: Restaurant,
+//                     selectedRestauransIndex: Int,
+//                     selectedMenu: Menu,
+//                     menuIndex: Int) -> Restaurant {
+//        
+//        var restaurants = getRestaurants()
+//        var restaurant = selectedRestaurant
+//        var menus = selectedRestaurant.menus
+//        var menu = selectedMenu
+////        dump(menu)
+//        
+//        menu.isFavorite = !menu.isFavorite
+//        print("selectedRestaurant:")
+//        dump(selectedRestaurant)
+//        print("selectedIndex:\(selectedRestauransIndex)")
+//        print("selectedMenu:")
+//        dump(selectedMenu)
+//        print("menuIndex: \(menuIndex)")
+//        menus[menuIndex] = menu
+//        restaurant.menus = menus
+//        restaurants[selectedRestauransIndex] = restaurant
+//        saveRestaurants(restaurants: restaurants)
+//        
+//        return restaurant
+//    }
 //    func updateRestaurants(newRestaurant: Restaurants) {
 //        var restaurants = getRestaurants()
 //        var newRestaurantIndex = -1
