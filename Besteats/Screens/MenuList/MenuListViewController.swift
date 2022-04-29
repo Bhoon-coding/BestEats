@@ -341,7 +341,9 @@ extension MenuListViewController: UITableViewDataSource {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedIdx,
+                    type: type,
                     menu: selectedRestaurant.likeMenus[indexPath.row],
+//      TODO: menuIndex 확인 필요
                     menuIndex: indexPath.row
                 )
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
@@ -352,6 +354,7 @@ extension MenuListViewController: UITableViewDataSource {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedIdx,
+                    type: type,
                     menu: selectedRestaurant.curiousMenus[indexPath.row],
                     menuIndex: indexPath.row
                 )
@@ -362,6 +365,7 @@ extension MenuListViewController: UITableViewDataSource {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedIdx,
+                    type: type,
                     menu: selectedRestaurant.badMenus[indexPath.row],
                     menuIndex: indexPath.row
                 )

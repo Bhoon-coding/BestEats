@@ -43,10 +43,8 @@ struct UserDefaultsManager {
             restaturant.likeMenus.append(addedMenu)
         case "curious":
             restaturant.curiousMenus.append(addedMenu)
-        case "warning":
-            restaturant.badMenus.append(addedMenu)
         default:
-            return
+            restaturant.badMenus.append(addedMenu)
         }
         restaurants[selectedIndex] = restaturant
         saveRestaurants(restaurants: restaurants)
@@ -54,14 +52,23 @@ struct UserDefaultsManager {
     
     func deleteMenu(selectedRestaurant: Restaurant,
                     selectedIndex: Int,
+                    type: String,
                     menu: Menu,
                     menuIndex: Int
                     ) -> Restaurant {
         
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
-        let filteredMenus = restaurant.menus.filter { $0.id != menu.id }
-        restaurant.menus = filteredMenus
+        switch type {
+        case "like":
+            restaurant.likeMenus.remove(at: menuIndex)
+        case "curious":
+            restaurant.curiousMenus.remove(at: menuIndex)
+        default:
+            restaurant.badMenus.remove(at: menuIndex)
+        }
+//        let filteredMenus = restaurant.menus.filter { $0.id != menu.id }
+//        restaurant.menus = filteredMenus
         restaurants[selectedIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         return restaurant
