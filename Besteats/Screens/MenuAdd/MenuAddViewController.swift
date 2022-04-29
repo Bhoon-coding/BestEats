@@ -351,6 +351,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
                                       )
                 UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant,
                                                    selectedIndex: self.selectedIndex,
+                                                   type: type,
                                                    addedMenu: menu)
                 self.dismiss(animated: true, completion: nil)
             }
@@ -362,6 +363,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
                                       )
                 UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant,
                                                    selectedIndex: self.selectedIndex,
+                                                   type: type,
                                                    addedMenu: menu)
                 self.dismiss(animated: true, completion: nil)
             }
@@ -374,6 +376,7 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
         } else {
             UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
                                                selectedIndex: selectedIndex,
+                                               type: type,
                                                addedMenu: menu)
             
             

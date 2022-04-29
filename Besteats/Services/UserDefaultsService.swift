@@ -32,12 +32,22 @@ struct UserDefaultsManager {
     
     func addMenu(selectedRestaurant: Restaurant,
                  selectedIndex: Int,
+                 type: String,
                  addedMenu: Menu) {
         
         var restaurants = getRestaurants()
         var restaturant = selectedRestaurant
         
-        restaturant.menus.append(addedMenu)
+        switch type {
+        case "like":
+            restaturant.likeMenus.append(addedMenu)
+        case "curious":
+            restaturant.curiousMenus.append(addedMenu)
+        case "warning":
+            restaturant.badMenus.append(addedMenu)
+        default:
+            return
+        }
         restaurants[selectedIndex] = restaturant
         saveRestaurants(restaurants: restaurants)
     }
