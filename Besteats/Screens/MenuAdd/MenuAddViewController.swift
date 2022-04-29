@@ -305,13 +305,13 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
         var menuId = 0
         var menuName = ""
         var oneLiner = ""
-        
+//      TODO: menuID +1 구현
         // FoodDetail 타입별 수정, 삭제를 고유 id로 판단
-        if selectedRestaurant.menus.isEmpty {
-            menuId = 1
-        } else {
-            menuId = selectedRestaurant.menus.last!.id + 1
-        }
+//        if selectedRestaurant.menus.isEmpty {
+//            menuId = 1
+//        } else {
+//            menuId = selectedRestaurant.menus.last!.id + 1
+//        }
 
         guard let inputMenuName = menuTextField.text else { return }
         guard let inputOneLiner = oneLinerTextField.text else { return }
@@ -336,41 +336,37 @@ class MenuAddViewController: UIViewController, UITextFieldDelegate {
         let menu: Menu = Menu(id: menuId,
                                 isFavorite: false,
                                 menu: menuName,
-                                oneLiner: oneLiner,
+                                oneLiner: oneLiner
                                 )
         
         if type == "like" {
-            let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "즐겨찾기",
+                                          message: "즐겨찾는 메뉴로 등록 하시겠습니까?",
+                                          preferredStyle: .alert)
             let confirm = UIAlertAction(title: "등록", style: .default) {_ in
-                
                 let menu: Menu = Menu(id: menuId,
                                       isFavorite: true,
                                       menu: menuName,
-                                      oneLiner: oneLiner,
-                                      type: type)
-                
+                                      oneLiner: oneLiner
+                                      )
                 UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant,
                                                    selectedIndex: self.selectedIndex,
                                                    addedMenu: menu)
                 self.dismiss(animated: true, completion: nil)
             }
             let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
-                
                 let menu: Menu = Menu(id: menuId,
                                       isFavorite: false,
                                       menu: menuName,
-                                      oneLiner: oneLiner,
-                                      type: type)
-                
+                                      oneLiner: oneLiner
+                                      )
                 UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant,
                                                    selectedIndex: self.selectedIndex,
                                                    addedMenu: menu)
-                
                 self.dismiss(animated: true, completion: nil)
             }
             alert.addAction(cancel)
             alert.addAction(confirm)
-            
             DispatchQueue.main.async {
                 self.present(alert, animated: true, completion: nil)
             }
