@@ -199,27 +199,24 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 // Cell에 대한 delegate
 extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         let restaurant: Restaurant = totalRestaurants[indexPath.row]
-        
-        
-        
-        let favoriteMenus = restaurant.likeMenus.filter {
-            $0.isFavorite == true
-        }
-        
+        let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
         var favoriteString = ""
 
-        if favoriteMenus.isEmpty {
-            favoriteString = "즐겨찾는 메뉴를 추가해주세요"
-
-        } else if favoriteMenus.count == 1 {
-            favoriteString = "\(favoriteMenus.first?.menu!)"
-
-        } else {
-            favoriteString = "\(favoriteMenus.first) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
+        if let favoriteMenuName = favoriteMenus.first?.menu {
+            
+            if favoriteMenus.isEmpty {
+                favoriteString = "즐겨찾는 메뉴를 추가해주세요"
+                
+            } else if favoriteMenus.count == 1 {
+                favoriteString = "\(favoriteMenuName)"
+                
+            } else {
+                favoriteString = "\(favoriteMenuName) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
+            }
+            
         }
-
         
         cell.restaurantNamesLabel.text = restaurant.restaurantName
         cell.favoriteMenuLabel.text = favoriteString
@@ -272,38 +269,3 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
 }
-
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "RestaurantViewController") as! RestaurantViewController
-        
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        ViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 12")
-    }
-}
-#endif
