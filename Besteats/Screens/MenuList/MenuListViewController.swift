@@ -243,10 +243,9 @@ class MenuListViewController: UIViewController {
     
     @objc func tappedFavorite(_ sender: UIButton) {
         // TODO: 기능 구현하기
-        print("별표 클릭")
-//        let id = sender.tag
-//        let selectedItem = selectedRestaurant.menus.filter { $0.id == id }
-//        print("selectedItem===============:\(selectedItem)")
+        let id = sender.tag
+        let selectedItem = selectedRestaurant.likeMenus.filter { $0.id == id }
+        print("selectedItem===============:\(selectedItem)")
         
 //        selectedRestaurant = UserDefaultsManager.shared.updateMenus(
 //            selectedRestaurant: selectedRestaurant,
