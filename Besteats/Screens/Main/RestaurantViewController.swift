@@ -204,12 +204,12 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
         let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
         var favoriteString = ""
 
+        if favoriteMenus.isEmpty {
+            favoriteString = "즐겨찾는 메뉴를 추가해주세요"
+        }
         if let favoriteMenuName = favoriteMenus.first?.menu {
             
-            if favoriteMenus.isEmpty {
-                favoriteString = "즐겨찾는 메뉴를 추가해주세요"
-                
-            } else if favoriteMenus.count == 1 {
+            if favoriteMenus.count == 1 {
                 favoriteString = "\(favoriteMenuName)"
                 
             } else {

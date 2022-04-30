@@ -242,17 +242,15 @@ class MenuListViewController: UIViewController {
     }
     
     @objc func tappedFavorite(_ sender: UIButton) {
-        // TODO: 기능 구현하기
-        let id = sender.tag
-        let selectedItem = selectedRestaurant.likeMenus.filter { $0.id == id }
-        print("selectedItem===============:\(selectedItem)")
+        let index = sender.tag
+        let selectedItem = selectedRestaurant.likeMenus[index]
         
-//        selectedRestaurant = UserDefaultsManager.shared.updateMenus(
-//            selectedRestaurant: selectedRestaurant,
-//            selectedRestauransIndex: selectedIdx,
-//            selectedMenu: selectedItem[0],
-//            menuIndex: id
-//        )
+        selectedRestaurant = UserDefaultsManager.shared.updateMenus(
+            selectedRestaurant: selectedRestaurant,
+            selectedRestauransIndex: selectedIdx,
+            selectedMenu: selectedItem,
+            menuIndex: index
+        )
         
         menuListTableView.reloadData()
     }
@@ -298,8 +296,7 @@ extension MenuListViewController: UITableViewDataSource {
             let selectedItem = selectedRestaurant.likeMenus[indexPath.row]
             cell.menuLabel.text = selectedItem.menu
             cell.oneLinerLabel.text = selectedItem.oneLiner
-            // TODO: 리팩토링후 불필요시 삭제 예정
-            cell.favoriteButton.tag = selectedRestaurant.likeMenus[indexPath.row].id
+            cell.favoriteButton.tag = indexPath.row
             cell.favoriteButton.addTarget(self,
                                           action: #selector(tappedFavorite),
                                           for: .touchUpInside)
@@ -312,14 +309,12 @@ extension MenuListViewController: UITableViewDataSource {
                 : cell.favoriteButton.setImage(uncheckedFavorite, for: .normal)
                 
             }
-        }
-        
-        else if type == "curious" {
+        } else if type == "curious" {
             cell.menuLabel.text = selectedRestaurant.curiousMenus[indexPath.row].menu
             cell.oneLinerLabel.text = selectedRestaurant.curiousMenus[indexPath.row].oneLiner
             cell.favoriteButton.isHidden = true
             
-        } else if type == "warning" {
+        } else {
             cell.menuLabel.text = selectedRestaurant.badMenus[indexPath.row].menu
             cell.oneLinerLabel.text = selectedRestaurant.badMenus[indexPath.row].oneLiner
             cell.favoriteButton.isHidden = true
@@ -333,23 +328,16 @@ extension MenuListViewController: UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             if type == "like" {
-//                let typeLike = selectedRestaurant.menus.filter { $0.type == "like" }
-                
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedIdx,
                     type: type,
                     menu: selectedRestaurant.likeMenus[indexPath.row],
-//      TODO: menuIndex 확인 필요
-                    menuIndex: indexPath.row
-                )
+                    menuIndex: indexPath.row)
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
                 
             } else if type == "curious" {
-//                let typeCurious = selectedRestaurant.menus.filter { $0.type == "curious" }
-                
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedIdx,
@@ -360,7 +348,6 @@ extension MenuListViewController: UITableViewDataSource {
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
                 
             } else {
-//                let typeWarning = selectedRestaurant.menus.filter { $0.type == "warning" }
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedIdx,
@@ -377,10 +364,7 @@ extension MenuListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView,
-                   titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        
-        return "삭제"
-    }
+                   titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? { return "삭제" }
     
 }
 
