@@ -1,8 +1,8 @@
 //
-//  RestaurantAddViewController.swift
+//  MenuAddViewController.swift
 //  Besteats
 //
-//  Created by BH on 2021/12/30.
+//  Created by BH on 2022/03/15.
 //
 
 import UIKit
@@ -10,8 +10,7 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
-
-class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
+class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
@@ -19,7 +18,18 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     var type: String? = nil
-    var totalRestaurant: [Restaurants] = []
+    var selectedIndex: Int
+    private var selectedRestaurant: Restaurant
+    
+    init(selectedRestaurant: Restaurant, selectedIndex: Int) {
+        self.selectedRestaurant = selectedRestaurant
+        self.selectedIndex = selectedIndex
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     lazy var wholeView: UIView = {
         let view = UIView()
@@ -35,16 +45,9 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var restaurantLabel: UILabel = {
         let label = UILabel()
-        label.text = "맛집명"
-        label.mediumLabel(label: label)
+        label.text = "\(selectedRestaurant.restaurantName)"
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
-    }()
-    
-    lazy var restaurantTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "맛집을 입력해 주세요."
-        textField.placeholderConvention(textField: textField)
-        return textField
     }()
     
     lazy var menuLabel: UILabel = {
@@ -119,7 +122,7 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     lazy var doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("맛집 추가", for: .normal)
+        button.setTitle("메뉴 추가", for: .normal)
         button.mediumButton(button: button)
         button.tintColor = .label
         button.backgroundColor = .systemGreen
@@ -131,14 +134,9 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        totalRestaurant = UserDefaultsManager.shared.getRestaurants()
-        
-        restaurantTextField.delegate = self
-        menuTextField.delegate = self
-        oneLinerTextField.delegate = self
-
+    
         setUpUI()
+        setUpDelegate()
     
     }
     
@@ -166,52 +164,45 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         
         wholeView.addSubview(restaurantLabel)
         restaurantLabel.snp.makeConstraints {
-            $0.top.equalTo(closeButton.snp.bottom).offset(36)
-            $0.leading.equalToSuperview()
-        }
-        
-        wholeView.addSubview(restaurantTextField)
-        restaurantTextField.snp.makeConstraints {
-            $0.top.equalTo(restaurantLabel.snp.bottom).offset(16)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(44)
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview()
         }
         
         wholeView.addSubview(menuLabel)
         menuLabel.snp.makeConstraints {
-            $0.top.equalTo(restaurantTextField.snp.bottom).offset(36)
+            $0.top.equalTo(closeButton.snp.bottom).offset(50)
             $0.leading.equalToSuperview()
         }
         
         wholeView.addSubview(menuTextField)
         menuTextField.snp.makeConstraints {
-            $0.top.equalTo(menuLabel.snp.bottom).offset(16)
+            $0.top.equalTo(menuLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(44)
         }
         
         wholeView.addSubview(oneLinerLabel)
         oneLinerLabel.snp.makeConstraints {
-            $0.top.equalTo(menuTextField.snp.bottom).offset(36)
+            $0.top.equalTo(menuTextField.snp.bottom).offset(50)
             $0.leading.equalToSuperview()
         }
         
         wholeView.addSubview(oneLinerTextField)
         oneLinerTextField.snp.makeConstraints {
-            $0.top.equalTo(oneLinerLabel.snp.bottom).offset(16)
+            $0.top.equalTo(oneLinerLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(44)
         }
         
         wholeView.addSubview(typeLabel)
         typeLabel.snp.makeConstraints {
-            $0.top.equalTo(oneLinerTextField.snp.bottom).offset(36)
+            $0.top.equalTo(oneLinerTextField.snp.bottom).offset(50)
             $0.leading.equalToSuperview()
         }
         
         wholeView.addSubview(typeView)
         typeView.snp.makeConstraints {
-            $0.top.equalTo(typeLabel.snp.bottom).offset(16)
+            $0.top.equalTo(typeLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(64)
         }
@@ -244,10 +235,13 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    private func setUpDelegate() {
+        menuTextField.delegate = self
+        oneLinerTextField.delegate = self
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == restaurantTextField {
-            menuTextField.becomeFirstResponder()
-        } else if textField == menuTextField {
+        if textField == menuTextField {
             oneLinerTextField.becomeFirstResponder()
         } else {
             oneLinerTextField.resignFirstResponder()
@@ -308,27 +302,15 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     @objc func doneTapped() {
         
-        let menuId = 0
-        var restaurantName = ""
+        var menuId = 0
         var menuName = ""
         var oneLiner = ""
-        
-        guard let inputRestaurant = restaurantTextField.text else { return }
+
         guard let inputMenuName = menuTextField.text else { return }
         guard let inputOneLiner = oneLinerTextField.text else { return }
         guard let type = self.type else {
             self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
             return }
-        
-        
-        // TODO: 빈공백 확인 (trimming)
-        if !inputRestaurant.trimmingCharacters(in: .whitespaces).isEmpty {
-            restaurantName = inputRestaurant.trimmingCharacters(in: .whitespaces)
-            
-        } else {
-            view.makeToast("맛집명을 입력 해주세요.", position: .top)
-            return
-        }
         
         if !inputMenuName.trimmingCharacters(in: .whitespaces).isEmpty {
             menuName = inputMenuName.trimmingCharacters(in: .whitespaces)
@@ -344,44 +326,62 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        var menus: [Menus] = [Menus(id: menuId + 1,
-                                isFavorite: false,
-                                menu: menuName,
-                                oneLiner: oneLiner,
-                                type: type
-                                )]
-        
         if type == "like" {
-            let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
+            if selectedRestaurant.likeMenus.isEmpty {
+                menuId = 1
+            } else {
+                menuId = selectedRestaurant.likeMenus.last!.id + 1
+            }
+            let alert = UIAlertController(title: "즐겨찾기",
+                                          message: "즐겨찾는 메뉴로 등록 하시겠습니까?",
+                                          preferredStyle: .alert)
             let confirm = UIAlertAction(title: "등록", style: .default) {_ in
-                menus[0].isFavorite = true
-                let restaurant: Restaurants = Restaurants(restaurantName: restaurantName, menu: menus)
-                
-                UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
+                let menu: Menu = Menu(id: menuId,
+                                        isFavorite: true,
+                                        menu: menuName,
+                                        oneLiner: oneLiner
+                                        )
+                UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant,
+                                                   selectedIndex: self.selectedIndex,
+                                                   type: type,
+                                                   addedMenu: menu)
                 self.dismiss(animated: true, completion: nil)
             }
             let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
-                let restaurant: Restaurants = Restaurants(restaurantName: restaurantName, menu: menus)
-                
-                UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
             }
+            
             alert.addAction(cancel)
             alert.addAction(confirm)
-            
             DispatchQueue.main.async {
                 self.present(alert, animated: true, completion: nil)
             }
             
-        } else {
-        
-        let restaurant: Restaurants = Restaurants(restaurantName: restaurantName, menu: menus)
-        
-        UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-            
+        } else if type == "curious" {
+            if selectedRestaurant.curiousMenus.isEmpty {
+                menuId = 1
+            } else {
+                menuId = selectedRestaurant.curiousMenus.last!.id + 1
+            }
             dismiss(animated: true, completion: nil)
-            
+        } else {
+            if selectedRestaurant.badMenus.isEmpty {
+                menuId = 1
+            } else {
+                menuId = selectedRestaurant.badMenus.last!.id + 1
+            }
+            dismiss(animated: true, completion: nil)
         }
+        
+        let menu: Menu = Menu(id: menuId,
+                                isFavorite: false,
+                                menu: menuName,
+                                oneLiner: oneLiner
+                                )
+        UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
+                                           selectedIndex: selectedIndex,
+                                           type: type,
+                                           addedMenu: menu)
         
     }
 

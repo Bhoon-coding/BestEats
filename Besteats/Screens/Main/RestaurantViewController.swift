@@ -7,28 +7,18 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class RestaurantViewController: UIViewController {
 
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
-    var totalRestaurants: [Restaurants] = []
+    var totalRestaurants: [Restaurant] = []
     
     // MARK: LifeCycle
-    
-    override func loadView() {
-        super.loadView()
-        
-         totalRestaurants = UserDefaultsManager.shared.getRestaurants()
-        
-        DispatchQueue.main.async {
-            self.foodCollectionView.reloadData()
-        }
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -164,13 +154,13 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     // MARK: Cell Outlet
     @IBOutlet weak var restaurantNamesLabel: UILabel!
-    @IBOutlet weak var bestMenuLabel: UILabel!
+    @IBOutlet weak var favoriteMenuLabel: UILabel!
     @IBOutlet weak var likeCountLabel: UILabel!
     @IBOutlet weak var curiousCountLabel: UILabel!
     @IBOutlet weak var warningCountLabel: UILabel!
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension RestaurantViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -187,7 +177,7 @@ extension MainViewController: UISearchBarDelegate {
 }
 
 // Cell layout
-extension MainViewController: UICollectionViewDelegateFlowLayout {
+extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     // 위 아래 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
@@ -207,40 +197,32 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // Cell에 대한 delegate
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
-        let restaurant: Restaurants = totalRestaurants[indexPath.row]
-        
-        let likeMenus = restaurant.menu.filter { $0.type == "like" }
-        let curiousMenus = restaurant.menu.filter { $0.type == "curious" }
-        let warningMenus = restaurant.menu.filter { $0.type == "warning" }
-        
-        let favoriteMenus = likeMenus.filter { menu in
-            menu.isFavorite == true
-        }
-        
-        let favoriteMenu = favoriteMenus.first?.menu
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
+        let restaurant: Restaurant = totalRestaurants[indexPath.row]
+        let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
         var favoriteString = ""
-        
-        
+
         if favoriteMenus.isEmpty {
             favoriteString = "즐겨찾는 메뉴를 추가해주세요"
-
-        } else if favoriteMenus.count == 1 {
-            favoriteString = "\(favoriteMenu!)"
-
-        } else {
-            favoriteString = "\(favoriteMenu!) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
         }
-
+        if let favoriteMenuName = favoriteMenus.first?.menu {
+            
+            if favoriteMenus.count == 1 {
+                favoriteString = "\(favoriteMenuName)"
+                
+            } else {
+                favoriteString = "\(favoriteMenuName) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
+            }
+            
+        }
         
         cell.restaurantNamesLabel.text = restaurant.restaurantName
-        cell.bestMenuLabel.text = favoriteString
-        cell.likeCountLabel.text = "\(likeMenus.count)"
-        cell.curiousCountLabel.text = "\(curiousMenus.count)"
-        cell.warningCountLabel.text = "\(warningMenus.count)"
+        cell.favoriteMenuLabel.text = favoriteString
+        cell.likeCountLabel.text = "\(restaurant.likeMenus.count)"
+        cell.curiousCountLabel.text = "\(restaurant.curiousMenus.count)"
+        cell.warningCountLabel.text = "\(restaurant.badMenus.count)"
 
         
         cell.layer.masksToBounds = false
@@ -287,38 +269,3 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
 }
-
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        
-    }
-}
-
-struct ViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        ViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 12")
-    }
-}
-#endif

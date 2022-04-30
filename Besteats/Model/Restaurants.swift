@@ -7,41 +7,47 @@
 
 import Foundation
 
-struct Restaurants: Codable, Equatable {
+struct Restaurant: Codable, Equatable {
     var restaurantName: String
-    var menu: [Menus]
+    var type: String
+    var likeMenus: [Menu]
+    var curiousMenus: [Menu]
+    var badMenus: [Menu]
     
-    static func == (lhs: Restaurants, rhs: Restaurants) -> Bool {
-        return lhs.restaurantName == rhs.restaurantName && lhs.menu == rhs.menu
-    }
+//    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+//        return lhs.restaurantName == rhs.restaurantName
+//    }
     
     init(
         restaurantName: String,
-        menu: [Menus]
+        type: String,
+        likeMenus: [Menu],
+        curiousMenus: [Menu],
+        badMenus: [Menu]
         ) {
-        self.restaurantName = restaurantName
-        self.menu = menu
+            self.restaurantName = restaurantName
+            self.type = type
+            self.likeMenus = likeMenus
+            self.curiousMenus = curiousMenus
+            self.badMenus = badMenus
     }
 }
 
-struct Menus: Codable, Equatable {
+struct Menu: Codable, Equatable {
     var id: Int
     var isFavorite: Bool
     var menu: String?
     var oneLiner: String
-    var type: String
     
     init(
         id: Int,
         isFavorite: Bool,
         menu: String,
-        oneLiner: String,
-        type:String
+        oneLiner: String
     ) {
         self.id = id
         self.isFavorite = isFavorite
         self.menu = menu
         self.oneLiner = oneLiner
-        self.type = type
     }
 }

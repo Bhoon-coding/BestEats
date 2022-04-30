@@ -47,6 +47,10 @@ class MenuListTableViewCell: UITableViewCell {
     
     
     // MARK: Methods
+    func configure() {
+        
+    }
+    
     private func setUpCell() {
         
         contentView.addSubview(menuLabel)

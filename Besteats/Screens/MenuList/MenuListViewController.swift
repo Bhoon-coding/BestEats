@@ -21,13 +21,13 @@ class MenuListViewController: UIViewController {
     var selectedWarning = false
 
     var type: String = "like"
-    var totalRestaurants: [Restaurants] = []
-    var selectedRestaurant: Restaurants
+    var totalRestaurants: [Restaurant] = []
+    var selectedRestaurant: Restaurant
     var selectedIdx: Int
-    var totalMenus: [Menus] = []
+    var totalMenus: [Menu] = []
     
     
-    init(selectedRestaurant: Restaurants ,index: Int) {
+    init(selectedRestaurant: Restaurant ,index: Int) {
         self.selectedRestaurant = selectedRestaurant
         self.selectedIdx = index
         super.init(nibName: nil, bundle: nil)
@@ -91,24 +91,14 @@ class MenuListViewController: UIViewController {
     
     // MARK: LifeCycle
     
-    override func loadView() {
-        super.loadView()
-        
-        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
-        
-        setUpTableView()
-        menuListTableView.dataSource = self
-        menuListTableView.delegate = self
-        menuListTableView.rowHeight = 150
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .secondarySystemBackground
         setUpNavigationBar()
         setUpUI()
+        setUpTableView()
+        
+        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
         
     }
     
@@ -134,11 +124,22 @@ class MenuListViewController: UIViewController {
     
     private func setUpTableView() {
         
+        setUpDelegate()
+        
+        menuListTableView.rowHeight = 150
         view.addSubview(menuListTableView)
         menuListTableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+    }
+    
+    private func setUpDelegate() {
+        
+        menuListTableView.dataSource = self
+        menuListTableView.delegate = self
+        
     }
     
     private func setUpNavigationBar() {
@@ -157,6 +158,8 @@ class MenuListViewController: UIViewController {
     }
     
     private func setUpUI() {
+        
+        view.backgroundColor = .secondarySystemBackground
         
         view.addSubview(typeStackView)
         typeStackView.snp.makeConstraints {
@@ -239,15 +242,14 @@ class MenuListViewController: UIViewController {
     }
     
     @objc func tappedFavorite(_ sender: UIButton) {
-        
-        let id = sender.tag
-        let selectedItem = selectedRestaurant.menu.filter { $0.id == id }
+        let index = sender.tag
+        let selectedItem = selectedRestaurant.likeMenus[index]
         
         selectedRestaurant = UserDefaultsManager.shared.updateMenus(
             selectedRestaurant: selectedRestaurant,
-            selectedIndex: selectedIdx,
-            selectedMenu: selectedItem[0],
-            menuIndex: id - 1
+            selectedRestauransIndex: selectedIdx,
+            selectedMenu: selectedItem,
+            menuIndex: index
         )
         
         menuListTableView.reloadData()
@@ -262,28 +264,23 @@ extension MenuListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
-        let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
-        let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
-        
         if type == "like" {
-            typeLike.count == 0
+            selectedRestaurant.likeMenus.count == 0
             ? tableView.setEmptyMessage("맛있었던 메뉴를 \n\n추가해 주세요.")
             : tableView.restore()
-            return typeLike.count
+            return selectedRestaurant.likeMenus.count
             
         } else if type == "curious" {
-            typeCurious.count == 0
+            selectedRestaurant.curiousMenus.count == 0
             ? tableView.setEmptyMessage("다음에 먹어보고 싶었던 메뉴를 \n\n추가해 주세요.")
             : tableView.restore()
-            return typeCurious.count
+            return selectedRestaurant.curiousMenus.count
             
         } else {
-            
-            typeWarning.count == 0
+            selectedRestaurant.badMenus.count == 0
             ? tableView.setEmptyMessage("나와 안맞았던 메뉴를 \n\n추가해 주세요.")
             : tableView.restore()
-            return typeWarning.count
+            return selectedRestaurant.badMenus.count
         }
         
     }
@@ -291,19 +288,18 @@ extension MenuListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier, for: indexPath) as! MenuListTableViewCell
-        
-        let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
-        let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
-        let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
+        let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier,
+                                                 for: indexPath) as! MenuListTableViewCell
         
         if type == "like" {
             
-            let selectedItem = typeLike[indexPath.row]
+            let selectedItem = selectedRestaurant.likeMenus[indexPath.row]
             cell.menuLabel.text = selectedItem.menu
             cell.oneLinerLabel.text = selectedItem.oneLiner
-            cell.favoriteButton.tag = selectedRestaurant.menu[indexPath.row].id + 1
-            cell.favoriteButton.addTarget(self, action: #selector(tappedFavorite), for: .touchUpInside)
+            cell.favoriteButton.tag = indexPath.row
+            cell.favoriteButton.addTarget(self,
+                                          action: #selector(tappedFavorite),
+                                          for: .touchUpInside)
             cell.favoriteButton.isHidden = false
                 
 
@@ -313,50 +309,52 @@ extension MenuListViewController: UITableViewDataSource {
                 : cell.favoriteButton.setImage(uncheckedFavorite, for: .normal)
                 
             }
-
-            
-            }
-        
-        else if type == "curious" {
-            cell.menuLabel.text = typeCurious[indexPath.row].menu
-            cell.oneLinerLabel.text = typeCurious[indexPath.row].oneLiner
+        } else if type == "curious" {
+            cell.menuLabel.text = selectedRestaurant.curiousMenus[indexPath.row].menu
+            cell.oneLinerLabel.text = selectedRestaurant.curiousMenus[indexPath.row].oneLiner
             cell.favoriteButton.isHidden = true
             
-        } else if type == "warning" {
-            cell.menuLabel.text = typeWarning[indexPath.row].menu
-            cell.oneLinerLabel.text = typeWarning[indexPath.row].oneLiner
+        } else {
+            cell.menuLabel.text = selectedRestaurant.badMenus[indexPath.row].menu
+            cell.oneLinerLabel.text = selectedRestaurant.badMenus[indexPath.row].oneLiner
             cell.favoriteButton.isHidden = true
         }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             if type == "like" {
-                let typeLike = selectedRestaurant.menu.filter { $0.type == "like" }
-                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                           selectedIndex: selectedIdx,
-                                                                           menu: typeLike[indexPath.row],
-                                                                           menuIndex: indexPath.row)
+                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
+                    selectedRestaurant: selectedRestaurant,
+                    selectedIndex: selectedIdx,
+                    type: type,
+                    menu: selectedRestaurant.likeMenus[indexPath.row],
+                    menuIndex: indexPath.row)
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
+                
             } else if type == "curious" {
-                let typeCurious = selectedRestaurant.menu.filter { $0.type == "curious" }
-                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                           selectedIndex: selectedIdx,
-                                                                           menu: typeCurious[indexPath.row],
-                                                                           menuIndex: indexPath.row)
+                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
+                    selectedRestaurant: selectedRestaurant,
+                    selectedIndex: selectedIdx,
+                    type: type,
+                    menu: selectedRestaurant.curiousMenus[indexPath.row],
+                    menuIndex: indexPath.row
+                )
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
                 
             } else {
-                let typeWarning = selectedRestaurant.menu.filter { $0.type == "warning" }
-                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(selectedRestaurant: selectedRestaurant,
-                                                                           selectedIndex: selectedIdx,
-                                                                           menu: typeWarning[indexPath.row],
-                                                                           menuIndex: indexPath.row)
+                selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
+                    selectedRestaurant: selectedRestaurant,
+                    selectedIndex: selectedIdx,
+                    type: type,
+                    menu: selectedRestaurant.badMenus[indexPath.row],
+                    menuIndex: indexPath.row
+                )
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
             }
             
@@ -365,10 +363,8 @@ extension MenuListViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        
-        return "삭제"
-    }
+    func tableView(_ tableView: UITableView,
+                   titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? { return "삭제" }
     
 }
 
