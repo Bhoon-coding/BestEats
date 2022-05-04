@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 
-
 let checkedFavorite = UIImage(named: "starFill")
 let uncheckedFavorite = UIImage(named: "star")
 
@@ -195,6 +194,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.backgroundColor = .white
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
+            
         } else {
             likeTypeButton.setTitleColor(.black, for: .normal)
             likeTypeButton.backgroundColor = .white
@@ -215,6 +215,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.backgroundColor = .systemGreen
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
+            
         } else {
             curiousTypeButton.setTitleColor(.black, for: .normal)
             curiousTypeButton.backgroundColor = .white
@@ -235,6 +236,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.backgroundColor = .white
             warningTypeButton.setTitleColor(.white, for: .normal)
             warningTypeButton.backgroundColor = .systemGreen
+            
         } else {
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
@@ -370,7 +372,16 @@ extension MenuListViewController: UITableViewDataSource {
 
 extension MenuListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let menuDetailVC = MenuDetailViewController()
+        var selectedMenu: Menu
+        switch type {
+        case "like":
+            selectedMenu = selectedRestaurant.likeMenus[indexPath.row]
+        case "curious":
+            selectedMenu = selectedRestaurant.curiousMenus[indexPath.row]
+        default:
+            selectedMenu = selectedRestaurant.badMenus[indexPath.row]
+        }
+        let menuDetailVC = MenuDetailViewController(selectedMenu: selectedMenu)
         navigationController?.pushViewController(menuDetailVC, animated: true)
     }
 }
