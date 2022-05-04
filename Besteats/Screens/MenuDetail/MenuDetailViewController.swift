@@ -33,21 +33,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         return view
     }()
     
-    lazy var closeButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "close"), for: .normal)
-        button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    lazy var restaurantLabel: UILabel = {
-        let label = UILabel()
-        // 수정필요
-        label.text = "\(selectedMenu)"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        return label
-    }()
-    
     lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.text = "메뉴명"
@@ -146,6 +131,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     
     private func setUpUI() {
         
+        tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .secondarySystemBackground
         
         view.addSubview(wholeView)
@@ -155,20 +141,9 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(24)
         }
         
-        wholeView.addSubview(closeButton)
-        closeButton.snp.makeConstraints {
-            $0.size.equalTo(20)
-        }
-        
-        wholeView.addSubview(restaurantLabel)
-        restaurantLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview()
-        }
-        
         wholeView.addSubview(menuLabel)
         menuLabel.snp.makeConstraints {
-            $0.top.equalTo(closeButton.snp.bottom).offset(50)
+            $0.top.equalToSuperview().offset(36)
             $0.leading.equalToSuperview()
         }
         
