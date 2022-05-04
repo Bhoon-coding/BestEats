@@ -102,16 +102,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
-    
-    lazy var doneButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("메뉴 추가", for: .normal)
-        button.mediumButton(button: button)
-        button.tintColor = .label
-        button.backgroundColor = .systemGreen
-        button.addTarget(self, action: #selector(doneTapped), for: .touchUpInside)
-        return button
-    }()
 
     // MARK: LifeCycle
     
@@ -200,12 +190,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             $0.width.equalTo(44)
         }
         
-        wholeView.addSubview(doneButton)
-        doneButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(24)
-            $0.height.equalTo(52)
-        }
     }
     
     private func setUpDelegate() {
@@ -271,91 +255,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         }
 
-    }
-    
-    @objc func doneTapped() {
-        
-//        var menuId = 0
-//        var menuName = ""
-//        var oneLiner = ""
-//
-//        guard let inputMenuName = menuTextField.text else { return }
-//        guard let inputOneLiner = oneLinerTextField.text else { return }
-//        guard let type = self.type else {
-//            self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
-//            return }
-//
-//        if !inputMenuName.trimmingCharacters(in: .whitespaces).isEmpty {
-//            menuName = inputMenuName.trimmingCharacters(in: .whitespaces)
-//        } else {
-//            view.makeToast("메뉴명을 입력 해주세요.", position: .top)
-//            return
-//        }
-//
-//        if !inputOneLiner.trimmingCharacters(in: .whitespaces).isEmpty {
-//            oneLiner = inputOneLiner.trimmingCharacters(in: .whitespaces)
-//        } else {
-//            view.makeToast("한줄팁을 입력 해주세요.", position: .top)
-//            return
-//        }
-//
-//        if type == "like" {
-//            if selectedRestaurant.likeMenus.isEmpty {
-//                menuId = 1
-//            } else {
-//                menuId = selectedRestaurant.likeMenus.last!.id + 1
-//            }
-//            let alert = UIAlertController(title: "즐겨찾기",
-//                                          message: "즐겨찾는 메뉴로 등록 하시겠습니까?",
-//                                          preferredStyle: .alert)
-//            let confirm = UIAlertAction(title: "등록", style: .default) {_ in
-//                let menu: Menu = Menu(id: menuId,
-//                                        isFavorite: true,
-//                                        menu: menuName,
-//                                        oneLiner: oneLiner
-//                                        )
-//                UserDefaultsManager.shared.addMenu(selectedRestaurant: self.selectedRestaurant,
-//                                                   selectedIndex: self.selectedIndex,
-//                                                   type: type,
-//                                                   addedMenu: menu)
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//            let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//
-//            alert.addAction(cancel)
-//            alert.addAction(confirm)
-//            DispatchQueue.main.async {
-//                self.present(alert, animated: true, completion: nil)
-//            }
-//
-//        } else if type == "curious" {
-//            if selectedRestaurant.curiousMenus.isEmpty {
-//                menuId = 1
-//            } else {
-//                menuId = selectedRestaurant.curiousMenus.last!.id + 1
-//            }
-//            dismiss(animated: true, completion: nil)
-//        } else {
-//            if selectedRestaurant.badMenus.isEmpty {
-//                menuId = 1
-//            } else {
-//                menuId = selectedRestaurant.badMenus.last!.id + 1
-//            }
-//            dismiss(animated: true, completion: nil)
-//        }
-//
-//        let menu: Menu = Menu(id: menuId,
-//                                isFavorite: false,
-//                                menu: menuName,
-//                                oneLiner: oneLiner
-//                                )
-//        UserDefaultsManager.shared.addMenu(selectedRestaurant: selectedRestaurant,
-//                                           selectedIndex: selectedIndex,
-//                                           type: type,
-//                                           addedMenu: menu)
-//
     }
 
 }

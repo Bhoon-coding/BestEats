@@ -373,16 +373,24 @@ extension MenuListViewController: UITableViewDataSource {
 extension MenuListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var selectedMenu: Menu
+        
         switch type {
         case "like":
             selectedMenu = selectedRestaurant.likeMenus[indexPath.row]
+            
         case "curious":
             selectedMenu = selectedRestaurant.curiousMenus[indexPath.row]
+            
         default:
             selectedMenu = selectedRestaurant.badMenus[indexPath.row]
         }
+        
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
         let menuDetailVC = MenuDetailViewController(selectedMenu: selectedMenu)
         navigationController?.pushViewController(menuDetailVC, animated: true)
+        
     }
 }
 
