@@ -13,6 +13,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Properties
     
+    var modifyMode: Bool = false
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
@@ -108,6 +109,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        setUpNavigationBar()
         setUpUI()
         setUpDelegate()
     
@@ -118,6 +120,18 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Methods
+    
+    private func setUpNavigationBar() {
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                       size: 14)!]
+        let modifyButton = UIBarButtonItem(title: "수정",
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(modifyTapped))
+        modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = modifyButton
+        title = selectedMenu.menu
+    }
     
     private func setUpUI() {
         
@@ -207,6 +221,10 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: @objc
+    
+    @objc func modifyTapped() {
+        print("수정 버튼 탭")
+    }
     
     @objc func closeTapped() {
         dismiss(animated: true, completion: nil)
