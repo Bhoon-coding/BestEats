@@ -128,7 +128,9 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
                                            style: .plain,
                                            target: self,
                                            action: #selector(modifyTapped))
+        
         modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        
         navigationItem.rightBarButtonItem = modifyButton
         title = selectedMenu.menu
     }
@@ -223,7 +225,30 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     // MARK: @objc
     
     @objc func modifyTapped() {
-        print("수정 버튼 탭")
+        
+        modifyMode = !modifyMode
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                       size: 14)!]
+        let doneButton = UIBarButtonItem(title: "완료",
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(doneTapped))
+        doneButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = doneButton
+    }
+    
+    @objc func doneTapped() {
+        
+        modifyMode = !modifyMode
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                       size: 14)!]
+        let modifyButton = UIBarButtonItem(title: "수정",
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(modifyTapped))
+        
+        modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = modifyButton
     }
     
     @objc func closeTapped() {
