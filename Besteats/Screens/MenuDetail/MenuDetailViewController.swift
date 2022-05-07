@@ -13,7 +13,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Properties
     
-    var modifyMode: Bool = false
+    var editMode: Bool = false
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
@@ -43,8 +43,10 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     
     lazy var menuTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "메뉴를 입력해 주세요."
         textField.placeholderConvention(textField: textField)
+        textField.isUserInteractionEnabled = false
+        textField.text = selectedMenu.menu
+        textField.backgroundColor = .secondarySystemBackground
         return textField
     }()
     
@@ -57,8 +59,10 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     
     lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "한줄팁을 입력해 주세요."
         textField.placeholderConvention(textField: textField)
+        textField.isUserInteractionEnabled = false
+        textField.text = selectedMenu.oneLiner
+        textField.backgroundColor = .secondarySystemBackground
         return textField
     }()
     
@@ -127,7 +131,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         let modifyButton = UIBarButtonItem(title: "수정",
                                            style: .plain,
                                            target: self,
-                                           action: #selector(modifyTapped))
+                                           action: #selector(editTapped))
         
         modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
         
@@ -152,6 +156,26 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             $0.top.equalToSuperview().offset(36)
             $0.leading.equalToSuperview()
         }
+
+//        wholeView.addSubview(setMenuView)
+//        setMenuView.snp.makeConstraints {
+//            $0.top.equalTo(menuLabel.snp.bottom).offset(24)
+//            $0.leading.trailing.equalToSuperview()
+//            $0.height.equalTo(44)
+//        }
+//
+//        setMenuView.addSubview(setMenuLabel)
+//        setMenuLabel.snp.makeConstraints {
+//            $0.leading.equalTo(10)
+//            $0.centerY.equalToSuperview()
+//        }
+        
+//        wholeView.addSubview(oneLinerLabel)
+//        oneLinerLabel.snp.makeConstraints {
+//            $0.top.equalTo(setMenuView.snp.bottom).offset(50)
+//            $0.leading.equalToSuperview()
+//        }
+
         
         wholeView.addSubview(menuTextField)
         menuTextField.snp.makeConstraints {
@@ -224,9 +248,9 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: @objc
     
-    @objc func modifyTapped() {
+    @objc func editTapped() {
         
-        modifyMode = !modifyMode
+        editMode = true
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
                                                                        size: 14)!]
         let doneButton = UIBarButtonItem(title: "완료",
@@ -235,20 +259,35 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
                                          action: #selector(doneTapped))
         doneButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
         navigationItem.rightBarButtonItem = doneButton
+        menuTextField.isUserInteractionEnabled = true
+        menuTextField.backgroundColor = .white
+        menuTextField.placeholder = selectedMenu.menu
+        
+        oneLinerTextField.isUserInteractionEnabled = true
+        oneLinerTextField.backgroundColor = .white
+        oneLinerTextField.placeholder = selectedMenu.oneLiner
     }
     
     @objc func doneTapped() {
         
-        modifyMode = !modifyMode
+        editMode = false
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
                                                                        size: 14)!]
-        let modifyButton = UIBarButtonItem(title: "수정",
+        let editButton = UIBarButtonItem(title: "수정",
                                            style: .plain,
                                            target: self,
-                                           action: #selector(modifyTapped))
+                                           action: #selector(editTapped))
         
-        modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
-        navigationItem.rightBarButtonItem = modifyButton
+        editButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = editButton
+        
+        menuTextField.isUserInteractionEnabled = false
+        menuTextField.backgroundColor = .secondarySystemBackground
+        menuTextField.text = selectedMenu.menu
+        
+        oneLinerTextField.isUserInteractionEnabled = false
+        oneLinerTextField.backgroundColor = .secondarySystemBackground
+        oneLinerTextField.text = selectedMenu.oneLiner
     }
     
     @objc func closeTapped() {
