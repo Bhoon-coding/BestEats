@@ -246,6 +246,17 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func changeTextField() {
+        self.menuTextField.isUserInteractionEnabled = editMode ? true : false
+        self.menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
+        self.menuTextField.text = self.selectedMenu.menu
+
+        self.oneLinerTextField.isUserInteractionEnabled = false
+        self.oneLinerTextField.backgroundColor = .secondarySystemBackground
+        self.oneLinerTextField.text = self.selectedMenu.oneLiner
+    }
+    
+    
     // MARK: @objc
     
     @objc func editTapped() {
@@ -276,18 +287,27 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         let editButton = UIBarButtonItem(title: "수정",
                                            style: .plain,
                                            target: self,
-                                           action: #selector(editTapped))
-        
+                                         action: #selector(self.editTapped))
+
         editButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
-        navigationItem.rightBarButtonItem = editButton
         
-        menuTextField.isUserInteractionEnabled = false
-        menuTextField.backgroundColor = .secondarySystemBackground
-        menuTextField.text = selectedMenu.menu
+        let alert = UIAlertController(title: "변경사항을 저장 하시겠습니까?",
+                                      message: "",
+                                      preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "저장",
+                                    style: .default) { action in
+            self.navigationItem.rightBarButtonItem = editButton
+            self.changeTextField()
+        }
+        let cancel = UIAlertAction(title: "취소",
+                                   style: .cancel) { action in
+            self.navigationItem.rightBarButtonItem = editButton
+            self.changeTextField()
+        }
+        alert.addAction(confirm)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
         
-        oneLinerTextField.isUserInteractionEnabled = false
-        oneLinerTextField.backgroundColor = .secondarySystemBackground
-        oneLinerTextField.text = selectedMenu.oneLiner
     }
     
     @objc func closeTapped() {
