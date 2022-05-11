@@ -18,9 +18,11 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
     var type: String? = nil
+    var selectedRestaurant: Restaurant
     var selectedMenu: Menu
 
-    init(selectedMenu: Menu) {
+    init(selectedRestaurant: Restaurant, selectedMenu: Menu) {
+        self.selectedRestaurant = selectedRestaurant
         self.selectedMenu = selectedMenu
         super.init(nibName: nil, bundle: nil)
     }
@@ -136,7 +138,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
         
         navigationItem.rightBarButtonItem = modifyButton
-        title = selectedMenu.menu
+        title = selectedRestaurant.restaurantName
     }
     
     private func setUpUI() {

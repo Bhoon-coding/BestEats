@@ -388,7 +388,7 @@ extension MenuListViewController: UITableViewDelegate {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         self.navigationItem.backBarButtonItem = backBarButtonItem
         
-        let menuDetailVC = MenuDetailViewController(selectedMenu: selectedMenu)
+        let menuDetailVC = MenuDetailViewController(selectedRestaurant: selectedRestaurant, selectedMenu: selectedMenu)
         navigationController?.pushViewController(menuDetailVC, animated: true)
         
     }
