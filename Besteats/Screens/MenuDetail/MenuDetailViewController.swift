@@ -17,13 +17,24 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
     var selectedWarning: Bool = false
-    var type: String? = nil
+    
     var selectedRestaurant: Restaurant
+    var selectedRestaurantIndex: Int
     var selectedMenu: Menu
+    var selectedMenuIndex: Int
+    var type: String
 
-    init(selectedRestaurant: Restaurant, selectedMenu: Menu) {
+    init(selectedRestaurant: Restaurant,
+         selectedRestaurantIndex: Int,
+         selectedMenu: Menu,
+         selectedMenuIndex: Int,
+         type: String) {
         self.selectedRestaurant = selectedRestaurant
+        self.selectedRestaurantIndex = selectedRestaurantIndex
         self.selectedMenu = selectedMenu
+        self.selectedMenuIndex = selectedMenuIndex
+        self.type = type
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -91,21 +102,21 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     
     lazy var typeLikeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "like"), for: .normal)
+        button.setImage(UIImage(named: type == "like" ? "likeFill" : "like"), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "curious"), for: .normal)
+        button.setImage(UIImage(named: type == "curious" ? "curiousFill" : "curious"), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var typeWarningButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "warning"), for: .normal)
+        button.setImage(UIImage(named: type == "warning" ? "warningFill" : "warning"), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
@@ -130,14 +141,14 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     private func setUpNavigationBar() {
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
                                                                        size: 14)!]
-        let modifyButton = UIBarButtonItem(title: "수정",
+        let editButton = UIBarButtonItem(title: "수정",
                                            style: .plain,
                                            target: self,
                                            action: #selector(editTapped))
         
-        modifyButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        editButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
         
-        navigationItem.rightBarButtonItem = modifyButton
+        navigationItem.rightBarButtonItem = editButton
         title = selectedRestaurant.restaurantName
     }
     
@@ -158,26 +169,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             $0.top.equalToSuperview().offset(36)
             $0.leading.equalToSuperview()
         }
-
-//        wholeView.addSubview(setMenuView)
-//        setMenuView.snp.makeConstraints {
-//            $0.top.equalTo(menuLabel.snp.bottom).offset(24)
-//            $0.leading.trailing.equalToSuperview()
-//            $0.height.equalTo(44)
-//        }
-//
-//        setMenuView.addSubview(setMenuLabel)
-//        setMenuLabel.snp.makeConstraints {
-//            $0.leading.equalTo(10)
-//            $0.centerY.equalToSuperview()
-//        }
-        
-//        wholeView.addSubview(oneLinerLabel)
-//        oneLinerLabel.snp.makeConstraints {
-//            $0.top.equalTo(setMenuView.snp.bottom).offset(50)
-//            $0.leading.equalToSuperview()
-//        }
-
         
         wholeView.addSubview(menuTextField)
         menuTextField.snp.makeConstraints {
@@ -266,12 +257,12 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         editMode = true
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
                                                                        size: 14)!]
-        let doneButton = UIBarButtonItem(title: "완료",
+        let saveButton = UIBarButtonItem(title: "저장",
                                          style: .plain,
                                          target: self,
-                                         action: #selector(doneTapped))
-        doneButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
-        navigationItem.rightBarButtonItem = doneButton
+                                         action: #selector(saveTapped))
+        saveButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        navigationItem.rightBarButtonItem = saveButton
         menuTextField.isUserInteractionEnabled = true
         menuTextField.backgroundColor = .white
         menuTextField.placeholder = selectedMenu.menu
@@ -281,7 +272,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         oneLinerTextField.placeholder = selectedMenu.oneLiner
     }
     
-    @objc func doneTapped() {
+    @objc func saveTapped() {
         
         editMode = false
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
@@ -325,7 +316,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         } else {
-            type = nil
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
         }
 
@@ -340,7 +330,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             typeCuriousButton.setImage(UIImage(named: "curiousFill"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         } else {
-            type = nil
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
         }
 
@@ -355,7 +344,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
         } else {
-            type = nil
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
         }
 

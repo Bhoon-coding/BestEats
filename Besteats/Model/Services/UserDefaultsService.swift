@@ -90,24 +90,6 @@ struct UserDefaultsManager {
         
         return restaurant
     }
-//    func updateRestaurants(newRestaurant: Restaurants) {
-//        var restaurants = getRestaurants()
-//        var newRestaurantIndex = -1
-//
-//        for (index, restaurant) in restaurants.enumerated() {
-//            if restaurant == newRestaurant {
-//                newRestaurantIndex = index
-//            }
-//        }
-//
-//        if newRestaurantIndex == -1 {
-//            print("바꿀가게가 없어")
-//            return
-//        }
-//
-//        restaurants[newRestaurantIndex] = newRestaurant
-//        saveRestaurants(restaurants: restaurants)
-//    }
 
     func getRestaurants() -> [Restaurant] {
         guard let getRestaurnatsEncodeData = defaults.value(forKey: "restaurantsData") as? Data else {
