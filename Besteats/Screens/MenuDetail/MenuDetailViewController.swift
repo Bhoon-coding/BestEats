@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import Toast_Swift
 
 class MenuDetailViewController: UIViewController, UITextFieldDelegate {
 
@@ -239,7 +240,17 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func changeTextField() {
+    private func changeTextField() {
+        self.menuTextField.isUserInteractionEnabled = editMode ? true : false
+        self.menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
+        self.menuTextField.text = editMode ? self.selectedMenu.menu : self.menuTextField.text
+
+        self.oneLinerTextField.isUserInteractionEnabled = false
+        self.oneLinerTextField.backgroundColor = .secondarySystemBackground
+        self.oneLinerTextField.text = editMode ? self.selectedMenu.oneLiner : self.oneLinerTextField.text
+    }
+    
+    private func saveCancel() {
         self.menuTextField.isUserInteractionEnabled = editMode ? true : false
         self.menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
         self.menuTextField.text = self.selectedMenu.menu
@@ -248,7 +259,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         self.oneLinerTextField.backgroundColor = .secondarySystemBackground
         self.oneLinerTextField.text = self.selectedMenu.oneLiner
     }
-    
     
     // MARK: @objc
     
@@ -291,11 +301,25 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
                                     style: .default) { action in
             self.navigationItem.rightBarButtonItem = editButton
             self.changeTextField()
+            
+            guard let editedMenuName = self.menuTextField.text,
+                  let editedOnliner = self.oneLinerTextField.text else { return }
+            
+            let editMenu = Menu(id: self.selectedMenu.id,
+                                  isFavorite: self.selectedMenu.isFavorite,
+                                  menu: editedMenuName,
+                                  oneLiner: editedOnliner)
+            
+            UserDefaultsManager.shared.updateMenu(selectedRestaurant: self.selectedRestaurant,
+                                                  selectedRestauransIndex: self.selectedRestaurantIndex,
+                                                  type: self.type,
+                                                  editedMenu: editMenu,
+                                                  menuIndex: self.selectedMenuIndex)
         }
         let cancel = UIAlertAction(title: "취소",
                                    style: .cancel) { action in
             self.navigationItem.rightBarButtonItem = editButton
-            self.changeTextField()
+            self.saveCancel()
         }
         alert.addAction(confirm)
         alert.addAction(cancel)

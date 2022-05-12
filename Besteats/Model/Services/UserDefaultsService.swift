@@ -38,14 +38,16 @@ struct UserDefaultsManager {
         var restaurants = getRestaurants()
         var restaturant = selectedRestaurant
         
-        switch type {
-        case "like":
+        if type == "like" {
             restaturant.likeMenus.append(addedMenu)
-        case "curious":
+            
+        } else if type == "curious" {
             restaturant.curiousMenus.append(addedMenu)
-        default:
+            
+        } else {
             restaturant.badMenus.append(addedMenu)
         }
+        
         restaurants[selectedIndex] = restaturant
         saveRestaurants(restaurants: restaurants)
     }
@@ -59,14 +61,17 @@ struct UserDefaultsManager {
         
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
-        switch type {
-        case "like":
+        
+        if type == "like" {
             restaurant.likeMenus.remove(at: menuIndex)
-        case "curious":
+            
+        } else if type == "curious" {
             restaurant.curiousMenus.remove(at: menuIndex)
-        default:
+            
+        } else {
             restaurant.badMenus.remove(at: menuIndex)
         }
+        
         restaurants[selectedIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
         return restaurant
@@ -89,6 +94,42 @@ struct UserDefaultsManager {
         saveRestaurants(restaurants: restaurants)
         
         return restaurant
+    }
+    
+    func updateMenu(selectedRestaurant: Restaurant,
+                    selectedRestauransIndex: Int,
+                    type: String,
+                    editedMenu: Menu,
+                    menuIndex: Int
+                    ) -> Restaurant {
+        
+        var restaurants = getRestaurants()
+        var restaurant = selectedRestaurant
+        var menus = selectedRestaurant.likeMenus
+        let menu = editedMenu
+        
+        if type == "curious" {
+            menus = selectedRestaurant.curiousMenus
+            
+        } else if type == "warning" {
+            menus = selectedRestaurant.badMenus
+        }
+        
+        menus[menuIndex] = menu
+        
+        if type == "like" {
+            restaurant.likeMenus = menus
+        } else if type == "curious" {
+            restaurant.curiousMenus = menus
+        } else {
+            restaurant.badMenus = menus
+        }
+        
+        restaurants[selectedRestauransIndex] = restaurant
+        saveRestaurants(restaurants: restaurants)
+        
+        return restaurant
+
     }
 
     func getRestaurants() -> [Restaurant] {
