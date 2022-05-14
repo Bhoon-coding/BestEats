@@ -247,7 +247,7 @@ class MenuListViewController: UIViewController {
         let index = sender.tag
         let selectedItem = selectedRestaurant.likeMenus[index]
         
-        selectedRestaurant = UserDefaultsManager.shared.updateMenus(
+        selectedRestaurant = UserDefaultsManager.shared.updateFavoriteMenu(
             selectedRestaurant: selectedRestaurant,
             selectedRestauransIndex: selectedRestaurantIndex,
             selectedMenu: selectedItem,

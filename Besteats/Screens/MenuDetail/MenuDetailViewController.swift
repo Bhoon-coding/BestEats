@@ -245,8 +245,8 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         self.menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
         self.menuTextField.text = editMode ? self.selectedMenu.menu : self.menuTextField.text
 
-        self.oneLinerTextField.isUserInteractionEnabled = false
-        self.oneLinerTextField.backgroundColor = .secondarySystemBackground
+        self.oneLinerTextField.isUserInteractionEnabled = editMode ? true : false
+        self.oneLinerTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
         self.oneLinerTextField.text = editMode ? self.selectedMenu.oneLiner : self.oneLinerTextField.text
     }
     
@@ -260,11 +260,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         self.oneLinerTextField.text = self.selectedMenu.oneLiner
     }
     
-    // MARK: @objc
-    
-    @objc func editTapped() {
-        
-        editMode = true
+    private func navRightBarSaveButton() {
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
                                                                        size: 14)!]
         let saveButton = UIBarButtonItem(title: "저장",
@@ -273,6 +269,28 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
                                          action: #selector(saveTapped))
         saveButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
         navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    private func navRightBarEditButton() {
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+                                                                       size: 14)!]
+        let editButton = UIBarButtonItem(title: "수정",
+                                           style: .plain,
+                                           target: self,
+                                         action: #selector(self.editTapped))
+
+        editButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
+        self.navigationItem.rightBarButtonItem = editButton
+    }
+    
+    // MARK: @objc
+    
+    @objc func editTapped() {
+        
+        editMode = true
+        if editMode {
+            navRightBarSaveButton()
+        }
         menuTextField.isUserInteractionEnabled = true
         menuTextField.backgroundColor = .white
         menuTextField.placeholder = selectedMenu.menu
@@ -285,26 +303,32 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     @objc func saveTapped() {
         
         editMode = false
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
-                                                                       size: 14)!]
-        let editButton = UIBarButtonItem(title: "수정",
-                                           style: .plain,
-                                           target: self,
-                                         action: #selector(self.editTapped))
-
-        editButton.setTitleTextAttributes(smallFontAttributes, for: .normal)
         
         let alert = UIAlertController(title: "변경사항을 저장 하시겠습니까?",
                                       message: "",
                                       preferredStyle: .alert)
         let confirm = UIAlertAction(title: "저장",
                                     style: .default) { action in
-            self.navigationItem.rightBarButtonItem = editButton
-            self.changeTextField()
+            self.navRightBarEditButton()
             
             guard let editedMenuName = self.menuTextField.text,
                   let editedOnliner = self.oneLinerTextField.text else { return }
             
+            if editedMenuName.trimmingCharacters(in: .whitespaces).isEmpty {
+                self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+                self.editMode = true
+                self.navRightBarSaveButton()
+                self.changeTextField()
+                return
+                
+            } else if editedOnliner.trimmingCharacters(in: .whitespaces).isEmpty {
+                self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+                self.editMode = true
+                self.navRightBarSaveButton()
+                self.changeTextField()
+                return
+            }
+            self.changeTextField()
             let editMenu = Menu(id: self.selectedMenu.id,
                                   isFavorite: self.selectedMenu.isFavorite,
                                   menu: editedMenuName,
@@ -318,7 +342,7 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         }
         let cancel = UIAlertAction(title: "취소",
                                    style: .cancel) { action in
-            self.navigationItem.rightBarButtonItem = editButton
+            self.navRightBarEditButton()
             self.saveCancel()
         }
         alert.addAction(confirm)

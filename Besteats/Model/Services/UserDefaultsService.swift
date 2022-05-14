@@ -77,7 +77,7 @@ struct UserDefaultsManager {
         return restaurant
     }
     
-    func updateMenus(selectedRestaurant: Restaurant,
+    func updateFavoriteMenu(selectedRestaurant: Restaurant,
                      selectedRestauransIndex: Int,
                      selectedMenu: Menu,
                      menuIndex: Int) -> Restaurant {
@@ -101,7 +101,7 @@ struct UserDefaultsManager {
                     type: String,
                     editedMenu: Menu,
                     menuIndex: Int
-                    ) -> Restaurant {
+                    ) {
         
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
@@ -127,8 +127,6 @@ struct UserDefaultsManager {
         
         restaurants[selectedRestauransIndex] = restaurant
         saveRestaurants(restaurants: restaurants)
-        
-        return restaurant
 
     }
 
