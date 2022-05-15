@@ -396,7 +396,7 @@ extension MenuListViewController: UITableViewDelegate {
             selectedRestaurantIndex: selectedRestaurantIndex,
             selectedMenu: selectedMenu,
             selectedMenuIndex: indexPath.row,
-            type: type
+            prevType: type
         )
         navigationController?.pushViewController(menuDetailVC, animated: true)
         

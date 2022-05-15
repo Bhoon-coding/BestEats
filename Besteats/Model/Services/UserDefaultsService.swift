@@ -98,7 +98,8 @@ struct UserDefaultsManager {
     
     func updateMenu(selectedRestaurant: Restaurant,
                     selectedRestauransIndex: Int,
-                    type: String,
+                    prevType: String,
+                    changeType: String,
                     editedMenu: Menu,
                     menuIndex: Int
                     ) {
@@ -108,25 +109,36 @@ struct UserDefaultsManager {
         var menus = selectedRestaurant.likeMenus
         let menu = editedMenu
         
-        if type == "curious" {
-            menus = selectedRestaurant.curiousMenus
-            
-        } else if type == "warning" {
-            menus = selectedRestaurant.badMenus
+        if changeType == "like" {
+            menus = selectedRestaurant.likeMenus
+            menus.remove(at: menuIndex)
         }
         
-        menus[menuIndex] = menu
+        if changeType == "curious" {
+            menus = selectedRestaurant.curiousMenus
+            menus.remove(at: menuIndex)
+            
+        } else if changeType == "warning" {
+            menus = selectedRestaurant.badMenus
+            menus.remove(at: menuIndex)
+        }
         
-        if type == "like" {
+        menus.append(menu)
+        dump(restaurant)
+        print("메뉴: \(menu)")
+        
+        if changeType == "like" {
             restaurant.likeMenus = menus
-        } else if type == "curious" {
+            
+        } else if changeType == "curious" {
             restaurant.curiousMenus = menus
+            
         } else {
             restaurant.badMenus = menus
         }
         
         restaurants[selectedRestauransIndex] = restaurant
-        saveRestaurants(restaurants: restaurants)
+//        saveRestaurants(restaurants: restaurants)
 
     }
 

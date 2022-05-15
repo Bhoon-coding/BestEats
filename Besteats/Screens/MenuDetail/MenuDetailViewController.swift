@@ -23,18 +23,20 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     var selectedRestaurantIndex: Int
     var selectedMenu: Menu
     var selectedMenuIndex: Int
-    var type: String
+    var prevType: String
+    var changeType: String = ""
+    
 
     init(selectedRestaurant: Restaurant,
          selectedRestaurantIndex: Int,
          selectedMenu: Menu,
          selectedMenuIndex: Int,
-         type: String) {
+         prevType: String) {
         self.selectedRestaurant = selectedRestaurant
         self.selectedRestaurantIndex = selectedRestaurantIndex
         self.selectedMenu = selectedMenu
         self.selectedMenuIndex = selectedMenuIndex
-        self.type = type
+        self.prevType = prevType
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -103,21 +105,21 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     
     lazy var typeLikeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: type == "like" ? "likeFill" : "like"), for: .normal)
+        button.setImage(UIImage(named: prevType == "like" ? "likeFill" : "like"), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: type == "curious" ? "curiousFill" : "curious"), for: .normal)
+        button.setImage(UIImage(named: prevType == "curious" ? "curiousFill" : "curious"), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
     lazy var typeWarningButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: type == "warning" ? "warningFill" : "warning"), for: .normal)
+        button.setImage(UIImage(named: prevType == "warning" ? "warningFill" : "warning"), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
@@ -248,6 +250,8 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         self.oneLinerTextField.isUserInteractionEnabled = editMode ? true : false
         self.oneLinerTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
         self.oneLinerTextField.text = editMode ? self.selectedMenu.oneLiner : self.oneLinerTextField.text
+        
+        self.typeView.backgroundColor = editMode ? .white : .secondarySystemBackground
     }
     
     private func saveCancel() {
@@ -258,6 +262,8 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         self.oneLinerTextField.isUserInteractionEnabled = false
         self.oneLinerTextField.backgroundColor = .secondarySystemBackground
         self.oneLinerTextField.text = self.selectedMenu.oneLiner
+        
+        self.typeView.backgroundColor = editMode ? .white : .secondarySystemBackground
     }
     
     private func navRightBarSaveButton() {
@@ -298,6 +304,8 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         oneLinerTextField.isUserInteractionEnabled = true
         oneLinerTextField.backgroundColor = .white
         oneLinerTextField.placeholder = selectedMenu.oneLiner
+        
+        typeView.backgroundColor = .white
     }
     
     @objc func saveTapped() {
@@ -336,7 +344,8 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
             
             UserDefaultsManager.shared.updateMenu(selectedRestaurant: self.selectedRestaurant,
                                                   selectedRestauransIndex: self.selectedRestaurantIndex,
-                                                  type: self.type,
+                                                  prevType: self.prevType,
+                                                  changeType: self.changeType,
                                                   editedMenu: editMenu,
                                                   menuIndex: self.selectedMenuIndex)
         }
@@ -356,10 +365,9 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func tappedLike(button: UIButton) {
-        selectedLike = !selectedLike
-
+        selectedLike = true
         if selectedLike {
-            type = "like"
+            changeType = "like"
             typeLikeButton.setImage(UIImage(named: "likeFill"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
@@ -370,10 +378,9 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func tappedCurious(button: UIButton) {
-        selectedCurious = !selectedCurious
-
+        selectedCurious = true
         if selectedCurious {
-            type = "curious"
+            changeType = "curious"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curiousFill"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
@@ -384,10 +391,9 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func tappedWarning(button: UIButton) {
-        selectedWarning = !selectedWarning
-
+        selectedWarning = true
         if selectedWarning {
-            type = "warning"
+            changeType = "warning"
             typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
             typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
             typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
