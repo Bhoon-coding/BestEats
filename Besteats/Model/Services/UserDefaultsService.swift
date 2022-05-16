@@ -107,39 +107,48 @@ struct UserDefaultsManager {
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
         var menus = selectedRestaurant.likeMenus
-        let menu = editedMenu
+        var menu = editedMenu
         
-        if changeType == "like" {
-            menus = selectedRestaurant.likeMenus
-            menus.remove(at: menuIndex)
-        }
-        
-        if changeType == "curious" {
-            menus = selectedRestaurant.curiousMenus
-            menus.remove(at: menuIndex)
+        if prevType != changeType {
             
-        } else if changeType == "warning" {
-            menus = selectedRestaurant.badMenus
-            menus.remove(at: menuIndex)
-        }
-        
-        menus.append(menu)
-        dump(restaurant)
-        print("메뉴: \(menu)")
-        
-        if changeType == "like" {
-            restaurant.likeMenus = menus
+            if changeType == "like" {
+                menus = selectedRestaurant.likeMenus
+                menus.append(menu)
+                restaurant.likeMenus = menus
+                
+            } else if changeType == "curious" {
+                menus = selectedRestaurant.curiousMenus
+                menus.append(menu)
+                restaurant.curiousMenus = menus
+                menu.isFavorite = false
+                
+            } else if changeType == "warning" {
+                menus = selectedRestaurant.badMenus
+                menus.append(menu)
+                restaurant.badMenus = menus
+                menu.isFavorite = false
+            }
             
-        } else if changeType == "curious" {
-            restaurant.curiousMenus = menus
+            if prevType == "like" {
+                menus = selectedRestaurant.likeMenus
+                menus.remove(at: menuIndex)
+                restaurant.likeMenus = menus
             
-        } else {
-            restaurant.badMenus = menus
+            } else if prevType == "curious" {
+                menus = selectedRestaurant.curiousMenus
+                menus.remove(at: menuIndex)
+                restaurant.curiousMenus = menus
+                
+            } else if prevType == "warning" {
+                menus = selectedRestaurant.badMenus
+                menus.remove(at: menuIndex)
+                restaurant.badMenus = menus
+            }
+            
         }
         
         restaurants[selectedRestauransIndex] = restaurant
-//        saveRestaurants(restaurants: restaurants)
-
+        saveRestaurants(restaurants: restaurants)
     }
 
     func getRestaurants() -> [Restaurant] {
