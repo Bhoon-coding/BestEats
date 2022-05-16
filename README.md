@@ -23,6 +23,8 @@
 # 기능
 
 ## Main page (메인 페이지)
+- <img width = "25%" src = "https://user-images.githubusercontent.com/64088377/168579712-495d2583-95ba-4482-88c7-fdaa33585145.png">
+
 
 ### TabBar Controller
 - 하단 탭의 버튼으로 페이지 별 보여지는 화면을 다르게 구현 하였습니다.
@@ -31,12 +33,16 @@
 - CollectionView를 활용하여 사용자가 등록한 맛집들을 한눈에 볼 수 있도록 구현 하였습니다.
 
 ### BottomSheet (ActionSheet)
+<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168580941-99d1efd4-928d-4cd5-b48b-ef6625052982.gif">
 - '...' 버튼을 누르면 하단에서 ActionSheet를 보여주며 '맛집 이름 변경', '맛집 삭제'를 할 수 있습니다.
 
+
 ### 음식점 찾기
+<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168581632-07b60bb3-5c1a-47a5-b04a-859eba29569e.gif">
 - 등록되어 있는 음식점을 filter, contain 메소드를 이용해서 사용자가 찾고자 하는 음식점을 직관적으로 추려내게 구현 하였습니다.
 
 ### 즐겨찾기 메뉴 예외 처리
+<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168582222-d1cd5a27-44c3-4b8e-824a-4cc5871c799f.png">
 - 등록된 즐겨찾기 메뉴가 없을 시 '즐겨찾기 메뉴 추가 문구'를 보여주게 하였습니다.
 
 
@@ -47,31 +53,19 @@
 ### Empty State (CollectionView, TableView)
 - 데이터가 없을시 빈 화면이 아닌 맛집 데이터 추가를 유도하는 View를 보여주도록 하였습니다.
 
-#### 체크리스트
-- [x] 맛집리스트 Cell 중간 베스트메뉴명 설정 
-- [x] 맛집메뉴명 변경하는 기능 추가 필요
-- [x] 맛집리스트 Cell 하단 타입별 메뉴 갯수 추가. (디자인 수정 필요)
-- [x] 맛집리스트 Cell 삭제 기능
-- [x] 등록된 맛집리스트 검색
- 
 
 ----
 
 ## MenuList page (메뉴리스트 페이지)
+<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168582735-dc804477-5649-42ce-b5cf-0795892bda57.png">
+
 - TableView를 사용하여 등록한 `메뉴`와 `한줄팁`을 보기쉽게 구현 하였습니다.
 - Main page에서 받아온 데이터를 navigation title, tableViewCell에 보여주도록 하였습니다.
 - `좋아요`, `먹어볼래요`, `별로에요` 버튼 클릭시 `filter 메소드`를 사용하여 타입별로 나타내게 하였습니다.
    -> 위 타입별로 filter 하게되면 index를 가져오는데 어려움이있어 Model 구조를 변경 하였습니다.
 - `좋아요` 타입에서 ⭐️ 터치시 메인페이지에 등록된 메뉴가 보이도록 즐겨찾기 기능 구현 하였습니다.
 
-### 체크리스트
-- [x] FoodModiModel 구조체 구조 수정 
-- [x] 메뉴리스트 Cell에 보여주기
-- [x] 메뉴리스트 삭제 기능
-- [x] type 별로 array filter (like, curious, warning)
-- [x] 해당 타입의 메뉴리스트가 없을시 Empty State 화면 보여주기
-- [x] Restaurant 구조 변경 
-- [ ] 중복 맛집명의 경우로 데이터 추가시 안되게 토스트 띄워주기
+
 
 -----
 
@@ -82,7 +76,8 @@
 
 -----
 
-## MenuDetail page (메뉴 상세 페이지)
+## MenuDetail page (메뉴 상세 페이지) - 기능구현중 입니다.
+
 
 - 메뉴 리스트의 선택된 cell의 데이터를 가져와서 보여주게 하였습니다.
 
