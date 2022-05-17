@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
-class MenuAddViewController: UIViewController, UITextFieldDelegate {
+final class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     

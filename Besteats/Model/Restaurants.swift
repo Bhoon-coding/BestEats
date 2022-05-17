@@ -14,10 +14,6 @@ struct Restaurant: Codable, Equatable {
     var curiousMenus: [Menu]
     var badMenus: [Menu]
     
-//    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
-//        return lhs.restaurantName == rhs.restaurantName
-//    }
-    
     init(
         restaurantName: String,
         type: String,

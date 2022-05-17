@@ -8,11 +8,10 @@
 import UIKit
 import SnapKit
 
-
 let checkedFavorite = UIImage(named: "starFill")
 let uncheckedFavorite = UIImage(named: "star")
 
-class MenuListViewController: UIViewController {
+final class MenuListViewController: UIViewController {
     
     // MARK: Properties
     
@@ -23,13 +22,13 @@ class MenuListViewController: UIViewController {
     var type: String = "like"
     var totalRestaurants: [Restaurant] = []
     var selectedRestaurant: Restaurant
-    var selectedIdx: Int
+    var selectedRestaurantIndex: Int
     var totalMenus: [Menu] = []
     
     
     init(selectedRestaurant: Restaurant ,index: Int) {
         self.selectedRestaurant = selectedRestaurant
-        self.selectedIdx = index
+        self.selectedRestaurantIndex = index
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -98,14 +97,14 @@ class MenuListViewController: UIViewController {
         setUpUI()
         setUpTableView()
         
-        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
+        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedRestaurantIndex]
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedIdx]
+        selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedRestaurantIndex]
         
         DispatchQueue.main.async {
             self.menuListTableView.reloadData()
@@ -174,7 +173,7 @@ class MenuListViewController: UIViewController {
     @objc func addTapped() {
         
         let menuAddVC = MenuAddViewController(selectedRestaurant: selectedRestaurant,
-                                              selectedIndex: selectedIdx
+                                              selectedIndex: selectedRestaurantIndex
         )
         
         menuAddVC.modalPresentationStyle = .fullScreen
@@ -195,6 +194,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.backgroundColor = .white
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
+            
         } else {
             likeTypeButton.setTitleColor(.black, for: .normal)
             likeTypeButton.backgroundColor = .white
@@ -215,6 +215,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.backgroundColor = .systemGreen
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
+            
         } else {
             curiousTypeButton.setTitleColor(.black, for: .normal)
             curiousTypeButton.backgroundColor = .white
@@ -235,6 +236,7 @@ class MenuListViewController: UIViewController {
             curiousTypeButton.backgroundColor = .white
             warningTypeButton.setTitleColor(.white, for: .normal)
             warningTypeButton.backgroundColor = .systemGreen
+            
         } else {
             warningTypeButton.setTitleColor(.black, for: .normal)
             warningTypeButton.backgroundColor = .white
@@ -245,9 +247,9 @@ class MenuListViewController: UIViewController {
         let index = sender.tag
         let selectedItem = selectedRestaurant.likeMenus[index]
         
-        selectedRestaurant = UserDefaultsManager.shared.updateMenus(
+        selectedRestaurant = UserDefaultsManager.shared.updateFavoriteMenu(
             selectedRestaurant: selectedRestaurant,
-            selectedRestauransIndex: selectedIdx,
+            selectedRestauransIndex: selectedRestaurantIndex,
             selectedMenu: selectedItem,
             menuIndex: index
         )
@@ -292,7 +294,6 @@ extension MenuListViewController: UITableViewDataSource {
                                                  for: indexPath) as! MenuListTableViewCell
         
         if type == "like" {
-            
             let selectedItem = selectedRestaurant.likeMenus[indexPath.row]
             cell.menuLabel.text = selectedItem.menu
             cell.oneLinerLabel.text = selectedItem.oneLiner
@@ -302,11 +303,12 @@ extension MenuListViewController: UITableViewDataSource {
                                           for: .touchUpInside)
             cell.favoriteButton.isHidden = false
                 
-
             DispatchQueue.main.async {
                 selectedItem.isFavorite
-                ? cell.favoriteButton.setImage(checkedFavorite, for: .normal)
-                : cell.favoriteButton.setImage(uncheckedFavorite, for: .normal)
+                ? cell.favoriteButton.setImage(checkedFavorite,
+                                               for: .normal)
+                : cell.favoriteButton.setImage(uncheckedFavorite,
+                                               for: .normal)
                 
             }
         } else if type == "curious" {
@@ -331,7 +333,7 @@ extension MenuListViewController: UITableViewDataSource {
             if type == "like" {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
-                    selectedIndex: selectedIdx,
+                    selectedIndex: selectedRestaurantIndex,
                     type: type,
                     menu: selectedRestaurant.likeMenus[indexPath.row],
                     menuIndex: indexPath.row)
@@ -340,7 +342,7 @@ extension MenuListViewController: UITableViewDataSource {
             } else if type == "curious" {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
-                    selectedIndex: selectedIdx,
+                    selectedIndex: selectedRestaurantIndex,
                     type: type,
                     menu: selectedRestaurant.curiousMenus[indexPath.row],
                     menuIndex: indexPath.row
@@ -350,7 +352,7 @@ extension MenuListViewController: UITableViewDataSource {
             } else {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
-                    selectedIndex: selectedIdx,
+                    selectedIndex: selectedRestaurantIndex,
                     type: type,
                     menu: selectedRestaurant.badMenus[indexPath.row],
                     menuIndex: indexPath.row
@@ -370,8 +372,34 @@ extension MenuListViewController: UITableViewDataSource {
 
 extension MenuListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let menuDetailVC = MenuDetailViewController()
+        var selectedMenu: Menu
+        
+        switch type {
+        case "like":
+            selectedMenu = selectedRestaurant.likeMenus[indexPath.row]
+            
+        case "curious":
+            selectedMenu = selectedRestaurant.curiousMenus[indexPath.row]
+            
+        default:
+            selectedMenu = selectedRestaurant.badMenus[indexPath.row]
+        }
+        
+        let backBarButtonItem = UIBarButtonItem(title: "",
+                                                style: .plain,
+                                                target: self,
+                                                action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+        
+        let menuDetailVC = MenuDetailViewController(
+            selectedRestaurant: selectedRestaurant,
+            selectedRestaurantIndex: selectedRestaurantIndex,
+            selectedMenu: selectedMenu,
+            selectedMenuIndex: indexPath.row,
+            prevType: type
+        )
         navigationController?.pushViewController(menuDetailVC, animated: true)
+        
     }
 }
 

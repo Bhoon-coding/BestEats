@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantViewController: UIViewController {
+final class RestaurantViewController: UIViewController {
 
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!

@@ -11,7 +11,7 @@ import SnapKit
 import Toast_Swift
 
 
-class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
+final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
@@ -347,23 +347,12 @@ class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                                   menu: menuName,
                                   oneLiner: oneLiner
                                  )]
-        //        TODO: switch문으로 리팩토링하기
-        //        switch type {
-        //        case "like":
-        //            <#code#>
-        //        case "curious":
-        //
-        //        case "warning":
-        //
-        //        default:
-        //            <#code#>
-        //        }
+        
         if type == "like" {
             let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
             let confirm = UIAlertAction(title: "등록", style: .default) {_ in
                 menus[0].isFavorite = true
-                //                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                //                                                        menus: menus)
+                
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
                                                         type: "like",
                                                         likeMenus: menus,
