@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MenuListTableViewCell: UITableViewCell {
+final class MenuListTableViewCell: UITableViewCell {
     
     // MARK: Properties
     static let identifier = "MenuListTableViewCell"

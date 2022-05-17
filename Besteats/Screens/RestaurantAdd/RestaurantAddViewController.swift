@@ -11,7 +11,7 @@ import SnapKit
 import Toast_Swift
 
 
-class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
+final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     

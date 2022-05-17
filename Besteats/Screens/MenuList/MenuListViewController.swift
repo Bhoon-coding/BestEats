@@ -11,7 +11,7 @@ import SnapKit
 let checkedFavorite = UIImage(named: "starFill")
 let uncheckedFavorite = UIImage(named: "star")
 
-class MenuListViewController: UIViewController {
+final class MenuListViewController: UIViewController {
     
     // MARK: Properties
     

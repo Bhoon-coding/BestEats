@@ -10,10 +10,10 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
-class MenuDetailViewController: UIViewController, UITextFieldDelegate {
+final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Properties
-    
+
     var editMode: Bool = false
     var selectedLike: Bool = false
     var selectedCurious: Bool = false
@@ -25,7 +25,6 @@ class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     var selectedMenuIndex: Int
     var prevType: String
     var changeType: String = ""
-    
 
     init(selectedRestaurant: Restaurant,
          selectedRestaurantIndex: Int,
