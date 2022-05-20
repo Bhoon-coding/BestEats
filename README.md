@@ -33,12 +33,12 @@
 - CollectionView를 활용하여 사용자가 등록한 맛집들을 한눈에 볼 수 있도록 구현 하였습니다.
 
 ### BottomSheet (ActionSheet)
-<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168580941-99d1efd4-928d-4cd5-b48b-ef6625052982.gif">
+<img width="190%" src = "https://user-images.githubusercontent.com/64088377/168580941-99d1efd4-928d-4cd5-b48b-ef6625052982.gif">
 - '...' 버튼을 누르면 하단에서 ActionSheet를 보여주며 '맛집 이름 변경', '맛집 삭제'를 할 수 있습니다.
 
 
 ### 음식점 찾기
-<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168581632-07b60bb3-5c1a-47a5-b04a-859eba29569e.gif">
+<img width="90%" src = "https://user-images.githubusercontent.com/64088377/168581632-07b60bb3-5c1a-47a5-b04a-859eba29569e.gif">
 - 등록되어 있는 음식점을 filter, contain 메소드를 이용해서 사용자가 찾고자 하는 음식점을 직관적으로 추려내게 구현 하였습니다.
 
 ### 즐겨찾기 메뉴 예외 처리
@@ -77,7 +77,7 @@
 -----
 
 ## MenuDetail page (메뉴 상세 페이지)
-<img width="25%" src = "https://user-images.githubusercontent.com/64088377/169181539-1ce587dd-3cf3-41ee-a01a-0d96385c44da.gif">
+<img width="90%" src = "https://user-images.githubusercontent.com/64088377/169181539-1ce587dd-3cf3-41ee-a01a-0d96385c44da.gif">
 
 - 메뉴 리스트의 선택된 cell의 데이터를 가져와서 보여주게 하였습니다.
 - 우측 상단 navItem에 `수정`, `저장` 버튼에 따라 이벤트를 주게 하였습니다. (수정모드 <-> 변경내용저장)
