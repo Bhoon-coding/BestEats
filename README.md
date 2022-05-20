@@ -3,61 +3,83 @@
 어떻게 먹어야 맛있게 먹을수 있을까를 고민하는 시대가 됐다.  
 기록하고 나만의 레시피로 맛있게 먹자🍗  
 
-## 이런분들에게 추천!  
+<br>
+
+## 이런분들에게 추천합니다!  
 
 - 음식점 마다 나에게 맞는 간이나 매운맛의 강도가 다 다르지 않았나?
 - 오랜만에 방문한 맛집. 어떻게 먹어야 맛있었지? 다음엔 이걸 먹어봐야겠다고 했는데 그게 뭐였지? 
 
+<br>
 
 # 기술 스택
 - Swift(v5.3.2)
+
+<br>
 
 # 개발 도구
 - Xcode(v13.1)
 - Snapkit
 - Storyboard (메인화면)
 
+<br>
+
 # Version Target 
 - iOS 13.0
+
+<br>
 
 # 기능
 
 ## Main page (메인 페이지)
-- <img width = "25%" src = "https://user-images.githubusercontent.com/64088377/168579712-495d2583-95ba-4482-88c7-fdaa33585145.png">
+- <img width = "30%" src = "https://user-images.githubusercontent.com/64088377/168579712-495d2583-95ba-4482-88c7-fdaa33585145.png">
 
+<br>
 
 ### TabBar Controller
 - 하단 탭의 버튼으로 페이지 별 보여지는 화면을 다르게 구현 하였습니다.
 
+<br>
+
 ### 맛집 티켓 (CollectionView)
 - CollectionView를 활용하여 사용자가 등록한 맛집들을 한눈에 볼 수 있도록 구현 하였습니다.
 
+<br>
+
 ### BottomSheet (ActionSheet)
-<img width="190%" src = "https://user-images.githubusercontent.com/64088377/168580941-99d1efd4-928d-4cd5-b48b-ef6625052982.gif">
+- <img width="30%" src = "https://user-images.githubusercontent.com/64088377/168580941-99d1efd4-928d-4cd5-b48b-ef6625052982.gif">
+
 - '...' 버튼을 누르면 하단에서 ActionSheet를 보여주며 '맛집 이름 변경', '맛집 삭제'를 할 수 있습니다.
 
+<br>
 
 ### 음식점 찾기
-<img width="90%" src = "https://user-images.githubusercontent.com/64088377/168581632-07b60bb3-5c1a-47a5-b04a-859eba29569e.gif">
+- <img width="30%" src = "https://user-images.githubusercontent.com/64088377/168581632-07b60bb3-5c1a-47a5-b04a-859eba29569e.gif">
+
 - 등록되어 있는 음식점을 filter, contain 메소드를 이용해서 사용자가 찾고자 하는 음식점을 직관적으로 추려내게 구현 하였습니다.
 
+<br>
+
 ### 즐겨찾기 메뉴 예외 처리
-<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168582222-d1cd5a27-44c3-4b8e-824a-4cc5871c799f.png">
+- <img width="30%" src = "https://user-images.githubusercontent.com/64088377/168582222-d1cd5a27-44c3-4b8e-824a-4cc5871c799f.png">
 - 등록된 즐겨찾기 메뉴가 없을 시 '즐겨찾기 메뉴 추가 문구'를 보여주게 하였습니다.
 
+<br>
 
 ### 해당 맛집 메뉴타입별 숫자 보여주기
 - 등록된 맛집의 메뉴 타입별로 메뉴갯수를 나타내게 하였습니다.
 
+<br>
 
 ### Empty State (CollectionView, TableView)
 - 데이터가 없을시 빈 화면이 아닌 맛집 데이터 추가를 유도하는 View를 보여주도록 하였습니다.
 
+<br>
 
 ----
 
 ## MenuList page (메뉴리스트 페이지)
-<img width="25%" src = "https://user-images.githubusercontent.com/64088377/168582735-dc804477-5649-42ce-b5cf-0795892bda57.png">
+- <img width="30%" src = "https://user-images.githubusercontent.com/64088377/168582735-dc804477-5649-42ce-b5cf-0795892bda57.png">
 
 - TableView를 사용하여 등록한 `메뉴`와 `한줄팁`을 보기쉽게 구현 하였습니다.
 - Main page에서 받아온 데이터를 navigation title, tableViewCell에 보여주도록 하였습니다.
@@ -77,7 +99,7 @@
 -----
 
 ## MenuDetail page (메뉴 상세 페이지)
-<img width="90%" src = "https://user-images.githubusercontent.com/64088377/169181539-1ce587dd-3cf3-41ee-a01a-0d96385c44da.gif">
+<img width="30%" src = "https://user-images.githubusercontent.com/64088377/169181539-1ce587dd-3cf3-41ee-a01a-0d96385c44da.gif">
 
 - 메뉴 리스트의 선택된 cell의 데이터를 가져와서 보여주게 하였습니다.
 - 우측 상단 navItem에 `수정`, `저장` 버튼에 따라 이벤트를 주게 하였습니다. (수정모드 <-> 변경내용저장)
