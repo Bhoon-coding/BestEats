@@ -9,6 +9,12 @@ import Foundation
 
 struct UserDefaultsManager {
     
+    enum MenuType: String {
+        case like
+        case curious
+        case warning
+    }
+    
     // MARK: Properties
     static let shared = UserDefaultsManager()
     let defaults = UserDefaults.standard
@@ -38,10 +44,10 @@ struct UserDefaultsManager {
         var restaurants = getRestaurants()
         var restaturant = selectedRestaurant
         
-        if type == "like" {
+        if type == MenuType.like.rawValue {
             restaturant.likeMenus.append(addedMenu)
             
-        } else if type == "curious" {
+        } else if type == MenuType.curious.rawValue {
             restaturant.curiousMenus.append(addedMenu)
             
         } else {
@@ -62,10 +68,10 @@ struct UserDefaultsManager {
         var restaurants = getRestaurants()
         var restaurant = selectedRestaurant
         
-        if type == "like" {
+        if type == MenuType.like.rawValue {
             restaurant.likeMenus.remove(at: menuIndex)
             
-        } else if type == "curious" {
+        } else if type == MenuType.curious.rawValue {
             restaurant.curiousMenus.remove(at: menuIndex)
             
         } else {
@@ -109,42 +115,59 @@ struct UserDefaultsManager {
         var menus = selectedRestaurant.likeMenus
         var menu = editedMenu
         
-        if prevType != changeType {
+        if prevType == changeType || changeType == "" {
+            if prevType == MenuType.like.rawValue {
+                menus = selectedRestaurant.likeMenus
+                menus[menuIndex] = menu
+                restaurant.likeMenus = menus
+                
+            } else if prevType == MenuType.curious.rawValue {
+                menus = selectedRestaurant.curiousMenus
+                menus[menuIndex] = menu
+                restaurant.curiousMenus = menus
+                menu.isFavorite = false
+                
+            } else if prevType == MenuType.warning.rawValue {
+                menus = selectedRestaurant.badMenus
+                menus[menuIndex] = menu
+                restaurant.badMenus = menus
+                menu.isFavorite = false
+            }
+        } else {
             
-            if changeType == "like" {
+            if changeType == MenuType.like.rawValue {
                 menus = selectedRestaurant.likeMenus
                 menus.append(menu)
                 restaurant.likeMenus = menus
                 
-            } else if changeType == "curious" {
+            } else if changeType == MenuType.curious.rawValue {
                 menus = selectedRestaurant.curiousMenus
                 menus.append(menu)
                 restaurant.curiousMenus = menus
                 menu.isFavorite = false
                 
-            } else if changeType == "warning" {
+            } else if changeType == MenuType.warning.rawValue {
                 menus = selectedRestaurant.badMenus
                 menus.append(menu)
                 restaurant.badMenus = menus
                 menu.isFavorite = false
             }
             
-            if prevType == "like" {
+            if prevType == MenuType.like.rawValue {
                 menus = selectedRestaurant.likeMenus
                 menus.remove(at: menuIndex)
                 restaurant.likeMenus = menus
-            
-            } else if prevType == "curious" {
+                
+            } else if prevType == MenuType.curious.rawValue {
                 menus = selectedRestaurant.curiousMenus
                 menus.remove(at: menuIndex)
                 restaurant.curiousMenus = menus
                 
-            } else if prevType == "warning" {
+            } else if prevType == MenuType.warning.rawValue {
                 menus = selectedRestaurant.badMenus
                 menus.remove(at: menuIndex)
                 restaurant.badMenus = menus
             }
-            
         }
         
         restaurants[selectedRestauransIndex] = restaurant
