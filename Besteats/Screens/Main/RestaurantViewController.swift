@@ -15,48 +15,32 @@ final class RestaurantViewController: UIViewController {
     var totalRestaurants: [Restaurant] = []
     
     // MARK: LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        foodCollectionView.addGestureRecognizer(tap)
-        
-        foodSearchBar.delegate = self
-        foodCollectionView.delegate = self
-        foodCollectionView.dataSource = self
-        
-        view.backgroundColor = .secondarySystemBackground
-        foodCollectionView.backgroundColor = .secondarySystemBackground
-                
-        navigationController?.navigationBar.tintColor = .label
-        
-        let addButton = UIBarButtonItem(title: "추가",
-                                        style: .plain,
-                                        target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "GmarketSansBold", size: 14)!], for: .normal)
-        navigationItem.rightBarButtonItem = addButton
-        
+        getRestaurantsData()
+        configureKeyboardDismiss()
+        configureNavBar()
+        configureUI()
+        configureDelegate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
-        
+        getRestaurantsData()
         DispatchQueue.main.async {
             self.foodCollectionView.reloadData()
         }
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         foodSearchBar.resignFirstResponder()
     }
     
-    // MARK: 보류
+    // MARK: Action
+    
     @IBAction func tapMore(_ sender: UIButton) {
         
         let point = sender.convert(CGPoint.zero, to: foodCollectionView)
@@ -134,11 +118,44 @@ final class RestaurantViewController: UIViewController {
 
     // MARK: Methods
     
+    private func getRestaurantsData() {
+        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
+    }
+    
+    private func configureNavBar() {
+        let addButton = UIBarButtonItem(title: "추가",
+                                        style: .plain,
+                                        target: self, action: #selector(addRestaurant))
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "GmarketSansBold", size: 14)!], for: .normal)
+        navigationItem.rightBarButtonItem = addButton
+        navigationController?.navigationBar.tintColor = .label
+    }
+    
+    private func configureUI() {
+        view.backgroundColor = .secondarySystemBackground
+        foodCollectionView.backgroundColor = .secondarySystemBackground
+    }
+    
+    private func configureDelegate() {
+        foodSearchBar.delegate = self
+        foodCollectionView.delegate = self
+        foodCollectionView.dataSource = self
+    }
+    
+    private func configureKeyboardDismiss() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        foodCollectionView.addGestureRecognizer(tap)
+        
+    }
+    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         foodSearchBar.resignFirstResponder()
     }
     
+    
     // MARK: @objc
+    
     @objc func addRestaurant() {
         let restaurantAddVC = RestaurantAddViewController()
         restaurantAddVC.modalPresentationStyle = .fullScreen
@@ -148,6 +165,8 @@ final class RestaurantViewController: UIViewController {
     @objc func dismissKeyboard() {
         foodSearchBar.resignFirstResponder()
     }
+    
+    
 }
 
 class FoodCollectionViewCell: UICollectionViewCell {
