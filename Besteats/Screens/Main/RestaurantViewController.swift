@@ -8,7 +8,26 @@
 import UIKit
 
 final class RestaurantViewController: UIViewController {
-
+    
+    enum RestaurantActionSheet: String {
+        case title = "맛집 수정, 삭제"
+        case message = "아래 항목을 선택해 주세요."
+    }
+    enum AlertButton: String {
+        case cancel = "취소"
+        case edit = "변경"
+        case delete = "삭제"
+    }
+    enum RestaurantAlert: String {
+        case editTitle = "맛집명 변경"
+        case editMessage = "변경할 맛집의 이름을 입력해주세요."
+        case deleteTitle = "해당 맛집에 포함된 메뉴들도 삭제 됩니다."
+        case deleteMessage = "정말로 삭제 하시겠습니까?"
+    }
+    enum NavButton: String {
+        case add = "추가"
+    }
+    
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
@@ -49,23 +68,23 @@ final class RestaurantViewController: UIViewController {
         DispatchQueue.main.async {
             
             // MARK: ActionSheet
-            let actionSheet = UIAlertController(title: "맛집 수정, 삭제",
-                                                message: "아래 항목을 선택해 주세요.",
+            let actionSheet = UIAlertController(title: RestaurantActionSheet.title.rawValue,
+                                                message: RestaurantActionSheet.message.rawValue,
                                                 preferredStyle: .actionSheet)
             
-            let cancelButton = UIAlertAction(title: "취소",
+            let cancelButton = UIAlertAction(title: AlertButton.cancel.rawValue,
                                        style: .cancel,
                                        handler: nil)
-            let modiRestaurant = UIAlertAction(title: "맛집명 변경",
+            let editRestaurant = UIAlertAction(title: RestaurantAlert.editTitle.rawValue,
                                                style: .default) {_ in
                 
-                let modiAlert = UIAlertController(title: "맛집명 변경",
-                                                  message: "변경할 맛집의 이름을 입력해주세요.",
+                let editAlert = UIAlertController(title: RestaurantAlert.editTitle.rawValue,
+                                                  message: RestaurantAlert.editMessage.rawValue,
                                                   preferredStyle: .alert)
                 
-                let modiButton = UIAlertAction(title: "변경",
+                let editButton = UIAlertAction(title: AlertButton.edit.rawValue,
                                                style: .default) {_ in
-                    if let txtField = modiAlert.textFields?.first,
+                    if let txtField = editAlert.textFields?.first,
                        let text = txtField.text {
                         self.totalRestaurants[indexPath.row].restaurantName = text
                         
@@ -74,24 +93,24 @@ final class RestaurantViewController: UIViewController {
                         self.foodCollectionView.reloadData()
                     }
                 }
-                modiAlert.addTextField { textField in
+                editAlert.addTextField { textField in
                     textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
                 }
-                modiAlert.addAction(modiButton)
-                modiAlert.addAction(cancelButton)
+                editAlert.addAction(editButton)
+                editAlert.addAction(cancelButton)
                 
-                self.present(modiAlert, animated: true, completion: nil)
+                self.present(editAlert, animated: true, completion: nil)
             }
             
             
-            let tappedDelete = UIAlertAction(title: "맛집 삭제",
+            let tappedDelete = UIAlertAction(title: AlertButton.delete.rawValue,
                                              style: .destructive) {_ in
                 
-                let deleteConfirmAlert = UIAlertController(title: "해당 맛집에 포함된 메뉴들도 삭제 됩니다.",
-                                                           message: "정말로 삭제 하시겠습니까?",
+                let deleteConfirmAlert = UIAlertController(title: RestaurantAlert.deleteTitle.rawValue,
+                                                           message: RestaurantAlert.deleteMessage.rawValue,
                                                            preferredStyle: .alert)
                 
-                let deleteRestaurant = UIAlertAction(title: "삭제",
+                let deleteRestaurant = UIAlertAction(title: AlertButton.delete.rawValue,
                                                      style: .destructive) {_ in
                     
                     self.totalRestaurants.remove(at: indexPath.row)
@@ -107,7 +126,7 @@ final class RestaurantViewController: UIViewController {
                 self.present(deleteConfirmAlert, animated: true, completion: nil)
             }
             
-            actionSheet.addAction(modiRestaurant)
+            actionSheet.addAction(editRestaurant)
             actionSheet.addAction(tappedDelete)
             actionSheet.addAction(cancelButton)
             
@@ -123,10 +142,10 @@ final class RestaurantViewController: UIViewController {
     }
     
     private func configureNavBar() {
-        let addButton = UIBarButtonItem(title: "추가",
+        let addButton = UIBarButtonItem(title: NavButton.add.rawValue,
                                         style: .plain,
                                         target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "GmarketSansBold", size: 14)!], for: .normal)
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.Bold.rawValue, size: 14)!], for: .normal)
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.tintColor = .label
     }
