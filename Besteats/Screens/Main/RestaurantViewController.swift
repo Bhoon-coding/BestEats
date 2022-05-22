@@ -9,9 +9,6 @@ import UIKit
 
 final class RestaurantViewController: UIViewController {
     
-    enum Font: String {
-        case Bold = "GmarketSansBold"
-    }
     enum RestaurantActionSheet: String {
         case title = "맛집 수정, 삭제"
         case message = "아래 항목을 선택해 주세요."
@@ -148,7 +145,7 @@ final class RestaurantViewController: UIViewController {
         let addButton = UIBarButtonItem(title: NavButton.add.rawValue,
                                         style: .plain,
                                         target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Font.Bold.rawValue, size: 14)!], for: .normal)
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.Bold.rawValue, size: 14)!], for: .normal)
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.tintColor = .label
     }
