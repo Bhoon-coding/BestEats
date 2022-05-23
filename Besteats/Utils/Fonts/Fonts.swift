@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum Fonts: String {
-  case Bold = "GmarketSansBold"
+enum Fonts {
+  static let bold = "GmarketSansBold"
 }
