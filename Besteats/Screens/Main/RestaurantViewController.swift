@@ -36,7 +36,7 @@ final class RestaurantViewController: UIViewController {
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
-    var totalRestaurants: [Restaurant] = []
+    private var totalRestaurants: [Restaurant] = []
     
     // MARK: LifeCycle
     
@@ -65,7 +65,7 @@ final class RestaurantViewController: UIViewController {
     
     // MARK: Action
     
-    @IBAction func tapMore(_ sender: UIButton) {
+    @IBAction private func tapMore(_ sender: UIButton) {
         
         let point = sender.convert(CGPoint.zero, to: foodCollectionView)
         guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
@@ -220,17 +220,17 @@ extension RestaurantViewController: UISearchBarDelegate {
 // Cell layout
 extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     // 위 아래 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
     }
     
     // 좌우 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
     // Cell 사이즈
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let size = CGSize(width: view.frame.width - 80, height: 150)
         return size
@@ -239,7 +239,7 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 
 // Cell에 대한 delegate
 extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         let restaurant: Restaurant = totalRestaurants[indexPath.row]
         let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
@@ -277,7 +277,7 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         if totalRestaurants.count == 0 {
             collectionView.setEmptyMessage("맛집이 없어요.\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
@@ -288,7 +288,7 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     //
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
         let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
