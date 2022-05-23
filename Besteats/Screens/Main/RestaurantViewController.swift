@@ -9,29 +9,34 @@ import UIKit
 
 final class RestaurantViewController: UIViewController {
     
-    enum RestaurantActionSheet: String {
-        case title = "맛집 수정, 삭제"
-        case message = "아래 항목을 선택해 주세요."
+    private enum Alert {
+        enum Contents {
+            static let actionSheetTitle: String = "맛집명 변경, 삭제"
+            static let actionSheetMessage: String = "아래 항목을 선택해 주세요."
+            static let editTitle: String = "맛집명 변경"
+            static let editMessage: String = "변경할 맛집의 이름을 입력해주세요."
+            static let deleteTitle: String = "해당 맛집에 포함된 메뉴들도 삭제 됩니다."
+            static let deleteMessage: String = "정말로 삭제 하시겠습니까?"
+        }
+        enum Button {
+            static let restaurantEdit: String = "맛집명 변경"
+            static let restaurantDelete: String = "맛집 삭제"
+            static let cancel: String = "취소"
+            static let edit: String = "변경"
+            static let delete: String = "삭제"
+        }
     }
-    enum AlertButton: String {
-        case cancel = "취소"
-        case edit = "변경"
-        case delete = "삭제"
-    }
-    enum RestaurantAlert: String {
-        case editTitle = "맛집명 변경"
-        case editMessage = "변경할 맛집의 이름을 입력해주세요."
-        case deleteTitle = "해당 맛집에 포함된 메뉴들도 삭제 됩니다."
-        case deleteMessage = "정말로 삭제 하시겠습니까?"
-    }
-    enum NavButton: String {
-        case add = "추가"
+    
+    private enum Navigation {
+        enum Button {
+            static let add: String = "추가"
+        }
     }
     
     @IBOutlet weak var foodSearchBar: UISearchBar!
     @IBOutlet weak var foodCollectionView: UICollectionView!
     
-    var totalRestaurants: [Restaurant] = []
+    private var totalRestaurants: [Restaurant] = []
     
     // MARK: LifeCycle
     
@@ -60,7 +65,7 @@ final class RestaurantViewController: UIViewController {
     
     // MARK: Action
     
-    @IBAction func tapMore(_ sender: UIButton) {
+    @IBAction private func tapMore(_ sender: UIButton) {
         
         let point = sender.convert(CGPoint.zero, to: foodCollectionView)
         guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
@@ -68,21 +73,20 @@ final class RestaurantViewController: UIViewController {
         DispatchQueue.main.async {
             
             // MARK: ActionSheet
-            let actionSheet = UIAlertController(title: RestaurantActionSheet.title.rawValue,
-                                                message: RestaurantActionSheet.message.rawValue,
-                                                preferredStyle: .actionSheet)
+            let actionSheet = UIAlertController(title: Alert.Contents.actionSheetTitle,
+                                                message: Alert.Contents.actionSheetMessage,        preferredStyle: .actionSheet)
             
-            let cancelButton = UIAlertAction(title: AlertButton.cancel.rawValue,
+            let cancelButton = UIAlertAction(title: Alert.Button.cancel,
                                        style: .cancel,
                                        handler: nil)
-            let editRestaurant = UIAlertAction(title: RestaurantAlert.editTitle.rawValue,
+            let editRestaurant = UIAlertAction(title: Alert.Button.restaurantEdit,
                                                style: .default) {_ in
                 
-                let editAlert = UIAlertController(title: RestaurantAlert.editTitle.rawValue,
-                                                  message: RestaurantAlert.editMessage.rawValue,
+                let editAlert = UIAlertController(title: Alert.Contents.editTitle,
+                                                  message: Alert.Contents.editMessage,
                                                   preferredStyle: .alert)
                 
-                let editButton = UIAlertAction(title: AlertButton.edit.rawValue,
+                let editButton = UIAlertAction(title: Alert.Button.edit,
                                                style: .default) {_ in
                     if let txtField = editAlert.textFields?.first,
                        let text = txtField.text {
@@ -102,15 +106,14 @@ final class RestaurantViewController: UIViewController {
                 self.present(editAlert, animated: true, completion: nil)
             }
             
-            
-            let tappedDelete = UIAlertAction(title: AlertButton.delete.rawValue,
+            let tappedDelete = UIAlertAction(title: Alert.Button.restaurantDelete,
                                              style: .destructive) {_ in
                 
-                let deleteConfirmAlert = UIAlertController(title: RestaurantAlert.deleteTitle.rawValue,
-                                                           message: RestaurantAlert.deleteMessage.rawValue,
+                let deleteConfirmAlert = UIAlertController(title: Alert.Contents.deleteTitle,
+                                                           message: Alert.Contents.deleteMessage,
                                                            preferredStyle: .alert)
                 
-                let deleteRestaurant = UIAlertAction(title: AlertButton.delete.rawValue,
+                let deleteRestaurant = UIAlertAction(title: Alert.Button.delete,
                                                      style: .destructive) {_ in
                     
                     self.totalRestaurants.remove(at: indexPath.row)
@@ -142,10 +145,10 @@ final class RestaurantViewController: UIViewController {
     }
     
     private func configureNavBar() {
-        let addButton = UIBarButtonItem(title: NavButton.add.rawValue,
+        let addButton = UIBarButtonItem(title: Navigation.Button.add,
                                         style: .plain,
                                         target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.Bold.rawValue, size: 14)!], for: .normal)
+        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.bold, size: 14)!], for: .normal)
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.tintColor = .label
     }
@@ -217,17 +220,17 @@ extension RestaurantViewController: UISearchBarDelegate {
 // Cell layout
 extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     // 위 아래 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 16
     }
     
     // 좌우 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
     // Cell 사이즈
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let size = CGSize(width: view.frame.width - 80, height: 150)
         return size
@@ -236,7 +239,7 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 
 // Cell에 대한 delegate
 extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
         let restaurant: Restaurant = totalRestaurants[indexPath.row]
         let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
@@ -274,7 +277,7 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         if totalRestaurants.count == 0 {
             collectionView.setEmptyMessage("맛집이 없어요.\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
@@ -285,7 +288,7 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     //
-    func collectionView(_ collectionView: UICollectionView,
+    public func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
         let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
