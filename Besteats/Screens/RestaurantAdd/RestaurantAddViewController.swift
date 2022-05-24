@@ -13,113 +13,156 @@ import Toast_Swift
 
 final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
+    // MARK: Enums
+    
+    private enum Info {
+        enum Label {
+            static let restaurant: String = "맛집명"
+            static let menu: String = "메뉴명"
+            static let oneLiner: String = "한줄평"
+            static let rating: String = "내평가"
+        }
+        
+        enum Placeholder {
+            static let restaurant: String = "맛집을 입력해 주세요."
+            static let menu: String = "메뉴를 입력해 주세요."
+            static let oneLiner: String = "한줄팁을 입력해 주세요."
+        }
+        
+        enum RatingType: String {
+            case like
+            case curious
+            case warning
+        }
+        
+        enum Button {
+            static let addRestaurant: String = "맛집 추가"
+        }
+    }
+    
+    private enum Toast {
+        static let requestRatingMsg: String = "평가버튼을 눌러 주세요."
+        static let requestRestaurantMsg: String = "맛집명을 입력해 주세요."
+        static let requestMenuMsg: String = "메뉴명을 입력해 주세요."
+        static let requestOneLinerMsg: String = "한줄평을 입력해 주세요."
+    }
+    
+    private enum Alert {
+        enum Favorite {
+            static let title: String = "즐겨찾기"
+            static let message: String = "즐겨찾는 메뉴로 등록 하시겠습니까?"
+            static let confirm: String = "등록"
+            static let cancel: String = "등록안함"
+        }
+    }
+    
     // MARK: Properties
     
-    var selectedLike: Bool = false
-    var selectedCurious: Bool = false
-    var selectedWarning: Bool = false
-    var type: String? = nil
-    var totalRestaurants: [Restaurant] = []
+    private var selectedLike: Bool = false
+    private var selectedCurious: Bool = false
+    private var selectedWarning: Bool = false
+    private var type: String? = nil
+    private var totalRestaurants: [Restaurant] = []
     
-    lazy var wholeView: UIView = {
+    private let wholeView: UIView = {
         let view = UIView()
         return view
     }()
     
-    lazy var closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "close"), for: .normal)
         button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         return button
     }()
     
-    lazy var restaurantLabel: UILabel = {
+    private let restaurantLabel: UILabel = {
         let label = UILabel()
-        label.text = "맛집명"
+        label.text = Info.Label.restaurant
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var restaurantTextField: UITextField = {
+    private let restaurantTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "맛집을 입력해 주세요."
+        textField.placeholder = Info.Placeholder.restaurant
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    lazy var menuLabel: UILabel = {
+    private let menuLabel: UILabel = {
         let label = UILabel()
-        label.text = "메뉴명"
+        label.text = Info.Label.menu
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var menuTextField: UITextField = {
+    private let menuTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "메뉴를 입력해 주세요."
+        textField.placeholder = Info.Placeholder.menu
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    lazy var oneLinerLabel: UILabel = {
+    private let oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.text = "한줄팁"
+        label.text = Info.Label.oneLiner
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var oneLinerTextField: UITextField = {
+    private let oneLinerTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "한줄팁을 입력해 주세요."
+        textField.placeholder = Info.Placeholder.oneLiner
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    lazy var typeLabel: UILabel = {
+    private let typeLabel: UILabel = {
         let label = UILabel()
-        label.text = "내평가"
+        label.text = Info.Label.rating
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var typeView: UIView = {
+    private let typeView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         return view
     }()
     
-    lazy var typeStackView: UIStackView = {
+    private let typeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         return stackView
     }()
     
-    lazy var typeLikeButton: UIButton = {
+    private lazy var typeLikeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "like"), for: .normal)
+        button.setImage(UIImage(named: Info.RatingType.like.rawValue), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var typeCuriousButton: UIButton = {
+    private lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "curious"), for: .normal)
+        button.setImage(UIImage(named: Info.RatingType.curious.rawValue), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var typeWarningButton: UIButton = {
+    private lazy var typeWarningButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "warning"), for: .normal)
+        button.setImage(UIImage(named: Info.RatingType.warning.rawValue), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var doneButton: UIButton = {
+    private lazy var doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("맛집 추가", for: .normal)
+        button.setTitle(Info.Button.addRestaurant, for: .normal)
         button.mediumButton(button: button)
         button.tintColor = .label
         button.backgroundColor = .systemGreen
@@ -265,13 +308,13 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedLike = !selectedLike
         
         if selectedLike {
-            type = "like"
-            typeLikeButton.setImage(UIImage(named: "likeFill"), for: .normal)
-            typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
-            typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
+            type = Info.RatingType.like.rawValue
+            typeLikeButton.setImage(UIImage(named: Image.likeFill), for: .normal)
+            typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
+            typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
         } else {
             type = nil
-            typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
+            typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
         }
         
     }
@@ -280,13 +323,13 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedCurious = !selectedCurious
         
         if selectedCurious {
-            type = "curious"
-            typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
-            typeCuriousButton.setImage(UIImage(named: "curiousFill"), for: .normal)
-            typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
+            type = Info.RatingType.curious.rawValue
+            typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
+            typeCuriousButton.setImage(UIImage(named: Image.curiousFill), for: .normal)
+            typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
         } else {
             type = nil
-            typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
+            typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
         }
         
     }
@@ -295,13 +338,13 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedWarning = !selectedWarning
         
         if selectedWarning {
-            type = "warning"
-            typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
-            typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
-            typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
+            type = Info.RatingType.warning.rawValue
+            typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
+            typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
+            typeWarningButton.setImage(UIImage(named: Image.warningFill), for: .normal)
         } else {
             type = nil
-            typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
+            typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
         }
         
     }
@@ -317,28 +360,28 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         guard let inputMenuName = menuTextField.text else { return }
         guard let inputOneLiner = oneLinerTextField.text else { return }
         guard let type = self.type else {
-            self.view.makeToast("평가버튼을 눌러 주세요.", position: .top)
+            self.view.makeToast(Toast.requestRatingMsg, position: .top)
             return }
         
         if !inputRestaurant.trimmingCharacters(in: .whitespaces).isEmpty {
             restaurantName = inputRestaurant.trimmingCharacters(in: .whitespaces)
             
         } else {
-            view.makeToast("맛집명을 입력 해주세요.", position: .top)
+            view.makeToast(Toast.requestRestaurantMsg, position: .top)
             return
         }
         
         if !inputMenuName.trimmingCharacters(in: .whitespaces).isEmpty {
             menuName = inputMenuName.trimmingCharacters(in: .whitespaces)
         } else {
-            view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+            view.makeToast(Toast.requestMenuMsg, position: .top)
             return
         }
         
         if !inputOneLiner.trimmingCharacters(in: .whitespaces).isEmpty {
             oneLiner = inputOneLiner.trimmingCharacters(in: .whitespaces)
         } else {
-            view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+            view.makeToast(Toast.requestOneLinerMsg, position: .top)
             return
         }
         
@@ -348,13 +391,13 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                                   oneLiner: oneLiner
                                  )]
         
-        if type == "like" {
-            let alert = UIAlertController(title: "즐겨찾기", message: "즐겨찾는 메뉴로 등록 하시겠습니까?", preferredStyle: .alert)
-            let confirm = UIAlertAction(title: "등록", style: .default) {_ in
+        if type == Info.RatingType.like.rawValue {
+            let alert = UIAlertController(title: Alert.Favorite.title, message: Alert.Favorite.message, preferredStyle: .alert)
+            let confirm = UIAlertAction(title: Alert.Favorite.confirm, style: .default) {_ in
                 menus[0].isFavorite = true
                 
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        type: "like",
+                                                        type: Info.RatingType.like.rawValue,
                                                         likeMenus: menus,
                                                         curiousMenus: [],
                                                         badMenus: [])
@@ -362,9 +405,9 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                 UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
                 self.dismiss(animated: true, completion: nil)
             }
-            let cancel = UIAlertAction(title: "등록안함", style: .destructive) {_ in
+            let cancel = UIAlertAction(title: Alert.Favorite.cancel, style: .destructive) {_ in
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        type: "like",
+                                                        type: Info.RatingType.like.rawValue,
                                                         likeMenus: menus,
                                                         curiousMenus: [],
                                                         badMenus: [])
@@ -379,9 +422,9 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
             
-        } else if type == "curious" {
+        } else if type == Info.RatingType.curious.rawValue {
             let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                    type: "curious",
+                                                    type: Info.RatingType.curious.rawValue,
                                                     likeMenus: [],
                                                     curiousMenus: menus,
                                                     badMenus: [])
@@ -391,7 +434,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                    type: "warning",
+                                                    type: Info.RatingType.warning.rawValue,
                                                     likeMenus: [],
                                                     curiousMenus: [],
                                                     badMenus: menus)
