@@ -14,4 +14,6 @@ public enum Image {
     static let curiousFill = "curiousFill"
     static let warning = "warning"
     static let warningFill = "warningFill"
+    static let star = "star"
+    static let starFill = "starFill"
 }

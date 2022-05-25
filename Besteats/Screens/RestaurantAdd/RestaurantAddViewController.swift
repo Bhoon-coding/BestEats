@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
-
 final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Enums
@@ -29,10 +28,10 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             static let oneLiner: String = "한줄팁을 입력해 주세요."
         }
         
-        enum RatingType: String {
-            case like
-            case curious
-            case warning
+        enum RatingType {
+            static let like: String = "like"
+            static let curious: String = "curious"
+            static let warning: String = "warning"
         }
         
         enum Button {
@@ -141,21 +140,21 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var typeLikeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: Info.RatingType.like.rawValue), for: .normal)
+        button.setImage(UIImage(named: Info.RatingType.like), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: Info.RatingType.curious.rawValue), for: .normal)
+        button.setImage(UIImage(named: Info.RatingType.curious), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
     private lazy var typeWarningButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: Info.RatingType.warning.rawValue), for: .normal)
+        button.setImage(UIImage(named: Info.RatingType.warning), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
@@ -308,7 +307,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedLike = !selectedLike
         
         if selectedLike {
-            type = Info.RatingType.like.rawValue
+            type = Info.RatingType.like
             typeLikeButton.setImage(UIImage(named: Image.likeFill), for: .normal)
             typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
             typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
@@ -323,7 +322,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedCurious = !selectedCurious
         
         if selectedCurious {
-            type = Info.RatingType.curious.rawValue
+            type = Info.RatingType.curious
             typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
             typeCuriousButton.setImage(UIImage(named: Image.curiousFill), for: .normal)
             typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
@@ -338,7 +337,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedWarning = !selectedWarning
         
         if selectedWarning {
-            type = Info.RatingType.warning.rawValue
+            type = Info.RatingType.warning
             typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
             typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
             typeWarningButton.setImage(UIImage(named: Image.warningFill), for: .normal)
@@ -391,13 +390,13 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                                   oneLiner: oneLiner
                                  )]
         
-        if type == Info.RatingType.like.rawValue {
+        if type == Info.RatingType.like {
             let alert = UIAlertController(title: Alert.Favorite.title, message: Alert.Favorite.message, preferredStyle: .alert)
             let confirm = UIAlertAction(title: Alert.Favorite.confirm, style: .default) {_ in
                 menus[0].isFavorite = true
                 
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        type: Info.RatingType.like.rawValue,
+                                                        type: Info.RatingType.like,
                                                         likeMenus: menus,
                                                         curiousMenus: [],
                                                         badMenus: [])
@@ -407,7 +406,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             }
             let cancel = UIAlertAction(title: Alert.Favorite.cancel, style: .destructive) {_ in
                 let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        type: Info.RatingType.like.rawValue,
+                                                        type: Info.RatingType.like,
                                                         likeMenus: menus,
                                                         curiousMenus: [],
                                                         badMenus: [])
@@ -422,9 +421,9 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                 self.present(alert, animated: true, completion: nil)
             }
             
-        } else if type == Info.RatingType.curious.rawValue {
+        } else if type == Info.RatingType.curious {
             let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                    type: Info.RatingType.curious.rawValue,
+                                                    type: Info.RatingType.curious,
                                                     likeMenus: [],
                                                     curiousMenus: menus,
                                                     badMenus: [])
@@ -434,7 +433,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             
         } else {
             let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                    type: Info.RatingType.warning.rawValue,
+                                                    type: Info.RatingType.warning,
                                                     likeMenus: [],
                                                     curiousMenus: [],
                                                     badMenus: menus)
