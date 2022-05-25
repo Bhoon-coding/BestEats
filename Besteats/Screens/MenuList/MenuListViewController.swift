@@ -44,11 +44,11 @@ final class MenuListViewController: UIViewController {
     private var selectedCurious = false
     private var selectedWarning = false
 
-    var type = RatingType.like
-    var totalRestaurants: [Restaurant] = []
-    var selectedRestaurant: Restaurant
-    var selectedRestaurantIndex: Int
-    var totalMenus: [Menu] = []
+    private var type = RatingType.like
+    private var totalRestaurants: [Restaurant] = []
+    private var selectedRestaurant: Restaurant
+    private var selectedRestaurantIndex: Int
+    private var totalMenus: [Menu] = []
     
     
     init(selectedRestaurant: Restaurant ,index: Int) {
