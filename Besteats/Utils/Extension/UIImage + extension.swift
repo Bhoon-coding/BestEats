@@ -16,4 +16,6 @@ public enum Image {
     static let warningFill = "warningFill"
     static let star = "star"
     static let starFill = "starFill"
+    static let close = "close"
+    
 }
