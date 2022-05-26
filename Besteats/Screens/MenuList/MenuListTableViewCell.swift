@@ -9,14 +9,21 @@ import UIKit
 
 final class MenuListTableViewCell: UITableViewCell {
     
-    // MARK: Properties
-    static let identifier = "MenuListTableViewCell"
+    // MARK: - Enums
     
-    var selectedFavorite = false
+    private enum MenuListCell {
+        static let identifier: String = "MenuListTableViewCell"
+    }
+    
+    // MARK: Properties
+    
+    static let identifier = MenuListCell.identifier
+    
+    private var selectedFavorite = false
     
     lazy var menuLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "GmarketSansBold", size: 20)
+        label.font = UIFont(name: Fonts.bold, size: 20)
         label.textColor = .systemOrange
         label.numberOfLines = 2
         return label
@@ -24,14 +31,14 @@ final class MenuListTableViewCell: UITableViewCell {
     
     lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "GmarketSansBold", size: 14)
+        label.font = UIFont(name: Fonts.bold, size: 14)
         label.numberOfLines = 2
         return label
     }()
     
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "star"), for: .normal)
+        button.setImage(UIImage(named: Image.star), for: .normal)
         return button
     }()
     
@@ -45,14 +52,7 @@ final class MenuListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    // MARK: Methods
-    func configure() {
-        
-    }
-    
     private func setUpCell() {
-        
         contentView.addSubview(menuLabel)
         contentView.addSubview(oneLinerLabel)
         contentView.addSubview(favoriteButton)
@@ -77,5 +77,4 @@ final class MenuListTableViewCell: UITableViewCell {
             $0.size.equalTo(26)
         }
     }
-    
 }
