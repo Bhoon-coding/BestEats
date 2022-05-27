@@ -10,14 +10,50 @@ import UIKit
 import SnapKit
 import Toast_Swift
 
-final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
+final class MenuDetailViewController: UIViewController {
+    
+    // MARK: - Enums
+    
+    private enum Navigation {
+        enum Button {
+            static let save: String = "저장"
+            static let edit: String = "수정"
+        }
+    }
+    
+    private enum Info {
+        enum Label {
+            static let menu: String = "메뉴명"
+            static let oneLiner: String = "한줄평"
+            static let rating: String = "내평가"
+        }
+        enum Placeholder {
+            static let menu: String = "메뉴를 입력해 주세요."
+            static let oneLiner: String = "한줄평을 입력해 주세요."
+        }
+    }
+    
+    private enum Toast {
+        static let requestMenuMsg: String = "메뉴명을 입력해 주세요."
+        static let requestOneLinerMsg: String = "한줄평을 입력해 주세요."
+    }
+    
+    private enum Alert {
+        enum Save {
+            static let title: String = "변경사항을 저장 하시겠습니까?"
+        }
+        enum Button {
+            static let save: String = "저장"
+            static let cancel: String = "취소"
+        }
+    }
 
     // MARK: Properties
 
-    var editMode: Bool = false
-    var selectedLike: Bool = false
-    var selectedCurious: Bool = false
-    var selectedWarning: Bool = false
+    private var editMode: Bool = false
+    private var selectedLike: Bool = false
+    private var selectedCurious: Bool = false
+    private var selectedWarning: Bool = false
     
     var selectedRestaurant: Restaurant
     var selectedRestaurantIndex: Int
@@ -44,19 +80,19 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var wholeView: UIView = {
+    private let wholeView: UIView = {
         let view = UIView()
         return view
     }()
     
-    lazy var menuLabel: UILabel = {
+    private let menuLabel: UILabel = {
         let label = UILabel()
-        label.text = "메뉴명"
+        label.text = Info.Label.menu
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var menuTextField: UITextField = {
+    private lazy var menuTextField: UITextField = {
         let textField = UITextField()
         textField.placeholderConvention(textField: textField)
         textField.isUserInteractionEnabled = false
@@ -65,14 +101,14 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
-    lazy var oneLinerLabel: UILabel = {
+    private let oneLinerLabel: UILabel = {
         let label = UILabel()
-        label.text = "한줄팁"
+        label.text = Info.Label.oneLiner
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var oneLinerTextField: UITextField = {
+    private lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
         textField.placeholderConvention(textField: textField)
         textField.isUserInteractionEnabled = false
@@ -81,47 +117,47 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         return textField
     }()
     
-    lazy var typeLabel: UILabel = {
+    private lazy var typeLabel: UILabel = {
         let label = UILabel()
-        label.text = "내평가"
+        label.text = Info.Label.rating
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var typeView: UIView = {
+    private let typeView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         return view
     }()
     
-    lazy var typeStackView: UIStackView = {
+    private let typeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         return stackView
     }()
     
-    lazy var typeLikeButton: UIButton = {
+    private lazy var typeLikeButton: UIButton = {
         let button = UIButton()
         button.isEnabled = false
-        button.setImage(UIImage(named: prevType == "like" ? "likeFill" : "like"), for: .normal)
+        button.setImage(UIImage(named: prevType == Image.like ? Image.likeFill : Image.like), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var typeCuriousButton: UIButton = {
+    private lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
         button.isEnabled = false
-        button.setImage(UIImage(named: prevType == "curious" ? "curiousFill" : "curious"), for: .normal)
+        button.setImage(UIImage(named: prevType == Image.curious ? Image.curiousFill : Image.curious), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var typeWarningButton: UIButton = {
+    private lazy var typeWarningButton: UIButton = {
         let button = UIButton()
         button.isEnabled = false
-        button.setImage(UIImage(named: prevType == "warning" ? "warningFill" : "warning"), for: .normal)
+        button.setImage(UIImage(named: prevType == Image.warning ? Image.warningFill : Image.warning), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
@@ -149,9 +185,9 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     // MARK: Methods
     
     private func setUpNavigationBar() {
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.bold,
                                                                        size: 14)!]
-        let editButton = UIBarButtonItem(title: "수정",
+        let editButton = UIBarButtonItem(title: Navigation.Button.edit,
                                            style: .plain,
                                            target: self,
                                            action: #selector(editTapped))
@@ -232,7 +268,6 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         typeWarningButton.snp.makeConstraints {
             $0.width.equalTo(44)
         }
-        
     }
     
     private func setUpDelegate() {
@@ -240,19 +275,10 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         oneLinerTextField.delegate = self
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == menuTextField {
-            oneLinerTextField.becomeFirstResponder()
-        } else {
-            oneLinerTextField.resignFirstResponder()
-        }
-        return true
-    }
-    
     private func navRightBarSaveButton() {
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.bold,
                                                                        size: 14)!]
-        let saveButton = UIBarButtonItem(title: "저장",
+        let saveButton = UIBarButtonItem(title: Navigation.Button.save,
                                          style: .plain,
                                          target: self,
                                          action: #selector(saveTapped))
@@ -261,9 +287,9 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func navRightBarEditButton() {
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.bold,
                                                                        size: 14)!]
-        let editButton = UIBarButtonItem(title: "수정",
+        let editButton = UIBarButtonItem(title: Navigation.Button.edit,
                                            style: .plain,
                                            target: self,
                                          action: #selector(self.editTapped))
@@ -273,61 +299,61 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func activeLikeButton() {
-        typeLikeButton.setImage(UIImage(named: "likeFill"), for: .normal)
-        typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
-        typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
+        typeLikeButton.setImage(UIImage(named: Image.likeFill), for: .normal)
+        typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
+        typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
     }
     
     private func activeCuriousButton() {
-        typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
-        typeCuriousButton.setImage(UIImage(named: "curiousFill"), for: .normal)
-        typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
+        typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
+        typeCuriousButton.setImage(UIImage(named: Image.curiousFill), for: .normal)
+        typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
     }
     
     private func activeWarningButton() {
-        typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
-        typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
-        typeWarningButton.setImage(UIImage(named: "warningFill"), for: .normal)
+        typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
+        typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
+        typeWarningButton.setImage(UIImage(named: Image.warningFill), for: .normal)
     }
     
     private func changeTextField() {
-        self.menuTextField.isUserInteractionEnabled = editMode ? true : false
-        self.menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
-        self.menuTextField.text = editMode ? self.selectedMenu.menu : self.menuTextField.text
+        menuTextField.isUserInteractionEnabled = editMode ? true : false
+        menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
+        menuTextField.text = editMode ? selectedMenu.menu : menuTextField.text
 
-        self.oneLinerTextField.isUserInteractionEnabled = editMode ? true : false
-        self.oneLinerTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
-        self.oneLinerTextField.text = editMode ? self.selectedMenu.oneLiner : self.oneLinerTextField.text
+        oneLinerTextField.isUserInteractionEnabled = editMode ? true : false
+        oneLinerTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
+        oneLinerTextField.text = editMode ? selectedMenu.oneLiner : oneLinerTextField.text
         
-        self.typeView.backgroundColor = editMode ? .white : .secondarySystemBackground
+        typeView.backgroundColor = editMode ? .white : .secondarySystemBackground
         
-        self.typeLikeButton.isEnabled = true
-        self.typeCuriousButton.isEnabled = true
-        self.typeWarningButton.isEnabled = true
+        typeLikeButton.isEnabled = true
+        typeCuriousButton.isEnabled = true
+        typeWarningButton.isEnabled = true
     }
     
     private func saveCancel() {
         switch prevType {
-        case "like":
+        case Image.like:
             activeLikeButton()
-        case "curious":
+        case Image.curious:
             activeCuriousButton()
         default:
             activeWarningButton()
         }
-        self.menuTextField.isUserInteractionEnabled = editMode ? true : false
-        self.menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
-        self.menuTextField.text = self.selectedMenu.menu
+        menuTextField.isUserInteractionEnabled = editMode ? true : false
+        menuTextField.backgroundColor = editMode ? .white : .secondarySystemBackground
+        menuTextField.text = selectedMenu.menu
 
-        self.oneLinerTextField.isUserInteractionEnabled = false
-        self.oneLinerTextField.backgroundColor = .secondarySystemBackground
-        self.oneLinerTextField.text = self.selectedMenu.oneLiner
+        oneLinerTextField.isUserInteractionEnabled = false
+        oneLinerTextField.backgroundColor = .secondarySystemBackground
+        oneLinerTextField.text = selectedMenu.oneLiner
         
-        self.typeView.backgroundColor = editMode ? .white : .secondarySystemBackground
+        typeView.backgroundColor = editMode ? .white : .secondarySystemBackground
         
-        self.typeLikeButton.isEnabled = false
-        self.typeCuriousButton.isEnabled = false
-        self.typeWarningButton.isEnabled = false
+        typeLikeButton.isEnabled = false
+        typeCuriousButton.isEnabled = false
+        typeWarningButton.isEnabled = false
     }
     
     // MARK: @objc
@@ -347,19 +373,19 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         oneLinerTextField.placeholder = selectedMenu.oneLiner
         
         typeView.backgroundColor = .white
-        self.typeLikeButton.isEnabled = true
-        self.typeCuriousButton.isEnabled = true
-        self.typeWarningButton.isEnabled = true
+        typeLikeButton.isEnabled = true
+        typeCuriousButton.isEnabled = true
+        typeWarningButton.isEnabled = true
     }
     
     @objc func saveTapped() {
         
         editMode = false
         
-        let alert = UIAlertController(title: "변경사항을 저장 하시겠습니까?",
+        let alert = UIAlertController(title: Alert.Save.title,
                                       message: "",
                                       preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "저장",
+        let confirm = UIAlertAction(title: Alert.Button.save,
                                     style: .default) { action in
             self.navRightBarEditButton()
             
@@ -367,14 +393,14 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
                   let editedOnliner = self.oneLinerTextField.text else { return }
             
             if editedMenuName.trimmingCharacters(in: .whitespaces).isEmpty {
-                self.view.makeToast("메뉴명을 입력 해주세요.", position: .top)
+                self.view.makeToast(Toast.requestMenuMsg, position: .top)
                 self.editMode = true
                 self.navRightBarSaveButton()
                 self.changeTextField()
                 return
                 
             } else if editedOnliner.trimmingCharacters(in: .whitespaces).isEmpty {
-                self.view.makeToast("한줄팁을 입력 해주세요.", position: .top)
+                self.view.makeToast(Toast.requestOneLinerMsg, position: .top)
                 self.editMode = true
                 self.navRightBarSaveButton()
                 self.changeTextField()
@@ -393,7 +419,7 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
                                                   editedMenu: editMenu,
                                                   menuIndex: self.selectedMenuIndex)
         }
-        let cancel = UIAlertAction(title: "취소",
+        let cancel = UIAlertAction(title: Alert.Button.cancel,
                                    style: .cancel) { action in
             self.navRightBarEditButton()
             self.saveCancel()
@@ -401,7 +427,6 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(confirm)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
-        
     }
     
     @objc func closeTapped() {
@@ -411,34 +436,41 @@ final class MenuDetailViewController: UIViewController, UITextFieldDelegate {
     @objc func tappedLike(button: UIButton) {
         selectedLike = true
         if selectedLike {
-            changeType = "like"
+            changeType = Image.like
             activeLikeButton()
         } else {
-            typeLikeButton.setImage(UIImage(named: "like"), for: .normal)
+            typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
         }
-
     }
 
     @objc func tappedCurious(button: UIButton) {
         selectedCurious = true
         if selectedCurious {
-            changeType = "curious"
+            changeType = Image.curious
            activeCuriousButton()
         } else {
-            typeCuriousButton.setImage(UIImage(named: "curious"), for: .normal)
+            typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
         }
-
     }
 
     @objc func tappedWarning(button: UIButton) {
         selectedWarning = true
         if selectedWarning {
-            changeType = "warning"
+            changeType = Image.warning
             activeWarningButton()
         } else {
-            typeWarningButton.setImage(UIImage(named: "warning"), for: .normal)
+            typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
         }
-
     }
+}
 
+extension MenuDetailViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == menuTextField {
+            oneLinerTextField.becomeFirstResponder()
+        } else {
+            oneLinerTextField.resignFirstResponder()
+        }
+        return true
+    }
 }
