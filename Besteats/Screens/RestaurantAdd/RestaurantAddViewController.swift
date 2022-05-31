@@ -63,7 +63,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     private var type: String? = nil
     private var totalRestaurants: [Restaurant] = []
     
-    private let wholeView: UIView = {
+    private lazy var wholeView: UIView = {
         let view = UIView()
         return view
     }()
@@ -75,63 +75,63 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
-    private let restaurantLabel: UILabel = {
+    private lazy var restaurantLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.restaurant
         label.mediumLabel(label: label)
         return label
     }()
     
-    private let restaurantTextField: UITextField = {
+    private lazy var restaurantTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = Info.Placeholder.restaurant
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    private let menuLabel: UILabel = {
+    private lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.menu
         label.mediumLabel(label: label)
         return label
     }()
     
-    private let menuTextField: UITextField = {
+    private lazy var menuTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = Info.Placeholder.menu
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    private let oneLinerLabel: UILabel = {
+    private lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.oneLiner
         label.mediumLabel(label: label)
         return label
     }()
     
-    private let oneLinerTextField: UITextField = {
+    private lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = Info.Placeholder.oneLiner
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    private let typeLabel: UILabel = {
+    private lazy var typeLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.rating
         label.mediumLabel(label: label)
         return label
     }()
     
-    private let typeView: UIView = {
+    private lazy var typeView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         return view
     }()
     
-    private let typeStackView: UIStackView = {
+    private lazy var typeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing

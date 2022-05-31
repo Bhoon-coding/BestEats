@@ -68,96 +68,96 @@ final class MenuAddViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var wholeView: UIView = {
+    private lazy var wholeView: UIView = {
         let view = UIView()
         return view
     }()
     
-    lazy var closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Image.close), for: .normal)
         button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         return button
     }()
     
-    lazy var restaurantLabel: UILabel = {
+    private lazy var restaurantLabel: UILabel = {
         let label = UILabel()
         label.text = "\(selectedRestaurant.restaurantName)"
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }()
     
-    lazy var menuLabel: UILabel = {
+    private lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.menu
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var menuTextField: UITextField = {
+    private lazy var menuTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = Info.Placeholder.menu
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    lazy var oneLinerLabel: UILabel = {
+    private lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.oneLiner
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var oneLinerTextField: UITextField = {
+    private lazy var oneLinerTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = Info.Placeholder.oneLiner
         textField.placeholderConvention(textField: textField)
         return textField
     }()
     
-    lazy var typeLabel: UILabel = {
+    private lazy var typeLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.rating
         label.mediumLabel(label: label)
         return label
     }()
     
-    lazy var typeView: UIView = {
+    private lazy var typeView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         return view
     }()
     
-    lazy var typeStackView: UIStackView = {
+    private lazy var typeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         return stackView
     }()
     
-    lazy var typeLikeButton: UIButton = {
+    private lazy var typeLikeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Image.like), for: .normal)
         button.addTarget(self, action: #selector(tappedLike(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var typeCuriousButton: UIButton = {
+    private lazy var typeCuriousButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Image.curious), for: .normal)
         button.addTarget(self, action: #selector(tappedCurious(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var typeWarningButton: UIButton = {
+    private lazy var typeWarningButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Image.warning), for: .normal)
         button.addTarget(self, action: #selector(tappedWarning(button:)), for: .touchUpInside)
         return button
     }()
     
-    lazy var doneButton: UIButton = {
+    private lazy var doneButton: UIButton = {
         let button = UIButton()
         button.setTitle(Info.Button.addMenu, for: .normal)
         button.mediumButton(button: button)

@@ -80,12 +80,12 @@ final class MenuDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let wholeView: UIView = {
+    private lazy var wholeView: UIView = {
         let view = UIView()
         return view
     }()
     
-    private let menuLabel: UILabel = {
+    private lazy var menuLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.menu
         label.mediumLabel(label: label)
@@ -101,7 +101,7 @@ final class MenuDetailViewController: UIViewController {
         return textField
     }()
     
-    private let oneLinerLabel: UILabel = {
+    private lazy var oneLinerLabel: UILabel = {
         let label = UILabel()
         label.text = Info.Label.oneLiner
         label.mediumLabel(label: label)
@@ -124,14 +124,14 @@ final class MenuDetailViewController: UIViewController {
         return label
     }()
     
-    private let typeView: UIView = {
+    private lazy var typeView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         return view
     }()
     
-    private let typeStackView: UIStackView = {
+    private lazy var typeStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
