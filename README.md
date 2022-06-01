@@ -135,10 +135,24 @@
 
 ### 예시
 
-``` 
+``` swift
 bugfix/BSTS-#12-add-menu-button-not-working
 feature/BSTS-#50-remote-notification
 ```
 
+## Commit Message Convention
+
+### 1. 기본 형식
+```swift
+// 아래 구분마다 띄워쓰기 해주며, [이슈내용] 부분에 띄어쓰기시 그대로 띄워줍니다.
+[prefix] #이슈번호 - [이슈내용]
+
+```
+
+### 2. 예시
+
+```swift
+[feature] #43 - remote notification
+```
 ## Code Convention 
 https://github.com/StyleShare/swift-style-guide 을 최대한 따르고 있습니다.
