@@ -114,3 +114,31 @@
 - [ ] 메뉴 사진 상세 modal
 - [x] 수정,완료 버튼 터치시 조건에 맞게 표현
 - [x] 메뉴리스트에서 선택된 cell의 데이터 가져오기
+
+<br><br>
+-----
+## Git Branch
+
+`<Prefix>/BSTS-#<issue_number>-<구현내용>` 의 양식에 따라 브랜치 명을 작성합니다.
+
+
+### 1. prefix
+- `main`: 개발이 완료되어 최종 배포될 브랜치
+- `develop`: default branch - feature, bugfix등 구현된 기능들이 merge된 후 main에 merge 되기 전 관리될 브랜치
+- `feature`: 기능을 개발하는 브랜치
+- `bugfix`: 버그를 수정하는 브랜치
+
+### ⚠️ 참고
+- 띄어쓰기 부분은 '-' 을 사용합니다.
+- branch 내용은 '소문자 영어'로만 작성합니다.
+
+
+### 예시
+
+``` 
+bugfix/BSTS-#12-add-menu-button-not-working
+feature/BSTS-#50-remote-notification
+```
+
+## Code Convention 
+https://github.com/StyleShare/swift-style-guide 을 최대한 따르고 있습니다.
