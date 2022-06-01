@@ -8,22 +8,47 @@
 import UIKit
 import SnapKit
 
-let checkedFavorite = UIImage(named: "starFill")
-let uncheckedFavorite = UIImage(named: "star")
+private let uncheckedFavorite = UIImage(named: Image.star)
+private let checkedFavorite = UIImage(named: Image.starFill)
 
 final class MenuListViewController: UIViewController {
     
-    // MARK: Properties
+    // MARK: - Enums
     
-    var selectedLike = true
-    var selectedCurious = false
-    var selectedWarning = false
+    private enum RatingType {
+        static let like: String = "like"
+        static let curious: String = "curious"
+        static let warning: String = "warning"
+        
+        enum Button {
+            static let likeTitle: String = "좋아요"
+            static let curiousTitle: String = "먹어볼래요"
+            static let warningTitle: String = "별로에요"
+        }
+        enum EmptyState {
+            static let likeMessage: String = "맛있었던 메뉴를 \n\n추가해 주세요."
+            static let curiousMessage: String = "다음에 먹어보고 싶었던 메뉴를 \n\n추가해 주세요."
+            static let warningMessage: String = "나와 안맞았던 메뉴를 \n\n추가해 주세요."
+        }
+    }
+    
+    private enum Navigation {
+        enum Button {
+            static let add: String = "추가"
+        }
+    }
+    
+    // MARK: - Properties
+    
+    private var selectedLike = true
+    private var selectedCurious = false
+    private var selectedWarning = false
 
-    var type: String = "like"
-    var totalRestaurants: [Restaurant] = []
-    var selectedRestaurant: Restaurant
-    var selectedRestaurantIndex: Int
-    var totalMenus: [Menu] = []
+    private var type = RatingType.like
+    private var totalRestaurants: [Restaurant] = []
+    private var selectedRestaurant: Restaurant
+    private var selectedRestaurantIndex: Int
+    private var totalMenus: [Menu] = []
     
     
     init(selectedRestaurant: Restaurant ,index: Int) {
@@ -36,7 +61,7 @@ final class MenuListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    lazy var typeStackView: UIStackView = {
+    private lazy var typeStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [likeTypeButton,
                                                        curiousTypeButton,
                                                        warningTypeButton
@@ -46,10 +71,10 @@ final class MenuListViewController: UIViewController {
         return stackView
     }()
     
-    lazy var likeTypeButton: UIButton = {
+    private lazy var likeTypeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("좋아요", for: .normal)
-        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 16)
+        button.setTitle(RatingType.Button.likeTitle, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.bold, size: 16)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
         button.layer.cornerRadius = 8
@@ -57,10 +82,10 @@ final class MenuListViewController: UIViewController {
         return button
     }()
     
-    lazy var curiousTypeButton: UIButton = {
+    private lazy var curiousTypeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("먹어볼래요", for: .normal)
-        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 16)
+        button.setTitle(RatingType.Button.curiousTitle, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.bold, size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
@@ -68,10 +93,10 @@ final class MenuListViewController: UIViewController {
         return button
     }()
     
-    lazy var warningTypeButton: UIButton = {
+    private lazy var warningTypeButton: UIButton = {
         let button = UIButton()
-        button.setTitle("별로에요", for: .normal)
-        button.titleLabel?.font = UIFont(name: "GmarketSansBold", size: 16)
+        button.setTitle(RatingType.Button.warningTitle, for: .normal)
+        button.titleLabel?.font = UIFont(name: Fonts.bold, size: 16)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 8
@@ -79,14 +104,13 @@ final class MenuListViewController: UIViewController {
         return button
     }()
     
-    lazy var menuListTableView: UITableView = {
+    private lazy var menuListTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(MenuListTableViewCell.self,
                            forCellReuseIdentifier: MenuListTableViewCell.identifier)
         tableView.backgroundColor = .secondarySystemBackground
         return tableView
     }()
-    
     
     // MARK: LifeCycle
     
@@ -98,7 +122,6 @@ final class MenuListViewController: UIViewController {
         setUpTableView()
         
         selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedRestaurantIndex]
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,37 +138,32 @@ final class MenuListViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         setUpTableView()
-        
     }
-    
     
     // MARK: Methods
     
     private func setUpTableView() {
         
         setUpDelegate()
-        
         menuListTableView.rowHeight = 150
         view.addSubview(menuListTableView)
         menuListTableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(80)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        
     }
     
     private func setUpDelegate() {
         
         menuListTableView.dataSource = self
         menuListTableView.delegate = self
-        
     }
     
     private func setUpNavigationBar() {
-        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: "GmarketSansBold",
+        let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.bold,
                                                                        size: 14)!]
         let boldFontAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-        let addButton = UIBarButtonItem(title: "추가",
+        let addButton = UIBarButtonItem(title: Navigation.Button.add,
                                         style: .plain,
                                         target: self,
                                         action: #selector(addTapped))
@@ -181,13 +199,13 @@ final class MenuListViewController: UIViewController {
     }
     
     @objc func tappedLikeButton() {
-        type = "like"
+        type = RatingType.like
         
         DispatchQueue.main.async {
             self.menuListTableView.reloadData()
         }
         
-        if type == "like" {
+        if type == RatingType.like {
             likeTypeButton.setTitleColor(.white, for: .normal)
             likeTypeButton.backgroundColor = .systemGreen
             curiousTypeButton.setTitleColor(.black, for: .normal)
@@ -202,13 +220,13 @@ final class MenuListViewController: UIViewController {
     }
     
     @objc func tappedCuriousButton() {
-        type = "curious"
+        type = RatingType.curious
         
         DispatchQueue.main.async {
             self.menuListTableView.reloadData()
         }
         
-        if type == "curious" {
+        if type == RatingType.curious {
             likeTypeButton.setTitleColor(.black, for: .normal)
             likeTypeButton.backgroundColor = .white
             curiousTypeButton.setTitleColor(.white, for: .normal)
@@ -223,13 +241,13 @@ final class MenuListViewController: UIViewController {
     }
     
     @objc func tappedWarningButton() {
-        type = "warning"
+        type = RatingType.warning
         
         DispatchQueue.main.async {
             self.menuListTableView.reloadData()
         }
         
-        if type == "warning" {
+        if type == RatingType.warning {
             likeTypeButton.setTitleColor(.black, for: .normal)
             likeTypeButton.backgroundColor = .white
             curiousTypeButton.setTitleColor(.black, for: .normal)
@@ -256,44 +274,41 @@ final class MenuListViewController: UIViewController {
         
         menuListTableView.reloadData()
     }
-        
 }
 
 // MARK: Extension
 
 extension MenuListViewController: UITableViewDataSource {
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if type == "like" {
+        if type == RatingType.like {
             selectedRestaurant.likeMenus.count == 0
-            ? tableView.setEmptyMessage("맛있었던 메뉴를 \n\n추가해 주세요.")
+            ? tableView.setEmptyMessage(RatingType.EmptyState.likeMessage)
             : tableView.restore()
             return selectedRestaurant.likeMenus.count
             
-        } else if type == "curious" {
+        } else if type == RatingType.curious {
             selectedRestaurant.curiousMenus.count == 0
-            ? tableView.setEmptyMessage("다음에 먹어보고 싶었던 메뉴를 \n\n추가해 주세요.")
+            ? tableView.setEmptyMessage(RatingType.EmptyState.curiousMessage)
             : tableView.restore()
             return selectedRestaurant.curiousMenus.count
             
         } else {
             selectedRestaurant.badMenus.count == 0
-            ? tableView.setEmptyMessage("나와 안맞았던 메뉴를 \n\n추가해 주세요.")
+            ? tableView.setEmptyMessage(RatingType.EmptyState.warningMessage)
             : tableView.restore()
             return selectedRestaurant.badMenus.count
         }
         
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier,
                                                  for: indexPath) as! MenuListTableViewCell
         
-        if type == "like" {
+        if type == RatingType.like {
             let selectedItem = selectedRestaurant.likeMenus[indexPath.row]
             cell.menuLabel.text = selectedItem.menu
             cell.oneLinerLabel.text = selectedItem.oneLiner
@@ -309,9 +324,8 @@ extension MenuListViewController: UITableViewDataSource {
                                                for: .normal)
                 : cell.favoriteButton.setImage(uncheckedFavorite,
                                                for: .normal)
-                
             }
-        } else if type == "curious" {
+        } else if type == RatingType.curious {
             cell.menuLabel.text = selectedRestaurant.curiousMenus[indexPath.row].menu
             cell.oneLinerLabel.text = selectedRestaurant.curiousMenus[indexPath.row].oneLiner
             cell.favoriteButton.isHidden = true
@@ -330,7 +344,7 @@ extension MenuListViewController: UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            if type == "like" {
+            if type == RatingType.like {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedRestaurantIndex,
@@ -339,7 +353,7 @@ extension MenuListViewController: UITableViewDataSource {
                     menuIndex: indexPath.row)
                 menuListTableView.deleteRows(at: [indexPath], with: .left)
                 
-            } else if type == "curious" {
+            } else if type == RatingType.curious {
                 selectedRestaurant = UserDefaultsManager.shared.deleteMenu(
                     selectedRestaurant: selectedRestaurant,
                     selectedIndex: selectedRestaurantIndex,
@@ -375,10 +389,10 @@ extension MenuListViewController: UITableViewDelegate {
         var selectedMenu: Menu
         
         switch type {
-        case "like":
+        case RatingType.like:
             selectedMenu = selectedRestaurant.likeMenus[indexPath.row]
             
-        case "curious":
+        case RatingType.curious:
             selectedMenu = selectedRestaurant.curiousMenus[indexPath.row]
             
         default:

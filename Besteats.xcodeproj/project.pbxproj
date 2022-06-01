@@ -16,6 +16,7 @@
 		E11E3CA22764CF6300B70E3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA02764CF6300B70E3A /* Main.storyboard */; };
 		E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA32764CF6400B70E3A /* Assets.xcassets */; };
 		E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */; };
+		E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */; };
 		E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */; };
 		E140A03B283A811B00988759 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E140A03A283A811B00988759 /* Fonts.swift */; };
 		E155E4E127F28E9E000E20A7 /* MenuListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */; };
@@ -49,6 +50,7 @@
 		E11E3CA32764CF6400B70E3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11E3CA62764CF6400B70E3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11E3CA82764CF6400B70E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + extension.swift"; sourceTree = "<group>"; };
 		E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddViewController.swift; sourceTree = "<group>"; };
 		E140A03A283A811B00988759 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Besteats/Utils/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
 		E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListTableViewCell.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				E159D5AB27F6E7B800C841DD /* UICollectionView + extension.swift */,
 				E159D5AD27F6E7DD00C841DD /* CALayer + extension.swift */,
 				E16F1EA027FB378500103E6B /* UITableView + extension.swift */,
+				E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				E155E4E127F28E9E000E20A7 /* MenuListTableViewCell.swift in Sources */,
 				E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */,
 				E159D5AA27F6E78900C841DD /* UITextField + extension.swift in Sources */,
+				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
 				E191C500276F54DC0031F036 /* TabBarController.swift in Sources */,
 				E159D5A827F6E77F00C841DD /* UIView + extension.swift in Sources */,
