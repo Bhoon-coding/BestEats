@@ -8,4 +8,6 @@ target 'Besteats' do
   # Pods for Besteats
   pod 'SnapKit', '~> 5.0.0'
   pod 'Toast-Swift', '~> 5.0.1'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
 end
