@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-import FirebaseCore
+import Firebase
 import FirebaseMessaging
 
 @available(iOS 13.0, *)

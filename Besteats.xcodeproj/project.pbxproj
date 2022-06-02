@@ -32,6 +32,7 @@
 		E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15A3F88278987A000CD810B /* BottomSheetViewController.swift */; };
 		E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E15D0109280470CA007BB795 /* GmarketSansBold.otf */; };
 		E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F1EA027FB378500103E6B /* UITableView + extension.swift */; };
+		E173202F2848FFE90020193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E173202E2848FFE90020193D /* GoogleService-Info.plist */; };
 		E191C500276F54DC0031F036 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarController.swift */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,8 @@
 		E15A3F88278987A000CD810B /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E15D0109280470CA007BB795 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		E16F1EA027FB378500103E6B /* UITableView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + extension.swift"; sourceTree = "<group>"; };
+		E173202E2848FFE90020193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E1732030284906DF0020193D /* Besteats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Besteats.entitlements; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
 		E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BesteatsRelease.entitlements; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E1732030284906DF0020193D /* Besteats.entitlements */,
 				E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */,
 				E123ED262815941500E63B68 /* Screens */,
 				E10161DC27C5289800215F5B /* Model */,
@@ -149,6 +153,7 @@
 				E11E3CA02764CF6300B70E3A /* Main.storyboard */,
 				E191C4FF276F54DC0031F036 /* TabBarController.swift */,
 				E11E3CA32764CF6400B70E3A /* Assets.xcassets */,
+				E173202E2848FFE90020193D /* GoogleService-Info.plist */,
 				E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */,
 				E11E3CA82764CF6400B70E3A /* Info.plist */,
 			);
@@ -303,6 +308,7 @@
 			files = (
 				E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */,
 				E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */,
+				E173202F2848FFE90020193D /* GoogleService-Info.plist in Resources */,
 				E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */,
 				E11E3CA22764CF6300B70E3A /* Main.storyboard in Resources */,
 			);
@@ -527,6 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = Besteats/Besteats.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = R4G74AF442;
