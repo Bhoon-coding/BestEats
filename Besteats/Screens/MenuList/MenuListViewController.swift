@@ -305,8 +305,8 @@ extension MenuListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier,
-                                                 for: indexPath) as! MenuListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier,
+                                                       for: indexPath) as? MenuListTableViewCell else { return MenuListTableViewCell() }
         
         if type == RatingType.like {
             let selectedItem = selectedRestaurant.likeMenus[indexPath.row]

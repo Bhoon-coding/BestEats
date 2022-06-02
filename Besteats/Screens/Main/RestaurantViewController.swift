@@ -240,7 +240,7 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 // Cell에 대한 delegate
 extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as! FoodCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as? FoodCollectionViewCell else { return FoodCollectionViewCell() }
         let restaurant: Restaurant = totalRestaurants[indexPath.row]
         let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
         var favoriteString = ""
