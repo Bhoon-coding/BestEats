@@ -9,6 +9,7 @@ import UIKit
 import UserNotifications
 
 import FirebaseCore
+import FirebaseMessaging
 
 @available(iOS 13.0, *)
 
@@ -22,6 +23,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
+        
+        // MARK: - FCM 현재 토큰 확인
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error FCM 등록토큰 가져오기: \(error.localizedDescription)")
+            } else if let token = token {
+                print("FCM 등록토큰: \(token)")
+            }
+        }
         sleep(2)
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -60,5 +71,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } else {
             completionHandler([.alert, .badge, .sound])
         }
+    }
+}
+
+// MARK: - FCM 등록토큰 기반 액세스
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        guard let token = fcmToken else { return }
+        print("FCM 등록토큰 갱신: \(token)")
     }
 }
