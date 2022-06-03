@@ -23,9 +23,12 @@ class SettingsTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var notificationToggle: UISwitch = {
-        let toggle = UISwitch()
-        return toggle
+    lazy var notificationSwitch: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(tappedNotification), for: .touchUpInside)
+        return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -38,16 +41,23 @@ class SettingsTableViewCell: UITableViewCell {
     
     func setUpCell() {
         contentView.addSubview(notificationLabel)
-        contentView.addSubview(notificationToggle)
+        contentView.addSubview(notificationSwitch)
         
         notificationLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(24)
             $0.centerY.equalToSuperview()
         }
         
-        notificationToggle.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(16)
+        notificationSwitch.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(24)
             $0.centerY.equalToSuperview()
         }
+    }
+    
+    // MARK: - @objc
+    
+    @objc func tappedNotification() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+
     }
 }
