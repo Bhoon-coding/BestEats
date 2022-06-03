@@ -19,6 +19,8 @@
 		E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */; };
 		E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */; };
 		E140A03B283A811B00988759 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E140A03A283A811B00988759 /* Fonts.swift */; };
+		E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */; };
+		E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */; };
 		E155E4E127F28E9E000E20A7 /* MenuListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */; };
 		E155E4E227F28E9E000E20A7 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */; };
 		E155E4E327F28E9E000E20A7 /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */; };
@@ -33,7 +35,7 @@
 		E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E15D0109280470CA007BB795 /* GmarketSansBold.otf */; };
 		E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F1EA027FB378500103E6B /* UITableView + extension.swift */; };
 		E173202F2848FFE90020193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E173202E2848FFE90020193D /* GoogleService-Info.plist */; };
-		E191C500276F54DC0031F036 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarController.swift */; };
+		E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarViewController.swift */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +56,8 @@
 		E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + extension.swift"; sourceTree = "<group>"; };
 		E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddViewController.swift; sourceTree = "<group>"; };
 		E140A03A283A811B00988759 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Besteats/Utils/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
+		E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListTableViewCell.swift; sourceTree = "<group>"; };
 		E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +73,7 @@
 		E16F1EA027FB378500103E6B /* UITableView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + extension.swift"; sourceTree = "<group>"; };
 		E173202E2848FFE90020193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1732030284906DF0020193D /* Besteats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Besteats.entitlements; sourceTree = "<group>"; };
-		E191C4FF276F54DC0031F036 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		E191C4FF276F54DC0031F036 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
 		E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BesteatsRelease.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,7 +147,8 @@
 			children = (
 				E1732030284906DF0020193D /* Besteats.entitlements */,
 				E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */,
-				E123ED262815941500E63B68 /* Screens */,
+				E146865C2849CC8A00DAA77D /* Settings */,
+				E123ED262815941500E63B68 /* Restaurants */,
 				E10161DC27C5289800215F5B /* Model */,
 				E1784F1627CD07000005AB03 /* Utils */,
 				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
@@ -151,7 +156,7 @@
 				E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */,
 				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
 				E11E3CA02764CF6300B70E3A /* Main.storyboard */,
-				E191C4FF276F54DC0031F036 /* TabBarController.swift */,
+				E191C4FF276F54DC0031F036 /* TabBarViewController.swift */,
 				E11E3CA32764CF6400B70E3A /* Assets.xcassets */,
 				E173202E2848FFE90020193D /* GoogleService-Info.plist */,
 				E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */,
@@ -160,7 +165,7 @@
 			path = Besteats;
 			sourceTree = "<group>";
 		};
-		E123ED262815941500E63B68 /* Screens */ = {
+		E123ED262815941500E63B68 /* Restaurants */ = {
 			isa = PBXGroup;
 			children = (
 				E1B4C9AE27F1F50B00B0E5E9 /* Main */,
@@ -169,7 +174,7 @@
 				E131C79927E0D3AF00AEAE8D /* MenuAdd */,
 				E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */,
 			);
-			path = Screens;
+			path = Restaurants;
 			sourceTree = "<group>";
 		};
 		E131C79827E0D33E00AEAE8D /* RestaurantAdd */ = {
@@ -186,6 +191,15 @@
 				E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */,
 			);
 			path = MenuAdd;
+			sourceTree = "<group>";
+		};
+		E146865C2849CC8A00DAA77D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */,
+				E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		E155E4DC27F28E9E000E20A7 /* MenuList */ = {
@@ -365,6 +379,7 @@
 			files = (
 				E11E3C9F2764CF6300B70E3A /* RestaurantViewController.swift in Sources */,
 				E155E4E327F28E9E000E20A7 /* MenuListViewController.swift in Sources */,
+				E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */,
 				E10161DF27C528C200215F5B /* Restaurants.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
@@ -378,12 +393,13 @@
 				E159D5AA27F6E78900C841DD /* UITextField + extension.swift in Sources */,
 				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
-				E191C500276F54DC0031F036 /* TabBarController.swift in Sources */,
+				E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */,
 				E159D5A827F6E77F00C841DD /* UIView + extension.swift in Sources */,
 				E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */,
 				E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */,
 				E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */,
 				E155E4E227F28E9E000E20A7 /* UserDefaultsService.swift in Sources */,
+				E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */,
 				E159D5AC27F6E7B800C841DD /* UICollectionView + extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
