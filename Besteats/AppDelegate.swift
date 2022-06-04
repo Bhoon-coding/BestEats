@@ -33,15 +33,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("FCM 등록토큰: \(token)")
             }
         }
-        sleep(2)
+        sleep(1)
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, error in
-            print("Error, Request Notifications Authorization: \(error.debugDescription)")
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { auth, error in
+             
+            if let error = error {
+                print("Error - Request Notification Auth:\(error)")
+            } else {
+                print("Request Notification Auth:\(auth)")
+            }
         }
         
         application.registerForRemoteNotifications()
-        
         return true
     }
 

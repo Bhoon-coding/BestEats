@@ -9,29 +9,40 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
     
+    // MARK: - Enums
+    
+    private enum Settings {
+        static let title = "설정"
+        
+        enum List {
+            static let notification = "Push 알림설정"
+        }
+        
+    }
+    
     // MARK: - Properties
 
-    private let settingsArr = ["알림"]
+    private let settingsLists = [Settings.List.notification]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "설정"
+        title = Settings.title
         
         tableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.identifier)
-        tableView.rowHeight = 80
+        tableView.rowHeight = 48
         
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//
+//        return 1
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return settingsArr.count
+        return settingsLists.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,6 +53,16 @@ class SettingsTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            
+        default:
+            print("others rows")
+        }
+        
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

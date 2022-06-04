@@ -9,8 +9,18 @@ import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
 
+    // MARK: - Enums
+    
     private enum Settings {
         static let identifier: String = "SettingsTableViewCell"
+        
+        enum Label {
+            static let notification = "알림"
+        }
+        
+        enum Image {
+            static let chevronRight = "chevron.right"
+        }
     }
     
     // MARK: - Properties
@@ -19,15 +29,14 @@ class SettingsTableViewCell: UITableViewCell {
     
     lazy var notificationLabel: UILabel = {
         let label = UILabel()
-        label.text = "알림"
+        label.text = Settings.Label.notification
         return label
     }()
     
     lazy var notificationSwitch: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setImage(UIImage(systemName: Settings.Image.chevronRight), for: .normal)
         button.tintColor = .black
-        button.addTarget(self, action: #selector(tappedNotification), for: .touchUpInside)
         return button
     }()
     
@@ -52,12 +61,5 @@ class SettingsTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().inset(24)
             $0.centerY.equalToSuperview()
         }
-    }
-    
-    // MARK: - @objc
-    
-    @objc func tappedNotification() {
-        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-
     }
 }
