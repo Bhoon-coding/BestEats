@@ -48,7 +48,7 @@ class SettingsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpCell() {
+    func configureCell() {
         contentView.addSubview(notificationLabel)
         contentView.addSubview(notificationSwitch)
         
