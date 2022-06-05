@@ -172,8 +172,8 @@ final class MenuAddViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        setUpUI()
-        setUpDelegate()
+        configureUI()
+        configureDelegate()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -182,7 +182,7 @@ final class MenuAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Methods
     
-    private func setUpUI() {
+    private func configureUI() {
         view.backgroundColor = .secondarySystemBackground
         
         view.addSubview(wholeView)
@@ -270,7 +270,7 @@ final class MenuAddViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func setUpDelegate() {
+    private func configureDelegate() {
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
     }
