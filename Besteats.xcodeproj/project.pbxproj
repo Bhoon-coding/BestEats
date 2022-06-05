@@ -145,6 +145,7 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E1468661284CE6DF00DAA77D /* Recommendation */,
 				E1732030284906DF0020193D /* Besteats.entitlements */,
 				E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */,
 				E146865C2849CC8A00DAA77D /* Settings */,
@@ -154,7 +155,6 @@
 				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
 				E15A3F88278987A000CD810B /* BottomSheetViewController.swift */,
 				E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */,
-				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
 				E11E3CA02764CF6300B70E3A /* Main.storyboard */,
 				E191C4FF276F54DC0031F036 /* TabBarViewController.swift */,
 				E11E3CA32764CF6400B70E3A /* Assets.xcassets */,
@@ -200,6 +200,14 @@
 				E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		E1468661284CE6DF00DAA77D /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
+			);
+			path = Recommendation;
 			sourceTree = "<group>";
 		};
 		E155E4DC27F28E9E000E20A7 /* MenuList */ = {
@@ -551,7 +559,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Besteats/Besteats.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = R4G74AF442;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Besteats/Info.plist;
@@ -567,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bhooncoding.Besteats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -585,7 +593,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Besteats/BesteatsRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = R4G74AF442;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Besteats/Info.plist;
@@ -601,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bhooncoding.Besteats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
