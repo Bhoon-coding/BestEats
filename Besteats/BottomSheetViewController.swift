@@ -87,7 +87,7 @@ class BottomSheetViewController: UIViewController {
 //        bottomSheetTableView.dataSource = self
 //        bottomSheetTableView.delegate = self
         
-        setupUI()
+        configureUI()
         
         let bottomSheetViewSnapPan = UIPanGestureRecognizer(target: self, action: #selector(bottomSheetViewSnapPanned(_:)))
         
@@ -110,7 +110,7 @@ class BottomSheetViewController: UIViewController {
     
     // tableViewCell 추가 참고 (https://shark-sea.kr/entry/iOS-TableView-Code%EB%A1%9C-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0)
     
-    private func setupUI() {
+    private func configureUI() {
         view.addSubview(dimmedView)
         view.addSubview(bottomSheetView)
         view.addSubview(dragIndicatorView)
@@ -119,7 +119,7 @@ class BottomSheetViewController: UIViewController {
         
         
         dimmedView.alpha = 0.0
-        setupLayout()
+        configureLayout()
 //        setStackView()
     }
     
@@ -131,7 +131,7 @@ class BottomSheetViewController: UIViewController {
 //
 //    }
     
-    private func setupLayout() {
+    private func configureLayout() {
         
         let dimmedTap = UITapGestureRecognizer(target: self, action: #selector(dimmedViewTapped(_:)))
         dimmedView.translatesAutoresizingMaskIntoConstraints = false

@@ -117,9 +117,9 @@ final class MenuListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpNavigationBar()
-        setUpUI()
-        setUpTableView()
+        configureNavigationBar()
+        configureUI()
+        configureTableView()
         
         selectedRestaurant = UserDefaultsManager.shared.getRestaurants()[selectedRestaurantIndex]
     }
@@ -137,14 +137,14 @@ final class MenuListViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setUpTableView()
+        configureTableView()
     }
     
     // MARK: Methods
     
-    private func setUpTableView() {
+    private func configureTableView() {
         
-        setUpDelegate()
+        configureDelegate()
         menuListTableView.rowHeight = 150
         view.addSubview(menuListTableView)
         menuListTableView.snp.makeConstraints {
@@ -153,13 +153,13 @@ final class MenuListViewController: UIViewController {
         }
     }
     
-    private func setUpDelegate() {
+    private func configureDelegate() {
         
         menuListTableView.dataSource = self
         menuListTableView.delegate = self
     }
     
-    private func setUpNavigationBar() {
+    private func configureNavigationBar() {
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.bold,
                                                                        size: 14)!]
         let boldFontAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
@@ -174,7 +174,7 @@ final class MenuListViewController: UIViewController {
         navigationItem.rightBarButtonItem = addButton
     }
     
-    private func setUpUI() {
+    private func configureUI() {
         
         view.backgroundColor = .secondarySystemBackground
         
@@ -305,8 +305,8 @@ extension MenuListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier,
-                                                 for: indexPath) as! MenuListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuListTableViewCell.identifier,
+                                                       for: indexPath) as? MenuListTableViewCell else { return MenuListTableViewCell() }
         
         if type == RatingType.like {
             let selectedItem = selectedRestaurant.likeMenus[indexPath.row]

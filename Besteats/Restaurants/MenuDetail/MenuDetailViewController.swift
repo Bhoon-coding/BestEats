@@ -167,9 +167,9 @@ final class MenuDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        setUpNavigationBar()
-        setUpUI()
-        setUpDelegate()
+        configureNavigationBar()
+        configureUI()
+        configureDelegate()
     
     }
     
@@ -184,7 +184,7 @@ final class MenuDetailViewController: UIViewController {
     
     // MARK: Methods
     
-    private func setUpNavigationBar() {
+    private func configureNavigationBar() {
         let smallFontAttributes = [NSAttributedString.Key.font: UIFont(name: Fonts.bold,
                                                                        size: 14)!]
         let editButton = UIBarButtonItem(title: Navigation.Button.edit,
@@ -198,7 +198,7 @@ final class MenuDetailViewController: UIViewController {
         title = selectedRestaurant.restaurantName
     }
     
-    private func setUpUI() {
+    private func configureUI() {
         
         tabBarController?.tabBar.isHidden = true
         view.backgroundColor = .secondarySystemBackground
@@ -270,7 +270,7 @@ final class MenuDetailViewController: UIViewController {
         }
     }
     
-    private func setUpDelegate() {
+    private func configureDelegate() {
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
     }

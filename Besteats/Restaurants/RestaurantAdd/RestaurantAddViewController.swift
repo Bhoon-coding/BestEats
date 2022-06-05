@@ -180,7 +180,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
         
-        setUpUI()
+        configureUI()
         
     }
     
@@ -190,7 +190,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Methods
     
-    private func setUpUI() {
+    private func configureUI() {
         
         view.backgroundColor = .secondarySystemBackground
         
