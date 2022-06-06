@@ -21,6 +21,9 @@
 - Xcode(v13.1)
 - Snapkit
 - Storyboard (메인화면)
+- Cocoa Pods
+- Firebase 
+  - FCM (Firebase Cloud Messaging)
 
 <br>
 
@@ -109,11 +112,9 @@
 
 <br>
 
-### 추후 구현할 기능
-- [ ] 메뉴 사진 등록기능
-- [ ] 메뉴 사진 상세 modal
-- [x] 수정,완료 버튼 터치시 조건에 맞게 표현
-- [x] 메뉴리스트에서 선택된 cell의 데이터 가져오기
+## FCM (Firebase Cloud Messaging) 원격 푸시 알림
+
+- 특정 시간대를 지정해 사용자에게 원격 푸시 알림을 보내게 하였습니다.
 
 <br><br>
 -----
