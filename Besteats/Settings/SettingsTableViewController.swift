@@ -13,15 +13,16 @@ class SettingsTableViewController: UITableViewController {
     
     private enum Settings {
         static let title = "설정"
+        static let section: [String] = ["알림설정", "지원"]
         
         enum List {
-            static let notification = "Push 알림설정"
+            static let notification: [String] = ["푸시 알림 설정"]
+            static let info: [String] = ["버전정보"]
         }
     }
     
     // MARK: - Properties
-
-    private let settingsLists = [Settings.List.notification]
+    
     
     // MARK: - LifeCycle
 
@@ -39,19 +40,35 @@ class SettingsTableViewController: UITableViewController {
     }
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//
-//        return 1
-//    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Settings.section[section]
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return Settings.section.count
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsLists.count
+        
+        if section == 0 {
+            return Settings.List.notification.count
+        } else if section == 1 {
+            return Settings.List.info.count
+        } else {
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.identifier, for: indexPath) as? SettingsTableViewCell else { return SettingsTableViewCell() }
 
         cell.configureCell()
+        
+        if indexPath.section == 0 {
+            cell.cellLabel.text = Settings.List.notification[indexPath.row]
+        } else if indexPath.section == 1{
+            cell.cellLabel.text = Settings.List.info[indexPath.row]
+        } 
 
         return cell
     }
