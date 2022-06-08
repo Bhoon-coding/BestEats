@@ -9,10 +9,15 @@ import UIKit
 
 class VersionInfoViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        view.backgroundColor = .white
     }
     
 

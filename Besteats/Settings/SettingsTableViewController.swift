@@ -74,14 +74,22 @@ class SettingsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-            
-        default:
-            print("others rows")
-        }
         
+        if indexPath.section == 0 {
+            switch indexPath.row {
+            case 0:
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            default:
+                print("알림설정 section: other rows")
+            }
+        } else if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                navigationController?.pushViewController(VersionInfoViewController(), animated: true)
+            default:
+                print("지원 section: other rows")
+            }
+        }
     }
     /*
     // Override to support conditional editing of the table view.
