@@ -13,9 +13,7 @@ class VersionInfoViewController: UIViewController {
     
     
     // MARK: - Properties
-    
-    let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    
+        
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "AppLogo")
@@ -39,14 +37,38 @@ class VersionInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let currentVersion = currentVersion {
-            currentVersionLabel.text = "현재 버전: \(currentVersion)"
-        }
+//        if let currentVersion = currentVersion {
+//            currentVersionLabel.text = "현재 버전: \(currentVersion)"
+//        }
+        let test = isUpdateAvailable()
+        print(test)
         
         configureUI()
     }
     
     // MARK: - Methods
+    
+    private func isUpdateAvailable() -> Bool {
+        guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.bhooncoding.Besteats"),
+              let data = try? Data(contentsOf: url),
+              let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
+              let results = json["results"] as? [[String: Any]],
+              results.count > 0,
+              let appStoreVersion = results[0]["version"] as? String
+                
+        else { return false }
+        print("data: \(data)")
+        print("json: \(json)")
+        print("results: \(results)")
+        
+        if !(currentVersion == appStoreVersion) {
+            return true
+        } else {
+            return false
+        }
+        
+    }
     
     private func configureUI() {
         view.backgroundColor = .white
