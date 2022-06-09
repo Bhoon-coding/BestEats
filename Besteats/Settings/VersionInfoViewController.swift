@@ -23,30 +23,36 @@ class VersionInfoViewController: UIViewController {
     private lazy var currentVersionLabel: UILabel = {
         let label = UILabel()
         label.text = "현재 버전: "
+        return label
+    }()
+    
+    private lazy var appStoreVersionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "최신 버전: "
         label.textColor = .gray
         return label
     }()
     
-    private lazy var latestVersionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "최신 버전: "
-        return label
+    private lazy var updateButton: UIButton = {
+        let button = UIButton()
+//        button.isEnabled = false
+        button.setTitle("업데이트 하기", for: .normal)
+        button.mediumButton(button: button)
+        button.backgroundColor = .systemOrange
+        return button
     }()
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if let currentVersion = currentVersion {
-//            currentVersionLabel.text = "현재 버전: \(currentVersion)"
-//        }
-        let test = isUpdateAvailable()
-        print(test)
+        isUpdateAvailable()
         
         configureUI()
     }
     
     // MARK: - Methods
+    
     
     private func isUpdateAvailable() -> Bool {
         guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
@@ -58,9 +64,8 @@ class VersionInfoViewController: UIViewController {
               let appStoreVersion = results[0]["version"] as? String
                 
         else { return false }
-        print("data: \(data)")
-        print("json: \(json)")
-        print("results: \(results)")
+        currentVersionLabel.text = "현재 버전: \(currentVersion)"
+        appStoreVersionLabel.text = "최신 버전: \(appStoreVersion)"
         
         if !(currentVersion == appStoreVersion) {
             return true
@@ -86,10 +91,18 @@ class VersionInfoViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
         
-        view.addSubview(latestVersionLabel)
-        latestVersionLabel.snp.makeConstraints {
+        view.addSubview(appStoreVersionLabel)
+        appStoreVersionLabel.snp.makeConstraints {
             $0.bottom.equalTo(currentVersionLabel).offset(24)
             $0.centerX.equalToSuperview()
+        }
+        
+        view.addSubview(updateButton)
+        updateButton.snp.makeConstraints {
+            $0.top.equalTo(appStoreVersionLabel).offset(40)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(160)
+            $0.height.equalTo(42)
         }
     }
     
