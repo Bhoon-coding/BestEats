@@ -36,6 +36,7 @@
 		E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F1EA027FB378500103E6B /* UITableView + extension.swift */; };
 		E173202F2848FFE90020193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E173202E2848FFE90020193D /* GoogleService-Info.plist */; };
 		E17A1DFC284F630C00F212E2 /* VersionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A1DFB284F630C00F212E2 /* VersionInfoViewController.swift */; };
+		E18D62E428538CB900884570 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D62E328538CB800884570 /* Constants.swift */; };
 		E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarViewController.swift */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		E173202E2848FFE90020193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1732030284906DF0020193D /* Besteats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Besteats.entitlements; sourceTree = "<group>"; };
 		E17A1DFB284F630C00F212E2 /* VersionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfoViewController.swift; sourceTree = "<group>"; };
+		E18D62E328538CB800884570 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
 		E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BesteatsRelease.entitlements; sourceTree = "<group>"; };
@@ -249,10 +251,19 @@
 		E1784F1627CD07000005AB03 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E18D62E228538C9F00884570 /* Constants */,
 				E16975E9277ED7C1004547F6 /* Fonts */,
 				E159D5A227F6E5F700C841DD /* Extension */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		E18D62E228538C9F00884570 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				E18D62E328538CB800884570 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */ = {
@@ -395,6 +406,7 @@
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
 				E159D5A627F6E75200C841DD /* UILabel + extension.swift in Sources */,
+				E18D62E428538CB900884570 /* Constants.swift in Sources */,
 				E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */,
 				E140A03B283A811B00988759 /* Fonts.swift in Sources */,
 				E11E3C9B2764CF6300B70E3A /* AppDelegate.swift in Sources */,

@@ -8,12 +8,12 @@
 import UIKit
 
 class VersionInfoViewController: UIViewController {
-
+    
     // MARK: - Enums
     
     
     // MARK: - Properties
-        
+    
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "AppLogo")
@@ -22,23 +22,26 @@ class VersionInfoViewController: UIViewController {
     
     private lazy var currentVersionLabel: UILabel = {
         let label = UILabel()
-        label.text = "현재 버전: "
+        label.smallLabel(label: label)
         return label
     }()
     
     private lazy var appStoreVersionLabel: UILabel = {
         let label = UILabel()
-        label.text = "최신 버전: "
+        label.smallLabel(label: label)
         label.textColor = .gray
         return label
     }()
     
-    private lazy var updateButton: UIButton = {
+    lazy var updateButton: UIButton = {
         let button = UIButton()
-//        button.isEnabled = false
+        //        button.isEnabled = false
         button.setTitle("업데이트 하기", for: .normal)
         button.mediumButton(button: button)
         button.backgroundColor = .systemOrange
+        button.addTarget(self,
+                         action: #selector(openAppStore),
+                         for: .touchUpInside)
         return button
     }()
     
@@ -52,28 +55,6 @@ class VersionInfoViewController: UIViewController {
     }
     
     // MARK: - Methods
-    
-    
-    private func isUpdateAvailable() -> Bool {
-        guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.bhooncoding.Besteats"),
-              let data = try? Data(contentsOf: url),
-              let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
-              let results = json["results"] as? [[String: Any]],
-              results.count > 0,
-              let appStoreVersion = results[0]["version"] as? String
-                
-        else { return false }
-        currentVersionLabel.text = "현재 버전: \(currentVersion)"
-        appStoreVersionLabel.text = "최신 버전: \(appStoreVersion)"
-        
-        if !(currentVersion == appStoreVersion) {
-            return true
-        } else {
-            return false
-        }
-        
-    }
     
     private func configureUI() {
         view.backgroundColor = .white
@@ -106,6 +87,37 @@ class VersionInfoViewController: UIViewController {
         }
     }
     
+    private func isUpdateAvailable() -> Bool {
+        guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.bhooncoding.Besteats"),
+              let data = try? Data(contentsOf: url),
+              let json = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any],
+              let results = json["results"] as? [[String: Any]],
+              results.count > 0,
+              let appStoreVersion = results[0]["version"] as? String
+                
+        else { return false }
+        currentVersionLabel.text = "현재 버전: \(currentVersion)"
+        appStoreVersionLabel.text = "최신 버전: \(appStoreVersion)"
+        
+        if !(currentVersion == appStoreVersion) {
+            return true
+        } else {
+            return false
+        }
+    }
     
-
+    @objc func openAppStore() {
+        let url = "itms-apps://itunes.apple.com/app/" + Constants.appId
+        if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url,
+                                          options: [:],
+                                          completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+        
+    }
 }
