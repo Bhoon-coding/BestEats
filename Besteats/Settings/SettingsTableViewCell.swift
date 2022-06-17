@@ -14,10 +14,6 @@ class SettingsTableViewCell: UITableViewCell {
     private enum Settings {
         static let identifier: String = "SettingsTableViewCell"
         
-        enum Label {
-            static let notification = "알림"
-        }
-        
         enum Image {
             static let chevronRight = "chevron.right"
         }
@@ -27,13 +23,12 @@ class SettingsTableViewCell: UITableViewCell {
     
     static let identifier = Settings.identifier
     
-    lazy var notificationLabel: UILabel = {
+    lazy var cellLabel: UILabel = {
         let label = UILabel()
-        label.text = Settings.Label.notification
         return label
     }()
     
-    lazy var notificationSwitch: UIButton = {
+    lazy var chevronRight: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: Settings.Image.chevronRight), for: .normal)
         button.tintColor = .black
@@ -49,17 +44,19 @@ class SettingsTableViewCell: UITableViewCell {
     }
     
     func configureCell() {
-        contentView.addSubview(notificationLabel)
-        contentView.addSubview(notificationSwitch)
+        contentView.addSubview(cellLabel)
+        contentView.addSubview(chevronRight)
         
-        notificationLabel.snp.makeConstraints {
+        cellLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(24)
             $0.centerY.equalToSuperview()
         }
         
-        notificationSwitch.snp.makeConstraints {
+        chevronRight.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(24)
             $0.centerY.equalToSuperview()
         }
+        
+        
     }
 }
