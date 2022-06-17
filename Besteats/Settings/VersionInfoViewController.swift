@@ -35,7 +35,6 @@ class VersionInfoViewController: UIViewController {
     
     lazy var updateButton: UIButton = {
         let button = UIButton()
-        //        button.isEnabled = false
         button.setTitle("업데이트 하기", for: .normal)
         button.mediumButton(button: button)
         button.backgroundColor = .systemOrange
@@ -49,8 +48,7 @@ class VersionInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isUpdateAvailable()
-        
+        isUpdateNeeded()
         configureUI()
     }
     
@@ -87,7 +85,7 @@ class VersionInfoViewController: UIViewController {
         }
     }
     
-    private func isUpdateAvailable() -> Bool {
+    private func isUpdateNeeded() -> () {
         guard let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
               let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.bhooncoding.Besteats"),
               let data = try? Data(contentsOf: url),
@@ -96,14 +94,21 @@ class VersionInfoViewController: UIViewController {
               results.count > 0,
               let appStoreVersion = results[0]["version"] as? String
                 
-        else { return false }
+        else {
+            print("<VersionInfoVC> - 앱 버전을 찾을 수 없습니다.")
+            return
+        }
         currentVersionLabel.text = "현재 버전: \(currentVersion)"
         appStoreVersionLabel.text = "최신 버전: \(appStoreVersion)"
         
         if !(currentVersion == appStoreVersion) {
-            return true
+            updateButton.isEnabled = true
+            updateButton.backgroundColor = .systemOrange
+            updateButton.setTitle("업데이트 하기", for: .normal)
         } else {
-            return false
+            updateButton.isEnabled = false
+            updateButton.backgroundColor = .lightGray
+            updateButton.setTitle("최신버전 입니다.", for: .normal)
         }
     }
     
