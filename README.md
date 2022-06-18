@@ -235,7 +235,22 @@
 
 <br><br>
 
+## 버전 비교 후 업데이트 버튼 활성화
 
+<br>
+
+현재 버전과 최신버전을 구해온 뒤 비교 후 같으면 '업데이트 버튼 비활성화'를 다르면 '업데이트 버튼 활성화' 를 하게 구현.
+
+현재버전: Bundle.main.infoDictionary 에서 가져옴 <br>
+최신버전: 앱스토어의 url로 접근해 json 데이터중 버전을 가져옴
+
+* `업데이트 하기` 버튼을 누르면 앱스토어 `BestEats`의 페이지로 이동하게 구현.
+
+|**버전이같을경우**|**버전이다를경우**|
+|--|-|
+|<img width="160" alt="업데이트 버튼 비활성화" src="https://user-images.githubusercontent.com/64088377/174446777-1eb09e59-4c72-41ed-9e03-f0417cb06907.png">|<img width="160" alt="업데이트 버튼활성화" src="https://user-images.githubusercontent.com/64088377/174446620-726f9298-6720-4ce5-a86a-00340cf02796.jpeg">|
+
+<br><br>
 
 ## Git Branch
 
