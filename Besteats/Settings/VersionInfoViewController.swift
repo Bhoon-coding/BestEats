@@ -104,7 +104,7 @@ class VersionInfoViewController: UIViewController {
     }
     
     @objc func openAppStore() {
-        let url = VersionInfoString.Url.app + Constants.appId
+        let url = VersionInfoString.Url.appStore + Constants.appId
         if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url,
