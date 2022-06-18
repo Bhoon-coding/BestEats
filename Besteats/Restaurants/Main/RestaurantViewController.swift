@@ -151,6 +151,13 @@ final class RestaurantViewController: UIViewController {
         addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.bold, size: 14)!], for: .normal)
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.tintColor = .label
+        
+        let backBarButtonItem = UIBarButtonItem(title: "",
+                                                style: .plain,
+                                                target: self, action: nil)
+        
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     private func configureUI() {
@@ -293,20 +300,10 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
         
         let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
         
-        
-        let backBarButtonItem = UIBarButtonItem(title: "",
-                                                style: .plain,
-                                                target: self, action: nil)
-        
         navigationController?.pushViewController(menuListVC,
                                                  animated: true)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
-        
         
         foodSearchBar.resignFirstResponder()
         foodSearchBar.text = ""
-        
     }
-    
 }
