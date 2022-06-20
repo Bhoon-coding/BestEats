@@ -16,7 +16,6 @@ class RecommendViewController: UIViewController {
         super.viewDidLoad()
         
         configure()
-        
     }
     
     func configure() {

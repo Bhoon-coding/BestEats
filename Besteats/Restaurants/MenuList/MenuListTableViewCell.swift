@@ -52,6 +52,13 @@ final class MenuListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+}
+
+// MARK: - Extensions
+
+extension MenuListTableViewCell {
+    
     private func configureCell() {
         contentView.addSubview(menuLabel)
         contentView.addSubview(oneLinerLabel)
