@@ -11,9 +11,6 @@ class FoodTypeCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Enums
     
-    
-    
-    
     // MARK: - Properties
     
     static let identifier = "FoodTypeCollectionViewCell"
@@ -21,13 +18,12 @@ class FoodTypeCollectionViewCell: UICollectionViewCell {
     
     lazy var foodTypeImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemOrange
-        imageView.image = #imageLiteral(resourceName: "AppLogo")
         return imageView
     }()
     
     lazy var foodTypeLabel: UILabel = {
         let label = UILabel()
+        label.smallLabel(label: label)
         return label
     }()
     
@@ -47,7 +43,6 @@ class FoodTypeCollectionViewCell: UICollectionViewCell {
 extension FoodTypeCollectionViewCell {
     func configureCell() {
         
-        contentView.backgroundColor = .gray
         contentView.layer.cornerRadius = 8
         [foodTypeImageView,
          foodTypeLabel]

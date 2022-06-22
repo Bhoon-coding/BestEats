@@ -13,7 +13,8 @@ class RecommendViewController: UIViewController {
 
     // MARK: - Properties
     
-    let foodType = ["한식", "양식", "일식", "중식", "디저트"]
+    let foodTypeName = ["한식", "피자", "햄버거", "디저트"]
+    let foodTypeImages = [#imageLiteral(resourceName: "tteokbokki"), #imageLiteral(resourceName: "pizza"), #imageLiteral(resourceName: "hamburger"), #imageLiteral(resourceName: "donut")]
     
     private lazy var foodTypeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,14 +44,15 @@ class RecommendViewController: UIViewController {
 
 extension RecommendViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return foodType.count
+        return foodTypeName.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodTypeCollectionViewCell.identifier, for: indexPath) as? FoodTypeCollectionViewCell else { return UICollectionViewCell() }
         
         cell.configureCell()
-        cell.foodTypeLabel.text = foodType[indexPath.item]
+        cell.foodTypeLabel.text = foodTypeName[indexPath.item]
+        cell.foodTypeImageView.image = foodTypeImages[indexPath.item]
         return cell
     }
 }
