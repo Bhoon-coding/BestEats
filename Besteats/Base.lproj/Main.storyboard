@@ -178,47 +178,17 @@
             </objects>
             <point key="canvasLocation" x="-2261" y="-363"/>
         </scene>
-        <!--추천-->
+        <!--오늘 뭐먹지 🤔-->
         <scene sceneID="cM7-XW-8U8">
             <objects>
-                <viewController id="hsd-dy-z1l" customClass="RecommendViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="오늘 뭐먹지 🤔" id="hsd-dy-z1l" customClass="RecommendViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="11O-1K-F8G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="it3-Jb-WhF">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="syD-AX-Ph0">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="769"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="width" secondItem="dUY-Vr-qRL" secondAttribute="width" id="5CB-ox-kc1"/>
-                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="leading" secondItem="fDq-vm-WrF" secondAttribute="leading" id="M9I-H8-7IE"/>
-                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="bottom" secondItem="fDq-vm-WrF" secondAttribute="bottom" id="R1r-Di-yz6"/>
-                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="height" secondItem="dUY-Vr-qRL" secondAttribute="height" id="cCQ-Kh-T9Q"/>
-                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="trailing" secondItem="fDq-vm-WrF" secondAttribute="trailing" id="dOt-7e-TUD"/>
-                                    <constraint firstItem="syD-AX-Ph0" firstAttribute="top" secondItem="fDq-vm-WrF" secondAttribute="top" id="p5a-A7-2Rc"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="fDq-vm-WrF"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="dUY-Vr-qRL"/>
-                            </scrollView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="yHb-Ul-wZf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="it3-Jb-WhF" firstAttribute="leading" secondItem="yHb-Ul-wZf" secondAttribute="leading" id="0xH-wD-cR5"/>
-                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="bottom" secondItem="it3-Jb-WhF" secondAttribute="bottom" id="S7M-CA-I0R"/>
-                            <constraint firstItem="yHb-Ul-wZf" firstAttribute="trailing" secondItem="it3-Jb-WhF" secondAttribute="trailing" id="Vjo-5D-YBy"/>
-                            <constraint firstItem="it3-Jb-WhF" firstAttribute="top" secondItem="yHb-Ul-wZf" secondAttribute="top" id="tuc-NQ-1dh"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="추천" image="person.fill.questionmark" catalog="system" selectedImage="person.fill.checkmark" id="uF0-XY-KmD"/>
-                    <connections>
-                        <outlet property="foodTableImageView" destination="syD-AX-Ph0" id="N89-qz-oi2"/>
-                        <outlet property="scrollView" destination="it3-Jb-WhF" id="oLh-V8-wZ9"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AtY-Dy-2PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

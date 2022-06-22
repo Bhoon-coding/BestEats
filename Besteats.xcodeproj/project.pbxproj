@@ -16,6 +16,7 @@
 		E11E3CA22764CF6300B70E3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA02764CF6300B70E3A /* Main.storyboard */; };
 		E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA32764CF6400B70E3A /* Assets.xcassets */; };
 		E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */; };
+		E12ACDDA2862D83A0068AA9D /* FoodTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12ACDD92862D83A0068AA9D /* FoodTypeCollectionViewCell.swift */; };
 		E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */; };
 		E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */; };
 		E140A03B283A811B00988759 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E140A03A283A811B00988759 /* Fonts.swift */; };
@@ -55,6 +56,7 @@
 		E11E3CA32764CF6400B70E3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E11E3CA62764CF6400B70E3A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11E3CA82764CF6400B70E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E12ACDD92862D83A0068AA9D /* FoodTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + extension.swift"; sourceTree = "<group>"; };
 		E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddViewController.swift; sourceTree = "<group>"; };
 		E140A03A283A811B00988759 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Besteats/Utils/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
@@ -211,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
+				E12ACDD92862D83A0068AA9D /* FoodTypeCollectionViewCell.swift */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 				E159D5AA27F6E78900C841DD /* UITextField + extension.swift in Sources */,
 				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
+				E12ACDDA2862D83A0068AA9D /* FoodTypeCollectionViewCell.swift in Sources */,
 				E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */,
 				E159D5A827F6E77F00C841DD /* UIView + extension.swift in Sources */,
 				E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */,
