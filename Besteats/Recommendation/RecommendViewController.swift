@@ -70,6 +70,18 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
         return 20
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        APIManager.shared.fetchData(query: "korean food") { res in
+            switch res {
+            case .success:
+                dump(res)
+            case .failure:
+                print("res error")
+            }
+        }
+    }
+    
 }
 
 extension RecommendViewController {

@@ -18,12 +18,14 @@
 		E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */; };
 		E12ACDDA2862D83A0068AA9D /* FoodTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12ACDD92862D83A0068AA9D /* FoodTypeCollectionViewCell.swift */; };
 		E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */; };
+		E12FFB0E286433730016098D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12FFB0D286433730016098D /* APIManager.swift */; };
+		E12FFB1028643B800016098D /* FoodPhotosResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12FFB0F28643B800016098D /* FoodPhotosResults.swift */; };
 		E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */; };
 		E140A03B283A811B00988759 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E140A03A283A811B00988759 /* Fonts.swift */; };
 		E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */; };
 		E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */; };
 		E155E4E127F28E9E000E20A7 /* MenuListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */; };
-		E155E4E227F28E9E000E20A7 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */; };
+		E155E4E227F28E9E000E20A7 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DF27F28E9E000E20A7 /* UserDefaultsManager.swift */; };
 		E155E4E327F28E9E000E20A7 /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */; };
 		E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */; };
 		E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E159D5A327F6E60A00C841DD /* UIButton + extension.swift */; };
@@ -58,12 +60,14 @@
 		E11E3CA82764CF6400B70E3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12ACDD92862D83A0068AA9D /* FoodTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + extension.swift"; sourceTree = "<group>"; };
+		E12FFB0D286433730016098D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		E12FFB0F28643B800016098D /* FoodPhotosResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPhotosResults.swift; sourceTree = "<group>"; };
 		E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddViewController.swift; sourceTree = "<group>"; };
 		E140A03A283A811B00988759 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Besteats/Utils/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
 		E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListTableViewCell.swift; sourceTree = "<group>"; };
-		E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
+		E155E4DF27F28E9E000E20A7 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
 		E1574856277DEC5D00D645F8 /* RestaurantAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantAddViewController.swift; sourceTree = "<group>"; };
 		E159D5A327F6E60A00C841DD /* UIButton + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + extension.swift"; sourceTree = "<group>"; };
@@ -116,18 +120,19 @@
 		E10161DC27C5289800215F5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E10DD94E280707A80004E90C /* Services */,
 				E10161DE27C528C200215F5B /* Restaurants.swift */,
+				E12FFB0F28643B800016098D /* FoodPhotosResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E10DD94E280707A80004E90C /* Services */ = {
+		E10DD94E280707A80004E90C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */,
+				E155E4DF27F28E9E000E20A7 /* UserDefaultsManager.swift */,
+				E12FFB0D286433730016098D /* APIManager.swift */,
 			);
-			path = Services;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		E11E3C8E2764CF6300B70E3A = {
@@ -254,6 +259,7 @@
 		E1784F1627CD07000005AB03 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				E10DD94E280707A80004E90C /* Managers */,
 				E18D62E228538C9F00884570 /* Constants */,
 				E16975E9277ED7C1004547F6 /* Fonts */,
 				E159D5A227F6E5F700C841DD /* Extension */,
@@ -405,6 +411,7 @@
 				E11E3C9F2764CF6300B70E3A /* RestaurantViewController.swift in Sources */,
 				E155E4E327F28E9E000E20A7 /* MenuListViewController.swift in Sources */,
 				E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */,
+				E12FFB0E286433730016098D /* APIManager.swift in Sources */,
 				E10161DF27C528C200215F5B /* Restaurants.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
@@ -419,6 +426,7 @@
 				E17A1DFC284F630C00F212E2 /* VersionInfoViewController.swift in Sources */,
 				E159D5AA27F6E78900C841DD /* UITextField + extension.swift in Sources */,
 				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
+				E12FFB1028643B800016098D /* FoodPhotosResults.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
 				E12ACDDA2862D83A0068AA9D /* FoodTypeCollectionViewCell.swift in Sources */,
 				E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */,
@@ -426,7 +434,7 @@
 				E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */,
 				E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */,
 				E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */,
-				E155E4E227F28E9E000E20A7 /* UserDefaultsService.swift in Sources */,
+				E155E4E227F28E9E000E20A7 /* UserDefaultsManager.swift in Sources */,
 				E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */,
 				E159D5AC27F6E7B800C841DD /* UICollectionView + extension.swift in Sources */,
 			);
