@@ -13,10 +13,6 @@ class SettingsTableViewCell: UITableViewCell {
     
     private enum Settings {
         static let identifier: String = "SettingsTableViewCell"
-        
-        enum Image {
-            static let chevronRight = "chevron.right"
-        }
     }
     
     // MARK: - Properties
@@ -30,7 +26,7 @@ class SettingsTableViewCell: UITableViewCell {
     
     lazy var chevronRight: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: Settings.Image.chevronRight), for: .normal)
+        button.setImage(UIImage(systemName: Image.arrowRight), for: .normal)
         button.tintColor = .black
         return button
     }()

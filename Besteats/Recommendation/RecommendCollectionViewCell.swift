@@ -7,13 +7,13 @@
 
 import UIKit
 
-class FoodTypeCollectionViewCell: UICollectionViewCell {
+class RecommendCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Enums
     
     // MARK: - Properties
     
-    static let identifier = "FoodTypeCollectionViewCell"
+    static let identifier = "RecommendCollectionViewCell"
     
     
     lazy var foodTypeImageView: UIImageView = {
@@ -40,7 +40,7 @@ class FoodTypeCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Extensions
 
-extension FoodTypeCollectionViewCell {
+extension RecommendCollectionViewCell {
     func configureCell() {
         
         contentView.layer.cornerRadius = 8

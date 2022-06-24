@@ -9,14 +9,14 @@ import UIKit
 
 import SnapKit
 
-class RecommendViewController: UIViewController {
+final class RecommendViewController: UIViewController {
 
     // MARK: - Properties
     
     let foodTypeName = ["한식", "피자", "햄버거", "디저트"]
     let foodTypeImages = [#imageLiteral(resourceName: "tteokbokki"), #imageLiteral(resourceName: "pizza"), #imageLiteral(resourceName: "hamburger"), #imageLiteral(resourceName: "donut")]
     
-    private lazy var foodTypeCollectionView: UICollectionView = {
+    private lazy var recommendCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
@@ -26,10 +26,9 @@ class RecommendViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureUI()
         configureCollectionView()
-        
     }
     
     // MARK: - Methods
@@ -48,7 +47,7 @@ extension RecommendViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FoodTypeCollectionViewCell.identifier, for: indexPath) as? FoodTypeCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendCollectionViewCell.identifier, for: indexPath) as? RecommendCollectionViewCell else { return UICollectionViewCell() }
         
         cell.configureCell()
         cell.foodTypeLabel.text = foodTypeName[indexPath.item]
@@ -72,14 +71,17 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        APIManager.shared.fetchData(query: "korean food") { res in
-            switch res {
-            case .success:
-                dump(res)
-            case .failure:
-                print("res error")
-            }
-        }
+        let foodImageVC = FoodImageViewController()
+        present(foodImageVC, animated: true)
+        
+//        APIManager.shared.fetchData(query: "korean food") { res in
+//            switch res {
+//            case .success:
+//                dump(res)
+//            case .failure:
+//                print("res error")
+//            }
+//        }
     }
     
 }
@@ -88,20 +90,20 @@ extension RecommendViewController {
     private func configureUI() {
         view.backgroundColor = .lightGray
         
-        [foodTypeCollectionView]
+        [recommendCollectionView]
             .forEach { view.addSubview($0) }
         
-        foodTypeCollectionView.snp.makeConstraints {
+        recommendCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
     
     private func configureCollectionView() {
-        foodTypeCollectionView.delegate = self
-        foodTypeCollectionView.dataSource = self
-        foodTypeCollectionView.register(FoodTypeCollectionViewCell.self, forCellWithReuseIdentifier: FoodTypeCollectionViewCell.identifier)
+        recommendCollectionView.delegate = self
+        recommendCollectionView.dataSource = self
+        recommendCollectionView.register(RecommendCollectionViewCell.self, forCellWithReuseIdentifier: RecommendCollectionViewCell.identifier)
         
-        foodTypeCollectionView.contentInset = UIEdgeInsets(top: 20,
+        recommendCollectionView.contentInset = UIEdgeInsets(top: 20,
                                                            left: 16,
                                                            bottom: 0,
                                                            right: 16)

@@ -17,5 +17,7 @@ public enum Image {
     static let star = "star"
     static let starFill = "starFill"
     static let close = "close"
+    static let arrowLeft = "chevron.left"
+    static let arrowRight = "chevron.right"
     
 }
