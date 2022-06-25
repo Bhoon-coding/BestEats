@@ -10,11 +10,15 @@ import UIKit
 import SnapKit
 
 final class RecommendViewController: UIViewController {
+    
+    // MARK: - Enums
+    
+    
 
     // MARK: - Properties
     
-    let foodTypeName = ["한식", "피자", "햄버거", "디저트"]
-    let foodTypeImages = [#imageLiteral(resourceName: "tteokbokki"), #imageLiteral(resourceName: "pizza"), #imageLiteral(resourceName: "hamburger"), #imageLiteral(resourceName: "donut")]
+    let foodTypeName: [String] = ["한식", "피자", "햄버거", "디저트"]
+    let foodTypeImages: [UIImage] = [#imageLiteral(resourceName: "tteokbokki"), #imageLiteral(resourceName: "pizza"), #imageLiteral(resourceName: "hamburger"), #imageLiteral(resourceName: "donut")]
     
     private lazy var recommendCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -71,17 +75,14 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let foodImageVC = FoodImageViewController()
+        let foodType: String = foodTypeName[indexPath.item]
+        
+        
+        
+        let foodImageVC = FoodImageViewController(foodType: foodType)
         present(foodImageVC, animated: true)
         
-//        APIManager.shared.fetchData(query: "korean food") { res in
-//            switch res {
-//            case .success:
-//                dump(res)
-//            case .failure:
-//                print("res error")
-//            }
-//        }
+        
     }
     
 }

@@ -20,6 +20,18 @@ final class FoodImageViewController: UIViewController {
     
     // MARK: - Properties
     
+    let foodType: String
+    
+    init(foodType: String) {
+        self.foodType = foodType
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: Image.close),
@@ -38,31 +50,7 @@ final class FoodImageViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var bottomButtonWrapper : UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [prevButton,
-                                                      nextButton])
-        stackView.distribution = .fillEqually
-//        stackView.backgroundColor = .systemOrange
-        return stackView
-    }()
     
-    private lazy var prevButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: Image.arrowLeft),
-                        for: .normal)
-        button.layer.cornerRadius = 12
-        button.backgroundColor = .brown
-        return button
-    }()
-    
-    private lazy var nextButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: Image.arrowRight),
-                        for: .normal)
-        button.layer.cornerRadius = 12
-        button.backgroundColor = .cyan
-        return button
-    }()
     
     // MARK: - LifeCycle
 
@@ -70,11 +58,16 @@ final class FoodImageViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        nextButton.setPreferredSymbolConfiguration(.init(pointSize: 30, weight: .regular, scale: .default) , forImageIn: .normal)
+        print("foodType: \(foodType)")
+//        APIManager.shared.fetchData(query: foodType) { res in
+//            switch res {
+//            case .success:
+//                dump(res)
+//            case .failure:
+//                print("res error")
+//            }
+//        }
+        
     }
     
     // MARK: - Methods
@@ -94,11 +87,10 @@ final class FoodImageViewController: UIViewController {
 extension FoodImageViewController {
     
     private func configureUI() {
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         
         [closeButton,
-         foodImageView,
-         bottomButtonWrapper
+         foodImageView
         ]
             .forEach { view.addSubview($0) }
         
@@ -111,19 +103,6 @@ extension FoodImageViewController {
             $0.leading.top.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(80)
         }
-        
-        bottomButtonWrapper.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalToSuperview()
-            $0.top.equalTo(foodImageView.snp.bottom)
-        }
-        
-        prevButton.snp.makeConstraints {
-            $0.width.equalTo(24)
-        }
-        nextButton.snp.makeConstraints {
-            $0.width.equalTo(24)
-        }
-        
         
     }
 
@@ -146,7 +125,7 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
     // Preview를 보고자 하는 Viewcontroller 이름
     // e.g.)
-        return FoodImageViewController()
+        return FoodImageViewController(foodType: "aaa")
     }
 }
 
