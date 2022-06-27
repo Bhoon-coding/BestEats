@@ -60,8 +60,11 @@ final class FoodImageViewController: UIViewController {
         
         APIManager.shared.fetchData(query: foodType) { res in
             switch res {
-            case .success:
+            case .success(let data):
+                guard let urlString = data.results.first?.urls.full else { return }
+                guard let imageUrl = URL(string: urlString) else { return }
                 
+                self.foodImageView.load(url: imageUrl)
                 dump(res)
             case .failure:
                 print("res error")
