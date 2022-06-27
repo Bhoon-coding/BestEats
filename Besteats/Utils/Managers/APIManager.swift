@@ -35,7 +35,7 @@ extension APIManager {
         guard let requestURL = urlComponents.url else { return }
         let session = URLSession(configuration: .default)
         
-        let dataTask = session.dataTask(with: requestURL) { data, _, error in
+        let dataTask = session.dataTask(with: requestURL) { data, res, error in
             guard error == nil else {
                 print("<API Manager, fetchData> - \(error!)")
                 return

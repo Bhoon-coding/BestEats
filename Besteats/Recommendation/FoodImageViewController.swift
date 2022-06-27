@@ -20,6 +20,8 @@ final class FoodImageViewController: UIViewController {
     
     // MARK: - Properties
     
+    var imageUrl: [String] = []
+    
     let foodType: String
     
     init(foodType: String) {
@@ -45,12 +47,10 @@ final class FoodImageViewController: UIViewController {
     private lazy var foodImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = #imageLiteral(resourceName: "hamburger")
+//        imageView.image = #imageLiteral(resourceName: "hamburger")
         
         return imageView
     }()
-    
-    
     
     // MARK: - LifeCycle
 
@@ -58,15 +58,15 @@ final class FoodImageViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         
-        print("foodType: \(foodType)")
-//        APIManager.shared.fetchData(query: foodType) { res in
-//            switch res {
-//            case .success:
-//                dump(res)
-//            case .failure:
-//                print("res error")
-//            }
-//        }
+        APIManager.shared.fetchData(query: foodType) { res in
+            switch res {
+            case .success:
+                
+                dump(res)
+            case .failure:
+                print("res error")
+            }
+        }
         
     }
     

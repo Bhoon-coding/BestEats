@@ -40,6 +40,7 @@
 		E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16F1EA027FB378500103E6B /* UITableView + extension.swift */; };
 		E173202F2848FFE90020193D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E173202E2848FFE90020193D /* GoogleService-Info.plist */; };
 		E17A1DFC284F630C00F212E2 /* VersionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17A1DFB284F630C00F212E2 /* VersionInfoViewController.swift */; };
+		E1810BF02869DEE30063396C /* UIImageView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1810BEF2869DEE30063396C /* UIImageView + extension.swift */; };
 		E18D62E428538CB900884570 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18D62E328538CB800884570 /* Constants.swift */; };
 		E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarViewController.swift */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
@@ -84,6 +85,7 @@
 		E173202E2848FFE90020193D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1732030284906DF0020193D /* Besteats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Besteats.entitlements; sourceTree = "<group>"; };
 		E17A1DFB284F630C00F212E2 /* VersionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfoViewController.swift; sourceTree = "<group>"; };
+		E1810BEF2869DEE30063396C /* UIImageView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + extension.swift"; sourceTree = "<group>"; };
 		E18D62E328538CB800884570 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				E159D5AD27F6E7DD00C841DD /* CALayer + extension.swift */,
 				E16F1EA027FB378500103E6B /* UITableView + extension.swift */,
 				E12D8B4D283BD2E0009FEAD5 /* UIImage + extension.swift */,
+				E1810BEF2869DEE30063396C /* UIImageView + extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				E10161DF27C528C200215F5B /* Restaurants.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
+				E1810BF02869DEE30063396C /* UIImageView + extension.swift in Sources */,
 				E159D5A627F6E75200C841DD /* UILabel + extension.swift in Sources */,
 				E18D62E428538CB900884570 /* Constants.swift in Sources */,
 				E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */,
