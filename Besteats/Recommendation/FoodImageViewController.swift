@@ -20,7 +20,7 @@ final class FoodImageViewController: UIViewController {
     
     // MARK: - Properties
     
-    var imageUrl: [String] = []
+    var imageArr: [String] = []
     
     let foodType: String
     
@@ -47,13 +47,11 @@ final class FoodImageViewController: UIViewController {
     private lazy var foodImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-//        imageView.image = #imageLiteral(resourceName: "hamburger")
-        
         return imageView
     }()
     
     // MARK: - LifeCycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -61,11 +59,14 @@ final class FoodImageViewController: UIViewController {
         APIManager.shared.fetchData(query: foodType) { res in
             switch res {
             case .success(let data):
-                guard let urlString = data.results.first?.urls.full else { return }
-                guard let imageUrl = URL(string: urlString) else { return }
+                let foodInfoResults = data.results
+                let foodImageURLs = foodInfoResults.map { foodInfo in
+                    foodInfo.urls.full
+                }
+                foodImageURLs.forEach {
+                    self.imageArr.append($0)
+                }
                 
-                self.foodImageView.load(url: imageUrl)
-                dump(res)
             case .failure:
                 print("res error")
             }
@@ -108,7 +109,7 @@ extension FoodImageViewController {
         }
         
     }
-
+    
 }
 
 // 전처리
@@ -126,8 +127,8 @@ struct ViewControllerRepresentable: UIViewControllerRepresentable {
     }
     // makeui
     func makeUIViewController(context: Context) -> UIViewController {
-    // Preview를 보고자 하는 Viewcontroller 이름
-    // e.g.)
+        // Preview를 보고자 하는 Viewcontroller 이름
+        // e.g.)
         return FoodImageViewController(foodType: "aaa")
     }
 }
@@ -138,8 +139,8 @@ struct ViewController_Previews: PreviewProvider {
     static var previews: some View {
         // UIViewControllerRepresentable에 지정된 이름.
         ViewControllerRepresentable()
-
-// 테스트 해보고자 하는 기기
+        
+        // 테스트 해보고자 하는 기기
             .previewDevice("iPhone 11")
     }
 }
