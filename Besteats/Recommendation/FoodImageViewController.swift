@@ -47,6 +47,7 @@ final class FoodImageViewController: UIViewController {
     private lazy var foodImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .brown
         return imageView
     }()
     
@@ -74,6 +75,7 @@ final class FoodImageViewController: UIViewController {
                     self.imageArr.append($0)
                 }
                 DispatchQueue.main.async {
+//                    self.foodImageView.load(url: <#T##URL#>)
                     self.pageControl.numberOfPages = self.imageArr.count
                 }
                 
@@ -120,7 +122,7 @@ extension FoodImageViewController {
         }
         
         pageControl.snp.makeConstraints {
-            $0.top.equalTo(foodImageView.snp.bottom).inset(40)
+            $0.bottom.equalTo(foodImageView.snp.bottom)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
             $0.height.equalTo(60)

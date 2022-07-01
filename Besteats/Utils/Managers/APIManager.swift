@@ -10,9 +10,7 @@ import Foundation
 class APIManager {
     
     static let shared = APIManager()
-    
     static let baseUrl: String = "https://api.unsplash.com/search/photos?"
-    
     static let headerField: String = "client_id"
 }
 
