@@ -20,7 +20,7 @@ final class FoodImageViewController: UIViewController {
     
     // MARK: - Properties
     
-    var imageArr: [String] = []
+    var imageURLs: [URL] = []
     let foodType: String
     
     init(foodType: String) {
@@ -44,16 +44,23 @@ final class FoodImageViewController: UIViewController {
         return button
     }()
     
-    private lazy var foodImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .brown
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isPagingEnabled = true
+//        scrollView.backgroundColor = .cyan
+        return scrollView
+    }()
+    
+    private lazy var foodImageView: [UIImageView] = {
+        let imageView = [UIImageView]()
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.backgroundColor = .brown
         return imageView
     }()
     
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.numberOfPages = imageArr.count
+        pageControl.numberOfPages = imageURLs.count
         pageControl.backgroundColor = #colorLiteral(red: 0.2279180713, green: 0.3073120006, blue: 1, alpha: 1)
         return pageControl
     }()
@@ -63,30 +70,44 @@ final class FoodImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchImage()
+        addContentScrollView()
         
+    }
+    
+    // MARK: - Methods
+    
+    func fetchImage() {
         APIManager.shared.fetchData(query: foodType) { res in
             switch res {
             case .success(let data):
                 let foodInfoResults = data.results
                 let foodImageURLs = foodInfoResults.map { foodInfo in
-                    foodInfo.urls.full
+                    URL(string: foodInfo.urls.full)
                 }
                 foodImageURLs.forEach {
-                    self.imageArr.append($0)
+                    self.imageURLs.append($0!)
                 }
                 DispatchQueue.main.async {
-//                    self.foodImageView.load(url: <#T##URL#>)
-                    self.pageControl.numberOfPages = self.imageArr.count
+                    self.pageControl.numberOfPages = self.imageURLs.count
                 }
                 
-            case .failure:
-                print("res error")
+            case .failure(let error):
+                print("<APIManager fetchData> - error: \(error.localizedDescription)")
             }
         }
-        
     }
     
-    // MARK: - Methods
+    func addContentScrollView() {
+        for i in 0..<imageURLs.count {
+            let imageView = UIImageView()
+            let xPos = self.view.frame.width * CGFloat(i)
+            imageView.frame = CGRect(x: xPos, y: 0, width: scrollView.bounds.width, height: scrollView.bounds.height)
+            imageView.load(url: imageURLs[i])
+            scrollView.addSubview(imageView)
+            scrollView.contentSize.width = imageView.frame.width * CGFloat(i + 1)
+        }
+    }
     
     
     // MARK: - @objc
@@ -104,25 +125,40 @@ extension FoodImageViewController {
     
     private func configureUI() {
         view.backgroundColor = .white
+//        니 앞가림이나 신경써 지금 잡생각하지말고
         
-        [closeButton,
-         foodImageView,
-         pageControl
+        [
+            closeButton,
+            scrollView,
+//            foodImageView,
+            pageControl
         ]
             .forEach { view.addSubview($0) }
+        
+        [
+            foodImageView,
+        ]
+            .forEach { scrollView.addSubview($0) }
         
         closeButton.snp.makeConstraints {
             $0.top.trailing.equalToSuperview().inset(24)
             $0.width.height.equalTo(16)
         }
         
-        foodImageView.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(80)
         }
         
+        foodImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(80)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(160)
+        }
+        
         pageControl.snp.makeConstraints {
-            $0.bottom.equalTo(foodImageView.snp.bottom)
+            $0.top.equalTo(scrollView.snp.bottom)
+//            $0.top.equalTo(foodImageView.snp.bottom)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(240)
             $0.height.equalTo(60)
