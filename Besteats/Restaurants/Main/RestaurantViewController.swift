@@ -52,7 +52,6 @@ final class RestaurantViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
         getRestaurantsData()
         DispatchQueue.main.async {
             self.foodCollectionView.reloadData()
@@ -66,34 +65,37 @@ final class RestaurantViewController: UIViewController {
     // MARK: Action
     
     @IBAction private func tapMore(_ sender: UIButton) {
-        
         let point = sender.convert(CGPoint.zero, to: foodCollectionView)
         guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
-        
         DispatchQueue.main.async {
-            
             // MARK: ActionSheet
-            let actionSheet = UIAlertController(title: Alert.Contents.actionSheetTitle,
-                                                message: Alert.Contents.actionSheetMessage,        preferredStyle: .actionSheet)
-            
-            let cancelButton = UIAlertAction(title: Alert.Button.cancel,
-                                       style: .cancel,
-                                       handler: nil)
-            let editRestaurant = UIAlertAction(title: Alert.Button.restaurantEdit,
-                                               style: .default) {_ in
-                
-                let editAlert = UIAlertController(title: Alert.Contents.editTitle,
-                                                  message: Alert.Contents.editMessage,
-                                                  preferredStyle: .alert)
-                
-                let editButton = UIAlertAction(title: Alert.Button.edit,
-                                               style: .default) {_ in
+            let actionSheet = UIAlertController(
+                title: Alert.Contents.actionSheetTitle,
+                message: Alert.Contents.actionSheetMessage,
+                preferredStyle: .actionSheet
+            )
+            let cancelButton = UIAlertAction(
+                title: Alert.Button.cancel,
+                style: .cancel,
+                handler: nil
+            )
+            let editRestaurant = UIAlertAction(
+                title: Alert.Button.restaurantEdit,
+                style: .default
+            ) {_ in
+                let editAlert = UIAlertController(
+                    title: Alert.Contents.editTitle,
+                    message: Alert.Contents.editMessage,
+                    preferredStyle: .alert
+                )
+                let editButton = UIAlertAction(
+                    title: Alert.Button.edit,
+                    style: .default
+                ) {_ in
                     if let txtField = editAlert.textFields?.first,
                        let text = txtField.text {
                         self.totalRestaurants[indexPath.row].restaurantName = text
-                        
                         UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                        
                         self.foodCollectionView.reloadData()
                     }
                 }
@@ -106,24 +108,23 @@ final class RestaurantViewController: UIViewController {
                 self.present(editAlert, animated: true, completion: nil)
             }
             
-            let tappedDelete = UIAlertAction(title: Alert.Button.restaurantDelete,
-                                             style: .destructive) {_ in
-                
-                let deleteConfirmAlert = UIAlertController(title: Alert.Contents.deleteTitle,
-                                                           message: Alert.Contents.deleteMessage,
-                                                           preferredStyle: .alert)
-                
-                let deleteRestaurant = UIAlertAction(title: Alert.Button.delete,
-                                                     style: .destructive) {_ in
-                    
+            let tappedDelete = UIAlertAction(
+                title: Alert.Button.restaurantDelete,
+                style: .destructive
+            ) {_ in
+                let deleteConfirmAlert = UIAlertController(
+                    title: Alert.Contents.deleteTitle,
+                    message: Alert.Contents.deleteMessage,
+                    preferredStyle: .alert
+                )
+                let deleteRestaurant = UIAlertAction(
+                    title: Alert.Button.delete,
+                    style: .destructive
+                ) {_ in
                     self.totalRestaurants.remove(at: indexPath.row)
-                    
                     UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                    
                     self.foodCollectionView.reloadData()
-                    
                 }
-                
                 deleteConfirmAlert.addAction(deleteRestaurant)
                 deleteConfirmAlert.addAction(cancelButton)
                 self.present(deleteConfirmAlert, animated: true, completion: nil)
@@ -134,10 +135,9 @@ final class RestaurantViewController: UIViewController {
             actionSheet.addAction(cancelButton)
             
             self.present(actionSheet, animated: true, completion: nil)
-            
         }
     }
-
+    
     // MARK: Methods
     
     private func getRestaurantsData() {
@@ -145,17 +145,24 @@ final class RestaurantViewController: UIViewController {
     }
     
     private func configureNavBar() {
-        let addButton = UIBarButtonItem(title: Navigation.Button.add,
-                                        style: .plain,
-                                        target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.bold, size: 14)!], for: .normal)
+        let addButton = UIBarButtonItem(
+            title: Navigation.Button.add,
+            style: .plain,
+            target: self,
+            action: #selector(addRestaurant)
+        )
+        addButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font: UIFont(name: Fonts.bold, size: 14)!],
+            for: .normal
+        )
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.tintColor = .label
         
-        let backBarButtonItem = UIBarButtonItem(title: "",
-                                                style: .plain,
-                                                target: self, action: nil)
-        
+        let backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: self, action: nil
+        )
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
@@ -167,16 +174,17 @@ final class RestaurantViewController: UIViewController {
     }
     
     private func configureKeyboardDismiss() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard)
+        )
         tap.cancelsTouchesInView = false
         foodCollectionView.addGestureRecognizer(tap)
-        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         foodSearchBar.resignFirstResponder()
     }
-    
     
     // MARK: @objc
     
@@ -189,7 +197,6 @@ final class RestaurantViewController: UIViewController {
     @objc func dismissKeyboard() {
         foodSearchBar.resignFirstResponder()
     }
-    
     
 }
 
@@ -208,32 +215,41 @@ extension RestaurantViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
         totalRestaurants = searchText.isEmpty
         ? UserDefaultsManager.shared.getRestaurants()
-        : UserDefaultsManager.shared.getRestaurants().filter { $0.restaurantName.contains(searchText) || $0.restaurantName.lowercased().contains(searchText.lowercased())}
-         
+        : UserDefaultsManager.shared.getRestaurants()
+            .filter { $0.restaurantName.contains(searchText) || $0.restaurantName.lowercased().contains(searchText.lowercased())}
         foodCollectionView.reloadData()
-  }
+    }
 }
 
 // Cell layout
 extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     // 위 아래 간격
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return 16
     }
     
     // 좌우 간격
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return 0
     }
     
     // Cell 사이즈
-    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = CGSize(width: view.frame.width - 80, height: 150)
         return size
     }
@@ -241,24 +257,29 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 
 // Cell에 대한 delegate
 extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as? FoodCollectionViewCell else { return FoodCollectionViewCell() }
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "foodCell",
+            for: indexPath
+        ) as? FoodCollectionViewCell else {
+            return FoodCollectionViewCell()
+        }
         let restaurant: Restaurant = totalRestaurants[indexPath.row]
         let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
         var favoriteString = ""
-
+        
         if favoriteMenus.isEmpty {
             favoriteString = "즐겨찾는 메뉴를 추가해주세요"
         }
         if let favoriteMenuName = favoriteMenus.first?.menu {
-            
             if favoriteMenus.count == 1 {
                 favoriteString = "\(favoriteMenuName)"
-                
             } else {
                 favoriteString = "\(favoriteMenuName) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
             }
-            
         }
         
         cell.restaurantNamesLabel.text = restaurant.restaurantName
@@ -266,21 +287,19 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.likeCountLabel.text = "\(restaurant.likeMenus.count)"
         cell.curiousCountLabel.text = "\(restaurant.curiousMenus.count)"
         cell.warningCountLabel.text = "\(restaurant.badMenus.count)"
-
         
         cell.layer.masksToBounds = false
         cell.layer.shadowOpacity = 0.3
         cell.layer.shadowOffset = CGSize(width: -2, height: 2)
         cell.layer.shadowRadius = 3
         cell.layer.cornerRadius = 20
-
         
         return cell
     }
     
     // numberOfItemsInSection: Cell을 몇개 보여줄지
     public func collectionView(_ collectionView: UICollectionView,
-                        numberOfItemsInSection section: Int) -> Int {
+                               numberOfItemsInSection section: Int) -> Int {
         if totalRestaurants.count == 0 {
             collectionView.setEmptyMessage("맛집이 없어요.\n\n우측 상단 '추가' 버튼을 눌러 맛집을 추가해주세요.")
         } else {
@@ -290,14 +309,16 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     //
-    public func collectionView(_ collectionView: UICollectionView,
-                        didSelectItemAt indexPath: IndexPath) {
-        
-        let menuListVC = MenuListViewController(selectedRestaurant: totalRestaurants[indexPath.row], index: indexPath.row)
-        
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let menuListVC = MenuListViewController(
+            selectedRestaurant: totalRestaurants[indexPath.row],
+            index: indexPath.row
+        )
         navigationController?.pushViewController(menuListVC,
                                                  animated: true)
-        
         foodSearchBar.resignFirstResponder()
         foodSearchBar.text = ""
     }
@@ -311,4 +332,5 @@ extension RestaurantViewController {
         view.backgroundColor = .secondarySystemBackground
         foodCollectionView.backgroundColor = .secondarySystemBackground
     }
+    
 }
