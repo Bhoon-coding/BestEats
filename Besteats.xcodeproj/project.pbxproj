@@ -21,6 +21,7 @@
 		E12FFB0E286433730016098D /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12FFB0D286433730016098D /* APIManager.swift */; };
 		E12FFB1028643B800016098D /* FoodPhotosResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12FFB0F28643B800016098D /* FoodPhotosResults.swift */; };
 		E131C79B27E0D3C300AEAE8D /* MenuAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */; };
+		E13AEB83289FB1B200A685E2 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13AEB82289FB1B200A685E2 /* CustomCollectionViewLayout.swift */; };
 		E140A03B283A811B00988759 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E140A03A283A811B00988759 /* Fonts.swift */; };
 		E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */; };
 		E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */; };
@@ -65,6 +66,7 @@
 		E12FFB0D286433730016098D /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		E12FFB0F28643B800016098D /* FoodPhotosResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPhotosResults.swift; sourceTree = "<group>"; };
 		E131C79A27E0D3C300AEAE8D /* MenuAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAddViewController.swift; sourceTree = "<group>"; };
+		E13AEB82289FB1B200A685E2 /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
 		E140A03A283A811B00988759 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Besteats/Utils/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
 		E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 		E159D5A227F6E5F700C841DD /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				E13AEB82289FB1B200A685E2 /* CustomCollectionViewLayout.swift */,
 				E159D5A727F6E77F00C841DD /* UIView + extension.swift */,
 				E159D5A927F6E78900C841DD /* UITextField + extension.swift */,
 				E159D5A527F6E75200C841DD /* UILabel + extension.swift */,
@@ -436,6 +439,7 @@
 				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
 				E12FFB1028643B800016098D /* FoodPhotosResults.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
+				E13AEB83289FB1B200A685E2 /* CustomCollectionViewLayout.swift in Sources */,
 				E12ACDDA2862D83A0068AA9D /* RecommendCollectionViewCell.swift in Sources */,
 				E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */,
 				E159D5A827F6E77F00C841DD /* UIView + extension.swift in Sources */,
