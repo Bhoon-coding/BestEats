@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4AE5FA420992969D5A4540B1 /* Pods_Besteats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4D392D1CF85F9F4D08E1A1 /* Pods_Besteats.framework */; };
 		E10161DF27C528C200215F5B /* Restaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10161DE27C528C200215F5B /* Restaurants.swift */; };
+		E107F21C28A1349700F41823 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107F21B28A1349600F41823 /* EndPointType.swift */; };
+		E107F21E28A134AB00F41823 /* FoodPhotoListEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107F21D28A134AB00F41823 /* FoodPhotoListEndPoint.swift */; };
 		E11DB070276E248400F78037 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11DB06F276E248400F78037 /* RecommendViewController.swift */; };
 		E11E3C9B2764CF6300B70E3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */; };
 		E11E3C9D2764CF6300B70E3A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */; };
@@ -52,6 +54,8 @@
 		69E5733A7F57145E26A4A0A4 /* Pods-Besteats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.debug.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.debug.xcconfig"; sourceTree = "<group>"; };
 		6A83352490499A030FAD40CB /* Pods-Besteats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Besteats.release.xcconfig"; path = "Target Support Files/Pods-Besteats/Pods-Besteats.release.xcconfig"; sourceTree = "<group>"; };
 		E10161DE27C528C200215F5B /* Restaurants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurants.swift; sourceTree = "<group>"; };
+		E107F21B28A1349600F41823 /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		E107F21D28A134AB00F41823 /* FoodPhotoListEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPhotoListEndPoint.swift; sourceTree = "<group>"; };
 		E11DB06F276E248400F78037 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		E11E3C972764CF6300B70E3A /* Besteats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Besteats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +136,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		E107F21928A1346A00F41823 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E107F21A28A1347700F41823 /* EndPoint */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E107F21A28A1347700F41823 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				E107F21B28A1349600F41823 /* EndPointType.swift */,
+				E107F21D28A134AB00F41823 /* FoodPhotoListEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
 		E10DD94E280707A80004E90C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +183,7 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
+				E107F21928A1346A00F41823 /* Network */,
 				E13AEB84289FB2DA00A685E2 /* Application */,
 				E1468661284CE6DF00DAA77D /* Recommendation */,
 				E1732030284906DF0020193D /* Besteats.entitlements */,
@@ -438,6 +460,7 @@
 				E15BF35B28657C4E003F3459 /* FoodImageViewController.swift in Sources */,
 				E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */,
 				E12FFB0E286433730016098D /* APIManager.swift in Sources */,
+				E107F21C28A1349700F41823 /* EndPointType.swift in Sources */,
 				E10161DF27C528C200215F5B /* Restaurants.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
@@ -463,6 +486,7 @@
 				E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */,
 				E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */,
 				E155E4E227F28E9E000E20A7 /* UserDefaultsManager.swift in Sources */,
+				E107F21E28A134AB00F41823 /* FoodPhotoListEndPoint.swift in Sources */,
 				E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */,
 				E159D5AC27F6E7B800C841DD /* UICollectionView + extension.swift in Sources */,
 			);
