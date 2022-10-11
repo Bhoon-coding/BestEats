@@ -13,14 +13,17 @@ final class RecommendCell: UICollectionViewCell {
     
     private lazy var foodImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Style.foodImage
+        imageView.backgroundColor = .systemGray
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = Style.cornerRadius
         return imageView
     }()
     
     private lazy var foodTypeLabel: UILabel = {
         let label = UILabel()
         label.text = Text.foodType
-        label.font = .boldSystemFont(ofSize: 16)
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: Style.boldFontSize)
         return label
     }()
     
@@ -34,6 +37,11 @@ final class RecommendCell: UICollectionViewCell {
         super.init(coder: coder)
         configureUI()
         configureConstraints()
+    }
+    
+    func setupCell(foodTypeData: RecommendFoodType) {
+        foodImageView.image = foodTypeData.foodTypeImage
+        foodTypeLabel.text = foodTypeData.foodTypeLabel
     }
     
     
@@ -72,12 +80,13 @@ extension RecommendCell {
 extension RecommendCell {
     
     private enum Text {
-        
-        static let foodType: String = "한식"
+        static let foodType: String = ""
     }
     
     private enum Style {
-        static let foodImage: UIImage? = .init(named: "KoreanFood")
+        static let cornerRadius: CGFloat = 20
+        static let boldFontSize: CGFloat = 32
+        
     }
     
 }
