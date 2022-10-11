@@ -130,7 +130,18 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
         return sectionInsets
     }
     
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        print(foodTypeData[indexPath.item].foodTypeLabel)
+        let recommendDetailVC = RecommendDetailViewController()
+        self.navigationController?.pushViewController(recommendDetailVC,
+                                                 animated: true)
+    }
+    
 }
+
 
 // MARK: - NameSpaces
 

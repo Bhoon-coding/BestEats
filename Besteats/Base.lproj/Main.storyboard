@@ -176,23 +176,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VcI-WX-paf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2261" y="-363"/>
+            <point key="canvasLocation" x="-1352.1739130434785" y="-363.61607142857139"/>
         </scene>
-        <!--오늘 뭐먹지 🤔-->
+        <!--Recommend-->
         <scene sceneID="cM7-XW-8U8">
             <objects>
-                <viewController title="오늘 뭐먹지 🤔" id="hsd-dy-z1l" customClass="RecommendViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="오늘 뭐먹지 🤔" id="hsd-dy-z1l" userLabel="Recommend" customClass="RecommendViewController" customModule="Besteats" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="11O-1K-F8G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="yHb-Ul-wZf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="추천" image="person.fill.questionmark" catalog="system" selectedImage="person.fill.checkmark" id="uF0-XY-KmD"/>
+                    <navigationItem key="navigationItem" id="52S-KY-Kgk"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AtY-Dy-2PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4296" y="-363"/>
+            <point key="canvasLocation" x="-3386.9565217391305" y="-363.61607142857139"/>
         </scene>
         <!--Tab Bar View Controller-->
         <scene sceneID="yH1-2Z-KYR">
@@ -204,7 +204,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="hsd-dy-z1l" kind="relationship" relationship="viewControllers" id="Bcv-vu-Xgt"/>
+                        <segue destination="Avi-Vk-QeK" kind="relationship" relationship="viewControllers" id="Bcv-vu-Xgt"/>
                         <segue destination="wCN-XA-yWo" kind="relationship" relationship="viewControllers" id="GCY-Me-hfh"/>
                         <segue destination="WTD-iR-ZXE" kind="relationship" relationship="viewControllers" id="Eym-Es-nFI"/>
                     </connections>
@@ -278,7 +278,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXA-4u-sN7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3199" y="-363"/>
+            <point key="canvasLocation" x="-2289.8550724637685" y="-363.61607142857139"/>
+        </scene>
+        <!--추천-->
+        <scene sceneID="ZQ3-x6-8W6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Avi-Vk-QeK" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="추천" image="person.fill.questionmark" catalog="system" selectedImage="person.fill.checkmark" id="uF0-XY-KmD"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="EUn-kV-00h">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hsd-dy-z1l" kind="relationship" relationship="rootViewController" id="HRD-Ug-8hn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xgg-EX-4zh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4297.1014492753629" y="-363.61607142857139"/>
         </scene>
     </scenes>
     <resources>
