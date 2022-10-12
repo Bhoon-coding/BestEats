@@ -9,89 +9,72 @@ import UIKit
 
 import SnapKit
 
-protocol CustomCollectionViewLayoutDelegate: AnyObject {
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        heightForPhotoAtIndexPath indexPath: IndexPath
-    ) -> CGFloat
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        widthForPhotoAtIndexPath indexPath: IndexPath
-    ) -> CGFloat
-    
-}
-
 final class RecommendDetailViewController: UIViewController {
    
     // MARK: - UIProperties
     
+    private lazy var flowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = Style.padding
+        return layout
+    }()
+    
     private lazy var collectionView: UICollectionView = {
-        let layout = CustomCollectionViewLayout()
-        let collectionView = UICollectionView(
-            frame: .zero,
-            collectionViewLayout: layout
-        )
-        collectionView.register(
-            RecommendCollectionViewCell.self,
-            forCellWithReuseIdentifier: RecommendCollectionViewCell.identifier
-        )
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .white
         return collectionView
     }()
+    
+    // MARK: - Properties
     
     // MARK: - LifeCycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        setupCollectionView()
-        setupConstraints()
-//        fetchPhotos()
+        configureUI()
+        configureConstraints()
     }
 }
 
-// MARK: - Layout extension
+// MARK: - Configure UI
 
 extension RecommendDetailViewController {
     
-    private func setupCollectionView() {
-        if let layout = collectionView.collectionViewLayout as?  CustomCollectionViewLayout {
-            layout.delegate = self
-        }
+    private func configureUI() {
+        view.backgroundColor = .white
+        [collectionView].forEach { view.addSubview($0) }
+        configureCollectionView()
+    }
+    
+    private func configureCollectionView() {
+        collectionView.register(
+            RecommendFoodCell.self,
+            forCellWithReuseIdentifier: String(describing: RecommendFoodCell.self)
+        )
         collectionView.dataSource = self
-//        collectionView.delegate = self
-        
-        [collectionView].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
-    }
-    
-    private func setupConstraints() {
-        setupConstraintsOfCollectionView()
-    }
-    
-    private func setupConstraintsOfCollectionView() {
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.leadingAnchor
-            ),
-            collectionView.topAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.topAnchor
-            ),
-            collectionView.trailingAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.trailingAnchor
-            ),
-            collectionView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor
-            )
-        ])
+        collectionView.delegate = self
     }
     
 }
 
-// MARK: - CollectionView DataSource extension
+// MARK: - Configure Constraints
+
+extension RecommendDetailViewController {
+    
+    private func configureConstraints() {
+        configureConstraintsOfCollectionView()
+    }
+    
+    private func configureConstraintsOfCollectionView() {
+        collectionView.snp.makeConstraints {
+            $0.top.trailing.bottom.leading.equalToSuperview()
+        }
+    }
+    
+}
+
+// MARK: - CollectionView DataSource
 
 extension RecommendDetailViewController: UICollectionViewDataSource {
     
@@ -107,36 +90,76 @@ extension RecommendDetailViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: RecommendCollectionViewCell.identifier,
+            withReuseIdentifier: String(describing: RecommendFoodCell.self),
             for: indexPath
-        ) as? RecommendCollectionViewCell else {
+        ) as? RecommendFoodCell else {
             return UICollectionViewCell()
         }
-      
+//        cell.setupImage(<#T##image: UIImage##UIImage#>)
         cell.setupCell()
         return cell
     }
     
 }
 
-// MARK: - CustomCollectionViewLayoutDelegate extension
-// TODO: [] 사진 데이터의 width, heigth 값 넣어놓기
-extension RecommendDetailViewController: CustomCollectionViewLayoutDelegate {
+// MARK: - CollectionView DelegateFlowLayout
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        heightForPhotoAtIndexPath indexPath: IndexPath
-    ) -> CGFloat {
-//        return CGFloat(photos[indexPath.item].height)
-        return 200
-    }
+extension RecommendDetailViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(
         _ collectionView: UICollectionView,
-        widthForPhotoAtIndexPath indexPath: IndexPath
-    ) -> CGFloat {
-//        return CGFloat(photos[indexPath.item].width)
-        return 100
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(
+            width: collectionView.frame.width * 0.9,
+            height: collectionView.frame.height * 0.3
+        )
     }
-
+    
 }
+
+// MARK: - NameSpaces
+
+extension RecommendDetailViewController {
+    
+    private enum Style {
+        static let padding: CGFloat = 16
+    }
+    
+}
+
+
+// 전처리
+#if DEBUG
+
+import SwiftUI
+@available(iOS 13.0, *)
+
+// UIViewControllerRepresentable을 채택
+struct RecommendDetailViewControllerRepresentable: UIViewControllerRepresentable {
+    // update
+    // _ uiViewController: UIViewController로 지정
+    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
+        
+    }
+    // makeui
+    func makeUIViewController(context: Context) -> UIViewController {
+        // Preview를 보고자 하는 Viewcontroller 이름
+        // e.g.)
+        return RecommendDetailViewController()
+    }
+}
+
+struct RecommendDetailViewController_Previews: PreviewProvider {
+    
+    @available(iOS 13.0, *)
+    static var previews: some View {
+        // UIViewControllerRepresentable에 지정된 이름.
+        RecommendDetailViewControllerRepresentable()
+        
+        // 테스트 해보고자 하는 기기
+            .previewDevice("iPhone 11")
+    }
+}
+#endif

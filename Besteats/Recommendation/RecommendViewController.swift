@@ -15,7 +15,7 @@ final class RecommendViewController: UIViewController {
     
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = Style.cellSpacing
+        layout.minimumLineSpacing = Style.padding
         return layout
     }()
     
@@ -50,21 +50,20 @@ final class RecommendViewController: UIViewController {
 // MARK: - Configure UI
 
 extension RecommendViewController {
-
+    
     private func configureUI() {
         view.backgroundColor = .white
-        [collectionView].forEach { view.addSubview($0)}
+        [collectionView].forEach { view.addSubview($0) }
         configureCollectionView()
     }
     
     private func configureCollectionView() {
         collectionView.register(
-            RecommendCell.self,
-            forCellWithReuseIdentifier: String(describing: RecommendCell.self)
+            RecommendFoodTypeCell.self,
+            forCellWithReuseIdentifier: String(describing: RecommendFoodTypeCell.self)
         )
         collectionView.dataSource = self
         collectionView.delegate = self
-        
     }
     
 }
@@ -84,6 +83,7 @@ extension RecommendViewController {
 // MARK: - CollectionView DataSource
 
 extension RecommendViewController: UICollectionViewDataSource {
+    
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -97,9 +97,9 @@ extension RecommendViewController: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: String(describing: RecommendCell.self),
+            withReuseIdentifier: String(describing: RecommendFoodTypeCell.self),
             for: indexPath
-        ) as? RecommendCell else { return UICollectionViewCell() }
+        ) as? RecommendFoodTypeCell else { return UICollectionViewCell() }
         let foodTypeData = foodTypeData[indexPath.item]
         cell.setupCell(foodTypeData: foodTypeData)
         return cell
@@ -134,10 +134,9 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        print(foodTypeData[indexPath.item].foodTypeLabel)
         let recommendDetailVC = RecommendDetailViewController()
         self.navigationController?.pushViewController(recommendDetailVC,
-                                                 animated: true)
+                                                      animated: true)
     }
     
 }
@@ -157,7 +156,7 @@ extension RecommendViewController {
     
     private enum Style {
         static let sectionInsets: UIEdgeInsets = .init(top: 32, left: 16, bottom: 100, right: 16)
-        static let cellSpacing: CGFloat = 24
+        static let padding: CGFloat = 16
         static let koreanFoodImage: UIImage = UIImage(named: "KoreanFood")!
         static let westernFoodImage: UIImage = UIImage(named: "WesternFood")!
         static let chineeseFoodImage: UIImage = UIImage(named: "ChineeseFood")!
@@ -178,7 +177,7 @@ struct RecommendViewControllerRepresentable: UIViewControllerRepresentable {
     // update
     // _ uiViewController: UIViewController로 지정
     func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-
+        
     }
     // makeui
     func makeUIViewController(context: Context) -> UIViewController {
@@ -189,12 +188,12 @@ struct RecommendViewControllerRepresentable: UIViewControllerRepresentable {
 }
 
 struct ViewController_Previews: PreviewProvider {
-
+    
     @available(iOS 13.0, *)
     static var previews: some View {
         // UIViewControllerRepresentable에 지정된 이름.
         RecommendViewControllerRepresentable()
-
+        
         // 테스트 해보고자 하는 기기
             .previewDevice("iPhone 11")
     }

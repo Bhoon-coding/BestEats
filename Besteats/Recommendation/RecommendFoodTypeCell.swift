@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class RecommendCell: UICollectionViewCell {
+final class RecommendFoodTypeCell: UICollectionViewCell {
     
     private lazy var foodImageView: UIImageView = {
         let imageView = UIImageView()
@@ -49,7 +49,7 @@ final class RecommendCell: UICollectionViewCell {
 
 // MARK: - Configure UI
 
-extension RecommendCell {
+extension RecommendFoodTypeCell {
     
     private func configureUI() {
         
@@ -61,7 +61,7 @@ extension RecommendCell {
 
 // MARK: - Configure Constraints
 
-extension RecommendCell {
+extension RecommendFoodTypeCell {
     
     private func configureConstraints() {
         foodImageView.snp.makeConstraints {
@@ -77,7 +77,7 @@ extension RecommendCell {
 
 // MARK: - NameSpaces
 
-extension RecommendCell {
+extension RecommendFoodTypeCell {
     
     private enum Text {
         static let foodType: String = ""
