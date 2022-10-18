@@ -245,12 +245,10 @@
 		E1468661284CE6DF00DAA77D /* Recommendation */ = {
 			isa = PBXGroup;
 			children = (
-				E19732C628F57FEB0014D276 /* Model */,
-				E11DB06F276E248400F78037 /* RecommendDetailViewController.swift */,
-				E12ACDD92862D83A0068AA9D /* RecommendFoodCell.swift */,
-				E15BF35A28657C4E003F3459 /* FoodImageViewController.swift */,
-				E19732C228F5499B0014D276 /* RecommendViewController.swift */,
-				E19732C428F55A2F0014D276 /* RecommendFoodTypeCell.swift */,
+				E1D24BFE28FEEAD700B96A3B /* Cells */,
+				E1D24BFD28FEEABE00B96A3B /* Controllers */,
+				E1D24BFC28FEEAB700B96A3B /* ViewModels */,
+				E19732C628F57FEB0014D276 /* Models */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -309,12 +307,12 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		E19732C628F57FEB0014D276 /* Model */ = {
+		E19732C628F57FEB0014D276 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E19732C728F580070014D276 /* RecommendFoodType.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E1B4C9A927F1F3EF00B0E5E9 /* MenuDetail */ = {
@@ -331,6 +329,32 @@
 				E11E3C9E2764CF6300B70E3A /* RestaurantViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		E1D24BFC28FEEAB700B96A3B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E1D24BFD28FEEABE00B96A3B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E11DB06F276E248400F78037 /* RecommendDetailViewController.swift */,
+				E15BF35A28657C4E003F3459 /* FoodImageViewController.swift */,
+				E19732C228F5499B0014D276 /* RecommendViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E1D24BFE28FEEAD700B96A3B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E12ACDD92862D83A0068AA9D /* RecommendFoodCell.swift */,
+				E19732C428F55A2F0014D276 /* RecommendFoodTypeCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

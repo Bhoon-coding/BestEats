@@ -36,6 +36,7 @@ import ObjectiveC
  The `showToast` methods display any view as toast.
  
  */
+@available(iOS 13.0, *)
 public extension UIView {
     
     /**

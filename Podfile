@@ -10,4 +10,5 @@ target 'Besteats' do
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
+  pod 'Alamofire'
 end
