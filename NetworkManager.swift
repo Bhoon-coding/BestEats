@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 
 class NetworkManager {
-    static instance = NetworkManager()
+    static let instance = NetworkManager()
     
     let session: Session
     
@@ -34,7 +34,9 @@ class NetworkManager {
                                                                               boolEncoding: .literal)
     ) -> Single<R> {
         Single<R>.create { observer in
-            guard let url = URL
+            guard let url = URL(string: host + path) else {
+                observer(.failure(<#T##Error#>))
+            }
             
         }
     }

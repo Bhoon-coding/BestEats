@@ -34,14 +34,14 @@ final class RecommendDetailViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        APIManager.shared.fetchData(query: "koreanFood") { result in
-            switch result {
-            case .success(let success):
-                print("성공:\(success)")
-            case .failure(let failure):
-                print("실패:\(failure.localizedDescription)")
-            }
-        }
+//        APIManager.shared.fetchData(query: "chineseFood") { result in
+//            switch result {
+//            case .success(let success):
+//                print("성공:\(success)")
+//            case .failure(let failure):
+//                print("실패:\(failure.localizedDescription)")
+//            }
+//        }
     }
 }
 
@@ -114,15 +114,11 @@ extension RecommendDetailViewController: UICollectionViewDataSource {
 
 extension RecommendDetailViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        return CGSize(
-            width: collectionView.frame.width * 0.9,
-            height: collectionView.frame.height * 0.3
-        )
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width * 0.9,
+                      height: collectionView.frame.height * 0.3)
     }
     
 }

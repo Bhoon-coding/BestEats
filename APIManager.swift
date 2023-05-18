@@ -12,7 +12,8 @@ import Alamofire
 class APIManager {
     
     static let shared = APIManager()
-    static let baseUrl: String = "https://api.odcloud.kr/api"
+    static let baseUrl: String = "https://api.odcloud.kr/api" // 공공데이터포털
+//    static let baseUrl: String = "https://api.unsplash.com/search/photos" // unsplash
     static let headerField: String = "client_id"
     
 }
