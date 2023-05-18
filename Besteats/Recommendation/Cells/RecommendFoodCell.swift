@@ -86,6 +86,9 @@ extension RecommendFoodCell {
     
     func setupCell() {
         unsplashImageView.image = UIImage(named: "WesternFood")
+        
+        // TODO: [] 공공데이터 
+//        unsplashImageView.load(url: URL(string: "https://ukcooyocdlvo8099722.cdn.ntruss.com/public_data/menu_images/1446334_1638842685_menu.png")!)
     }
     
     private func configureUI() {

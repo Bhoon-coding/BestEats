@@ -100,6 +100,12 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
   - SnapKit (5.0.1)
   - Toast-Swift (5.0.1)
 
@@ -107,6 +113,8 @@ DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - Firebase/Messaging
+  - RxCocoa
+  - RxSwift
   - SnapKit (~> 5.0.0)
   - Toast-Swift (~> 5.0.1)
 
@@ -124,6 +132,9 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SnapKit
     - Toast-Swift
 
@@ -140,9 +151,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 90d268c740deaf594f73f23c378a8685ba810192
+PODFILE CHECKSUM: 2c1b1937638ce7236c8ab1330e3ae4a39f8dfbdc
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.12.1

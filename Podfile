@@ -11,4 +11,6 @@ target 'Besteats' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'Alamofire'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end
