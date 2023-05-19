@@ -25,7 +25,7 @@ class NetworkManager {
     }
     
     static func request<R: Codable>(host: String = APICommon.host,
-                                    parameters: Parameters? = nil,
+//                                    parameters: Parameters? = nil,
                                     path: String,
                                     method: HTTPMethod = .get,
                                     header: HTTPHeaders? = nil,
