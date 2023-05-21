@@ -145,5 +145,69 @@ private final class NetworkIntercepter: RequestInterceptor {
     static let maximumRetryCount: Int = 3
     
     /// 로그 등록
+    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        var jsonHttpBodyString = ""
+        
+        if let httpBodyData = urlRequest.httpBody,
+           let stringData = String(data: httpBodyData, encoding: .utf8)
+        {
+            jsonHttpBodyString = stringData
+        }
+        print("========= Request 🚀 =========")
+        print("||")
+        print("|| host : \(urlRequest.url?.host ?? "")")
+        print("|| path : \(urlRequest.url?.path ?? "")")
+        print("|| method : \(urlRequest.httpMethod ?? "")")
+        print("|| header : \(urlRequest.headers)")
+        if !jsonHttpBodyString.isEmpty {
+            print("|| requestbody : \(jsonHttpBodyString)")
+        }
+        print("||")
+        print("==============================")
+        completion(.success(urlRequest))
+    }
+    
+    /// 네트워크 연결 유실 시 Retry 설정
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        // 최대 retry count 도달 시 session cancel, retry 종료
+        guard request.retryCount < NetworkIntercepter.maximumRetryCount else {
+            print("NetworkRetryHandler retry finished..")
+            session.cancelAllRequests()
+            completion(.doNotRetry)
+            return
+        }
+        
+        // Device Network 연결 유실, timeout 발생 시 1.5초 간격 Retry 시도
+        if let nsError = ((error.asAFError)?.underlyingError as? NSError),
+           nsError.code == CFNetworkErrors.cfurlErrorTimedOut.rawValue ||
+            nsError.code == CFNetworkErrors.cfurlErrorNetworkConnectionLost.rawValue ||
+            nsError.code == CFNetworkErrors.cfurlErrorDNSLookupFailed.rawValue ||
+            nsError.code == CFNetworkErrors.cfurlErrorCannotConnectToHost.rawValue ||
+            nsError.code == CFNetworkErrors.cfurlErrorNotConnectedToInternet.rawValue
+        {
+            var requestBodyString = ""
+            
+            if let requestBody = request.request?.httpBody,
+               let stringData = String(data: requestBody, encoding: .utf8)
+            {
+                requestBodyString = stringData
+            }
+            
+            print("========= Retry Request 🤔 =========")
+            print("||")
+            print("|| host : \(request.request?.url?.host ?? "")")
+            print("|| path : \(request.request?.url?.path ?? "")")
+            print("|| method : \(request.request?.httpMethod ?? "")")
+            print("|| header : \(request.request?.headers)")
+            if !requestBodyString.isEmpty {
+                print("|| body : \(requestBodyString)")
+            }
+            print("||")
+            print("==============================")
+        } else {
+            print("NetworkRetryHandler not handling.. ")
+            completion(.doNotRetry)
+        }
+    }
     
 }
