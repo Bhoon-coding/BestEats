@@ -47,6 +47,7 @@
 		E19732C328F5499B0014D276 /* RecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19732C228F5499B0014D276 /* RecommendViewController.swift */; };
 		E19732C528F55A2F0014D276 /* RecommendFoodTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19732C428F55A2F0014D276 /* RecommendFoodTypeCell.swift */; };
 		E19732C828F580070014D276 /* RecommendFoodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19732C728F580070014D276 /* RecommendFoodType.swift */; };
+		E1A266312A1AE6ED00E7118B /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A266302A1AE6ED00E7118B /* SearchAPI.swift */; };
 		E1B143592A16ED9E00740120 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143582A16ED9E00740120 /* FoodModel.swift */; };
 		E1B1435F2A16EE9500740120 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B1435E2A16EE9500740120 /* NetworkManager.swift */; };
 		E1B143612A16EF3D00740120 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143602A16EF3D00740120 /* API.swift */; };
@@ -101,6 +102,7 @@
 		E19732C228F5499B0014D276 /* RecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendViewController.swift; sourceTree = "<group>"; };
 		E19732C428F55A2F0014D276 /* RecommendFoodTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFoodTypeCell.swift; sourceTree = "<group>"; };
 		E19732C728F580070014D276 /* RecommendFoodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFoodType.swift; sourceTree = "<group>"; };
+		E1A266302A1AE6ED00E7118B /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		E1B143582A16ED9E00740120 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		E1B1435E2A16EE9500740120 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = /Users/bh/Desktop/Dev/iOS/Project/Besteats/NetworkManager.swift; sourceTree = "<absolute>"; };
 		E1B143602A16EF3D00740120 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -328,6 +330,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E1A2662F2A1AE6D100E7118B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				E1A266302A1AE6ED00E7118B /* SearchAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		E1B1435B2A16EE1A00740120 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				E1B143602A16EF3D00740120 /* API.swift */,
+				E1A2662F2A1AE6D100E7118B /* API */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -541,6 +552,7 @@
 				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
 				E12FFB1028643B800016098D /* FoodPhotosResults.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
+				E1A266312A1AE6ED00E7118B /* SearchAPI.swift in Sources */,
 				E19732C528F55A2F0014D276 /* RecommendFoodTypeCell.swift in Sources */,
 				E13AEB83289FB1B200A685E2 /* CustomCollectionViewLayout.swift in Sources */,
 				E12ACDDA2862D83A0068AA9D /* RecommendFoodCell.swift in Sources */,
@@ -635,7 +647,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SERVER_HOST = "https://api.odcloud.kr/api";
+				SERVER_HOST = "https://api.unsplash.com";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -690,7 +702,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				SERVER_HOST = "https://api.odcloud.kr/api";
+				SERVER_HOST = "https://api.unsplash.com";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;

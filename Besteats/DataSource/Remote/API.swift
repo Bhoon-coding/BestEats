@@ -14,6 +14,8 @@ struct APICommon {
     static let host: String = Bundle.main.object(forInfoDictionaryKey: "SERVER_HOST") as! String
 }
 
+enum Search { }
+
 protocol APIErrorDefinable: Error {
     var httpStatusCode: Int { get }
     var errorMsg: String? { get }
@@ -22,4 +24,23 @@ protocol APIErrorDefinable: Error {
 struct CommonAPIError: APIErrorDefinable {
     var httpStatusCode: Int
     var errorMsg: String?
+}
+
+protocol APIDefinition {
+    var path: String { get }
+    var headers: HTTPHeaders? { get }
+//    var parameters:
+    var method: HTTPMethod { get }
+}
+
+extension APIDefinition {
+    static var rx: Reactive<Self>.Type {
+        get { Reactive<Self>.self }
+        set {}
+    }
+    
+    var rx: Reactive<Self> {
+        get { Reactive(self) }
+        set {}
+    }
 }

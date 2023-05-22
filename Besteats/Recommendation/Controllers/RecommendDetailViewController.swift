@@ -34,14 +34,15 @@ final class RecommendDetailViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-//        APIManager.shared.fetchData(query: "chineseFood") { result in
-//            switch result {
-//            case .success(let success):
-//                print("성공:\(success)")
-//            case .failure(let failure):
-//                print("실패:\(failure.localizedDescription)")
-//            }
-//        }
+        // TODO: [] APIManager -> NetworkManager로 변경
+        APIManager.shared.fetchData(query: "china food") { result in
+            switch result {
+            case .success(let success):
+                print("성공:\(success)")
+            case .failure(let failure):
+                print("실패:\(failure.localizedDescription)")
+            }
+        }
     }
 }
 

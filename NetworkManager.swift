@@ -17,7 +17,6 @@ class NetworkManager {
     let session: Session
     
     private init() {
-        // TODO: []
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 4
         configuration.httpMaximumConnectionsPerHost = 4
