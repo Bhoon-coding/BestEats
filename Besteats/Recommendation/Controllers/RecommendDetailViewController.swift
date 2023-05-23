@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 final class RecommendDetailViewController: UIViewController {
@@ -26,6 +27,18 @@ final class RecommendDetailViewController: UIViewController {
         return collectionView
     }()
     
+    var foodType: String
+    let disposeBag = DisposeBag()
+    
+    init(foodType: String) {
+        self.foodType = foodType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Properties
     
     // MARK: - LifeCycles
@@ -35,14 +48,23 @@ final class RecommendDetailViewController: UIViewController {
         configureUI()
         configureConstraints()
         // TODO: [] APIManager -> NetworkManager로 변경
-        APIManager.shared.fetchData(query: "china food") { result in
-            switch result {
-            case .success(let success):
-                print("성공:\(success)")
-            case .failure(let failure):
-                print("실패:\(failure.localizedDescription)")
-            }
-        }
+//        APIManager.shared.fetchData(query: "china food") { result in
+//            switch result {
+//            case .success(let success):
+//                print("성공:\(success)")
+//            case .failure(let failure):
+//                print("실패:\(failure.localizedDescription)")
+//            }
+//        }
+        SearchService()
+            .request(parameters: Search.Photos.FoodPhotoParameter(foodType: foodType))
+            .observe(on: MainScheduler.instance)
+            .subscribe { response in
+                print("=================== \(#function) response: \(response) ===================")
+            } onFailure: { error in
+                print("=================== \(#function) error: \(error.localizedDescription) ===================")
+            }.disposed(by: disposeBag)
+
     }
 }
 
@@ -134,37 +156,37 @@ extension RecommendDetailViewController {
     
 }
 
-
-// 전처리
-#if DEBUG
-
-import SwiftUI
-@available(iOS 13.0, *)
-
-// UIViewControllerRepresentable을 채택
-struct RecommendDetailViewControllerRepresentable: UIViewControllerRepresentable {
-    // update
-    // _ uiViewController: UIViewController로 지정
-    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
-        
-    }
-    // makeui
-    func makeUIViewController(context: Context) -> UIViewController {
-        // Preview를 보고자 하는 Viewcontroller 이름
-        // e.g.)
-        return RecommendDetailViewController()
-    }
-}
-
-struct RecommendDetailViewController_Previews: PreviewProvider {
-    
-    @available(iOS 13.0, *)
-    static var previews: some View {
-        // UIViewControllerRepresentable에 지정된 이름.
-        RecommendDetailViewControllerRepresentable()
-        
-        // 테스트 해보고자 하는 기기
-            .previewDevice("iPhone 11")
-    }
-}
-#endif
+//
+//// 전처리
+//#if DEBUG
+//
+//import SwiftUI
+//@available(iOS 13.0, *)
+//
+//// UIViewControllerRepresentable을 채택
+//struct RecommendDetailViewControllerRepresentable: UIViewControllerRepresentable {
+//    // update
+//    // _ uiViewController: UIViewController로 지정
+//    func updateUIViewController(_ uiViewController: UIViewController , context: Context) {
+//
+//    }
+//    // makeui
+//    func makeUIViewController(context: Context) -> UIViewController {
+//        // Preview를 보고자 하는 Viewcontroller 이름
+//        // e.g.)
+//        return RecommendDetailViewController()
+//    }
+//}
+//
+//struct RecommendDetailViewController_Previews: PreviewProvider {
+//
+//    @available(iOS 13.0, *)
+//    static var previews: some View {
+//        // UIViewControllerRepresentable에 지정된 이름.
+//        RecommendDetailViewControllerRepresentable()
+//
+//        // 테스트 해보고자 하는 기기
+//            .previewDevice("iPhone 11")
+//    }
+//}
+//#endif

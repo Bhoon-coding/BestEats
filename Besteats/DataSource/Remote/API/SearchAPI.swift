@@ -12,6 +12,11 @@ import RxSwift
 
 extension Search {
     struct Photos: APIDefinition {
+        
+        struct FoodPhotoParameter {
+            let clientId: String = Constants.clientId
+            let foodType: String
+        }
         // TODO: [] Codable or query, clientID 파라미터로 받기
         struct FoodPhotosResponse: Codable {
             let total: Int
@@ -32,13 +37,41 @@ extension Search {
             }
         }
         
-        
         var path: String = "/search/photos"
         
         var headers: HTTPHeaders?
         
+        var parameters: BestEatsParameters?
+        
         var method: HTTPMethod = .get
         
-        
+        init(parameters: FoodPhotoParameter) {
+            let params = BestEatsParameters()
+            params.append(.init(key: .clientId, value: parameters.clientId))
+            params.append(.init(key: .query, value: parameters.foodType))
+            
+            self.parameters = params
+        }
+    }
+}
+
+protocol SearchServiceable {
+    func request(parameters: Search.Photos.FoodPhotoParameter) ->  Single<Search.Photos.FoodPhotosResponse>
+}
+
+struct SearchService: SearchServiceable {
+    func request(parameters: Search.Photos.FoodPhotoParameter) -> Single<Search.Photos.FoodPhotosResponse> {
+        Search.Photos(parameters: parameters)
+            .rx
+            .request()
+    }
+}
+
+extension Reactive where Base == Search.Photos {
+    func request() -> Single<Search.Photos.FoodPhotosResponse> {
+        NetworkManager.request(path: base.path,
+                               method: base.method,
+                               header: base.headers,
+                               encoding: JSONEncoding.default)
     }
 }

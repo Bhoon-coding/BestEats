@@ -29,7 +29,7 @@ struct CommonAPIError: APIErrorDefinable {
 protocol APIDefinition {
     var path: String { get }
     var headers: HTTPHeaders? { get }
-//    var parameters:
+    var parameters: BestEatsParameters? { get }
     var method: HTTPMethod { get }
 }
 

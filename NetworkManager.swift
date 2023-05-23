@@ -24,7 +24,7 @@ class NetworkManager {
     }
     
     static func request<R: Codable>(host: String = APICommon.host,
-//                                    parameters: Parameters? = nil,
+                                    parameters: BestEatsParameters? = nil,
                                     path: String,
                                     method: HTTPMethod = .get,
                                     header: HTTPHeaders? = nil,
@@ -41,7 +41,7 @@ class NetworkManager {
             let request = NetworkManager.instance.session
                 .request(url,
                          method: method,
-                         parameters: nil,
+                         parameters: parameters?.toDictionary(),
                          encoding: encoding,
                          headers: header)
                 .responseDecodable(of: R.self) { res in
@@ -107,6 +107,7 @@ class NetworkManager {
                         print("||")
                         print("==============================")
                         observer(.success(response))
+                        print("=================== \(#function) 성공결과: \(response) ===================")
                     }
                 }
             return Disposables.create {

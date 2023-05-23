@@ -30,11 +30,11 @@ final class RecommendViewController: UIViewController {
     
     private let sectionInsets = Style.sectionInsets
     private let foodTypeData: [RecommendFoodType] = [
-        RecommendFoodType(foodTypeImage: Style.koreanFoodImage, foodTypeLabel: Text.koreanFood),
+        RecommendFoodType(foodTypeImage: Style.koreanFoodImage, foodTypeLabel: Text.koreaFood),
         RecommendFoodType(foodTypeImage: Style.westernFoodImage, foodTypeLabel: Text.westernFood),
-        RecommendFoodType(foodTypeImage: Style.chineeseFoodImage, foodTypeLabel: Text.chineeseFood),
-        RecommendFoodType(foodTypeImage: Style.japaneseFoodImage, foodTypeLabel: Text.japaneseFood),
-        RecommendFoodType(foodTypeImage: Style.diserFoodImage, foodTypeLabel: Text.diserFood)
+        RecommendFoodType(foodTypeImage: Style.chineeseFoodImage, foodTypeLabel: Text.chinaFood),
+        RecommendFoodType(foodTypeImage: Style.japaneseFoodImage, foodTypeLabel: Text.japanFood),
+        RecommendFoodType(foodTypeImage: Style.dessertFoodImage, foodTypeLabel: Text.dessert)
     ]
     
     // MARK: - LifeCycles
@@ -134,7 +134,8 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let recommendDetailVC = RecommendDetailViewController()
+        let foodType = foodTypeData[indexPath.item].foodTypeLabel
+        let recommendDetailVC = RecommendDetailViewController(foodType: foodType)
         self.navigationController?.pushViewController(recommendDetailVC,
                                                       animated: true)
     }
@@ -147,11 +148,11 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
 extension RecommendViewController {
     
     private enum Text {
-        static let koreanFood: String = "한식"
+        static let koreaFood: String = "한식"
         static let westernFood: String = "양식"
-        static let chineeseFood: String = "중식"
-        static let japaneseFood: String = "일식"
-        static let diserFood: String = "디저트"
+        static let chinaFood: String = "중식"
+        static let japanFood: String = "일식"
+        static let dessert: String = "디저트"
     }
     
     private enum Style {
@@ -161,7 +162,7 @@ extension RecommendViewController {
         static let westernFoodImage: UIImage = UIImage(named: "WesternFood")!
         static let chineeseFoodImage: UIImage = UIImage(named: "ChineeseFood")!
         static let japaneseFoodImage: UIImage = UIImage(named: "JapaneseFood")!
-        static let diserFoodImage: UIImage = UIImage(named: "DisertFood")!
+        static let dessertFoodImage: UIImage = UIImage(named: "DessertFood")!
     }
     
 }

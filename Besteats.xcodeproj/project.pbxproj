@@ -51,7 +51,7 @@
 		E1B143592A16ED9E00740120 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143582A16ED9E00740120 /* FoodModel.swift */; };
 		E1B1435F2A16EE9500740120 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B1435E2A16EE9500740120 /* NetworkManager.swift */; };
 		E1B143612A16EF3D00740120 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143602A16EF3D00740120 /* API.swift */; };
-		E1B143632A16F24B00740120 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143622A16F24B00740120 /* Parameter.swift */; };
+		E1B143632A16F24B00740120 /* BestEatsParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143622A16F24B00740120 /* BestEatsParameters.swift */; };
 		E1B143652A16F3F200740120 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B143642A16F3F200740120 /* ErrorCode.swift */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -106,7 +106,7 @@
 		E1B143582A16ED9E00740120 /* FoodModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
 		E1B1435E2A16EE9500740120 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = /Users/bh/Desktop/Dev/iOS/Project/Besteats/NetworkManager.swift; sourceTree = "<absolute>"; };
 		E1B143602A16EF3D00740120 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		E1B143622A16F24B00740120 /* Parameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		E1B143622A16F24B00740120 /* BestEatsParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestEatsParameters.swift; sourceTree = "<group>"; };
 		E1B143642A16F3F200740120 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
 		E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BesteatsRelease.entitlements; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 				E18D62E228538C9F00884570 /* Constants */,
 				E16975E9277ED7C1004547F6 /* Fonts */,
 				E159D5A227F6E5F700C841DD /* Extension */,
-				E1B143622A16F24B00740120 /* Parameter.swift */,
+				E1B143622A16F24B00740120 /* BestEatsParameters.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -531,7 +531,7 @@
 				E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */,
 				E12FFB0E286433730016098D /* APIManager.swift in Sources */,
 				E10161DF27C528C200215F5B /* Restaurants.swift in Sources */,
-				E1B143632A16F24B00740120 /* Parameter.swift in Sources */,
+				E1B143632A16F24B00740120 /* BestEatsParameters.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
 				E1810BF02869DEE30063396C /* UIImageView + extension.swift in Sources */,
