@@ -16,8 +16,9 @@ extension Search {
         struct FoodPhotoParameter {
             let clientId: String = Constants.clientId
             let foodType: String
+            
         }
-        // TODO: [] Codable or query, clientID 파라미터로 받기
+        // TODO: [] API 응답 값 Cell에 보여주기 (total page 쿼리 추가 필요)
         struct FoodPhotosResponse: Codable {
             let total: Int
             let totalPages: Int
@@ -51,6 +52,7 @@ extension Search {
             params.append(.init(key: .query, value: parameters.foodType))
             
             self.parameters = params
+            
         }
     }
 }
@@ -69,9 +71,11 @@ struct SearchService: SearchServiceable {
 
 extension Reactive where Base == Search.Photos {
     func request() -> Single<Search.Photos.FoodPhotosResponse> {
-        NetworkManager.request(path: base.path,
+        NetworkManager.request(parameters: base.parameters,
+                               path: base.path,
                                method: base.method,
                                header: base.headers,
-                               encoding: JSONEncoding.default)
+                               encoding: URLEncoding.default)
+        
     }
 }

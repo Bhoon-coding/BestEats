@@ -62,7 +62,7 @@ final class RecommendDetailViewController: UIViewController {
             .subscribe { response in
                 print("=================== \(#function) response: \(response) ===================")
             } onFailure: { error in
-                print("=================== \(#function) error: \(error.localizedDescription) ===================")
+                print("=================== \(#function) error: \(error) ===================")
             }.disposed(by: disposeBag)
 
     }

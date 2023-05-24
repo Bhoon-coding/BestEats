@@ -26,9 +26,11 @@ struct Code {
     let value: Codable?
 }
 
-enum CodeKey: String {
+enum CodeKey: String, CodingKey {
     case query
-    case clientId
+    case clientId = "client_id"
+    
+    
 }
 
 public class BestEatsParameters {
