@@ -27,8 +27,14 @@ final class RecommendDetailViewController: UIViewController {
         return collectionView
     }()
     
+    // MARK: - Properties
+    
+    private var foodInfo: [Search.Photos.FoodPhotosResponse.FoodPhotosInfo] = []
     var foodType: String
     let disposeBag = DisposeBag()
+    
+    
+    // MARK: - LifeCycles
     
     init(foodType: String) {
         self.foodType = foodType
@@ -39,32 +45,26 @@ final class RecommendDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Properties
-    
-    // MARK: - LifeCycles
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureConstraints()
-        // TODO: [] APIManager -> NetworkManager로 변경
-//        APIManager.shared.fetchData(query: "china food") { result in
-//            switch result {
-//            case .success(let success):
-//                print("성공:\(success)")
-//            case .failure(let failure):
-//                print("실패:\(failure.localizedDescription)")
-//            }
-//        }
+        fetchFood()
+    }
+    
+    // MARK: - Methods
+    
+    private func fetchFood() {
         SearchService()
             .request(parameters: Search.Photos.FoodPhotoParameter(foodType: foodType))
             .observe(on: MainScheduler.instance)
-            .subscribe { response in
-                print("=================== \(#function) response: \(response) ===================")
+            .subscribe { [weak self] response in
+                self?.foodInfo = response.results
+                self?.collectionView.reloadData()
             } onFailure: { error in
+                // TODO: [] Crashlytics
                 print("=================== \(#function) error: \(error) ===================")
             }.disposed(by: disposeBag)
-
     }
 }
 
@@ -113,7 +113,7 @@ extension RecommendDetailViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 5
+        return foodInfo.count
     }
     
     func collectionView(
@@ -126,8 +126,8 @@ extension RecommendDetailViewController: UICollectionViewDataSource {
         ) as? RecommendFoodCell else {
             return UICollectionViewCell()
         }
-//        cell.setupImage(<#T##image: UIImage##UIImage#>)
-        cell.setupCell()
+        let foodItem = foodInfo[indexPath.item]
+        cell.setupImage(URL(string: foodItem.urls.small)!)
         return cell
     }
     

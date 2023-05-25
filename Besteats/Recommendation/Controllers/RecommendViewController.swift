@@ -29,12 +29,12 @@ final class RecommendViewController: UIViewController {
     // MARK: - Properties
     
     private let sectionInsets = Style.sectionInsets
-    private let foodTypeData: [RecommendFoodType] = [
-        RecommendFoodType(foodTypeImage: Style.koreanFoodImage, foodTypeLabel: Text.koreaFood),
-        RecommendFoodType(foodTypeImage: Style.westernFoodImage, foodTypeLabel: Text.westernFood),
-        RecommendFoodType(foodTypeImage: Style.chineeseFoodImage, foodTypeLabel: Text.chinaFood),
-        RecommendFoodType(foodTypeImage: Style.japaneseFoodImage, foodTypeLabel: Text.japanFood),
-        RecommendFoodType(foodTypeImage: Style.dessertFoodImage, foodTypeLabel: Text.dessert)
+    private let foodInfo: [FoodInfo] = [
+        FoodInfo(type: .korea, image: Style.koreanFoodImage, label: Text.koreaFood),
+        FoodInfo(type: .western, image: Style.westernFoodImage, label: Text.westernFood),
+        FoodInfo(type: .china, image: Style.chineeseFoodImage, label: Text.chinaFood),
+        FoodInfo(type: .japan, image: Style.japaneseFoodImage, label: Text.japanFood),
+        FoodInfo(type: .dessert, image: Style.dessertFoodImage, label: Text.dessert)
     ]
     
     // MARK: - LifeCycles
@@ -88,7 +88,7 @@ extension RecommendViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return foodTypeData.count
+        return foodInfo.count
     }
     
     
@@ -100,8 +100,8 @@ extension RecommendViewController: UICollectionViewDataSource {
             withReuseIdentifier: String(describing: RecommendFoodTypeCell.self),
             for: indexPath
         ) as? RecommendFoodTypeCell else { return UICollectionViewCell() }
-        let foodTypeData = foodTypeData[indexPath.item]
-        cell.setupCell(foodTypeData: foodTypeData)
+        let foodInfoItem = foodInfo[indexPath.item]
+        cell.setupCell(foodInfo: foodInfoItem)
         return cell
     }
     
@@ -134,8 +134,8 @@ extension RecommendViewController: UICollectionViewDelegateFlowLayout {
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
     ) {
-        let foodType = foodTypeData[indexPath.item].foodTypeLabel
-        let recommendDetailVC = RecommendDetailViewController(foodType: foodType)
+        let foodType = foodInfo[indexPath.item].type.rawValue
+        let recommendDetailVC = RecommendDetailViewController(foodType: "\(foodType) food")
         self.navigationController?.pushViewController(recommendDetailVC,
                                                       animated: true)
     }

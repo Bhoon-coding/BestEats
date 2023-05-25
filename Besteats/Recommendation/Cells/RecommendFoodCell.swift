@@ -78,14 +78,11 @@ class RecommendFoodCell: UICollectionViewCell {
 
 extension RecommendFoodCell {
     
-    func setupImage(_ image: UIImage) {
+    func setupImage(_ url: URL) {
+        // TODO: [] 바인딩해서 dispatchqueue.main.async 안해도 되지않을까
         DispatchQueue.main.async { [weak self] in
-            self?.unsplashImageView.image = image
+            self?.unsplashImageView.load(url: url)
         }
-    }
-    
-    func setupCell() {
-        unsplashImageView.image = UIImage(named: "WesternFood")
     }
     
     private func configureUI() {

@@ -39,9 +39,9 @@ final class RecommendFoodTypeCell: UICollectionViewCell {
         configureConstraints()
     }
     
-    func setupCell(foodTypeData: RecommendFoodType) {
-        foodImageView.image = foodTypeData.foodTypeImage
-        foodTypeLabel.text = foodTypeData.foodTypeLabel
+    func setupCell(foodInfo: FoodInfo) {
+        foodImageView.image = foodInfo.image
+        foodTypeLabel.text = foodInfo.label
     }
     
     
