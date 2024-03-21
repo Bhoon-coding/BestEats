@@ -8,7 +8,7 @@
 import Foundation
 
 struct Restaurant: Codable, Equatable {
-    var restaurantName: String//
+    var restaurantName: String
     var type: String
     var likeMenus: [Menu]
     var curiousMenus: [Menu]
