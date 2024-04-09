@@ -21,6 +21,7 @@
 		E140A03B283A811B00988759 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E140A03A283A811B00988759 /* Fonts.swift */; };
 		E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */; };
 		E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */; };
+		E14C004A2BC4C01200844860 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E14C00492BC4C00700844860 /* PrivacyInfo.xcprivacy */; };
 		E155E4E127F28E9E000E20A7 /* MenuListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */; };
 		E155E4E227F28E9E000E20A7 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */; };
 		E155E4E327F28E9E000E20A7 /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */; };
@@ -59,6 +60,8 @@
 		E140A03A283A811B00988759 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Fonts.swift; path = Besteats/Utils/Fonts/Fonts.swift; sourceTree = SOURCE_ROOT; };
 		E146865D2849CCCD00DAA77D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E146865F2849DB4800DAA77D /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		E14C00452BC4BB3000844860 /* BestEats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BestEats.entitlements; sourceTree = "<group>"; };
+		E14C00492BC4C00700844860 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E155E4DE27F28E9E000E20A7 /* MenuListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListTableViewCell.swift; sourceTree = "<group>"; };
 		E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		E155E4E027F28E9E000E20A7 /* MenuListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
@@ -72,14 +75,12 @@
 		E15A3F88278987A000CD810B /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E15D0109280470CA007BB795 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		E16F1EA027FB378500103E6B /* UITableView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + extension.swift"; sourceTree = "<group>"; };
-		E1732030284906DF0020193D /* Besteats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Besteats.entitlements; sourceTree = "<group>"; };
 		E17A1DFB284F630C00F212E2 /* VersionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfoViewController.swift; sourceTree = "<group>"; };
 		E18D62E328538CB800884570 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E1B344D22BAA646100D10E50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B344D32BAA646100D10E50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
-		E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BesteatsRelease.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,18 +115,17 @@
 		E10161DC27C5289800215F5B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E10DD94E280707A80004E90C /* Services */,
 				E10161DE27C528C200215F5B /* Restaurants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E10DD94E280707A80004E90C /* Services */ = {
+		E10DD94E280707A80004E90C /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
-				E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */,
+				E14C00462BC4BE7600844860 /* Local */,
 			);
-			path = Services;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		E11E3C8E2764CF6300B70E3A = {
@@ -150,19 +150,13 @@
 		E11E3C992764CF6300B70E3A /* Besteats */ = {
 			isa = PBXGroup;
 			children = (
-				E1468661284CE6DF00DAA77D /* Recommendation */,
-				E1732030284906DF0020193D /* Besteats.entitlements */,
-				E1F025502847A45B001809B4 /* BesteatsRelease.entitlements */,
-				E146865C2849CC8A00DAA77D /* Settings */,
-				E123ED262815941500E63B68 /* Restaurants */,
+				E14C00442BC4B9D800844860 /* Presentation */,
+				E10DD94E280707A80004E90C /* DataSource */,
 				E10161DC27C5289800215F5B /* Model */,
 				E1784F1627CD07000005AB03 /* Utils */,
-				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
-				E15A3F88278987A000CD810B /* BottomSheetViewController.swift */,
-				E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */,
+				E14C00472BC4BE9800844860 /* Application */,
 				E11E3CA02764CF6300B70E3A /* Main.storyboard */,
-				E191C4FF276F54DC0031F036 /* TabBarViewController.swift */,
-				E11E3CA32764CF6400B70E3A /* Assets.xcassets */,
+				E14C00452BC4BB3000844860 /* BestEats.entitlements */,
 				E11E3CA52764CF6400B70E3A /* LaunchScreen.storyboard */,
 			);
 			path = Besteats;
@@ -212,6 +206,35 @@
 				E11DB06F276E248400F78037 /* RecommendViewController.swift */,
 			);
 			path = Recommendation;
+			sourceTree = "<group>";
+		};
+		E14C00442BC4B9D800844860 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E1468661284CE6DF00DAA77D /* Recommendation */,
+				E146865C2849CC8A00DAA77D /* Settings */,
+				E123ED262815941500E63B68 /* Restaurants */,
+				E15A3F88278987A000CD810B /* BottomSheetViewController.swift */,
+				E191C4FF276F54DC0031F036 /* TabBarViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E14C00462BC4BE7600844860 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		E14C00472BC4BE9800844860 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E11E3C9A2764CF6300B70E3A /* AppDelegate.swift */,
+				E11E3C9C2764CF6300B70E3A /* SceneDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		E155E4DC27F28E9E000E20A7 /* MenuList */ = {
@@ -268,8 +291,10 @@
 		E1B344D12BAA646100D10E50 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				E11E3CA32764CF6400B70E3A /* Assets.xcassets */,
 				E1B344D22BAA646100D10E50 /* GoogleService-Info.plist */,
 				E1B344D32BAA646100D10E50 /* Info.plist */,
+				E14C00492BC4C00700844860 /* PrivacyInfo.xcprivacy */,
 			);
 			name = Resource;
 			path = Besteats/Resource;
@@ -351,6 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E14C004A2BC4C01200844860 /* PrivacyInfo.xcprivacy in Resources */,
 				E11E3CA72764CF6400B70E3A /* LaunchScreen.storyboard in Resources */,
 				E15D010A280470CA007BB795 /* GmarketSansBold.otf in Resources */,
 				E11E3CA42764CF6400B70E3A /* Assets.xcassets in Resources */,
@@ -584,7 +610,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Besteats/Besteats.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R4G74AF442;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Besteats/Resource/Info.plist;
@@ -600,9 +626,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bhooncoding.Besteats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -618,7 +647,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Besteats/BesteatsRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = R4G74AF442;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Besteats/Resource/Info.plist;
@@ -634,9 +663,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bhooncoding.Besteats;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
