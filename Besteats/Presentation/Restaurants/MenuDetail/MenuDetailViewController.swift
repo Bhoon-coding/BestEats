@@ -198,78 +198,6 @@ final class MenuDetailViewController: UIViewController {
         title = selectedRestaurant.restaurantName
     }
     
-    private func configureUI() {
-        
-        tabBarController?.tabBar.isHidden = true
-        view.backgroundColor = .secondarySystemBackground
-        
-        view.addSubview(wholeView)
-        wholeView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(24)
-        }
-        
-        wholeView.addSubview(menuLabel)
-        menuLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(36)
-            $0.leading.equalToSuperview()
-        }
-        
-        wholeView.addSubview(menuTextField)
-        menuTextField.snp.makeConstraints {
-            $0.top.equalTo(menuLabel.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(44)
-        }
-        
-        wholeView.addSubview(oneLinerLabel)
-        oneLinerLabel.snp.makeConstraints {
-            $0.top.equalTo(menuTextField.snp.bottom).offset(50)
-            $0.leading.equalToSuperview()
-        }
-        
-        wholeView.addSubview(oneLinerTextField)
-        oneLinerTextField.snp.makeConstraints {
-            $0.top.equalTo(oneLinerLabel.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(44)
-        }
-        
-        wholeView.addSubview(typeLabel)
-        typeLabel.snp.makeConstraints {
-            $0.top.equalTo(oneLinerTextField.snp.bottom).offset(50)
-            $0.leading.equalToSuperview()
-        }
-        
-        wholeView.addSubview(typeView)
-        typeView.snp.makeConstraints {
-            $0.top.equalTo(typeLabel.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(64)
-        }
-        
-        typeView.addSubview(typeStackView)
-        typeStackView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(24)
-            $0.height.equalTo(48)
-        }
-        
-        typeStackView.addArrangedSubview(typeLikeButton)
-        typeLikeButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-        typeStackView.addArrangedSubview(typeCuriousButton)
-        typeCuriousButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-        typeStackView.addArrangedSubview(typeWarningButton)
-        typeWarningButton.snp.makeConstraints {
-            $0.width.equalTo(44)
-        }
-    }
-    
     private func configureDelegate() {
         menuTextField.delegate = self
         oneLinerTextField.delegate = self
@@ -464,6 +392,8 @@ final class MenuDetailViewController: UIViewController {
     }
 }
 
+// MARK: - Extension
+
 extension MenuDetailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == menuTextField {
@@ -472,5 +402,80 @@ extension MenuDetailViewController: UITextFieldDelegate {
             oneLinerTextField.resignFirstResponder()
         }
         return true
+    }
+}
+
+extension MenuDetailViewController {
+    
+    private func configureUI() {
+        
+        tabBarController?.tabBar.isHidden = true
+        view.backgroundColor = .secondarySystemBackground
+        
+        view.addSubview(wholeView)
+        wholeView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(24)
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(24)
+        }
+        
+        wholeView.addSubview(menuLabel)
+        menuLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(36)
+            $0.leading.equalToSuperview()
+        }
+        
+        wholeView.addSubview(menuTextField)
+        menuTextField.snp.makeConstraints {
+            $0.top.equalTo(menuLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(44)
+        }
+        
+        wholeView.addSubview(oneLinerLabel)
+        oneLinerLabel.snp.makeConstraints {
+            $0.top.equalTo(menuTextField.snp.bottom).offset(50)
+            $0.leading.equalToSuperview()
+        }
+        
+        wholeView.addSubview(oneLinerTextField)
+        oneLinerTextField.snp.makeConstraints {
+            $0.top.equalTo(oneLinerLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(44)
+        }
+        
+        wholeView.addSubview(typeLabel)
+        typeLabel.snp.makeConstraints {
+            $0.top.equalTo(oneLinerTextField.snp.bottom).offset(50)
+            $0.leading.equalToSuperview()
+        }
+        
+        wholeView.addSubview(typeView)
+        typeView.snp.makeConstraints {
+            $0.top.equalTo(typeLabel.snp.bottom).offset(24)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(64)
+        }
+        
+        typeView.addSubview(typeStackView)
+        typeStackView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(24)
+            $0.height.equalTo(48)
+        }
+        
+        typeStackView.addArrangedSubview(typeLikeButton)
+        typeLikeButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+        typeStackView.addArrangedSubview(typeCuriousButton)
+        typeCuriousButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
+        typeStackView.addArrangedSubview(typeWarningButton)
+        typeWarningButton.snp.makeConstraints {
+            $0.width.equalTo(44)
+        }
     }
 }

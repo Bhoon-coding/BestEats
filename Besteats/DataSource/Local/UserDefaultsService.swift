@@ -24,7 +24,6 @@ struct UserDefaultsManager {
         
         var restaurants = getRestaurants()
         restaurants.append(restaurant)
-        
         saveRestaurants(restaurants: restaurants)
     }
     
@@ -32,7 +31,6 @@ struct UserDefaultsManager {
                           selectedIndex: Int) {
         
         var restaurants = getRestaurants()
-        
         restaurants[selectedIndex] = selectedRestaurant
     }
     

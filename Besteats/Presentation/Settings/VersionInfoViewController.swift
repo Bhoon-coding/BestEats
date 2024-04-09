@@ -114,7 +114,6 @@ class VersionInfoViewController: UIViewController {
                 UIApplication.shared.openURL(url)
             }
         }
-        
     }
 }
 

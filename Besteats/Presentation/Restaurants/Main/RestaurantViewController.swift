@@ -160,11 +160,6 @@ final class RestaurantViewController: UIViewController {
         self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
-    private func configureUI() {
-        view.backgroundColor = .secondarySystemBackground
-        foodCollectionView.backgroundColor = .secondarySystemBackground
-    }
-    
     private func configureDelegate() {
         foodSearchBar.delegate = self
         foodCollectionView.delegate = self
@@ -305,5 +300,15 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
         
         foodSearchBar.resignFirstResponder()
         foodSearchBar.text = ""
+    }
+}
+
+// MARK: - Extension
+
+extension RestaurantViewController {
+    
+    private func configureUI() {
+        view.backgroundColor = .secondarySystemBackground
+        foodCollectionView.backgroundColor = .secondarySystemBackground
     }
 }

@@ -38,28 +38,17 @@
 # 개발 도구
 
 - Xcode(v13.1)
-
 - Snapkit
-
 - Storyboard (메인화면)
-
 - Cocoa Pods
-
 - Firebase
-
-- FCM (Firebase Cloud Messaging)
-
-  
+  - FCM (Firebase Cloud Messaging)
 
 <br>
-
-  
 
 # Version Target
 
 - iOS 13.0
-
-  
 
 <br>
 
@@ -80,7 +69,6 @@
   
 
 #### TabBar Controller
-
 - 하단 탭의 버튼으로 페이지 별 보여지는 화면을 다르게 구현 하였습니다.
 
   
@@ -90,7 +78,6 @@
   
 
 #### 맛집 티켓 (CollectionView)
-
 - CollectionView를 활용하여 사용자가 등록한 맛집들을 한눈에 볼 수 있도록 구현 하였습니다.
 
   
@@ -119,7 +106,7 @@
 
   
 
-- 등록되어 있는 음식점을 filter, contain 메소드를 이용해서 사용자가 찾고자 하는 음식점을 직관적으로 추려내게 구현 하였습니다.
+- 등록되어 있는 음식점을 `filter`, `contain` 메소드를 이용해서 사용자가 찾고자 하는 음식점을 직관적으로 추려내게 구현 하였습니다.
 
   
 
@@ -153,13 +140,8 @@
 
 - 데이터가 없을시 빈 화면이 아닌 맛집 데이터 추가를 유도하는 View를 보여주도록 하였습니다.
 
-  
 
 <br>
-
-  
-
-
 
   
 
@@ -183,18 +165,13 @@
 
 <br>
 
-  
 
-
-
-  
 
 ## MenuAdd page (메뉴 추가 페이지)
 
   
 
 - 메뉴 추가시 `해당 맛집`에 추가 되게 구현 하였습니다.
-
 - UserDefaults를 활용하여 사용자가 등록한 맛집들을 로컬에 저장하게 하였습니다.
 
   
@@ -202,11 +179,6 @@
 <br>
 
   
-
-
-
-  
-
 ## MenuDetail page (메뉴 상세 페이지)
 
 <img width="30%" src = "https://user-images.githubusercontent.com/64088377/169181539-1ce587dd-3cf3-41ee-a01a-0d96385c44da.gif">
@@ -226,8 +198,6 @@
   
 
 ## FCM (Firebase Cloud Messaging) 원격 푸시 알림
-
-  
 
 - 특정 시간대를 지정해 사용자에게 원격 푸시 알림을 보내게 하였습니다.
 
@@ -265,11 +235,8 @@
 ### 1. prefix
 
 - `main`: 개발이 완료되어 최종 배포될 브랜치
-
 - `develop`: default branch - feature, bugfix등 구현된 기능들이 merge된 후 main에 merge 되기 전 관리될 브랜치
-
 - `feature`: 기능을 개발하는 브랜치
-
 - `bugfix`: 버그를 수정하는 브랜치
 
   
@@ -277,12 +244,8 @@
 ### ⚠️ 참고
 
 - 띄어쓰기 부분은 '-' 을 사용합니다.
-
 - branch 내용은 '소문자 영어'로만 작성합니다.
 
-  
-
-  
 
 ### 예시
 
