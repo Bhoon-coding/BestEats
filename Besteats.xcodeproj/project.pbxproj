@@ -40,6 +40,10 @@
 		E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191C4FF276F54DC0031F036 /* TabBarViewController.swift */; };
 		E1B344D42BAA646100D10E50 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1B344D22BAA646100D10E50 /* GoogleService-Info.plist */; };
 		E1B4C9AB27F1F41600B0E5E9 /* MenuDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */; };
+		E1E05D902BC7608A00DF26FA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E05D8D2BC7608A00DF26FA /* Model.xcdatamodeld */; };
+		E1E05D922BC7663A00DF26FA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E05D912BC7663A00DF26FA /* CoreDataManager.swift */; };
+		E1E05D952BC76ADA00DF26FA /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E05D942BC76ADA00DF26FA /* CoreDataError.swift */; };
+		E1E05D972BC76AF400DF26FA /* CoreDataKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E05D962BC76AF400DF26FA /* CoreDataKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,13 +79,17 @@
 		E15A3F88278987A000CD810B /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		E15D0109280470CA007BB795 /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		E16F1EA027FB378500103E6B /* UITableView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + extension.swift"; sourceTree = "<group>"; };
-		E1732030284906DF0020193D /* Besteats.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Besteats.entitlements; sourceTree = "<group>"; };
 		E17A1DFB284F630C00F212E2 /* VersionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfoViewController.swift; sourceTree = "<group>"; };
 		E18D62E328538CB800884570 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E191C4FF276F54DC0031F036 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		E1B344D22BAA646100D10E50 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E1B344D32BAA646100D10E50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1B4C9AA27F1F41600B0E5E9 /* MenuDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuDetailViewController.swift; sourceTree = "<group>"; };
+		E1E05D8E2BC7608A00DF26FA /* Restaurants.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Restaurants.xcdatamodel; sourceTree = "<group>"; };
+		E1E05D8F2BC7608A00DF26FA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E1E05D912BC7663A00DF26FA /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		E1E05D942BC76ADA00DF26FA /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
+		E1E05D962BC76AF400DF26FA /* CoreDataKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +121,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E10161DC27C5289800215F5B /* Model */ = {
+		E10161DC27C5289800215F5B /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E10161DE27C528C200215F5B /* Restaurants.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E10DD94E280707A80004E90C /* DataSource */ = {
@@ -153,7 +161,7 @@
 			children = (
 				E14C00442BC4B9D800844860 /* Presentation */,
 				E10DD94E280707A80004E90C /* DataSource */,
-				E10161DC27C5289800215F5B /* Model */,
+				E10161DC27C5289800215F5B /* Models */,
 				E1784F1627CD07000005AB03 /* Utils */,
 				E14C00472BC4BE9800844860 /* Application */,
 				E11E3CA02764CF6300B70E3A /* Main.storyboard */,
@@ -225,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				E155E4DF27F28E9E000E20A7 /* UserDefaultsService.swift */,
+				E1E05D932BC76AAC00DF26FA /* CoreData */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -315,6 +324,17 @@
 				E11E3C9E2764CF6300B70E3A /* RestaurantViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		E1E05D932BC76AAC00DF26FA /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E1E05D8D2BC7608A00DF26FA /* Model.xcdatamodeld */,
+				E1E05D912BC7663A00DF26FA /* CoreDataManager.swift */,
+				E1E05D942BC76ADA00DF26FA /* CoreDataError.swift */,
+				E1E05D962BC76AF400DF26FA /* CoreDataKey.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +460,8 @@
 				E14686602849DB4800DAA77D /* SettingsTableViewCell.swift in Sources */,
 				E10161DF27C528C200215F5B /* Restaurants.swift in Sources */,
 				E15A3F89278987A000CD810B /* BottomSheetViewController.swift in Sources */,
+				E1E05D902BC7608A00DF26FA /* Model.xcdatamodeld in Sources */,
+				E1E05D972BC76AF400DF26FA /* CoreDataKey.swift in Sources */,
 				E159D5A427F6E60A00C841DD /* UIButton + extension.swift in Sources */,
 				E159D5A627F6E75200C841DD /* UILabel + extension.swift in Sources */,
 				E18D62E428538CB900884570 /* Constants.swift in Sources */,
@@ -452,6 +474,7 @@
 				E17A1DFC284F630C00F212E2 /* VersionInfoViewController.swift in Sources */,
 				E159D5AA27F6E78900C841DD /* UITextField + extension.swift in Sources */,
 				E12D8B4E283BD2E0009FEAD5 /* UIImage + extension.swift in Sources */,
+				E1E05D952BC76ADA00DF26FA /* CoreDataError.swift in Sources */,
 				E1574857277DEC5D00D645F8 /* RestaurantAddViewController.swift in Sources */,
 				E191C500276F54DC0031F036 /* TabBarViewController.swift in Sources */,
 				E159D5A827F6E77F00C841DD /* UIView + extension.swift in Sources */,
@@ -460,6 +483,7 @@
 				E16F1EA127FB378500103E6B /* UITableView + extension.swift in Sources */,
 				E155E4E227F28E9E000E20A7 /* UserDefaultsService.swift in Sources */,
 				E146865E2849CCCD00DAA77D /* SettingsTableViewController.swift in Sources */,
+				E1E05D922BC7663A00DF26FA /* CoreDataManager.swift in Sources */,
 				E159D5AC27F6E7B800C841DD /* UICollectionView + extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,6 +722,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E1E05D8D2BC7608A00DF26FA /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E1E05D8E2BC7608A00DF26FA /* Restaurants.xcdatamodel */,
+				E1E05D8F2BC7608A00DF26FA /* Model.xcdatamodel */,
+			);
+			currentVersion = E1E05D8E2BC7608A00DF26FA /* Restaurants.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E11E3C8F2764CF6300B70E3A /* Project object */;
 }
