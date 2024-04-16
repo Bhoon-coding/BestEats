@@ -5,11 +5,11 @@
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="oneLiner" optional="YES" attributeType="String"/>
-        <relationship name="restaurant" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="menu" inverseEntity="Restaurant"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Restaurant" representedClassName="Restaurant" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
-        <relationship name="menu" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" inverseName="restaurant" inverseEntity="Menu"/>
+        <relationship name="menu" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Menu"/>
     </entity>
 </model>

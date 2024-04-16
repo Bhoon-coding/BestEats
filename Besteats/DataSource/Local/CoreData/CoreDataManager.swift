@@ -48,30 +48,58 @@ final class CoreDataManager {
         }
     }
     
-    @discardableResult
-    func saveRestaurant(with restaurant: Restaurant) -> Bool {
-        // TODO: [] entityName 접근방법 바꾸기 (string -> enum)
-        let entity = NSEntityDescription.entity(forEntityName: "Restaurant", in: self.context)
-        if let entity = entity {
-            let managedObject = NSManagedObject(entity: entity, insertInto: self.context)
-            // TODO: [] restaurant model 만들기
-            // TODO: [] key 접근방법 바꾸기 (string -> enum)
-            managedObject.setValue(restaurant.name, forKey: "name")
-            managedObject.setValue(restaurant.type, forKey: "type")
-            
-            do {
-                try self.context.save()
-                print("Restaurant saved: \(managedObject)")
-                return true
-            } catch let error {
-                print(#function, CoreDataError.saveError(error))
-            }
-        } else {
-            print(#function, "Failed to access entity")
-            return false
-        }
-        return false
+    func saveMenu(name: String, oneLiner: String, type: String, isFavorite: Bool) -> Menu {
+        let newMenu = Menu(context: context)
+        newMenu.id = UUID()
+        newMenu.name = name
+        newMenu.oneLiner = oneLiner
+        newMenu.type = type
+        newMenu.isFavorite = isFavorite
+        return newMenu
     }
+    
+    func saveRestaurant(name: String, menu: Menu) {
+        let newRestaurant = Restaurant(context: context)
+        newRestaurant.id = UUID()
+        newRestaurant.name = name
+        newRestaurant.addToMenu(menu)
+    }
+    
+    func fetchRestaurant() -> [Restaurant] {
+        let request = Restaurant.fetchRequest()
+        do {
+            let result = try persistentContainer.viewContext.fetch(request)
+            return result
+        } catch let error {
+            print("Couldn't fetch Restaurant")
+            return []
+        }
+    }
+    
+//    @discardableResult
+//    func saveRestaurant(with restaurant: Restaurant) -> Bool {
+//        // TODO: [] entityName 접근방법 바꾸기 (string -> enum)
+//        let entity = NSEntityDescription.entity(forEntityName: "Restaurant", in: self.context)
+//        if let entity = entity {
+//            let managedObject = NSManagedObject(entity: entity, insertInto: self.context)
+//            // TODO: [] restaurant model 만들기
+//            // TODO: [] key 접근방법 바꾸기 (string -> enum)
+//            managedObject.setValue(restaurant.name, forKey: "name")
+//            managedObject.setValue(restaurant.type, forKey: "type")
+//            
+//            do {
+//                try self.context.save()
+//                print("Restaurant saved: \(managedObject)")
+//                return true
+//            } catch let error {
+//                print(#function, CoreDataError.saveError(error))
+//            }
+//        } else {
+//            print(#function, "Failed to access entity")
+//            return false
+//        }
+//        return false
+//    }
     
     @discardableResult
     func delete(with object: NSManagedObject) -> Bool {

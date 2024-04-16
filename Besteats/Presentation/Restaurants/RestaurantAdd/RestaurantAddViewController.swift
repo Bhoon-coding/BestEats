@@ -12,56 +12,13 @@ import Toast_Swift
 
 final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     
-    // MARK: Enums
-    
-    private enum Info {
-        enum Label {
-            static let restaurant: String = "맛집명"
-            static let menu: String = "메뉴명"
-            static let oneLiner: String = "한줄평"
-            static let rating: String = "내평가"
-        }
-        
-        enum Placeholder {
-            static let restaurant: String = "맛집을 입력해 주세요."
-            static let menu: String = "메뉴를 입력해 주세요."
-            static let oneLiner: String = "한줄팁을 입력해 주세요."
-        }
-        
-        enum RatingType {
-            static let like: String = "like"
-            static let curious: String = "curious"
-            static let warning: String = "warning"
-        }
-        
-        enum Button {
-            static let addRestaurant: String = "맛집 추가"
-        }
-    }
-    
-    private enum Toast {
-        static let requestRatingMsg: String = "평가버튼을 눌러 주세요."
-        static let requestRestaurantMsg: String = "맛집명을 입력해 주세요."
-        static let requestMenuMsg: String = "메뉴명을 입력해 주세요."
-        static let requestOneLinerMsg: String = "한줄평을 입력해 주세요."
-    }
-    
-    private enum Alert {
-        enum Favorite {
-            static let title: String = "즐겨찾기"
-            static let message: String = "즐겨찾는 메뉴로 등록 하시겠습니까?"
-            static let confirm: String = "등록"
-            static let cancel: String = "등록안함"
-        }
-    }
-    
     // MARK: Properties
     
     private var selectedLike: Bool = false
     private var selectedCurious: Bool = false
     private var selectedWarning: Bool = false
     private var type: String? = nil
-    private var totalRestaurants: [Restaurant] = []
+//    private var totalRestaurants: [Restaurant] = []
     
     private lazy var wholeView: UIView = {
         let view = UIView()
@@ -174,7 +131,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
+//        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
         
         restaurantTextField.delegate = self
         menuTextField.delegate = self
@@ -211,7 +168,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedLike = !selectedLike
         
         if selectedLike {
-            type = Info.RatingType.like
+            type = RatingType.like.rawValue
             typeLikeButton.setImage(UIImage(named: Image.likeFill), for: .normal)
             typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
             typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
@@ -226,7 +183,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedCurious = !selectedCurious
         
         if selectedCurious {
-            type = Info.RatingType.curious
+            type = RatingType.curious.rawValue
             typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
             typeCuriousButton.setImage(UIImage(named: Image.curiousFill), for: .normal)
             typeWarningButton.setImage(UIImage(named: Image.warning), for: .normal)
@@ -241,7 +198,7 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
         selectedWarning = !selectedWarning
         
         if selectedWarning {
-            type = Info.RatingType.warning
+            type = RatingType.bad.rawValue
             typeLikeButton.setImage(UIImage(named: Image.like), for: .normal)
             typeCuriousButton.setImage(UIImage(named: Image.curious), for: .normal)
             typeWarningButton.setImage(UIImage(named: Image.warningFill), for: .normal)
@@ -253,11 +210,10 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func doneTapped() {
-        
-        let menuId = 0
         var restaurantName = ""
         var menuName = ""
         var oneLiner = ""
+        var isFavorite = false
         
         guard let inputRestaurant = restaurantTextField.text else { return }
         guard let inputMenuName = menuTextField.text else { return }
@@ -288,35 +244,28 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        var menus: [Menu] = [Menu(id: menuId + 1,
-                                  isFavorite: false,
-                                  menu: menuName,
-                                  oneLiner: oneLiner
-                                 )]
-        
-        if type == Info.RatingType.like {
-            let alert = UIAlertController(title: Alert.Favorite.title, message: Alert.Favorite.message, preferredStyle: .alert)
-            let confirm = UIAlertAction(title: Alert.Favorite.confirm, style: .default) {_ in
-                menus[0].isFavorite = true
-                
-                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        type: Info.RatingType.like,
-                                                        likeMenus: menus,
-                                                        curiousMenus: [],
-                                                        badMenus: [])
-                
-                UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-                self.dismiss(animated: true, completion: nil)
+        /// 좋아요를 눌렀을 시
+        if type == RatingType.like.rawValue {
+            let alert = UIAlertController(
+                title: Alert.Favorite.title,
+                message: Alert.Favorite.message,
+                preferredStyle: .alert
+            )
+            let confirm = UIAlertAction(title: Alert.Favorite.confirm, style: .default) { _ in
+                isFavorite = true
+                let savedMenu = CoreDataManager.shared.saveMenu(
+                    name: menuName,
+                    oneLiner: oneLiner,
+                    type: type,
+                    isFavorite: isFavorite
+                )
+                CoreDataManager.shared.saveRestaurant(name: restaurantName, menu: savedMenu)
+                let test = CoreDataManager.shared.fetchRestaurant()
+                debugPrint("test: \(test)")
+                self.dismiss(animated: true)
             }
-            let cancel = UIAlertAction(title: Alert.Favorite.cancel, style: .destructive) {_ in
-                let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                        type: Info.RatingType.like,
-                                                        likeMenus: menus,
-                                                        curiousMenus: [],
-                                                        badMenus: [])
-                
-                UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-                self.dismiss(animated: true, completion: nil)
+            let cancel = UIAlertAction(title: Alert.Favorite.cancel, style: .destructive) { _ in
+  
             }
             alert.addAction(cancel)
             alert.addAction(confirm)
@@ -324,28 +273,18 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.main.async {
                 self.present(alert, animated: true, completion: nil)
             }
-            
-        } else if type == Info.RatingType.curious {
-            let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                    type: Info.RatingType.curious,
-                                                    likeMenus: [],
-                                                    curiousMenus: menus,
-                                                    badMenus: [])
-            
-            UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-            dismiss(animated: true, completion: nil)
-            
         } else {
-            let restaurant: Restaurant = Restaurant(restaurantName: restaurantName,
-                                                    type: Info.RatingType.warning,
-                                                    likeMenus: [],
-                                                    curiousMenus: [],
-                                                    badMenus: menus)
-            
-            UserDefaultsManager.shared.addRestaurant(restaurant: restaurant)
-            dismiss(animated: true, completion: nil)
+            let savedMenu = CoreDataManager.shared.saveMenu(
+                name: menuName,
+                oneLiner: oneLiner,
+                type: type,
+                isFavorite: isFavorite
+            )
+            CoreDataManager.shared.saveRestaurant(name: restaurantName, menu: savedMenu)
+            let test = CoreDataManager.shared.fetchRestaurant()
+            debugPrint("test: \(test)")
+            dismiss(animated: true)
         }
-        
     }
     
 }
@@ -450,3 +389,55 @@ extension RestaurantAddViewController {
         }
     }
 }
+
+extension RestaurantAddViewController {
+    // MARK: Enums
+    
+    private enum Info {
+        enum Label {
+            static let restaurant: String = "맛집명"
+            static let menu: String = "메뉴명"
+            static let oneLiner: String = "한줄평"
+            static let rating: String = "내평가"
+        }
+        
+        enum Placeholder {
+            static let restaurant: String = "맛집을 입력해 주세요."
+            static let menu: String = "메뉴를 입력해 주세요."
+            static let oneLiner: String = "한줄팁을 입력해 주세요."
+        }
+        
+        enum RatingType {
+            static let like: String = "like"
+            static let curious: String = "curious"
+            static let warning: String = "warning"
+        }
+        
+        enum Button {
+            static let addRestaurant: String = "맛집 추가"
+        }
+    }
+    
+    private enum Toast {
+        static let requestRatingMsg: String = "평가버튼을 눌러 주세요."
+        static let requestRestaurantMsg: String = "맛집명을 입력해 주세요."
+        static let requestMenuMsg: String = "메뉴명을 입력해 주세요."
+        static let requestOneLinerMsg: String = "한줄평을 입력해 주세요."
+    }
+    
+    private enum Alert {
+        enum Favorite {
+            static let title: String = "즐겨찾기"
+            static let message: String = "즐겨찾는 메뉴로 등록 하시겠습니까?"
+            static let confirm: String = "등록"
+            static let cancel: String = "등록안함"
+        }
+    }
+}
+
+enum RatingType: String {
+    case like
+    case curious
+    case bad
+}
+
