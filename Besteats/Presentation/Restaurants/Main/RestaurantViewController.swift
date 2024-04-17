@@ -43,7 +43,6 @@ final class RestaurantViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getRestaurantsData()
         configureKeyboardDismiss()
         configureNavBar()
         configureUI()
@@ -54,9 +53,6 @@ final class RestaurantViewController: UIViewController {
         super.viewWillAppear(animated)
     
         getRestaurantsData()
-        DispatchQueue.main.async {
-            self.foodCollectionView.reloadData()
-        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,95 +62,105 @@ final class RestaurantViewController: UIViewController {
     // MARK: Action
     
     @IBAction private func tapMore(_ sender: UIButton) {
-        
-        let point = sender.convert(CGPoint.zero, to: foodCollectionView)
-        guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
-        
-        DispatchQueue.main.async {
-            
-            // MARK: ActionSheet
-            let actionSheet = UIAlertController(title: Alert.Contents.actionSheetTitle,
-                                                message: Alert.Contents.actionSheetMessage,        preferredStyle: .actionSheet)
-            
-            let cancelButton = UIAlertAction(title: Alert.Button.cancel,
-                                       style: .cancel,
-                                       handler: nil)
-            let editRestaurant = UIAlertAction(title: Alert.Button.restaurantEdit,
-                                               style: .default) {_ in
-                
-                let editAlert = UIAlertController(title: Alert.Contents.editTitle,
-                                                  message: Alert.Contents.editMessage,
-                                                  preferredStyle: .alert)
-                
-                let editButton = UIAlertAction(title: Alert.Button.edit,
-                                               style: .default) {_ in
-                    if let txtField = editAlert.textFields?.first,
-                       let text = txtField.text {
-                        self.totalRestaurants[indexPath.row].restaurantName = text
-                        
-                        UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                        
-                        self.foodCollectionView.reloadData()
-                    }
-                }
-                editAlert.addTextField { textField in
-                    textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
-                }
-                editAlert.addAction(editButton)
-                editAlert.addAction(cancelButton)
-                
-                self.present(editAlert, animated: true, completion: nil)
-            }
-            
-            let tappedDelete = UIAlertAction(title: Alert.Button.restaurantDelete,
-                                             style: .destructive) {_ in
-                
-                let deleteConfirmAlert = UIAlertController(title: Alert.Contents.deleteTitle,
-                                                           message: Alert.Contents.deleteMessage,
-                                                           preferredStyle: .alert)
-                
-                let deleteRestaurant = UIAlertAction(title: Alert.Button.delete,
-                                                     style: .destructive) {_ in
-                    
-                    self.totalRestaurants.remove(at: indexPath.row)
-                    
-                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                    
-                    self.foodCollectionView.reloadData()
-                    
-                }
-                
-                deleteConfirmAlert.addAction(deleteRestaurant)
-                deleteConfirmAlert.addAction(cancelButton)
-                self.present(deleteConfirmAlert, animated: true, completion: nil)
-            }
-            
-            actionSheet.addAction(editRestaurant)
-            actionSheet.addAction(tappedDelete)
-            actionSheet.addAction(cancelButton)
-            
-            self.present(actionSheet, animated: true, completion: nil)
-            
-        }
+//        
+//        let point = sender.convert(CGPoint.zero, to: foodCollectionView)
+//        guard let indexPath = foodCollectionView.indexPathForItem(at: point) else { return }
+//        
+//        DispatchQueue.main.async {
+//            
+//            // MARK: ActionSheet
+//            let actionSheet = UIAlertController(title: Alert.Contents.actionSheetTitle,
+//                                                message: Alert.Contents.actionSheetMessage,        preferredStyle: .actionSheet)
+//            
+//            let cancelButton = UIAlertAction(title: Alert.Button.cancel,
+//                                       style: .cancel,
+//                                       handler: nil)
+//            let editRestaurant = UIAlertAction(title: Alert.Button.restaurantEdit,
+//                                               style: .default) {_ in
+//                
+//                let editAlert = UIAlertController(title: Alert.Contents.editTitle,
+//                                                  message: Alert.Contents.editMessage,
+//                                                  preferredStyle: .alert)
+//                
+//                let editButton = UIAlertAction(title: Alert.Button.edit,
+//                                               style: .default) {_ in
+//                    if let txtField = editAlert.textFields?.first,
+//                       let text = txtField.text {
+////                        self.totalRestaurants[indexPath.row].restaurantName = text
+//                        
+//                        UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+//                        
+//                        self.foodCollectionView.reloadData()
+//                    }
+//                }
+//                editAlert.addTextField { textField in
+//                    textField.placeholder = "\(self.totalRestaurants[indexPath.row].restaurantName)"
+//                }
+//                editAlert.addAction(editButton)
+//                editAlert.addAction(cancelButton)
+//                
+//                self.present(editAlert, animated: true, completion: nil)
+//            }
+//            
+//            let tappedDelete = UIAlertAction(title: Alert.Button.restaurantDelete,
+//                                             style: .destructive) {_ in
+//                
+//                let deleteConfirmAlert = UIAlertController(title: Alert.Contents.deleteTitle,
+//                                                           message: Alert.Contents.deleteMessage,
+//                                                           preferredStyle: .alert)
+//                
+//                let deleteRestaurant = UIAlertAction(title: Alert.Button.delete,
+//                                                     style: .destructive) {_ in
+//                    
+//                    self.totalRestaurants.remove(at: indexPath.row)
+//                    
+//                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
+//                    
+//                    self.foodCollectionView.reloadData()
+//                    
+//                }
+//                
+//                deleteConfirmAlert.addAction(deleteRestaurant)
+//                deleteConfirmAlert.addAction(cancelButton)
+//                self.present(deleteConfirmAlert, animated: true, completion: nil)
+//            }
+//            
+//            actionSheet.addAction(editRestaurant)
+//            actionSheet.addAction(tappedDelete)
+//            actionSheet.addAction(cancelButton)
+//            
+//            self.present(actionSheet, animated: true, completion: nil)
+//            
+//        }
     }
 
     // MARK: Methods
     
     private func getRestaurantsData() {
-        totalRestaurants = UserDefaultsManager.shared.getRestaurants()
+        totalRestaurants = CoreDataManager.shared.fetchRestaurant()
+        DispatchQueue.main.async {
+            self.foodCollectionView.reloadData()
+        }
     }
     
     private func configureNavBar() {
-        let addButton = UIBarButtonItem(title: Navigation.Button.add,
-                                        style: .plain,
-                                        target: self, action: #selector(addRestaurant))
-        addButton.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: Fonts.bold, size: 14)!], for: .normal)
+        let addButton = UIBarButtonItem(
+            title: Navigation.Button.add,
+            style: .plain,
+            target: self, action: #selector(presentRestaurantAddVC)
+        )
+        addButton.setTitleTextAttributes(
+            [NSAttributedString.Key.font: UIFont(name: Fonts.bold, size: 14)!],
+            for: .normal
+        )
         navigationItem.rightBarButtonItem = addButton
         navigationController?.navigationBar.tintColor = .label
         
-        let backBarButtonItem = UIBarButtonItem(title: "",
-                                                style: .plain,
-                                                target: self, action: nil)
+        let backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: self, action: nil
+        )
         
         backBarButtonItem.tintColor = .black
         self.navigationItem.backBarButtonItem = backBarButtonItem
@@ -180,7 +186,7 @@ final class RestaurantViewController: UIViewController {
     
     // MARK: @objc
     
-    @objc func addRestaurant() {
+    @objc func presentRestaurantAddVC() {
         let restaurantAddVC = RestaurantAddViewController()
         restaurantAddVC.modalPresentationStyle = .fullScreen
         present(restaurantAddVC, animated: true, completion: nil)
@@ -243,37 +249,18 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "foodCell", for: indexPath) as? FoodCollectionViewCell else { return FoodCollectionViewCell() }
-        let restaurant: Restaurant = totalRestaurants[indexPath.row]
-        let favoriteMenus = restaurant.likeMenus.filter { $0.isFavorite == true }
-        var favoriteString = ""
-
-        if favoriteMenus.isEmpty {
-            favoriteString = "즐겨찾는 메뉴를 추가해주세요"
-        }
-        if let favoriteMenuName = favoriteMenus.first?.menu {
-            
-            if favoriteMenus.count == 1 {
-                favoriteString = "\(favoriteMenuName)"
-                
-            } else {
-                favoriteString = "\(favoriteMenuName) (외 ⭐️ \(favoriteMenus.count - 1 )개)"
-            }
-            
-        }
+        let restaurant: Restaurant = totalRestaurants[indexPath.item]
+        // TODO: [] 레스토랑이 있고 메뉴가 없는경우도 확인해보기 (메뉴삭제시 확인해볼것)
+        let menus = restaurant.menus?.allObjects as! [Menu]
+        let favoriteMenus = menus.filter { $0.isFavorite }
+        let favoriteMenuString = setFavoriteMenuString(menus: favoriteMenus)
         
-        cell.restaurantNamesLabel.text = restaurant.restaurantName
-        cell.favoriteMenuLabel.text = favoriteString
-        cell.likeCountLabel.text = "\(restaurant.likeMenus.count)"
-        cell.curiousCountLabel.text = "\(restaurant.curiousMenus.count)"
-        cell.warningCountLabel.text = "\(restaurant.badMenus.count)"
-
-        
-        cell.layer.masksToBounds = false
-        cell.layer.shadowOpacity = 0.3
-        cell.layer.shadowOffset = CGSize(width: -2, height: 2)
-        cell.layer.shadowRadius = 3
-        cell.layer.cornerRadius = 20
-
+        // TODO: [] Cell Class 분리
+        cell.restaurantNamesLabel.text = restaurant.name
+        cell.favoriteMenuLabel.text = favoriteMenuString
+        cell.likeCountLabel.text = "\(String(describing: menus.filter { $0.type == RatingType.like.rawValue }.count))"
+        cell.curiousCountLabel.text = "\(String(describing: menus.filter { $0.type == RatingType.curious.rawValue }.count))"
+        cell.warningCountLabel.text = "\(String(describing: menus.filter { $0.type == RatingType.bad.rawValue }.count))"
         
         return cell
     }
@@ -300,6 +287,21 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
         
         foodSearchBar.resignFirstResponder()
         foodSearchBar.text = ""
+    }
+    
+    private func setFavoriteMenuString(menus: [Menu]?) -> String {
+        guard let menus = menus else { return "" }
+        var menuString = ""
+        
+        if menus.isEmpty {
+            menuString = "즐겨찾는 메뉴를 추가해 주세요."
+        } else if menus.count == 1 {
+            menuString = menus[0].name ?? ""
+        } else {
+            menuString = "\(menus[0]) 외 ⭐️ \(menus.count - 1 )개"
+        }
+        
+        return menuString
     }
 }
 

@@ -260,8 +260,6 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                     isFavorite: isFavorite
                 )
                 CoreDataManager.shared.saveRestaurant(name: restaurantName, menu: savedMenu)
-                let test = CoreDataManager.shared.fetchRestaurant()
-                debugPrint("test: \(test)")
                 self.dismiss(animated: true)
             }
             let cancel = UIAlertAction(title: Alert.Favorite.cancel, style: .destructive) { _ in
@@ -281,8 +279,6 @@ final class RestaurantAddViewController: UIViewController, UITextFieldDelegate {
                 isFavorite: isFavorite
             )
             CoreDataManager.shared.saveRestaurant(name: restaurantName, menu: savedMenu)
-            let test = CoreDataManager.shared.fetchRestaurant()
-            debugPrint("test: \(test)")
             dismiss(animated: true)
         }
     }

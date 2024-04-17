@@ -55,6 +55,7 @@ final class CoreDataManager {
         newMenu.oneLiner = oneLiner
         newMenu.type = type
         newMenu.isFavorite = isFavorite
+        saveContext()
         return newMenu
     }
     
@@ -62,7 +63,8 @@ final class CoreDataManager {
         let newRestaurant = Restaurant(context: context)
         newRestaurant.id = UUID()
         newRestaurant.name = name
-        newRestaurant.addToMenu(menu)
+        newRestaurant.addToMenus(menu)
+        saveContext()
     }
     
     func fetchRestaurant() -> [Restaurant] {
