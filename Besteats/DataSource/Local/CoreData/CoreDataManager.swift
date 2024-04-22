@@ -78,6 +78,12 @@ final class CoreDataManager {
         }
     }
     
+    func updateRestaurant(index: Int, name: String) {
+        var prevRestaurants = fetchRestaurant()
+        prevRestaurants[index].name = name
+        saveContext()
+    }
+    
 //    @discardableResult
 //    func saveRestaurant(with restaurant: Restaurant) -> Bool {
 //        // TODO: [] entityName 접근방법 바꾸기 (string -> enum)

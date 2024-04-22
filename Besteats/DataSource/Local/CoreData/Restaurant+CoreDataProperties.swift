@@ -16,9 +16,9 @@ extension Restaurant {
         return NSFetchRequest<Restaurant>(entityName: "Restaurant")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var name: String?
-    @NSManaged public var menus: NSSet?
+    @NSManaged public var id: UUID
+    @NSManaged public var name: String
+    @NSManaged public var menus: NSSet
 
 }
 
