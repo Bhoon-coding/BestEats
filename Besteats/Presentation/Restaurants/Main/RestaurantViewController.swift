@@ -52,7 +52,7 @@ final class RestaurantViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
-        getRestaurantsData()
+        fetchRestaurants()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -97,14 +97,10 @@ final class RestaurantViewController: UIViewController {
                     title: Alert.Button.edit,
                     style: .default
                 ) { _ in
-                    
                     if let newRestaurantTextField = editAlert.textFields?.first,
                        let newRestaurantName = newRestaurantTextField.text {
-                        CoreDataManager.shared.updateRestaurant(
-                            index: index,
-                            name: newRestaurantName
-                        )
-                        self.getRestaurantsData()
+                        CoreDataManager.shared.updateRestaurant(at: index, name: newRestaurantName)
+                        self.fetchRestaurants()
                     }
                 }
                 editAlert.addAction(editButton)
@@ -117,7 +113,6 @@ final class RestaurantViewController: UIViewController {
                 title: Alert.Button.restaurantDelete,
                 style: .destructive
             ) { _ in
-                
                 let deleteConfirmAlert = UIAlertController(
                     title: Alert.Contents.deleteTitle,
                     message: Alert.Contents.deleteMessage,
@@ -128,19 +123,14 @@ final class RestaurantViewController: UIViewController {
                     title: Alert.Button.delete,
                     style: .destructive
                 ) { _ in
-                    
-                    // TODO: [] Delete restaurant
-                    self.totalRestaurants.remove(at: indexPath.row)
-                    
-                    UserDefaultsManager.shared.saveRestaurants(restaurants: self.totalRestaurants)
-                    
-                    self.foodCollectionView.reloadData()
-                    
+                    CoreDataManager.shared.deleteRestaurant(with: self.totalRestaurants[index].id)
+                    self.fetchRestaurants()
                 }
                 
                 deleteConfirmAlert.addAction(deleteRestaurant)
                 deleteConfirmAlert.addAction(cancelButton)
-                self.present(deleteConfirmAlert, animated: true, completion: nil)
+
+                self.present(deleteConfirmAlert, animated: true)
             }
             
             actionSheet.addAction(editRestaurant)
@@ -153,7 +143,7 @@ final class RestaurantViewController: UIViewController {
 
     // MARK: Methods
     
-    private func getRestaurantsData() {
+    private func fetchRestaurants() {
         totalRestaurants = CoreDataManager.shared.fetchRestaurant()
         DispatchQueue.main.async {
             self.foodCollectionView.reloadData()
@@ -193,13 +183,11 @@ final class RestaurantViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         foodCollectionView.addGestureRecognizer(tap)
-        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         foodSearchBar.resignFirstResponder()
     }
-    
     
     // MARK: @objc
     
@@ -291,7 +279,7 @@ extension RestaurantViewController: UICollectionViewDelegate, UICollectionViewDa
         return totalRestaurants.count
     }
     
-    //
+    // TODO: [] Menu 선택시 navigation 구현 (index range error 나는 상황)
     public func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         

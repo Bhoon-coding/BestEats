@@ -78,10 +78,25 @@ final class CoreDataManager {
         }
     }
     
-    func updateRestaurant(index: Int, name: String) {
-        var prevRestaurants = fetchRestaurant()
-        prevRestaurants[index].name = name
+    func updateRestaurant(at index: Int, name: String) {
+        let restaurants = fetchRestaurant()
+        restaurants[index].name = name
         saveContext()
+    }
+    
+    func deleteRestaurant(with selectedId: UUID) {
+        do {
+            let fetchRequest = Restaurant.fetchRequest()
+            let predicate = NSPredicate(format: "id == %@", selectedId as CVarArg)
+            fetchRequest.predicate = predicate
+            let results = try context.fetch(fetchRequest)
+            if let restaurantToDelete = results.first {
+                context.delete(restaurantToDelete)
+                saveContext()
+            }
+        } catch let error {
+            print("Error deleting restaurant: \(error.localizedDescription)")
+        }
     }
     
 //    @discardableResult
